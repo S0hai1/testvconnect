@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ValueConnectSolution - Your Success Is Our Mission</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables (Keep at the top for easy access) */
+:root {
+    --header-height: 70px; /* Define your header's height here */
+}
+
+/* General Body Styles */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    background-color: #000; /* Overall dark background */
+    /* REMOVED: overflow: hidden; */ /* Allow scrolling now */
+    overflow-x: hidden; /* Prevent horizontal scroll from overflow, especially on mobile */
+    min-height: 100vh; /* Ensure body is at least viewport height */
+    height: auto; /* Allow body to expand with content */
+}
+
+/* Background Video Styles */
+.video-background {
+    position: fixed; /* Fixes video to viewport, covering everything */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2; /* Puts it behind all content, including the header */
+}
+
+.video-background video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Ensures the video covers the entire container */
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay for better text readability */
+    z-index: -1; /* Above video, below all foreground content (including header) */
+}
+
+/* Header Specific Styles */
+.navbar {
+    position: fixed; /* Header floats on top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure header is on top of everything */
+    box-sizing: border-box; /* Include padding in the width calculation */
+    background-color: transparent; /* Allows video/overlay to show through */
+    padding: 15px 30px; /* Example padding for your header content */
+    height: var(--header-height); /* Explicit height for calculations */
+    display: flex; /* To help align content inside header */
+    align-items: center; /* To center content vertically inside header */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.navbar.scrolled {
+    background-color: #ffffff; /* White background when scrolled */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+}
+
+.navbar.scrolled .logo .text-select,
+.navbar.scrolled .logo .text-voicecom,
+.navbar.scrolled .nav-item > a,
+.navbar.scrolled .search-icon,
+.navbar.scrolled .lang {
+    color: #000; /* Change text color to black when scrolled */
+}
+
+.navbar.scrolled .hamburger-menu span {
+    background-color: #000; /* Change hamburger lines to black when scrolled */
+}
+
+/* Wrapper for main content to sit on top of the video */
+.hero-content-wrapper {
+    position: relative; /* Allows content inside to be positioned normally */
+    z-index: 1; /* Ensures content is above the video and overlay */
+    /* REMOVED: height: calc(100vh - var(--header-height)); */ /* Remove fixed height */
+    min-height: calc(100vh - var(--header-height)); /* Ensure it's at least one screen height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center hero content vertically */
+    padding-bottom: 50px; /* Add some padding at the bottom for separation */
+}
+
+/* Hero Section Styles (already good, just ensure no conflicting backgrounds) */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Adjust vertical padding to fit content better within the calculated height */
+    padding: 0px 30px; /* Reduced vertical padding */
+    margin-top: 80px;
+    background: none; /* No background on hero section itself */
+    /* REMOVED: height: 100%; */ /* No fixed height, let content define it */
+    min-height: calc(100vh - var(--header-height) - 80px - 80px); /* Adjust to fit initially */
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    color: #fff; /* Ensure text is white as per body style */
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 650px;
+    margin-right: 50px;
+    z-index: 1;
+    color: #fff;
+}
+
+.hero-content h1 {
+    font-size: 3.2em;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.hero-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    color: #e0e0e0;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+
+.clutch-reviews {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.clutch-logo {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: #d1d5db;
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+}
+
+.stars span {
+    color: #fdd835;
+    font-size: 1.2em;
+}
+
+.hero-image-container {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.hero-section::before,
+.hero-section::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.05);
+    filter: blur(80px);
+    z-index: 0;
+}
+
+.hero-section::before {
+    width: 300px;
+    height: 300px;
+    top: -50px;
+    left: -100px;
+}
+
+.hero-section::after {
+    width: 400px;
+    height: 400px;
+    bottom: -100px;
+    right: -150px;
+    background: rgba(253, 216, 53, 0.05);
+}
+
+/* --- New Content Section Styles --- */
+.content-section {
+    background-color: #f8f8f8; /* Light background for new section */
+    color: #333; /* Dark text for readability */
+    padding: 80px 30px;
+    text-align: center;
+    position: relative; /* Essential for z-index to work */
+    z-index: 2; /* Make sure it sits above the fixed video background */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Optional shadow to distinguish from video */
+}
+
+.content-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.content-section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item h3 {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #3b82f6; /* Matching your primary blue */
+}
+
+.feature-item p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 0;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px; /* Further reduce vertical padding */
+    }
+
+    .hero-content {
+        margin-right: 0;
+        margin-bottom: 30px; /* Reduced margin */
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2em; /* Slightly smaller on tablets */
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .clutch-reviews {
+        justify-content: center;
+    }
+
+    .hero-image-container {
+        flex: none;
+        width: 80%;
+        max-width: 350px; /* Slightly smaller image container */
+    }
+
+    .content-section {
+        padding: 60px 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 1.8em; /* Even smaller on mobile */
+    }
+
+    .hero-content p {
+        font-size: 0.95em; /* Slightly smaller paragraph */
+    }
+
+    .btn {
+        padding: 10px 18px; /* Smaller button padding */
+        font-size: 0.85em;
+    }
+
+    .hero-image-container {
+        width: 90%;
+        max-width: 300px; /* Smaller image container on mobile */
+    }
+    .navbar {
+        padding: 10px 20px; /* Smaller padding for mobile header */
+        --header-height: 60px; /* Adjust header height for smaller screens if needed */
+    }
+
+    .content-section h2 {
+        font-size: 1.8em;
+    }
+
+    .content-section p {
+        font-size: 1em;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr; /* Stack features on very small screens */
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline id="bgVideo">
+            <source src="{% static 'myapp/videos/B&WsampleVideo.mp4' %}" type="video/mp4">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-typing-on-his-computer-40742-large.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="hero-content-wrapper">
+        <main class="hero-section">
+            <div class="hero-content">
+                <h1>Your Success Is Our Mission with India's Call Center Excellence</h1>
+                <p>
+                    Power your company's growth with top-notch call center outsourcing in the India. At ValueConnectSolution, we provide
+                    scalable, cost-effective solutions tailored to your business needs to keep you ahead in your industry.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Get Your Free Quote</button>
+                    <button class="btn btn-secondary">Explore Our Services</button>
+                </div>
+                <div class="clutch-reviews">
+                    <span class="clutch-logo">C</span>
+                    <span class="clutch-text">Clutch Reviews - 4.9 Rating</span>
+                    <div class="stars">
+                        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!--certificate section  -->
+    <div class="Certificates_section">
+        {% include 'myapp/index_certificates.html' %}
+    </div>
+    <!-- Services section -->
+    <div class="Services_Section">
+        {% include 'myapp/index_services.html' %}
+    </div>
+    <!-- Footer -->
+    <div class="Services_Section">
+        {% include 'myapp/footer.html' %}
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navbar = document.querySelector('.navbar');
+
+        function handleScroll() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Run on initial load
+    });
+</script>
+
+</body>
+</html>
