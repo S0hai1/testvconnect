@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inbound Call Center Services - ValueConnectSolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+            min-height: 100vh;
+            height: auto;
+        }
+
+        /* Background Image Styles for Hero */
+        .image-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* Header Specific Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box;
+            background-color: transparent;
+            padding: 15px 30px;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled .logo .text-select,
+        .navbar.scrolled .logo .text-voicecom,
+        .navbar.scrolled .nav-item>a,
+        .navbar.scrolled .search-icon,
+        .navbar.scrolled .lang {
+            color: #000;
+        }
+
+        .navbar.scrolled .hamburger-menu span {
+            background-color: #000;
+        }
+
+        /* Services Hero Section Styles */
+        .services-hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding-top: var(--header-height);
+            box-sizing: border-box;
+            z-index: 0;
+        }
+
+        .services-hero-content {
+            max-width: 800px;
+            padding: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .services-hero-content h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .services-hero-content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* New Content Section Styles */
+        .content-section {
+            background-color: #fff;
+            padding: 60px 40px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .text-column {
+            flex: 2;
+            min-width: 300px;
+            line-height: 1.7;
+        }
+
+        .image-column {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+        }
+
+        .image-column img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #222;
+        }
+
+        .content-section h3 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .service-list li {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            color: #555;
+        }
+
+        .service-list li::before {
+            content: '✅';
+            margin-right: 15px;
+            font-size: 1.2em;
+            color: green;
+        }
+
+        /* Combined list and image container */
+        .list-image-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows the items to stack */
+            gap: 30px;
+            /* Space between list and image */
+            align-items: flex-start;
+        }
+
+        .list-image-container .service-list {
+            flex: 2;
+            /* Adjust as needed */
+            min-width: 280px;
+            /* Minimum width for the list before wrapping */
+        }
+
+        .list-image-container .image-column {
+            flex: 1;
+            /* Adjust as needed */
+            min-width: 250px;
+            /* Minimum width for the image column */
+            justify-content: center;
+            /* Center the image when it wraps */
+        }
+
+        /* Styles for "What You Gain" Section */
+        .gain-section {
+            background-color: #f8f8f8;
+            padding: 80px 40px;
+        }
+
+        .gain-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .gain-section .image-wrapper {
+            flex: 1.2;
+            /* Slightly larger image column */
+            min-width: 350px;
+            /* Minimum width for the image */
+            position: relative;
+            z-index: 1;
+        }
+
+        .gain-section .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-top-left-radius: 50px;
+            /* Large radius for top-left */
+            border-bottom-left-radius: 50px;
+            /* Large radius for bottom-left */
+            border-top-right-radius: 8px;
+            /* Small radius for top-right */
+            border-bottom-right-radius: 8px;
+            /* Small radius for bottom-right */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .gain-section .text-wrapper {
+            flex: 2;
+            /* Larger text column */
+            min-width: 400px;
+            /* Minimum width for text */
+            line-height: 1.7;
+        }
+
+        .gain-section h2 {
+            font-size: 2.5em;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .gain-section p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Styles for "Benefits of Outsourcing" Section */
+        .benefits-section {
+            background-color: #fff;
+            padding: 80px 40px;
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .benefits-section h2 {
+            font-size: 2.5em;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .benefits-section h3 {
+            font-size: 2em;
+            color: #222;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .benefits-section p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .benefits-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .benefits-content .text-content {
+            flex: 2;
+            min-width: 400px;
+        }
+
+        .benefits-content .text-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-content .text-content li {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .benefits-content .text-content li strong {
+            display: block;
+            font-size: 1.2em;
+            color: #222;
+            margin-bottom: 5px;
+        }
+
+        .benefits-content .image-content {
+            flex: 1.2;
+            min-width: 350px;
+            position: relative;
+            z-index: 1;
+            display: flex; /* To help center the image when stacked */
+            justify-content: center; /* To help center the image when stacked */
+        }
+
+        .benefits-content .image-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-top-right-radius: 50px; /* Large radius for top-right */
+            border-bottom-right-radius: 50px; /* Large radius for bottom-right */
+            border-top-left-radius: 8px; /* Small radius for top-left */
+            border-bottom-left-radius: 8px; /* Small radius for bottom-left */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .services-hero-content h1 {
+                font-size: 2.5em;
+            }
+
+            .services-hero-content p {
+                font-size: 1em;
+            }
+
+            .content-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content-section {
+                padding: 40px 20px;
+            }
+
+            .text-column,
+            .image-column {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .content-section h2 {
+                font-size: 1.8em;
+            }
+
+            .content-section h3 {
+                font-size: 1.5em;
+            }
+
+            /* Responsive adjustments for the combined list and image */
+            .list-image-container {
+                flex-direction: column;
+                /* Stack list and image on smaller screens */
+                align-items: center;
+            }
+
+            .list-image-container .service-list,
+            .list-image-container .image-column {
+                width: 100%;
+                min-width: unset;
+                /* Remove min-width when stacked */
+                justify-content: center;
+                /* Ensure image is centered when stacked */
+            }
+
+            /* Responsive for "What You Gain" Section */
+            .gain-section {
+                padding: 50px 20px;
+            }
+
+            .gain-container {
+                flex-direction: column;
+                /* Stack image and text */
+                align-items: center;
+                gap: 30px;
+            }
+
+            .gain-section .image-wrapper,
+            .gain-section .text-wrapper {
+                min-width: unset;
+                width: 100%;
+                text-align: center;
+                /* Center text for stacked layout */
+            }
+
+            .gain-section .image-wrapper img {
+                border-radius: 8px;
+                /* Uniform radius on small screens */
+            }
+
+            .gain-section h2 {
+                font-size: 2em;
+            }
+
+            .gain-section p {
+                font-size: 1em;
+            }
+
+            /* Responsive for "Benefits of Outsourcing" Section */
+            .benefits-section {
+                padding: 50px 20px;
+            }
+
+            .benefits-section h2 {
+                font-size: 2em;
+            }
+
+            .benefits-section h3 {
+                font-size: 1.8em;
+            }
+
+            .benefits-content {
+                flex-direction: column;
+                /* Stack text and image */
+                align-items: center;
+                gap: 30px;
+            }
+
+            .benefits-content .text-content,
+            .benefits-content .image-content {
+                min-width: unset;
+                width: 100%;
+                text-align: center; /* Center text for stacked layout */
+            }
+
+            .benefits-content .image-content img {
+                border-radius: 8px; /* Uniform radius on small screens */
+            }
+
+            .benefits-content .text-content li {
+                text-align: left; /* Keep list items left-aligned */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-background" style="background-image: url('{% static 'myapp/images/services_hero_bg.jpg' %}');">
+        <div class="image-overlay"></div>
+    </div>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="services-hero-section">
+        <div class="services-hero-content">
+            <h1>Inbound Call Center in The India</h1>
+            <p>
+                Enhance customer service with outsourced inbound solutions. Call Value ConnectSolutions for inbound call
+                handling services today.
+            </p>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="content-container">
+            <div class="text-column">
+                <h2>Boost Customer Satisfaction by Outsourcing Inbound Call Center Services</h2>
+                <p>
+                    When customers contact you with questions, concerns, or complaints, delivering quick, effective
+                    support is essential for retaining their business. Poor customer service can cost companies
+                    substantial revenue every year. Outsourcing your inbound call center services to a reliable and
+                    cost-effective provider like Value ConnectSolutions can enhance your customer service and protect your
+                    bottom line.
+                </p>
+                <p>
+                    We partner with businesses of all sizes across various industries to optimize their inbound call
+                    services, a critical component of any successful ROI strategy.
+                </p>
+
+
+                <h3>Value ConnectSolutions Inbound Call Services</h3>
+                <p>
+                    With decades of experience in inbound support services, Value ConnectSolutions has built a reputation for
+                    excellence across multiple industries, including healthcare, e-commerce, finance, marketing, retail,
+                    hospitality, real estate, travel, and more.
+                </p>
+                <p>We handle a wide range of customer interactions, including:</p>
+                <div class="list-image-container">
+                    {# New container for list and image #}
+                    <ul class="service-list">
+                        <li>Billing Inquiries</li>
+                        <li>Subscription Renewals and Cancellation</li>
+                        <li>Order Processing</li>
+                        <li>Appointment Scheduling</li>
+                        <li>Product Information Requests</li>
+                        <li>Order Refunds and Returns Processing</li>
+                        <li>Warranty Registration</li>
+                        <li>Real-Time Inventory Status Checks</li>
+                        <li>Event Registration and Reservations</li>
+                        <p>And Much More!</p>
+                    </ul>
+                    <div class="image-column">
+                        <img src="{% static 'myapp/images/demo.avif' %}"
+                            alt="Smiling woman looking up, representing thoughtful customer service" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gain-section">
+        <div class="gain-container">
+            <div class="image-wrapper">
+                <img src="{% static 'myapp/images/outsourcing1.webp' %}" alt="Team of smiling call center agents" />
+            </div>
+            <div class="text-wrapper">
+                <h2>What You Gain from Inbound Call Center Outsourcing</h2>
+                <p>
+                    At Value ConnectSolutions, we ensure customers receive the prompt, professional assistance they
+                    deserve. Our agents are expertly trained to handle a variety of customer interactions,
+                    maintaining a high standard of professionalism in every situation. With our inbound
+                    services, you can count on us to provide the support your customers expect.
+                </p>
+                <p>
+                    We prioritize transparency in all our operations, keeping you informed every step of the way
+                    to ensure we're adding value to your business.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="benefits-section">
+        <div class="benefits-container">
+            <h2>The Benefits of Outsourcing Inbound Calls</h2>
+            <p>
+                Outsourcing inbound voice support offers several advantages for businesses. The primary benefit of outsourcing is the significant reduction in overhead costs. When
+                you partner with Value ConnectSolutions, based in the India, you can realize considerable savings compared to managing an in-house team or working with a similar
+                call center in a Western country.
+            </p>
+            <p>
+                By outsourcing inbound voice support services, you eliminate costs associated with training, paid leave, employee benefits, and management. Plus, our flexible pay-
+                as-you-go options, including month-to-month agreements, allow you to adjust services based on business needs.
+            </p>
+
+            <h3>Why Choose Value ConnectSolutions?</h3>
+            <div class="benefits-content">
+                <div class="text-content">
+                    <ul>
+                        <li>
+                            <strong>Enhanced Productivity</strong>
+                            Your team can focus on core business activities without the distraction of
+                            handling customer service inquiries, which is especially beneficial for
+                            smaller businesses.
+                        </li>
+                        <li>
+                            <strong>24/7 Availability</strong>
+                            We operate around the clock, ensuring your customers can reach us
+                            anytime, regardless of their time zone. Our inbound call center agents are
+                            always available to assist whether it's late at night or early morning.
+                        </li>
+                        <li>
+                            <strong>Improved Customer Satisfaction</strong>
+                            Quick response times and courteous service keep customer dissatisfaction
+                            to a minimum, reducing the likelihood of negative word-of-mouth.
+                        </li>
+                        <li>
+                            <strong>Reduced Wait Times</strong>
+                            With the ability to scale your support team up or down as needed, you’ll
+                            always have the right number of agents to handle inbound calls efficiently,
+                            minimizing customer wait times.
+                        </li>
+                    </ul>
+                </div>
+                <div class="image-content">
+                    <img src="{% static 'myapp/images/outsourcing2.webp' %}"
+                        alt="Two smiling call center agents giving a thumbs up" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Services_Section">
+        {% include 'myapp/footer.html' %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+
+            function handleScroll() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Run on initial load
+        });
+    </script>
+</body>
+
+</html>

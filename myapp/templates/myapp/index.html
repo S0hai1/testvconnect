@@ -14,6 +14,7 @@
 
 /* General Body Styles */
 body {
+    
     margin: 0;
     font-family: 'Inter', sans-serif;
     color: #fff;
@@ -389,6 +390,8 @@ body {
     </style>
 </head>
 <body>
+
+    
     <div class="video-background">
         <video autoplay loop muted playsinline id="bgVideo">
             <source src="{% static 'myapp/videos/B&WsampleVideo.mp4' %}" type="video/mp4">
@@ -431,10 +434,33 @@ body {
     <div class="Services_Section">
         {% include 'myapp/index_services.html' %}
     </div>
+    <!-- why choose us section -->
+    <div class="why_choose_us_section">
+        {% include 'myapp/index_whychooseus.html' %}
+
+    </div>
+    <!-- industry we serve -->
+    <div class="industry_we_serve_section">
+        {% include 'myapp/index_industryweserve.html' %}
+
+    </div>
+    <!-- countires we serve -->
+     <div class="countries_we_serve_section">
+        {% include 'myapp/index_countriesweserve.html' %}
+
+    </div>
+
     <!-- Footer -->
     <div class="Services_Section">
         {% include 'myapp/footer.html' %}
     </div>
+    
+
+
+
+
+
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const navbar = document.querySelector('.navbar');

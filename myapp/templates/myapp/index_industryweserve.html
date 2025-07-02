@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Connect Solution - Industries We Serve</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .company-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #f8f9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .scroll-wrapper {
+            position: relative;
+            padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Ensure content outside is hidden */
+        }
+
+        .scroll-container {
+            overflow: hidden; /* This can be auto if you want native scrollbar too */
+            padding: 0 2rem;
+        }
+
+        .cards-wrapper {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.3s ease-out; /* Add transition for smooth manual scrolling */
+        }
+
+        .cards-wrapper.no-transition {
+            transition: none; /* For immediate jumps in cloning logic */
+        }
+
+        .cards-wrapper:hover {
+            /* animation-play-state: paused; */ /* Controlled by JS now */
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 320px;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .card-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card-link::after {
+            content: '→';
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card-link:hover {
+            color: #764ba2;
+        }
+
+        .card-link:hover::after {
+            transform: translateX(4px);
+        }
+
+        .controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #667eea;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .control-left {
+            left: 1rem;
+        }
+
+        .control-right {
+            right: 1rem;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            width: 0%; /* Start at 0% */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .card {
+                width: 280px;
+                padding: 1.5rem;
+            }
+
+            .controls {
+                display: none; /* Hide buttons on small screens */
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-wrapper {
+                gap: 1rem;
+            }
+
+            .card {
+                width: 250px;
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="company-name">Value Connect Solution</div>
+            <h1 class="main-title">Industries We Serve</h1>
+            <p class="subtitle">Our contact center outsourcing spans multiple industries, offering customized solutions tailored to each sector's unique needs.</p>
+        </div>
+
+        <div class="scroll-wrapper" id="scrollWrapper">
+            <div class="scroll-container" id="scrollContainer">
+                <div class="cards-wrapper" id="cardsWrapper">
+                    <div class="card">
+                        <div class="card-icon">📞</div>
+                        <h3 class="card-title">Telecommunication</h3>
+                        <p class="card-description">Meet customer demands, manage technical support, and enhance network operations more efficiently.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🛒</div>
+                        <h3 class="card-title">Retail and E-Commerce</h3>
+                        <p class="card-description">Whether you need help after hours or a full-scale contact center to handle multiple service platforms 24/7, we're up to the task.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">💰</div>
+                        <h3 class="card-title">Financial Services</h3>
+                        <p class="card-description">We can handle your time-intensive tasks, from general bookkeeping to in-house payroll management and more.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🏥</div>
+                        <h3 class="card-title">Health and Life Insurance</h3>
+                        <p class="card-description">Delegate administrative duties like claims and forms processing, and other non-core duties to free up money, resources, and time.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">⚕️</div>
+                        <h3 class="card-title">Healthcare</h3>
+                        <p class="card-description">Leave the administrative tasks to us so you can dedicate your time to patient care.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🔬</div>
+                        <h3 class="card-title">Clinical Research</h3>
+                        <p class="card-description">Accelerate study timelines by outsourcing critical yet time-consuming tasks to our experts.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">Lead Generation and Verification</h3>
+                        <p class="card-description">Enhance the accuracy and efficiency of identifying and qualifying potential leads with help from our expert team.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🎓</div>
+                        <h3 class="card-title">Higher Education</h3>
+                        <p class="card-description">Ease your workload during the school year so you can focus on providing quality education to students.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">💻</div>
+                        <h3 class="card-title">IT and Managed Service Providers</h3>
+                        <p class="card-description">We solve your technical issues promptly and effectively to minimize downtime and maintain smooth operations.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">📈</div>
+                        <h3 class="card-title">Marketing Services</h3>
+                        <p class="card-description">Our experienced talent can help you build smart, strategic marketing plans to reach your campaign objectives.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">💊</div>
+                        <h3 class="card-title">Pharmaceutical Marketing</h3>
+                        <p class="card-description">With specialized expertise you can effectively reach healthcare professionals and stay competitive in the industry.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🏠</div>
+                        <h3 class="card-title">Real Estate</h3>
+                        <p class="card-description">We handle calls, appointment scheduling, lead generation, and forms processing for your real estate firm.</p>
+                        <a href="#" class="card-link">Learn more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls control-left">
+                <button class="control-btn" id="prevBtn">‹</button>
+            </div>
+            <div class="controls control-right">
+                <button class="control-btn" id="nextBtn">›</button>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scrollWrapper = document.getElementById('scrollWrapper');
+        const cardsWrapper = document.getElementById('cardsWrapper');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        const scrollContainer = document.getElementById('scrollContainer');
+
+        const cardWidth = 320;
+        const cardGap = 32;
+        const cardTotalWidth = cardWidth + cardGap;
+
+        const originalCardsCount = 12;
+        let totalCardsInWrapper; // Will be set after cloning
+
+        let currentScrollPosition = 0; // Tracks the scroll position in pixels from the absolute left of cardsWrapper
+
+        // Clone cards for seamless looping
+        function cloneCards() {
+            const originalChildren = Array.from(cardsWrapper.children);
+            // Append a duplicate set to the end
+            originalChildren.forEach(card => cardsWrapper.appendChild(card.cloneNode(true)));
+            // Prepend a duplicate set to the beginning
+            originalChildren.slice().reverse().forEach(card => cardsWrapper.prepend(card.cloneNode(true)));
+            totalCardsInWrapper = cardsWrapper.children.length; // Update the total count
+        }
+
+        cloneCards();
+
+        // Set initial scroll position to start at the first *original* set of cards
+        // This means skipping over the prepended clones
+        currentScrollPosition = originalCardsCount * cardTotalWidth;
+        cardsWrapper.style.transform = `translateX(-${currentScrollPosition}px)`;
+
+        function applyScrollTransform(smooth = true) {
+            if (!smooth) {
+                cardsWrapper.classList.add('no-transition');
+            } else {
+                cardsWrapper.classList.remove('no-transition');
+            }
+            cardsWrapper.style.transform = `translateX(-${currentScrollPosition}px)`;
+        }
+
+        function handleLooping() {
+            const viewportWidth = scrollContainer.offsetWidth - (2 * 16 * 2); // 2rem padding = 32px each side
+            const cardsInView = Math.floor(viewportWidth / cardTotalWidth);
+            const scrollAmount = cardsInView > 0 ? cardsInView * cardTotalWidth : cardTotalWidth; // Use cards in view or at least one
+
+            const firstOriginalSetStart = originalCardsCount * cardTotalWidth;
+            const secondOriginalSetStart = (originalCardsCount * 2) * cardTotalWidth;
+            const thirdOriginalSetStart = (originalCardsCount * 3) * cardTotalWidth;
+
+
+            if (currentScrollPosition >= secondOriginalSetStart) {
+                // If we've scrolled past the second set of cards (i.e., into the third cloned set)
+                currentScrollPosition -= originalCardsCount * cardTotalWidth; // Jump back by one full set
+                applyScrollTransform(false); // Apply instantly
+                // Allow transition to resume for the next animation cycle
+                requestAnimationFrame(() => applyScrollTransform(true));
+            } else if (currentScrollPosition < firstOriginalSetStart) {
+                // If we've scrolled before the first original set (i.e., into the prepended cloned set)
+                currentScrollPosition += originalCardsCount * cardTotalWidth; // Jump forward by one full set
+                applyScrollTransform(false); // Apply instantly
+                // Allow transition to resume for the next animation cycle
+                requestAnimationFrame(() => applyScrollTransform(true));
+            }
+        }
+
+
+        function updateScroll(direction, scrollAmountMultiplier = 1) {
+            const viewportWidth = scrollContainer.offsetWidth - (2 * 16 * 2); // Account for 2rem padding on each side
+            const cardsInView = Math.floor(viewportWidth / cardTotalWidth);
+            // Scroll by number of cards in view if possible, otherwise by one card
+            const scrollDistance = (cardsInView > 0 ? cardsInView : 1) * cardTotalWidth;
+
+            if (direction === 'next') {
+                currentScrollPosition += scrollDistance * scrollAmountMultiplier;
+            } else if (direction === 'prev') {
+                currentScrollPosition -= scrollDistance * scrollAmountMultiplier;
+            }
+
+            applyScrollTransform();
+            // Looping check after the transition completes, or shortly after for quick jumps
+            // Use setTimeout for consistency with visual transition, or requestAnimationFrame for immediate checks
+            setTimeout(() => {
+                handleLooping();
+                updateProgressBar(); // Update progress bar after looping might have adjusted position
+            }, 300); // Match cards-wrapper transition duration
+
+            pauseAnimation();
+        }
+
+        // --- Progress Bar Logic ---
+        function updateProgressBar() {
+            // The progress bar should represent our position within a *single* logical loop of the original cards.
+            // We need to calculate the position relative to the start of an "original" set.
+            const normalizedPosition = currentScrollPosition % (originalCardsCount * cardTotalWidth);
+
+            const progress = (normalizedPosition / (originalCardsCount * cardTotalWidth)) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        // Initial progress bar update
+        updateProgressBar();
+
+        // --- Event Listeners for Buttons ---
+        prevBtn.addEventListener('click', () => updateScroll('prev'));
+        nextBtn.addEventListener('click', () => updateScroll('next'));
+
+        // --- Pause/Resume Animation Logic (for potential auto-scroll in future) ---
+        let pauseTimeout;
+        function pauseAnimation() {
+            clearTimeout(pauseTimeout);
+            pauseTimeout = setTimeout(() => {
+                // Future auto-scroll restart logic would go here
+            }, 3000); // Pause for 3 seconds after manual interaction
+        }
+
+        // Remove CSS animation from cardsWrapper and progressFill in HTML or here
+        cardsWrapper.style.animation = 'none';
+        progressFill.style.animation = 'none';
+
+
+        // --- Touch and Mouse Drag Support ---
+        let startPos = 0;
+        let isDragging = false;
+        let currentTranslate = 0;
+        let prevTranslate = 0; // This stores the actual translateX value when drag starts
+
+        scrollWrapper.addEventListener('touchstart', touchStart);
+        scrollWrapper.addEventListener('touchend', touchEnd);
+        scrollWrapper.addEventListener('touchmove', touchMove);
+
+        scrollWrapper.addEventListener('mousedown', touchStart);
+        scrollWrapper.addEventListener('mouseup', touchEnd);
+        scrollWrapper.addEventListener('mousemove', touchMove);
+        scrollWrapper.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                touchEnd(); // End drag if mouse leaves wrapper while dragging
+            }
+        });
+
+
+        function touchStart(event) {
+            // Prevent dragging if on small screens where controls are hidden to avoid accidental scrolls
+            if (window.innerWidth <= 768 && (event.type === 'mousedown' || event.type === 'mousemove' || event.type === 'mouseup')) {
+                return;
+            }
+
+            isDragging = true;
+            cardsWrapper.classList.add('no-transition'); // Disable transition during drag
+
+            if (event.type === 'touchstart') {
+                startPos = event.touches[0].clientX;
+            } else {
+                startPos = event.clientX;
+                event.preventDefault(); // Prevent default browser drag behavior (e.g., image drag)
+            }
+
+            // `currentScrollPosition` is always positive (distance from left edge of `cardsWrapper`)
+            // The `transform` applied is `-currentScrollPosition`.
+            prevTranslate = -currentScrollPosition;
+        }
+
+        function touchMove(event) {
+            if (!isDragging) return;
+
+            let currentClientX;
+            if (event.type === 'touchmove') {
+                currentClientX = event.touches[0].clientX;
+            } else {
+                currentClientX = event.clientX;
+            }
+
+            // Calculate the new transform value
+            currentTranslate = prevTranslate + (currentClientX - startPos);
+            cardsWrapper.style.transform = `translateX(${currentTranslate}px)`;
+        }
+
+        function touchEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            cardsWrapper.classList.remove('no-transition'); // Re-enable transition
+
+            const movedBy = currentTranslate - prevTranslate; // How much the user dragged in pixels
+            const threshold = cardTotalWidth / 4; // Snap threshold (25% of a card)
+
+            let targetScrollOffset; // This will be a positive value, similar to currentScrollPosition
+
+            if (Math.abs(movedBy) > threshold) {
+                // If moved enough to snap to next/prev card
+                if (movedBy < 0) { // Swiped left (view moves right, so targetScrollOffset increases)
+                    targetScrollOffset = Math.ceil(-currentTranslate / cardTotalWidth) * cardTotalWidth;
+                } else { // Swiped right (view moves left, so targetScrollOffset decreases)
+                    targetScrollOffset = Math.floor(-currentTranslate / cardTotalWidth) * cardTotalWidth;
+                }
+            } else {
+                // If not enough drag, snap back to the card we started on
+                targetScrollOffset = currentScrollPosition;
+            }
+
+            // Ensure targetScrollOffset is not negative (it should always represent a distance)
+            targetScrollOffset = Math.max(0, targetScrollOffset); // Safety net
+
+            currentScrollPosition = targetScrollOffset;
+
+            // Apply the actual transform for the end of the drag
+            applyScrollTransform();
+
+            // After the visual transition, handle looping
+            setTimeout(() => {
+                handleLooping();
+                updateProgressBar(); // Update progress bar after potential loop adjustment
+            }, 300); // Match the CSS transition duration
+
+            pauseAnimation();
+        }
+
+
+        // --- Mouse Wheel Scrolling ---
+        scrollContainer.addEventListener('wheel', (e) => {
+            // Check if on desktop and not dragging (to avoid conflict with drag)
+            if (window.innerWidth > 768 && !isDragging) {
+                e.preventDefault(); // Prevent default vertical scrolling of the page
+
+                // Determine scroll direction and amount
+                const viewportWidth = scrollContainer.offsetWidth - (2 * 16 * 2); // Account for 2rem padding on each side
+                const cardsInView = Math.floor(viewportWidth / cardTotalWidth);
+                const scrollStep = (cardsInView > 0 ? cardsInView : 1) * cardTotalWidth * 0.2; // Scroll by 20% of the visible group or one card
+
+                if (e.deltaY > 0) {
+                    // Scroll down (scroll right)
+                    currentScrollPosition += scrollStep;
+                } else {
+                    // Scroll up (scroll left)
+                    currentScrollPosition -= scrollStep;
+                }
+                
+                applyScrollTransform();
+                // Looping check after the transition completes, or shortly after for quick jumps
+                setTimeout(() => {
+                    handleLooping();
+                    updateProgressBar(); // Update progress bar after looping might have adjusted position
+                }, 300); // Match cards-wrapper transition duration
+
+                pauseAnimation();
+            }
+        }, { passive: false }); // Use passive: false to allow preventDefault
+
+    </script>
+</body>
+</html>
