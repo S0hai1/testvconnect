@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Secure Access</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .form-group input.success {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-size: 1.2em;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-password:hover {
+            color: #333;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .login-btn.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin-top: -10px;
+            margin-left: -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .forgot-password {
+            text-align: center;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal p {
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .strength-meter {
+            height: 4px;
+            background: #e1e5e9;
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-meter-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak {
+            background: #e74c3c;
+        }
+
+        .strength-fair {
+            background: #f39c12;
+        }
+
+        .strength-good {
+            background: #3498db;
+        }
+
+        .strength-strong {
+            background: #27ae60;
+        }
+
+        .otp-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .otp-input {
+            width: 50px !important;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        .otp-input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .otp-input.error {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .otp-input.success {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .otp-timer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .otp-timer p {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .otp-timer span {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .resend-btn {
+            background: none;
+            border: 1px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .resend-btn:hover:not(:disabled) {
+            background: #667eea;
+            color: white;
+        }
+
+        .resend-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .reset-step {
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-container {
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 4em;
+            color: #27ae60;
+            margin-bottom: 20px;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .remember-me label {
+            font-size: 0.9em;
+            color: #666;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+
+            .login-header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Welcome Back</h1>
+            <p>Please sign in to your account</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <div class="error-message" id="usernameError"></div>
+                <div class="success-message" id="usernameSuccess"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+                </div>
+                <div class="error-message" id="passwordError"></div>
+                <div class="success-message" id="passwordSuccess"></div>
+                <div class="strength-meter">
+                    <div class="strength-meter-fill" id="strengthMeter"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+        </form>
+
+        <div class="forgot-password">
+            <a href="#" onclick="openForgotPasswordModal()">Forgot your password?</a>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeForgotPasswordModal()">&times;</span>
+
+            <!-- Step 1: Enter Username/Email -->
+            <div id="step1" class="reset-step">
+                <h2>Reset Password</h2>
+                <p>Enter your username or email address and we'll send you an OTP to reset your password.</p>
+                <form id="forgotPasswordForm">
+                    <div class="form-group">
+                        <label for="resetUsername">Username or Email</label>
+                        <input type="text" id="resetUsername" name="resetUsername" required>
+                        <div class="error-message" id="resetUsernameError"></div>
+                    </div>
+                    <button type="submit" class="login-btn" id="resetBtn">Send OTP</button>
+                </form>
+            </div>
+
+            <!-- Step 2: Enter OTP -->
+            <div id="step2" class="reset-step" style="display: none;">
+                <h2>Enter OTP</h2>
+                <p>We've sent a 6-digit OTP to your email address. Please enter it below.</p>
+                <form id="otpForm">
+                    <div class="form-group">
+                        <label for="otpCode">Enter 6-digit OTP</label>
+                        <div class="otp-container">
+                            <input type="text" id="otp1" class="otp-input" maxlength="1" required>
+                            <input type="text" id="otp2" class="otp-input" maxlength="1" required>
+                            <input type="text" id="otp3" class="otp-input" maxlength="1" required>
+                            <input type="text" id="otp4" class="otp-input" maxlength="1" required>
+                            <input type="text" id="otp5" class="otp-input" maxlength="1" required>
+                            <input type="text" id="otp6" class="otp-input" maxlength="1" required>
+                        </div>
+                        <div class="error-message" id="otpError"></div>
+                    </div>
+                    <div class="otp-timer">
+                        <p>OTP expires in: <span id="otpTimer">05:00</span></p>
+                        <button type="button" id="resendOtp" class="resend-btn" disabled>Resend OTP</button>
+                    </div>
+                    <button type="submit" class="login-btn" id="verifyOtpBtn">Verify OTP</button>
+                </form>
+            </div>
+
+            <!-- Step 3: Set New Password -->
+            <div id="step3" class="reset-step" style="display: none;">
+                <h2>Set New Password</h2>
+                <p>Please enter your new password below.</p>
+                <form id="newPasswordForm">
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <div class="password-container">
+                            <input type="password" id="newPassword" name="newPassword" required>
+                            <button type="button" class="toggle-password" onclick="toggleNewPassword()">👁️</button>
+                        </div>
+                        <div class="error-message" id="newPasswordError"></div>
+                        <div class="strength-meter">
+                            <div class="strength-meter-fill" id="newPasswordStrengthMeter"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <div class="password-container">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            <button type="button" class="toggle-password" onclick="toggleConfirmPassword()">👁️</button>
+                        </div>
+                        <div class="error-message" id="confirmPasswordError"></div>
+                        <div class="success-message" id="confirmPasswordSuccess"></div>
+                    </div>
+                    <button type="submit" class="login-btn" id="updatePasswordBtn">Update Password</button>
+                </form>
+            </div>
+
+            <!-- Step 4: Success Message -->
+            <div id="step4" class="reset-step" style="display: none;">
+                <div class="success-container">
+                    <div class="success-icon">✓</div>
+                    <h2>Password Updated Successfully!</h2>
+                    <p>Your password has been updated. You can now log in with your new password.</p>
+                    <button type="button" class="login-btn" onclick="closeForgotPasswordModal()">Back to Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo credentials for testing
+        const validCredentials = {
+            'admin': 'admin123',
+            'user': 'password123',
+            'demo': 'demo123'
+        };
+
+        // Form validation rules
+        const validationRules = {
+            username: {
+                minLength: 3,
+                maxLength: 20,
+                pattern: /^[a-zA-Z0-9_]+$/,
+                required: true
+            },
+            password: {
+                minLength: 6,
+                maxLength: 50,
+                required: true
+            }
+        };
+
+        // DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        const resetUsernameInput = document.getElementById('resetUsername');
+
+        // Event listeners
+        loginForm.addEventListener('submit', handleLogin);
+        forgotPasswordForm.addEventListener('submit', handleForgotPassword);
+        document.getElementById('otpForm').addEventListener('submit', handleOtpVerification);
+        document.getElementById('newPasswordForm').addEventListener('submit', handleNewPassword);
+        usernameInput.addEventListener('input', () => validateField('username'));
+        usernameInput.addEventListener('blur', () => validateField('username'));
+        passwordInput.addEventListener('input', () => {
+            validateField('password');
+            updatePasswordStrength();
+        });
+        passwordInput.addEventListener('blur', () => validateField('password'));
+
+        // Setup OTP inputs
+        setupOtpInputs();
+
+        // New password field validation
+        document.getElementById('newPassword').addEventListener('input', () => {
+            validateNewPassword();
+            updateNewPasswordStrength();
+        });
+        document.getElementById('confirmPassword').addEventListener('input', validateConfirmPassword);
+
+        // Real-time validation
+        function validateField(fieldName) {
+            const input = document.getElementById(fieldName);
+            const errorElement = document.getElementById(fieldName + 'Error');
+            const successElement = document.getElementById(fieldName + 'Success');
+            const value = input.value.trim();
+            const rules = validationRules[fieldName];
+
+            // Clear previous states
+            input.classList.remove('error', 'success');
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+
+            let isValid = true;
+            let errorMessage = '';
+
+            // Required field validation
+            if (rules.required && !value) {
+                isValid = false;
+                errorMessage = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+            }
+            // Length validation
+            else if (value && (value.length < rules.minLength || value.length > rules.maxLength)) {
+                isValid = false;
+                errorMessage = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be between ${rules.minLength} and ${rules.maxLength} characters`;
+            }
+            // Pattern validation for username
+            else if (fieldName === 'username' && value && !rules.pattern.test(value)) {
+                isValid = false;
+                errorMessage = 'Username can only contain letters, numbers, and underscores';
+            }
+            // Password strength validation
+            else if (fieldName === 'password' && value && !isStrongPassword(value)) {
+                isValid = false;
+                errorMessage = 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
+            }
+
+            // Apply validation results
+            if (!isValid) {
+                input.classList.add('error');
+                errorElement.textContent = errorMessage;
+                errorElement.style.display = 'block';
+            } else if (value) {
+                input.classList.add('success');
+                successElement.textContent = '✓ Valid';
+                successElement.style.display = 'block';
+            }
+
+            return isValid;
+        }
+
+        // Password strength checker
+        function isStrongPassword(password) {
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumbers = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            return hasUpperCase && hasLowerCase && hasNumbers;
+        }
+
+        // Password strength meter
+        function updatePasswordStrength() {
+            const password = passwordInput.value;
+            const strengthMeter = document.getElementById('strengthMeter');
+
+            if (!password) {
+                strengthMeter.style.width = '0%';
+                strengthMeter.className = 'strength-meter-fill';
+                return;
+            }
+
+            let strength = 0;
+            let strengthClass = '';
+
+            // Length check
+            if (password.length >= 6) strength += 25;
+            if (password.length >= 10) strength += 25;
+
+            // Character variety checks
+            if (/[a-z]/.test(password)) strength += 10;
+            if (/[A-Z]/.test(password)) strength += 10;
+            if (/[0-9]/.test(password)) strength += 15;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 15;
+
+            // Determine strength class
+            if (strength < 30) strengthClass = 'strength-weak';
+            else if (strength < 60) strengthClass = 'strength-fair';
+            else if (strength < 90) strengthClass = 'strength-good';
+            else strengthClass = 'strength-strong';
+
+            strengthMeter.style.width = strength + '%';
+            strengthMeter.className = 'strength-meter-fill ' + strengthClass;
+        }
+
+        // Handle login form submission
+        function handleLogin(e) {
+            e.preventDefault();
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Validate all fields
+            const isUsernameValid = validateField('username');
+            const isPasswordValid = validateField('password');
+
+            if (!isUsernameValid || !isPasswordValid) {
+                return;
+            }
+
+            // Show loading state
+            loginBtn.classList.add('loading');
+            loginBtn.textContent = '';
+
+            // Prepare data for POST
+            const data = new URLSearchParams();
+            data.append('username', username);
+            data.append('password', password);
+
+            fetch("{% url 'admin_login'%}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCSRFToken() // Function to get CSRF token
+                },
+                body: data
+            })
+                .then(response => response.json())
+                .then(data => {
+                    loginBtn.classList.remove('loading');
+
+                    if (data.success) {
+                        loginBtn.textContent = '✓ Login Successful!';
+                        loginBtn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+
+                        setTimeout(() => {
+                            loginForm.reset();
+                            window.location.href = '/admin/dashboard/'; // Redirect to admin dashboard
+                        }, 1500);
+                    } else {
+                        loginBtn.textContent = 'Sign In';
+
+                        const errorDiv = document.getElementById('passwordError');
+                        errorDiv.textContent = data.message || 'Invalid username or password';
+                        errorDiv.style.display = 'block';
+                        passwordInput.classList.add('error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Login error:', error);
+                    loginBtn.classList.remove('loading');
+                    loginBtn.textContent = 'Sign In';
+                    alert('Something went wrong. Please try again.');
+                });
+        }
+
+
+        // Handle forgot password
+        async function handleForgotPassword(e) {
+            e.preventDefault();
+            console.log('Forgot password form submitted');
+
+            const username = resetUsernameInput.value.trim();
+            const errorElement = document.getElementById('resetUsernameError');
+
+            if (!username) {
+                errorElement.textContent = 'Username or email is required';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (username.length < 3) {
+                errorElement.textContent = 'Username must be at least 3 characters';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            // Clear error
+            errorElement.style.display = 'none';
+
+            const resetBtn = document.getElementById('resetBtn');
+            resetBtn.classList.add('loading');
+            resetBtn.textContent = '';
+
+            try {
+                console.log('Sending OTP request to server with username:', username);
+                const response = await fetch("{% url 'send_otp_ajax' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': getCSRFToken(),
+                    },
+                    body: new URLSearchParams({
+                        username: username
+                    })
+                });
+                console.log('Response received from server:', response);
+
+                const data = await response.json();
+                resetBtn.classList.remove('loading');
+                resetBtn.textContent = 'Send OTP';
+
+                if (data.success) {
+                    window.resetUsername = username;
+                    showStep(2);
+                    startOtpTimer();
+                    alert(`Demo OTP sent: ${data.otp}`);
+                } else {
+                    errorElement.textContent = data.message || 'Something went wrong.';
+                    errorElement.style.display = 'block';
+                }
+            } catch (err) {
+                console.log('Error during OTP request:', err);
+                resetBtn.classList.remove('loading');
+                resetBtn.textContent = 'Send OTP';
+                errorElement.textContent = 'Server error. Please try again.';
+                errorElement.style.display = 'block';
+            }
+        }
+
+
+        // Handle OTP verification
+        async function handleOtpVerification(e) {
+            e.preventDefault();
+
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const enteredOtp = Array.from(otpInputs).map(input => input.value).join('');
+            const errorElement = document.getElementById('otpError');
+
+            errorElement.style.display = 'none';
+            otpInputs.forEach(input => input.classList.remove('error'));
+
+            if (enteredOtp.length !== 6) {
+                errorElement.textContent = 'Please enter all 6 digits';
+                errorElement.style.display = 'block';
+                otpInputs.forEach(input => {
+                    if (!input.value) input.classList.add('error');
+                });
+                return;
+            }
+
+            const verifyBtn = document.getElementById('verifyOtpBtn');
+            verifyBtn.classList.add('loading');
+            verifyBtn.textContent = '';
+
+            try {
+                const response = await fetch("{% url 'verify_otp_ajax' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': getCSRFToken(),
+                    },
+                    body: new URLSearchParams({ otp: enteredOtp })
+                });
+
+                const data = await response.json();
+                verifyBtn.classList.remove('loading');
+                verifyBtn.textContent = 'Verify OTP';
+
+                if (data.success) {
+                    otpInputs.forEach(input => input.classList.add('success'));
+                    setTimeout(() => {
+                        showStep(3);
+                        stopOtpTimer();
+                    }, 500);
+                } else {
+                    errorElement.textContent = data.message || 'Invalid OTP';
+                    errorElement.style.display = 'block';
+                    otpInputs.forEach(input => input.classList.add('error'));
+                }
+            } catch (err) {
+                verifyBtn.classList.remove('loading');
+                verifyBtn.textContent = 'Verify OTP';
+                errorElement.textContent = 'Server error. Please try again.';
+                errorElement.style.display = 'block';
+            }
+        }
+
+        // Handle new password setting
+        async function handleNewPassword(e) {
+            e.preventDefault();
+
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!validateNewPassword() || !validateConfirmPassword()) return;
+
+            const updateBtn = document.getElementById('updatePasswordBtn');
+            updateBtn.classList.add('loading');
+            updateBtn.textContent = '';
+
+            try {
+                const response = await fetch("{% url 'reset_password_ajax' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': getCSRFToken(),
+                    },
+                    body: new URLSearchParams({
+                        new_password: newPassword,
+                        confirm_password: confirmPassword
+                    })
+                });
+
+                const data = await response.json();
+                updateBtn.classList.remove('loading');
+                updateBtn.textContent = 'Update Password';
+
+                if (data.success) {
+                    showStep(4);
+                    delete window.resetUsername;
+                } else {
+                    alert(data.message || 'Password update failed.');
+                }
+            } catch (err) {
+                updateBtn.classList.remove('loading');
+                updateBtn.textContent = 'Update Password';
+                alert('Server error. Please try again.');
+            }
+        }
+
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.querySelector('.toggle-password');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        // Toggle new password visibility
+        function toggleNewPassword() {
+            const newPasswordInput = document.getElementById('newPassword');
+            const toggleBtn = newPasswordInput.nextElementSibling;
+
+            if (newPasswordInput.type === 'password') {
+                newPasswordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                newPasswordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        // Toggle confirm password visibility
+        function toggleConfirmPassword() {
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const toggleBtn = confirmPasswordInput.nextElementSibling;
+
+            if (confirmPasswordInput.type === 'password') {
+                confirmPasswordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                confirmPasswordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        // Modal functions
+        function openForgotPasswordModal() {
+            forgotPasswordModal.style.display = 'block';
+            showStep(1);
+        }
+
+        function closeForgotPasswordModal() {
+            forgotPasswordModal.style.display = 'none';
+            resetPasswordResetForm();
+        }
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`step${i}`).style.display = 'none';
+            }
+            // Show current step
+            document.getElementById(`step${stepNumber}`).style.display = 'block';
+        }
+
+        function resetPasswordResetForm() {
+            // Reset all forms
+            forgotPasswordForm.reset();
+            document.getElementById('otpForm').reset();
+            document.getElementById('newPasswordForm').reset();
+
+            // Clear all errors and success messages
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.success-message').forEach(el => el.style.display = 'none');
+
+            // Reset input states
+            document.querySelectorAll('input').forEach(input => {
+                input.classList.remove('error', 'success');
+            });
+
+            // Reset strength meters
+            document.getElementById('newPasswordStrengthMeter').style.width = '0%';
+            document.getElementById('newPasswordStrengthMeter').className = 'strength-meter-fill';
+
+            // Reset buttons
+            document.getElementById('resetBtn').textContent = 'Send OTP';
+            document.getElementById('resetBtn').style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            document.getElementById('verifyOtpBtn').textContent = 'Verify OTP';
+            document.getElementById('updatePasswordBtn').textContent = 'Update Password';
+
+            // Stop timer
+            stopOtpTimer();
+
+            // Clear stored data
+            delete window.demoOtp;
+            delete window.resetUsername;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function (event) {
+            if (event.target === forgotPasswordModal) {
+                closeForgotPasswordModal();
+            }
+        }
+
+        // Reset form state
+        function resetForm() {
+            const inputs = document.querySelectorAll('input');
+            const errors = document.querySelectorAll('.error-message');
+            const successes = document.querySelectorAll('.success-message');
+
+            inputs.forEach(input => {
+                input.classList.remove('error', 'success');
+            });
+
+            errors.forEach(error => {
+                error.style.display = 'none';
+            });
+
+            successes.forEach(success => {
+                success.style.display = 'none';
+            });
+
+            document.getElementById('strengthMeter').style.width = '0%';
+            document.getElementById('strengthMeter').className = 'strength-meter-fill';
+
+            loginBtn.textContent = 'Sign In';
+            loginBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+        }
+
+        // Demo credentials info
+        console.log('Demo credentials:');
+        console.log('Username: admin, Password: admin123');
+        console.log('Username: user, Password: password123');
+        console.log('Username: demo, Password: demo123');
+
+        // OTP Input Management
+        function setupOtpInputs() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value;
+
+                    // Only allow numbers
+                    if (!/^\d*$/.test(value)) {
+                        e.target.value = value.replace(/\D/g, '');
+                        return;
+                    }
+
+                    // Move to next input if current is filled
+                    if (value && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    // Move to previous input on backspace
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text');
+                    const digits = pastedData.replace(/\D/g, '').slice(0, 6);
+
+                    digits.split('').forEach((digit, i) => {
+                        if (otpInputs[i]) {
+                            otpInputs[i].value = digit;
+                        }
+                    });
+                });
+            });
+        }
+
+        // OTP Timer Management
+        let otpTimer;
+        let timeLeft = 300; // 5 minutes in seconds
+
+        function startOtpTimer() {
+            timeLeft = 300;
+            const timerDisplay = document.getElementById('otpTimer');
+            const resendBtn = document.getElementById('resendOtp');
+
+            resendBtn.disabled = true;
+
+            otpTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(otpTimer);
+                    timerDisplay.textContent = '00:00';
+                    resendBtn.disabled = false;
+
+                    // Show expiry message
+                    const otpError = document.getElementById('otpError');
+                    otpError.textContent = 'OTP has expired. Please request a new one.';
+                    otpError.style.display = 'block';
+                }
+
+                timeLeft--;
+            }, 1000);
+        }
+
+        function stopOtpTimer() {
+            if (otpTimer) {
+                clearInterval(otpTimer);
+                otpTimer = null;
+            }
+        }
+
+        // Resend OTP
+        document.getElementById('resendOtp').addEventListener('click', () => {
+            const demoOtp = Math.floor(100000 + Math.random() * 900000).toString();
+            console.log(`New Demo OTP: ${demoOtp}`);
+            alert(`New OTP sent: ${demoOtp}`);
+            window.demoOtp = demoOtp;
+
+            // Clear OTP inputs
+            document.querySelectorAll('.otp-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('error', 'success');
+            });
+
+            // Clear error
+            document.getElementById('otpError').style.display = 'none';
+
+            // Restart timer
+            startOtpTimer();
+        });
+
+        // New Password Validation
+        function validateNewPassword() {
+            const newPassword = document.getElementById('newPassword').value;
+            const errorElement = document.getElementById('newPasswordError');
+
+            errorElement.style.display = 'none';
+
+            if (!newPassword) {
+                errorElement.textContent = 'New password is required';
+                errorElement.style.display = 'block';
+                return false;
+            }
+
+            if (newPassword.length < 6) {
+                errorElement.textContent = 'Password must be at least 6 characters';
+                errorElement.style.display = 'block';
+                return false;
+            }
+
+            if (!isStrongPassword(newPassword)) {
+                errorElement.textContent = 'Password must contain uppercase, lowercase, and numbers';
+                errorElement.style.display = 'block';
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateConfirmPassword() {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorElement = document.getElementById('confirmPasswordError');
+            const successElement = document.getElementById('confirmPasswordSuccess');
+
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+
+            if (!confirmPassword) {
+                errorElement.textContent = 'Please confirm your password';
+                errorElement.style.display = 'block';
+                return false;
+            }
+
+            if (newPassword !== confirmPassword) {
+                errorElement.textContent = 'Passwords do not match';
+                errorElement.style.display = 'block';
+                return false;
+            }
+
+            successElement.textContent = '✓ Passwords match';
+            successElement.style.display = 'block';
+            return true;
+        }
+
+        // New Password Strength Meter
+        function updateNewPasswordStrength() {
+            const password = document.getElementById('newPassword').value;
+            const strengthMeter = document.getElementById('newPasswordStrengthMeter');
+
+            if (!password) {
+                strengthMeter.style.width = '0%';
+                strengthMeter.className = 'strength-meter-fill';
+                return;
+            }
+
+            let strength = 0;
+            let strengthClass = '';
+
+            // Length check
+            if (password.length >= 6) strength += 25;
+            if (password.length >= 10) strength += 25;
+
+            // Character variety checks
+            if (/[a-z]/.test(password)) strength += 10;
+            if (/[A-Z]/.test(password)) strength += 10;
+            if (/[0-9]/.test(password)) strength += 15;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 15;
+
+            // Determine strength class
+            if (strength < 30) strengthClass = 'strength-weak';
+            else if (strength < 60) strengthClass = 'strength-fair';
+            else if (strength < 90) strengthClass = 'strength-good';
+            else strengthClass = 'strength-strong';
+
+            strengthMeter.style.width = strength + '%';
+            strengthMeter.className = 'strength-meter-fill ' + strengthClass;
+        }
+
+
+
+        function getCSRFToken() {
+            const csrfCookie = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+            return csrfCookie ? csrfCookie.split('=')[1] : '';
+        }
+
+    </script>
+</body>
+
+</html>

@@ -20,6 +20,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', include('adminpanel.urls')),
     path('', include('myapp.urls')),  # root route goes to main app
 ]

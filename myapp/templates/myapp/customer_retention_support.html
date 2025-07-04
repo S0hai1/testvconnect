@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ValueConnectSolution - Your Success Is Our Mission</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Change text/icon colors when */
+        .navbar .logo .text-select,
+        .navbar .logo .text-voicecom,
+        .navbar .nav-item > a,
+        .navbar .search-icon,
+        .navbar .lang {
+            color: var(--text-color-dark);
+        }
+
+        .navbar .hamburger-menu span {
+            background-color: var(--text-color-dark);
+        }
+
+        /* Hero Section with Background Image */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background-image: url('{% static "myapp/images/outsourcing1.webp" %}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* This creates the parallax effect */
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for better text readability */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+            padding: 0 30px;
+            padding-top: 140px;
+            background-color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+
+            .hero-content p {
+                font-size: 1.1em;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                background-attachment: scroll; /* Disable parallax on mobile for better performance */
+            }
+
+            .hero-content {
+                padding: 0 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+
+            .hero-content p {
+                font-size: 1em;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+
+        
+        /* Container styling */
+        .container {
+            max-width: 1440px; /* Equivalent to max-w-4xl */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 24px; /* Equivalent to p-6 */
+            background-color: #ffffff; /* White background */
+        }
+
+        /* Main Heading styling */
+        .main-heading {
+            font-size: 2rem; /* Default text-3xl */
+            font-weight: 800; /* Equivalent to font-extrabold */
+            color: #1a202c; /* Equivalent to text-gray-900 */
+            text-align: center;
+            line-height: 1.25; /* Equivalent to leading-tight */
+            margin-bottom: 24px; /* Equivalent to mb-6 */
+        }
+
+        /* Paragraph Content styling */
+        .paragraph-content {
+            font-size: 1rem; /* Default text-base */
+            color: #4a5568; /* Equivalent to text-gray-700 */
+            text-align: center;
+            line-height: 1.625; /* Equivalent to leading-relaxed */
+        }
+
+        /* Responsive adjustments for medium screens (md:p-10) */
+        @media (min-width: 768px) {
+            .container {
+                padding: 40px; /* Equivalent to md:p-10 */
+            }
+            .main-heading {
+                font-size: 2rem; /* Equivalent to md:text-5xl */
+            }
+            .paragraph-content {
+                font-size: 1.125rem; /* Equivalent to md:text-xl */
+            }
+        }
+
+        /* Responsive adjustments for small screens (sm:text-4xl, sm:mb-8) */
+        @media (min-width: 640px) {
+            .main-heading {
+                font-size: 2rem; /* Equivalent to sm:text-4xl */
+                margin-bottom: 32px; /* Equivalent to sm:mb-8 */
+            }
+            .paragraph-content {
+                font-size: 1.125rem; /* Equivalent to sm:text-lg */
+            }
+        }
+
+        /* Responsive adjustments for large screens (lg:text-6xl) */
+        @media (min-width: 1024px) {
+            .main-heading {
+                font-size: 2.5rem; /* Equivalent to lg:text-6xl */
+            }
+        }
+
+
+        /* General container for content sections */
+.content-section {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.content-section .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* Customer Retention Intro Section */
+.customer-retention-intro {
+    display: flex;
+    flex-direction: column; /* Default to column for small screens */
+    gap: 40px; /* Space between text and image */
+    align-items: flex-start; /* Align items to the start */
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+}
+
+.customer-retention-intro .text-content {
+    flex: 1; /* Allows text to take available space */
+}
+
+.customer-retention-intro .text-content h2 {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.customer-retention-intro .text-content p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.customer-retention-intro .text-content ul {
+    list-style: disc;
+    margin-left: 25px;
+    padding: 0;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+
+.customer-retention-intro .text-content ul li {
+    margin-bottom: 10px;
+}
+
+.customer-retention-intro .image-content {
+    flex-shrink: 0; /* Prevents image from shrinking too much */
+    width: 100%; /* Default to full width for small screens */
+    max-width: 500px; /* Max width for the image */
+    order: -1; /* Place image above text on small screens by default */
+}
+
+.customer-retention-intro .image-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Benefits of Outsourcing Section */
+.outsourcing-benefits {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+}
+
+.outsourcing-benefits h2 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.outsourcing-benefits p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.outsourcing-benefits ul {
+    list-style: disc;
+    margin-left: 25px;
+    padding: 0;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+
+.outsourcing-benefits ul li {
+    margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .customer-retention-intro {
+        flex-direction: row-reverse ; /* Side-by-side on larger screens */
+        align-items: center; /* Vertically align items in the middle */
+    }
+
+    .customer-retention-intro .image-content {
+        width: 45%; /* Adjust width for image on larger screens */
+        order: unset; /* Remove order change on larger screens */
+    }
+
+    /* Adjust order for text and image in the first section */
+    .customer-retention-intro .text-content {
+        order: 2; /* Text on the right */
+    }
+    .customer-retention-intro .image-content {
+        order: 1; /* Image on the left */
+    }
+
+    .customer-retention-intro .text-content h2 {
+        font-size: 2.8em;
+    }
+    .outsourcing-benefits h2 {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 767px) {
+    .content-section .container {
+        padding: 0 20px;
+    }
+    .customer-retention-intro,
+    .outsourcing-benefits {
+        padding: 30px 20px;
+    }
+    .customer-retention-intro .text-content h2 {
+        font-size: 2em;
+    }
+    .outsourcing-benefits h2 {
+        font-size: 1.8em;
+    }
+    .customer-retention-intro .text-content p,
+    .outsourcing-benefits p {
+        font-size: 1em;
+    }
+    .customer-retention-intro .text-content ul,
+    .outsourcing-benefits ul {
+        font-size: 0.95em;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-section {
+        padding: 40px 0;
+    }
+    .customer-retention-intro,
+    .outsourcing-benefits {
+        padding: 25px 15px;
+    }
+    .customer-retention-intro .text-content h2 {
+        font-size: 1.8em;
+    }
+    .outsourcing-benefits h2 {
+        font-size: 1.6em;
+    }
+}
+
+
+
+/* Why Choose Select VoiceCom Section */
+.why-choose-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.why-choose-section h2 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.why-choose-section h3 {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.why-choose-section p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.why-choose-section ul {
+    list-style: disc;
+    margin-left: 25px;
+    padding: 0;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+
+.why-choose-section ul li {
+    margin-bottom: 10px;
+}
+
+.why-choose-section a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.why-choose-section a:hover {
+    text-decoration: underline;
+    color: #2980b9;
+}
+
+/* Responsive Design for Why Choose Section */
+@media (max-width: 767px) {
+    .why-choose-section {
+        padding: 30px 20px;
+    }
+    
+    .why-choose-section h2 {
+        font-size: 1.8em;
+    }
+    
+    .why-choose-section h3 {
+        font-size: 1.4em;
+    }
+    
+    .why-choose-section p {
+        font-size: 1em;
+    }
+    
+    .why-choose-section ul {
+        font-size: 0.95em;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .why-choose-section {
+        padding: 25px 15px;
+    }
+    
+    .why-choose-section h2 {
+        font-size: 1.6em;
+    }
+    
+    .why-choose-section h3 {
+        font-size: 1.3em;
+    }
+}
+
+
+
+    .image-container {
+            max-width: 1440px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 2rem; /* More rounded corners for the main container */
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .image-collage {
+            display: flex;
+            flex-direction: row; /* Stack vertically by default */
+            gap: 1.5rem; /* Gap between columns/rows */
+        }
+
+        .image-wrapper {
+            border-radius: 1.5rem; /* Rounded corners for images */
+            overflow: hidden; /* Ensures image respects border-radius */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow for individual images */
+            display: flex; /* To center content if needed */
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5; /* Fallback background for image areas */
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below image */
+            object-fit: cover; /* Cover the area, cropping if necessary */
+        }
+
+        /* Specific heights for images */
+        .main-image .image-content {
+            height: 400px; /* Fixed height for the main image area */
+        }
+
+        .side-image .image-content {
+            height: 190px; /* Fixed height for side images */
+        }
+
+        /* Flex container for image content, helps with object-fit centering */
+        .image-content {
+            width: 100%;
+            position: relative; /* For the image inside */
+        }
+        .image-content img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        /* Responsive layout for larger screens */
+        @media (min-width: 768px) {
+            .image-collage {
+                flex-direction: row; /* Layout horizontally on larger screens */
+            }
+
+            .main-column {
+                flex: 2; /* Takes 2/3 of the space */
+            }
+
+            .side-column {
+                flex: 1; /* Takes 1/3 of the space */
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem; /* Gap between the two side images */
+            }
+
+            /* Adjust heights for desktop */
+            .main-image .image-content {
+                height: 500px;
+            }
+
+            .side-image .image-content {
+                height: 240px; /* Slightly less than half of main image height */
+            }
+        }   
+    </style>
+</head>
+
+<body>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Outsourced Customer Retention Services in the Philippines</h1>
+        </div>
+        
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 13l3 3 7-7"/>
+                <path d="M7 6l3 3 7-7"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Main Heading -->
+        <h1 class="main-heading">
+            Maximize Profitability With Outsourced Customer Retention Services
+        </h1>
+
+        <!-- Paragraph Content -->
+        <p class="paragraph-content">
+            Retaining existing customers is far more cost-effective than acquiring new ones. Studies show that it costs seven times more to attract new clients than to keep the ones you already have. Your business can boost profitability, increase customer loyalty, and drive long-term growth by focusing on customer retention.
+        </p>
+    </div>
+
+
+
+    <section class="content-section">
+        <div class="container">
+            <div class="customer-retention-intro">
+                <div class="text-content">
+                    <h2>Why Customer Retention Is Critical to Your Success</h2>
+                    <p>Acquiring new customers is important, but maintaining relationships with existing clients is where true value lies. A loyal customer base provides consistent revenue and helps your business grow. This is especially true in customer retention in service marketing, where personal connections and customer experience are critical to maintaining loyalty.</p>
+                    <p>Here's why customer retention should be at the core of your business strategy:</p>
+                    <ul>
+                        <li><strong>Cost Efficiency:</strong> Retaining customers is significantly cheaper than acquiring new ones.</li>
+                        <li><strong>Increased Revenue:</strong> A 5% increase in customer retention can boost profits by up to 95%.</li>
+                        <li><strong>Higher Customer Value:</strong> Loyal customers spend more and buy more often.</li>
+                        <li><strong>Referral Potential:</strong> Satisfied customers are more likely to recommend your business to others, expanding your reach organically.</li>
+                    </ul>
+                </div>
+                <div class="image-content">
+                    <img src="{% static 'myapp/images/image_37af59.jpg' %}" alt="Customer Retention Importance">
+                </div>
+            </div>
+
+            <div class="outsourcing-benefits">
+                <h2>The Benefits of Outsourcing Customer Retention to Select VoiceCom</h2>
+                <p>Building and maintaining a loyal customer base is no easy task. It requires consistent, high-quality service and a deep understanding of your customer's needs. That's why many businesses turn to customer retention outsourcing. That's where Select VoiceCom comes in.</p>
+                <p>We design our client retention services to strengthen your existing client relationships, save you time and resources, and ultimately enhance your bottom line.</p>
+                <p>Customer service and customer retention go hand in hand. When customers feel heard, supported, and valued, they're far more likely to stay. Our dedicated agents not only resolve issues quickly but create positive, brand-aligned experiences that keep your customers coming back.</p>
+                <p><strong>Key Benefits of Our Customer Retention Services:</strong></p>
+                <ul>
+                    <li><strong>Reduce Customer Attrition:</strong> Proactively address customer concerns to minimize churn.</li>
+                    <li><strong>Multi-Channel Communication:</strong> Engage customers through the channels that works best for them: social media, SMS, phone calls, chat, or email.</li>
+                    <li><strong>Fast Response Times:</strong> Provide quick, personalized service to keep customers satisfied.</li>
+                    <li><strong>Product Knowledge:</strong> Our agents are well-versed in your products and services, ensuring accurate support. Encourage repeat purchases and long-term relationships that increase the value of every customer.</li>
+                    <li><strong>Brand Reinforcement:</strong> Strengthen brand loyalty through consistent and positive customer interactions.</li>
+                    <li><strong>Loyalty Campaigns:</strong> Launch targeted customer loyalty programs and promotions to reward and retain your best customers.</li>
+                    <li><strong>Predict Future Needs:</strong> Anticipate and address potential customer needs before they arise.</li>
+                    <li><strong>Identify and Resolve Issues:</strong> Uncover and fix common complaints or policy flaws to improve customer satisfaction.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="content-section">
+        <div class="container">
+            <div class="why-choose-section">
+                <h2>Why Choose Select VoiceCom for Your Customer Retention Needs?</h2>
+                <p>At Select VoiceCom, we go beyond basic customer support; we help you keep your customers loyal. Our retention services are tailored to reduce churn, strengthen your brand, and build long-lasting relationships through open communication and proactive customer engagement. Happy customers are loyal customers.</p>
+                <p>Whether you're facing challenges with pricing, service issues, shifting customer needs, or operational changes, we bring the tools and expertise to overcome obstacles and maintain customer retention for long-term success.</p>
+                
+                <h3>What Sets Us Apart:</h3>
+                <ul>
+                    <li><strong>Cutting-Edge Technology:</strong> Our advanced call center platform streamlines every aspect of customer service, from payment processing to loyalty analytics.</li>
+                    <li><strong>Personalized Service:</strong> We act as an extension of your brand, providing friendly and knowledgeable support that keeps customers coming back.</li>
+                    <li><strong>Strategic Growth:</strong> We don't just support customers, we help you grow by identifying referral opportunities and implementing strategies that lead to a more satisfied, loyal customer base.</li>
+                </ul>
+                
+                <h3>What We Offer:</h3>
+                <ul>
+                    <li><strong>Specialized Agents:</strong> Our team is trained specifically to manage retention conversations with empathy, professionalism, and results-driven strategies.</li>
+                    <li><strong>Proactive Retention Strategies:</strong> We help identify at-risk customers and implement loyalty campaigns that reduce churn and boost lifetime customer value.</li>
+                    <li><strong>Data-Driven Insights:</strong> Access detailed reports and analytics on customer behavior and retention trends to make informed business decisions.</li>
+                    <li><strong>Flexible & Scalable Solutions:</strong> Whether you need short-term assistance or long-term outsourcing, we adapt to your business's evolving needs.</li>
+                </ul>
+                
+                <p>Ready to boost your revenue and decrease churn? Select VoiceCom's customer retention services in the Philippines offer an affordable and effective way to achieve business growth. <a href="#contact">Contact us today</a> to learn more.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="image-container">
+        <div class="image-collage">
+            <div class="main-column">
+                <div class="image-wrapper main-image">
+                    <div class="image-content">
+                        <img
+                            src="https://placehold.co/800x500/A0C49D/FFFFFF?text=Team+Member+1"
+                            alt="Team Member 1 - Smiling man with headset"
+                            onerror="this.onerror=null;this.src='https://placehold.co/800x500/A0C49D/FFFFFF?text=Image+Load+Error';"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-column">
+                <div class="image-wrapper side-image">
+                    <div class="image-content">
+                        <img
+                            src="https://placehold.co/400x240/C4D7B2/FFFFFF?text=Team+Member+2"
+                            alt="Team Member 2 - Smiling woman with headset"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x240/C4D7B2/FFFFFF?text=Image+Load+Error';"
+                        >
+                    </div>
+                </div>
+                <div class="image-wrapper side-image">
+                    <div class="image-content">
+                        <img
+                            src="https://placehold.co/400x240/E0F4F4/333333?text=Team+Member+3"
+                            alt="Team Member 3 - Man working on laptop"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x240/E0F4F4/333333?text=Image+Load+Error';"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% include 'myapp/footer.html' %}
+
+
+    <script>
+        
+    </script>
+
+</body>
+
+</html>

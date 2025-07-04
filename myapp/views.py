@@ -11,8 +11,14 @@ def our_services(request):
 def inbound_call_center_services(request):
     return render(request, 'myapp/inbound_call_center_services.html')
 
-def customer_service_page(request):
-    return render(request, 'myapp/customer_service_page.html')
-
 def technical_support_page(request):
     return render(request, 'myapp/technical_support_page.html')
+
+def order_processing_services(request):
+    return render(request, 'myapp/order_processing_services.html')
+
+def customer_service_outsourcing(request):
+    return render(request, 'myapp/customer_service_outsourcing.html')
+
+def customer_retention_support(request):
+    return render(request, 'myapp/customer_retention_support.html')

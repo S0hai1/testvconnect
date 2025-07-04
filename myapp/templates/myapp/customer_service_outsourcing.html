@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ValueConnectSolution - Your Success Is Our Mission</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* CSS Variables (Keep at the top for easy access) */
+        :root {
+            --header-height: 70px;
+            /* Define your header's height here */
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            /* Overall dark background */
+            overflow-x: hidden;
+            /* Prevent horizontal scroll from overflow, especially on mobile */
+            min-height: 100vh;
+            /* Ensure body is at least viewport height */
+            height: auto;
+            /* Allow body to expand with content */
+        }
+
+        /* Image Background Styles (for Header and Hero) */
+        .hero-background-image {
+            position: absolute;
+            /* Position relative to its parent .hero-content-wrapper */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Make it fill the wrapper */
+            overflow: hidden;
+            z-index: -2;
+            /* Puts it behind all content, including the header */
+        }
+
+        .hero-background-image img {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            /* Ensures the image covers the entire container */
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Dark overlay for better text readability */
+            z-index: -1;
+            /* Above image, below all foreground content (including header) */
+        }
+
+        /* Wrapper for main content to sit on top of the image */
+        .hero-content-wrapper {
+            position: relative;
+            /* Allows content inside to be positioned normally */
+            z-index: 1;
+            /* Ensures content is above the image and overlay */
+            min-height: calc(100vh - var(--header-height));
+            /* Ensure it's at least one screen height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Center hero content vertically */
+            padding-bottom: 50px;
+            /* Add some padding at the bottom for separation */
+        }
+
+        /* Hero Section Styles (already good, just ensure no conflicting backgrounds) */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 30px;
+            /* Reduced vertical padding */
+            margin-top: 80px;
+            background: none;
+            /* No background on hero section itself */
+            min-height: calc(100vh - var(--header-height) - 80px - 80px);
+            /* Adjust to fit initially */
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+            /* Ensure text is white as per body style */
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+            margin-right: 50px;
+            z-index: 1;
+            color: #fff;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2em;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        /* These pseudo-elements are still part of .hero-section in your HTML */
+        .hero-section::before,
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.05);
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .hero-section::before {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -100px;
+        }
+
+        .hero-section::after {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            right: -150px;
+            background: rgba(253, 216, 53, 0.05);
+        }
+
+        /* Customer Service Section Styles */
+        .customer-service-section {
+            color: black;
+            padding: 80px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.1em;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .philippine-section {
+            margin: 60px 0;
+        }
+
+        .philippine-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .philippine-description {
+            font-size: 1em;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .services-grid-section {
+            margin-top: 80px;
+        }
+
+        .services-grid-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .services-grid-subtitle {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #FFB800, #FFA000);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 184, 0, 0.3);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: #fff;
+        }
+
+        .service-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .read-more-btn {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .read-more-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+                /* Further reduce vertical padding */
+            }
+
+            .hero-content {
+                margin-right: 0;
+                margin-bottom: 30px;
+                /* Reduced margin */
+                max-width: 100%;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+                /* Slightly smaller on tablets */
+            }
+
+            .customer-service-section {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .philippine-title,
+            .services-grid-title {
+                font-size: 1.8em;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.8em;
+                /* Even smaller on mobile */
+            }
+
+            .customer-service-section {
+                padding: 40px 15px;
+            }
+
+            .section-title {
+                font-size: 1.6em;
+            }
+
+            .philippine-title,
+            .services-grid-title {
+                font-size: 1.5em;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Benefits Section Styles */
+.benefits-section {
+    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+    color: white;
+    padding: 80px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefits-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.benefits-title {
+    font-size: 2.5em;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.2;
+}
+
+.benefits-description {
+    font-size: 1.1em;
+    text-align: center;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+    max-width: 900px;
+}
+
+.benefits-subtitle {
+    font-size: 1.1em;
+    text-align: center;
+    margin: 0 auto 50px;
+    font-weight: 600;
+    max-width: 900px;
+}
+
+.benefits-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.benefit-icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.benefit-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.benefit-content {
+    flex: 1;
+}
+
+.benefit-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #FFF;
+}
+
+.benefit-text {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.benefit-features {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+}
+
+.benefit-features li {
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    padding-left: 20px;
+}
+
+.benefit-features li:before {
+    content: "•";
+    color: #FFD700;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.benefit-features strong {
+    color: #FFF;
+}
+
+/* Benefits Section Responsive Styles */
+@media (max-width: 992px) {
+    .benefits-section {
+        padding: 60px 20px;
+    }
+
+    .benefits-title {
+        font-size: 2em;
+    }
+
+    .benefit-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .benefit-icon {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .benefits-section {
+        padding: 40px 15px;
+    }
+
+    .benefits-title {
+        font-size: 1.6em;
+    }
+
+    .benefit-item {
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .benefit-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .benefit-title {
+        font-size: 1.3em;
+    }
+}
+
+
+/* Customer Service Outsourcing Section */
+        .customer-service-outsourcing {
+            padding: 80px 30px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .outsourcing-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .outsourcing-content {
+            flex: 1;
+        }
+
+        .outsourcing-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .outsourcing-description {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .outsourcing-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .outsourcing-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .outsourcing-image:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Decorative Elements */
+        .outsourcing-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .outsourcing-container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .outsourcing-content,
+        .outsourcing-image-container {
+            position: relative;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .outsourcing-container {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .outsourcing-title {
+                font-size: 2em;
+            }
+
+            .outsourcing-image {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .customer-service-outsourcing {
+                padding: 60px 20px;
+            }
+
+            .outsourcing-title {
+                font-size: 1.8em;
+            }
+
+            .outsourcing-description {
+                font-size: 0.95em;
+            }
+
+            .outsourcing-image {
+                max-width: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .customer-service-outsourcing {
+                padding: 40px 15px;
+            }
+
+            .outsourcing-title {
+                font-size: 1.6em;
+            }
+
+            .outsourcing-image {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero-content-wrapper">
+        <div class="hero-background-image">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Background Image">
+            <div class="image-overlay"></div>
+        </div>
+
+        <!-- Header placeholder -->
+        {% include 'myapp/header.html' %}
+
+        <main class="hero-section">
+            <div class="hero-content">
+                <h1>Customer Service Outsourcing in the India</h1>
+            </div>
+        </main>
+    </div>
+
+    <!-- Customer Service Section -->
+    <section class="customer-service-section">
+        <h2 class="section-title">Provide World-Class Customer Service Outsourcing Support</h2>
+        <p class="section-description">
+            Customer service support will always be central to a company's success and growth. Today's most successful companies know how to provide world-class customer service that elevates exceptional customer experiences without breaking the bank. At Value ConnectSolutions, we specialize in providing outsourced customer service, exceptional order processing, problem-solving, and customer support services.
+        </p>
+        <p class="section-description">
+            Our college-educated agents offer the experience, knowledge, professionalism, and desire to make customers happy, regardless of their situation or location. We work with brands from the USA, UK, and Australia who want to expand and improve their customer service experiences.
+        </p>
+
+        <div class="philippine-section">
+            <h3 class="philippine-title">Top Philippines Call Center</h3>
+            <p class="philippine-description">
+                The Philippines is the world leader in customer service call center support, with over 1.2 million tech-savvy Filipinos working in call centers. Here, you'll find a booming population of young people who speak English and Tagalog - both of which are the country's official languages, making it an ideal location for offering customer support. The culture is friendly, pleasant, professional, and customer-centric. Its time zone and holiday schedule make it the ideal location to fulfill customer's expectations of 24/7 service.
+            </p>
+            <p class="philippine-description">
+                Naturally, not all Filipino call centers are created equal. At Value ConnectSolutions, we stand out from the crowd. Founded by experienced business professionals with customer service, IT, finance, marketing, and law backgrounds, we offer unmatched training, technology, and creative solutions. Our experts quickly become experts on your products, services, and company culture, delivering tailored customer support.
+            </p>
+        </div>
+
+        <div class="services-grid-section">
+            <h3 class="services-grid-title">Customer Support Outsourcing Services</h3>
+            <h4 class="services-grid-subtitle">Value ConnectSolutions's Customer Service Outsourcing Include:</h4>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎧</div>
+                    <h4 class="service-title">Customer Retention Support</h4>
+                    <a href="#" class="read-more-btn">Read more</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💬</div>
+                    <h4 class="service-title">Overflow Services</h4>
+                    <a href="#" class="read-more-btn">Read more</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h4 class="service-title">Billing Inquiries</h4>
+                    <a href="#" class="read-more-btn">Read more</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🌙</div>
+                    <h4 class="service-title">After-Hour Support</h4>
+                    <a href="#" class="read-more-btn">Read more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2 class="benefits-title">Benefits of Outsourcing Your Inbound Call Center</h2>
+            <p class="benefits-description">
+                While cost savings were once the primary reason for outsourcing customer service, the focus has shifted toward improving customer satisfaction and service quality. Here's why outsourcing your customer service to the Philippines can benefit your business.
+            </p>
+            <p class="benefits-subtitle">Consider the following benefits of outsourcing your inbound call center to Value ConnectSolutions:</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Top Talent" class="benefit-image">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">Top Talent</h3>
+                        <p class="benefit-text">Our call center agents are college-educated, highly trained, and hand-selected to match your customer service needs. Whether you need daytime, overnight, or 24/7 support, we can provide the right coverage for your business.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Reducing Costs" class="benefit-image">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">Reducing Costs</h3>
+                        <p class="benefit-text">When you outsource customer service to the Philippines, you can significantly reduce operational costs. We offer the same high-quality service that large corporations use, making it accessible for small and mid-sized businesses.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Trusted Technology" class="benefit-image">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">Trusted Technology</h3>
+                        <p class="benefit-text">We utilize the latest cloud-based technology, trusted by Fortune 500 companies, to ensure reliable customer service. Thanks to our reliable service, which includes voice, email, chat, and SMS, you'll never miss an opportunity to connect with your customers.</p>
+                        <ul class="benefit-features">
+                            <li><strong>Automated Call Distribution (ACD):</strong> Our ACD service ensures an efficient and consistent customer experience by managing all traffic and prioritizing inquiries based on urgency.</li>
+                            <li><strong>Interactive Voice Response (IVR):</strong> IVR allows customers to interact with an automated system to find answers to their questions, complete simple transactions, or be directed to the right agent.</li>
+                            <li><strong>Cloud Routing:</strong> Cloud routing provides call forwarding to multiple contact center locations to control volume spikes, balance loads, and overcome business continuity challenges.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Seamless Integration" class="benefit-image">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">Seamless Integration</h3>
+                        <p class="benefit-text">Our outsourced customer support services in the Philippines work as smoothly, just as if your customer service department is on the next floor. We integrate seamlessly with your business systems for maximum efficiency.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Smart Solutions" class="benefit-image">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">Smart Solutions</h3>
+                        <p class="benefit-text">We customize customer service programs that optimize conversion, increase sales, drive repeat business, and help you meet your program and enterprise goals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Service Outsourcing Section -->
+    <section class="customer-service-outsourcing">
+        <div class="outsourcing-container">
+            <div class="outsourcing-content">
+                <h2 class="outsourcing-title">Customer Service Outsourcing the Right Way</h2>
+                <p class="outsourcing-description">
+                    At Value ConnectSolutions, we understand the importance of delivering the best possible customer support. We customize our Philippines call center services to fit your needs and your organization. Together, we will design a program to optimize conversion, increase sales, resolve problems, answer questions, and create a positive experience that leads to loyal repeat customers.
+                </p>
+                <p class="outsourcing-description">
+                    Every member of your inbound customer support team understands the importance of effectively supporting your acquisition and retention initiatives. Our highly trained Philippines call center agents treat your customers with the care and attention they deserve, just like one of your employees.
+                </p>
+            </div>
+            <div class="outsourcing-image-container">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Customer Service Team" class="outsourcing-image">
+            </div>
+        </div>
+    </section>
+
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Add smooth scrolling for read more buttons
+        document.querySelectorAll('.read-more-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Add your read more functionality here
+                console.log('Read more clicked for:', this.previousElementSibling.textContent);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',  # Add your app here
+    'adminpanel',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,18 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com' # Or your SMTP server (e.g., for Outlook: smtp.office365.com)
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True # Use TLS for secure connection
+EMAIL_HOST_USER = 'your_email@gmail.com' # Your full email address
+EMAIL_HOST_PASSWORD = 'your_app_password_or_email_password' # Your email password or App Password
+DEFAULT_FROM_EMAIL = 'your_email@gmail.com' # The email address that appears as the sender
+
+# If using a console backend for testing (emails printed to console):
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

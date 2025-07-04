@@ -21,8 +21,6 @@
             margin: 0;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            padding-top: var(--header-height); /* Add padding to prevent content overlap */
-            background-color: #f0f2f5; /* Just for visual context */
             color: #333;
         }
 
@@ -41,8 +39,6 @@
             left: 0;
             z-index: 1000;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            
-            
         }
 
         /* Styles for when the navbar is scrolled */
@@ -525,7 +521,146 @@
             }
         }
 
+
+        /* Add these styles to your existing CSS for accordion animation */
+
+@media (max-width: 1200px) {
+    .nav-item {
+        width: 100%;
+        text-align: left; /* Changed from center to left */
+        padding: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        align-items: stretch; /* Changed from center to stretch */
+    }
+
+    .nav-item > a {
+        color: var(--text-color-dark);
+        font-size: 18px;
+        padding: 15px 20px; /* Added horizontal padding */
+        width: 100%;
+        justify-content: space-between; /* Space between text and arrow */
+        align-items: center;
+        display: flex;
+        position: relative;
+        background-color: transparent;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-item > a:hover {
+        background-color: #f5f5f5;
+    }
+
+    /* Add plus/minus icons for accordion */
+    .nav-item > a::after {
+        content: '+';
+        font-size: 18px;
+        font-weight: bold;
+        color: var(--text-color-dark);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-item.active-mobile-toggle > a::after {
+        content: '−';
+        transform: rotate(180deg);
+    }
+
+    /* Remove the small arrow from the original design */
+    .nav-item > a span {
+        display: none;
+    }
+
+    .dropdown {
+        position: static;
+        background-color: #f9f9f9; /* Light background for dropdown */
+        width: 100%;
+        margin-top: 0;
+        border-radius: 0;
+        box-shadow: none;
+        opacity: 1;
+        transform: translateY(0);
+        display: none;
+        padding: 0;
+        border-left: 3px solid var(--accent-color); /* Blue accent border */
+    }
+
+    .dropdown-item {
+        padding: 12px 25px; /* Increased left padding for indentation */
+        font-size: 16px;
+        text-align: left; /* Changed from center to left */
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between; /* Space between text and arrow */
+        color: var(--text-color-dark);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: background-color 0.3s ease, padding-left 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: #eee;
+        padding-left: 30px; /* Slight indent on hover */
+    }
+
+    .dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Sub-dropdown styles */
+    .sub-dropdown,
+    .sub-sub-dropdown {
+        position: static;
+        width: 100%;
+        background-color: #f0f0f0; /* Slightly darker for nested items */
+        box-shadow: none;
+        border-radius: 0;
+        margin-top: 0;
+        padding: 0;
+        display: none;
+        border-left: 3px solid #fdd835; /* Yellow accent for sub-items */
+    }
+
+    .sub-dropdown .dropdown-item {
+        padding-left: 40px; /* More indentation for sub-items */
+        font-size: 15px;
+        justify-content: flex-start;
+    }
+
+    .sub-sub-dropdown .dropdown-item {
+        padding-left: 55px; /* Even more indentation for sub-sub-items */
+        font-size: 14px;
+        background-color: #e8e8e8; /* Even lighter background */
+    }
+
+    .dropdown-item .arrow {
+        display: inline-block;
+        margin-left: auto;
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Mobile call button styling */
+    .nav-links .mobile-call-btn {
+        display: block;
+        margin: 20px;
+        margin-top: auto;
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .mobile-call-btn:hover {
+        background-color: #2563eb;
+    }
+}
         
+
+
     </style>
 </head>
 <body>
@@ -547,15 +682,15 @@
                         </a>
                         <span class="arrow">▶</span>
                         <div class="sub-dropdown">
-                            <a href="#" class="dropdown-item sub-item">Order Processing</a>
+                            <a href="{% url 'order_processing' %}" class="dropdown-item sub-item">Order Processing</a>
                             
                             <div class="dropdown-item sub-item has-sub-sub" tabindex="0">
-                                <a href="{% url 'customer_service' %}" style="text-decoration: none; color: inherit; display: contents;">
+                                <a href="{% url 'customer_service_outsourcing' %}" style="text-decoration: none; color: inherit; display: contents;">
                                     Customer Service
                                 </a>
                                 <span class="arrow">▶</span>
                                 <div class="sub-sub-dropdown">
-                                    <a href="#" class="dropdown-item">Customer Retention Support</a>
+                                    <a href="{% url 'customer_retention_support' %}" class="dropdown-item">Customer Retention Support</a>
                                     <a href="#" class="dropdown-item">Overflow Services</a>
                                     <a href="#" class="dropdown-item">Billing Inquiries</a>
                                     <a href="#" class="dropdown-item">After-hours Support</a>
@@ -676,197 +811,206 @@
 
     <script>
         const hamburger = document.querySelector('.hamburger-menu');
-        const navLinks = document.getElementById('navLinks');
+const navLinks = document.getElementById('navLinks');
 
-        // Prevent body scroll when mobile menu is open
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            
-            // Prevent body scroll when menu is open
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
+// Prevent body scroll when mobile menu is open
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (navLinks.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+        // Also close any open mobile dropdowns
+        navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
+            d.style.display = 'none';
+        });
+        navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
+            item.classList.remove('active-mobile-toggle');
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const navLinks = document.getElementById('navLinks');
+
+    // Handle dropdown toggling for main menu items on mobile (click on parent link)
+    navLinks.querySelectorAll('.nav-item > a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            const parentItem = this.closest('.nav-item');
+            const dropdown = parentItem.querySelector('.dropdown');
+
+            if (window.innerWidth <= 1200) {
+                if (dropdown) {
+                    e.preventDefault(); // Prevent default link behavior
+
+                    // Close other open main dropdowns with animation
+                    navLinks.querySelectorAll('.nav-item').forEach(otherNavItem => {
+                        if (otherNavItem !== parentItem) {
+                            const otherDropdown = otherNavItem.querySelector('.dropdown');
+                            if (otherDropdown && otherDropdown.style.display === 'flex') {
+                                otherDropdown.style.display = 'none';
+                                otherNavItem.classList.remove('active-mobile-toggle');
+                            }
+                        }
+                    });
+
+                    // Close any open sub-dropdowns
+                    navLinks.querySelectorAll('.sub-dropdown, .sub-sub-dropdown').forEach(d => {
+                        d.style.display = 'none';
+                    });
+                    navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
+                        item.classList.remove('active-mobile-toggle');
+                    });
+
+                    // Toggle current main dropdown with accordion animation
+                    const isOpen = dropdown.style.display === 'flex';
+                    dropdown.style.display = isOpen ? 'none' : 'flex';
+                    parentItem.classList.toggle('active-mobile-toggle', !isOpen);
+                }
             }
         });
+    });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+    // Handle mobile click for dropdown items with sub-menus
+    navLinks.querySelectorAll('.dropdown-item.has-sub, .dropdown-item.has-sub-sub').forEach(item => {
+        // Add click handler to the arrow or toggle area, not the entire item
+        const toggleArea = document.createElement('span');
+        toggleArea.className = 'mobile-toggle-area';
+        toggleArea.style.cssText = 'position: absolute; right: 0; top: 0; width: 50px; height: 100%; cursor: pointer; z-index: 1;';
+        item.style.position = 'relative';
+        item.appendChild(toggleArea);
+
+        toggleArea.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (window.innerWidth <= 1200) {
+                const subMenu = item.querySelector('.sub-dropdown') || item.querySelector('.sub-sub-dropdown');
+                
+                if (subMenu) {
+                    // Close other open sub-menus at the same level
+                    const siblings = Array.from(item.parentNode.children);
+                    siblings.forEach(sibling => {
+                        if (sibling !== item && sibling.classList.contains('dropdown-item')) {
+                            const siblingSubMenu = sibling.querySelector('.sub-dropdown') || sibling.querySelector('.sub-sub-dropdown');
+                            if (siblingSubMenu && siblingSubMenu.style.display === 'flex') {
+                                siblingSubMenu.style.display = 'none';
+                                sibling.classList.remove('active-mobile-toggle');
+                            }
+                        }
+                    });
+
+                    // Toggle current sub-menu
+                    const isOpen = subMenu.style.display === 'flex';
+                    subMenu.style.display = isOpen ? 'none' : 'flex';
+                    item.classList.toggle('active-mobile-toggle', !isOpen);
+
+                    // For immediate children of .dropdown, when sub-menu opens, close other .sub-dropdowns that are open
+                    if (item.classList.contains('has-sub')) {
+                        const mainDropdown = item.closest('.dropdown');
+                        if (mainDropdown) {
+                            mainDropdown.querySelectorAll('.sub-dropdown').forEach(otherSubDropdown => {
+                                if (otherSubDropdown !== subMenu && otherSubDropdown.style.display === 'flex') {
+                                    otherSubDropdown.style.display = 'none';
+                                    otherSubDropdown.parentNode.classList.remove('active-mobile-toggle');
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    // Handle anchor links within dropdown items - ensure they work properly
+    navLinks.querySelectorAll('.dropdown-item a, .dropdown-item').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Only handle if it's a direct anchor link (not a toggle area)
+            if (e.target.classList.contains('mobile-toggle-area')) {
+                return; // Let the toggle handler deal with it
+            }
+            
+            // If it's an actual link (has href and it's not just "#"), allow navigation
+            const href = this.getAttribute('href') || (this.tagName === 'A' ? this.href : null);
+            const isValidLink = href && href !== '#' && href !== 'javascript:void(0)';
+            
+            if (isValidLink && window.innerWidth <= 1200) {
+                // Close the mobile menu when navigating to a real link
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
-                document.body.style.overflow = ''; // Restore body scroll
-                // Also close any open mobile dropdowns
+                document.body.style.overflow = '';
                 navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
                     d.style.display = 'none';
                 });
                 navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
                     item.classList.remove('active-mobile-toggle');
                 });
+                // Don't prevent default - let the link work normally
             }
         });
+    });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const navLinks = document.getElementById('navLinks');
-
-            // Handle dropdown toggling for main menu items on mobile (click on parent link)
-            navLinks.querySelectorAll('.nav-item > a').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    const parentItem = this.closest('.nav-item');
-                    const dropdown = parentItem.querySelector('.dropdown');
-
-                    if (window.innerWidth <= 1200) {
-                        if (dropdown) {
-                            e.preventDefault(); // Prevent default link behavior
-
-                            // Close other open main dropdowns
-                            navLinks.querySelectorAll('.dropdown').forEach(otherDropdown => {
-                                if (otherDropdown !== dropdown && otherDropdown.style.display === 'flex') {
-                                    otherDropdown.style.display = 'none';
-                                    otherDropdown.previousElementSibling.classList.remove('active-mobile-toggle');
-                                }
-                            });
-                            // Close any open sub-dropdowns
-                            navLinks.querySelectorAll('.sub-dropdown, .sub-sub-dropdown').forEach(d => {
-                                d.style.display = 'none';
-                            });
-                            navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-                                item.classList.remove('active-mobile-toggle');
-                            });
-
-                            // Toggle current main dropdown
-                            const isOpen = dropdown.style.display === 'flex';
-                            dropdown.style.display = isOpen ? 'none' : 'flex';
-                            // No 'active-mobile-toggle' for main nav-item link, as its the dropdown itself that toggles
-                        }
-                    }
-                });
+    // Close mobile menu when mobile call button is clicked
+    const mobileCallBtn = document.querySelector('.mobile-call-btn');
+    if (mobileCallBtn) {
+        mobileCallBtn.addEventListener('click', function () {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+            navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
+                d.style.display = 'none';
             });
-
-            // Handle mobile click for .dropdown-item with sub-menus (e.g., Inbound Services, Customer Service)
-            navLinks.querySelectorAll('.dropdown-item.has-sub, .dropdown-item.has-sub-sub').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 1200) {
-                        const subMenu = this.querySelector('.sub-dropdown') || this.querySelector('.sub-sub-dropdown');
-                        
-                        if (subMenu) {
-                            e.preventDefault(); // Prevent navigation
-                            
-                            // Close other open sub-menus at the same level
-                            const siblings = Array.from(this.parentNode.children);
-                            siblings.forEach(sibling => {
-                                if (sibling !== this && sibling.classList.contains('dropdown-item')) {
-                                    const siblingSubMenu = sibling.querySelector('.sub-dropdown') || sibling.querySelector('.sub-sub-dropdown');
-                                    if (siblingSubMenu && siblingSubMenu.style.display === 'flex') {
-                                        siblingSubMenu.style.display = 'none';
-                                        sibling.classList.remove('active-mobile-toggle');
-                                    }
-                                }
-                            });
-
-                            // Toggle current sub-menu
-                            const isOpen = subMenu.style.display === 'flex';
-                            subMenu.style.display = isOpen ? 'none' : 'flex';
-                            this.classList.toggle('active-mobile-toggle', !isOpen);
-
-                            // For immediate children of .dropdown, when sub-menu opens, close other .sub-dropdowns that are open
-                            // This ensures only one sub-dropdown is open at a time for level 2
-                            if (this.classList.contains('has-sub')) {
-                                const mainDropdown = this.closest('.dropdown');
-                                if (mainDropdown) {
-                                    mainDropdown.querySelectorAll('.sub-dropdown').forEach(otherSubDropdown => {
-                                        if (otherSubDropdown !== subMenu && otherSubDropdown.style.display === 'flex') {
-                                            otherSubDropdown.style.display = 'none';
-                                            otherSubDropdown.parentNode.classList.remove('active-mobile-toggle');
-                                        }
-                                    });
-                                }
-                            }
-                        } else if (e.target.tagName === 'A' && !e.target.classList.contains('has-sub') && !e.target.classList.contains('has-sub-sub')) {
-                             // If it's a simple link within a dropdown-item, close the whole menu
-                            hamburger.classList.remove('active');
-                            navLinks.classList.remove('active');
-                            document.body.style.overflow = '';
-                            navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
-                                d.style.display = 'none';
-                            });
-                            navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-                                item.classList.remove('active-mobile-toggle');
-                            });
-                        }
-                    }
-                });
+            navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
+                item.classList.remove('active-mobile-toggle');
             });
-
-            // Close mobile menu when a simple dropdown-item link is clicked
-            navLinks.querySelectorAll('.dropdown-item:not(.has-sub):not(.has-sub-sub)').forEach(link => {
-                link.addEventListener('click', function () {
-                    if (window.innerWidth <= 1200) {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        document.body.style.overflow = ''; // Restore body scroll
-                        navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
-                            d.style.display = 'none';
-                        });
-                        navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-                            item.classList.remove('active-mobile-toggle');
-                        });
-                    }
-                });
-            });
-
-            // Close mobile menu when mobile call button is clicked
-            const mobileCallBtn = document.querySelector('.mobile-call-btn');
-            if (mobileCallBtn) {
-                mobileCallBtn.addEventListener('click', function () {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                    document.body.style.overflow = ''; // Restore body scroll
-                    navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
-                        d.style.display = 'none';
-                    });
-                    navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-                        item.classList.remove('active-mobile-toggle');
-                    });
-                    console.log('Discovery call button clicked');
-                });
-            }
-
-            // Reset dropdowns on window resize
-            window.addEventListener('resize', function () {
-                if (window.innerWidth > 1200) {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                    document.body.style.overflow = ''; // Restore body scroll
-                    navLinks.querySelectorAll('.dropdown').forEach(d => {
-                        d.style.display = '';
-                        d.style.opacity = '';
-                        d.style.transform = '';
-                    });
-                    // Ensure all sub-dropdowns are hidden by default on desktop
-                    navLinks.querySelectorAll('.sub-dropdown, .sub-sub-dropdown').forEach(sd => {
-                        sd.style.display = 'none';
-                        sd.style.opacity = '';
-                        sd.style.transform = '';
-                    });
-                     // Remove mobile active classes
-                     navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-                        item.classList.remove('active-mobile-toggle');
-                    });
-                }
-            });
-
-            // Optional: Add scroll effect for navbar background
-            window.addEventListener('scroll', function() {
-                const navbar = document.querySelector('.navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
+            console.log('Discovery call button clicked');
         });
+    }
+
+    // Reset dropdowns on window resize
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 1200) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+            navLinks.querySelectorAll('.dropdown').forEach(d => {
+                d.style.display = '';
+                d.style.opacity = '';
+                d.style.transform = '';
+            });
+            navLinks.querySelectorAll('.sub-dropdown, .sub-sub-dropdown').forEach(sd => {
+                sd.style.display = 'none';
+                sd.style.opacity = '';
+                sd.style.transform = '';
+            });
+            navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
+                item.classList.remove('active-mobile-toggle');
+            });
+        }
+    });
+
+    // Optional: Add scroll effect for navbar background
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+});
     </script>
 </body>
 </html>
