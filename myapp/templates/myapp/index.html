@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ValueConnectSolution - Your Success Is Our Mission</title>
+    {% include 'myapp/meta_tags.html' %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     {% load static %}
     <style>
@@ -412,8 +410,10 @@ body {
                     scalable, cost-effective solutions tailored to your business needs to keep you ahead in your industry.
                 </p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary">Get Your Free Quote</button>
-                    <button class="btn btn-secondary">Explore Our Services</button>
+                   <a href="{% url 'contact-us' %}" class="btn btn-primary">Get Your Free Quote</a>
+                    <a href="{% url 'our_services' %}" class="btn btn-secondary">Our Services</a>
+
+
                 </div>
                 <div class="clutch-reviews">
                     <span class="clutch-logo">C</span>
@@ -445,9 +445,9 @@ body {
 
     </div>
     <!-- countires we serve -->
-     <div class="countries_we_serve_section">
-        {% include 'myapp/index_countriesweserve.html' %}
-
+   <div id="target-section">
+        <!-- Include your contact form here -->
+         {% include 'myapp/index_countriesweserve.html' %}
     </div>
 
     <!-- Footer -->

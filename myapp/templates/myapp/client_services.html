@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="shortcut icon" href="https://valueconnectsolutions.com/favicon.ico">
+    
+    <meta name="description" content="Experience premium client service with Value Connect Solution. We provide tailored outsourcing solutions to meet your business needs from our India-based centers.">
+    <meta property="og:description" content="Experience premium client service with Value Connect Solution. We provide tailored outsourcing solutions to meet your business needs from our India-based centers.">
+    <meta property="og:title" content="Client Services | Value Connect Solution">
+    <meta name="twitter:description" content="Experience premium client service with Value Connect Solution. We provide tailored outsourcing solutions to meet your business needs from our India-based centers.">
+    <meta name="twitter:title" content="Client Services | Value Connect Solution">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2962FF;
+            --secondary-color: #00BFA5;
+            --dark-color: #263238;
+            --light-color: #ffffff;
+            --gray-color: #ECEFF1;
+            --text-color: #455A64;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Header Styles */
+        .header-main {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-main__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header-main__logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .header-main__menu-nav-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-main__menu-nav-wrapper .hs-menu-wrapper > ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header-main__menu-nav-wrapper .hs-menu-wrapper > ul > li > a {
+            color: var(--dark-color);
+            padding: 10px 15px;
+            font-weight: 500;
+            display: block;
+        }
+        
+        .header-main__cta {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-left: 15px;
+        }
+        
+        .header-main__cta:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Banner Styles */
+        .banner {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 191, 166, 0)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 0 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .banner .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .banner h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .content-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        .content-section h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 40px;
+        }
+        
+        .two-column {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .two-column > div {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .two-column img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Feature Boxes */
+        .feature-boxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-box {
+            flex: 1;
+            min-width: 250px;
+            background: var(--light-color);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-box .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-box h3 {
+            color: var(--dark-color);
+            margin: 0 0 15px 0;
+        }
+        
+        /* Colored Section */
+        .colored-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 80px 5%;
+        }
+        
+        .colored-section h2, 
+        .colored-section h3 {
+            color: white;
+        }
+        
+        .colored-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .colored-section li {
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .colored-section li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+        
+        /* Contact Form */
+        .contact-form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            background: var(--gray-color);
+            padding: 60px 5%;
+            border-radius: 8px;
+        }
+        
+        .contact-form-container > div {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+        
+        .contact-form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .contact-form button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: var(--gray-color);
+            padding: 60px 5%;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .stat-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+        }
+        
+        .stat-item .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .stat-item .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-item .label {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer__main {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .footer__menu {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer__menu h4 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .footer__menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer__menu li {
+            margin-bottom: 10px;
+        }
+        
+        .footer__menu a {
+            color: #B0BEC5;
+        }
+        
+        .footer__menu a:hover {
+            color: white;
+        }
+        
+        .footer__social-link {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .footer__social-link a {
+            color: white;
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer__social-link a:hover {
+            background: var(--primary-color);
+        }
+        
+        .footer__copyright-text {
+            color: #B0BEC5;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main__container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .header-main__menu-nav-container {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .header-main__menu-nav-wrapper .hs-menu-wrapper > ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .banner {
+                padding: 120px 20px 60px;
+            }
+            
+            .banner h1 {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 60px 20px;
+            }
+            
+            .feature-boxes {
+                flex-direction: column;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+   {% include 'myapp/header.html' %}
+
+    <div class="banner">
+        <div class="content-wrapper">
+            <h1><i class="fas fa-handshake"></i> Client Services</h1>
+            <p>Delivering exceptional client experiences through our India-based service centers</p>
+        </div>
+    </div>
+
+    <section class="content-section">
+        <div class="two-column">
+            <div>
+                <h2><i class="fas fa-users"></i> Seamless Client Services</h2>
+                <p>At Value Connect Solution, we understand that successful partnerships begin with clear communication and meticulous execution. Our client service approach combines Indian hospitality with global business standards to deliver exceptional experiences.</p>
+                <p>From initial onboarding to ongoing support, we ensure transparency, responsiveness, and continuous improvement in all client interactions.</p>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80" alt="Value Connect Solution client services team">
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background-color: #F5F7FA;">
+        <h2 style="text-align: center;"><i class="fas fa-cog"></i> Our Client Service Approach</h2>
+        
+        <div class="feature-boxes">
+            <div class="feature-box">
+                <div class="icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Comprehensive Onboarding</h3>
+                <p>We establish clear expectations and success metrics during structured onboarding sessions with your dedicated account manager and our leadership team.</p>
+            </div>
+            
+            <div class="feature-box">
+                <div class="icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>Dedicated Leadership</h3>
+                <p>Each client receives a named Account Manager who serves as your single point of contact and oversees your program's success.</p>
+            </div>
+            
+            <div class="feature-box">
+                <div class="icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Tailored Communication</h3>
+                <p>We adapt our communication style and frequency to match your preferences, with options for daily, weekly, or monthly reporting.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="two-column">
+            <div>
+                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80" alt="Value Connect Solution team meeting">
+            </div>
+            <div>
+                <h2><i class="fas fa-sitemap"></i> Dedicated Team Leadership</h2>
+                <p>Our account management structure ensures you always have direct access to decision-makers:</p>
+                <ul>
+                    <li><strong><i class="fas fa-user-check"></i> Account Managers</strong> - Your day-to-day contacts who understand your business intimately</li>
+                    <li><strong><i class="fas fa-tasks"></i> Operations Leaders</strong> - Ensure service delivery meets SLAs and quality standards</li>
+                    <li><strong><i class="fas fa-crown"></i> Executive Sponsors</strong> - Provide strategic oversight and remove roadblocks</li>
+                </ul>
+                <p>This multi-tiered approach combines operational expertise with executive visibility for optimal results.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <h2><i class="fas fa-chart-line"></i> Our Performance Excellence</h2>
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="number">24/7</div>
+                <div class="label">Support Coverage</div>
+            </div>
+            <div class="stat-item">
+                <div class="icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="number">10+</div>
+                <div class="label">Languages Supported</div>
+            </div>
+            <div class="stat-item">
+                <div class="icon">
+                    <i class="fas fa-thumbs-up"></i>
+                </div>
+                <div class="number">99.5%</div>
+                <div class="label">Client Satisfaction</div>
+            </div>
+            <div class="stat-item">
+                <div class="icon">
+                    <i class="fas fa-stopwatch"></i>
+                </div>
+                <div class="number">&lt;30s</div>
+                <div class="label">Average Response Time</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="colored-section">
+        <div class="content-section">
+            <h2><i class="fas fa-chart-bar"></i> Performance Management Framework</h2>
+            
+            <h3><i class="fas fa-calendar-day"></i> Daily Operations</h3>
+            <ul>
+                <li>Real-time monitoring by your dedicated team</li>
+                <li>Immediate escalation path for urgent issues</li>
+                <li>End-of-day summary reports</li>
+            </ul>
+            
+            <h3><i class="fas fa-calendar-week"></i> Weekly Reviews</h3>
+            <ul>
+                <li>Performance against KPIs and SLAs</li>
+                <li>Quality assurance findings</li>
+                <li>Process improvement opportunities</li>
+            </ul>
+            
+            <h3><i class="fas fa-calendar-alt"></i> Quarterly Business Reviews</h3>
+            <ul>
+                <li>Strategic alignment sessions</li>
+                <li>Innovation and transformation planning</li>
+                <li>Roadmap development</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 style="text-align: center;"><i class="fas fa-star"></i> Why Choose Value Connect Solution?</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">As a leading Indian BPO provider, we combine global standards with local expertise to deliver exceptional client experiences at competitive rates.</p>
+        
+        <div class="feature-boxes">
+            <div class="feature-box">
+                <div class="icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Our follow-the-sun model ensures coverage across timezones with seamless handoffs between teams.</p>
+            </div>
+            
+            <div class="feature-box">
+                <div class="icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>Multilingual Capabilities</h3>
+                <p>Serve global customers in English, Hindi, and 10+ regional Indian languages plus major international languages.</p>
+            </div>
+            
+            <div class="feature-box">
+                <div class="icon">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <h3>Cost Efficiency</h3>
+                <p>High-quality services at competitive Indian market rates without compromising on quality or security.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact us -->
+     {% include 'myapp/index_countriesweserve.html' %}
+
+   <!-- footer -->
+   {% include 'myapp/footer.html' %} 
+
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.header-main__mobile-menu-btn');
+            const menuContainer = document.querySelector('.header-main__menu-nav-container');
+            
+            if (mobileMenuBtn && menuContainer) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    menuContainer.classList.toggle('active');
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('2'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Animate numbers on scroll
+            const animateNumbers = () => {
+                const numberElements = document.querySelectorAll('.number');
+                numberElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        const finalValue = element.textContent.replace(/[^\d.]/g, '');
+                        if (finalValue && !element.classList.contains('animated')) {
+                            element.classList.add('animated');
+                            animateNumber(element, finalValue);
+                        }
+                    }
+                });
+            };
+            
+            const animateNumber = (element, finalValue) => {
+                const duration = 2000;
+                const startTime = performance.now();
+                const originalText = element.textContent;
+                
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    let currentValue = 0;
+                    if (finalValue.includes('.')) {
+                        currentValue = (parseFloat(finalValue) * progress).toFixed(1);
+                    } else {
+                        currentValue = Math.floor(parseFloat(finalValue) * progress);
+                    }
+                    
+                    // Keep any non-numeric characters from original
+                    if (originalText.includes('%')) {
+                        element.textContent = currentValue + '%';
+                    } else if (originalText.includes('<') && originalText.includes('s')) {
+                        element.textContent = '<' + currentValue + 's';
+                    } else if (originalText.includes('+')) {
+                        element.textContent = currentValue + '+';
+                    } else if (originalText.includes('/')) {
+                        element.textContent = currentValue + '/7';
+                    } else {
+                        element.textContent = currentValue;
+                    }
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        element.textContent = originalText;
+                    }
+                };
+                
+                requestAnimationFrame(animate);
+            };
+            
+            // Scroll event listener for animations
+            window.addEventListener('scroll', animateNumbers);
+            
+            // Fade in animations
+            const fadeInElements = document.querySelectorAll('.feature-box, .stat-item');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeInElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                fadeInObserver.observe(element);
+            });
+            
+            // Form submission with loading state
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const button = this.querySelector('button[type="submit"]');
+                    const originalText = button.innerHTML;
+                    
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    button.disabled = true;
+                    
+                    // Simulate form submission
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-check"></i> Sent!';
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.disabled = false;
+                            form.reset();
+                        }, 2000);
+                    }, 1500);
+                });
+            }
+            
+            // Sticky header on scroll
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header-main');
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+            
+            // Add scroll-based header styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .header-main.scrolled {
+                    background-color: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(10px);
+                    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+                }
+                
+                .header-main.scrolled .header-main__logo img {
+                    transition: transform 0.3s ease;
+                }
+                
+                .header-main.scrolled:hover .header-main__logo img {
+                    transform: scale(1.05);
+                }
+            `;
+            document.head.appendChild(style);
+        });
+            // Smooth scrolling for anchor links
+          </script>
+          </html>

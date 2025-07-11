@@ -1,15 +1,12 @@
-
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ValueConnectSolution - Your Success Is Our Mission</title>
+    {% include 'myapp/meta_tags.html' %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
-    {% load static %}
     <style>
         /* CSS Variables */
         :root {
@@ -80,6 +77,7 @@
             padding-top: 140px;
             padding-bottom: 60px;
             background-color: white;
+            width: 100%;
         }
 
         .hero-content h1 {
@@ -89,24 +87,108 @@
             margin-bottom: 30px;
         }
 
-        .hero-content p {
-            font-size: 1.2em;
-            margin-bottom: 40px;
+        /* Styles for the new content section */
+        .content-section {
+            padding: 60px 30px;
+            max-width: 1440px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #555;
         }
 
-        
-        /* Responsive Adjustments */
-        @media (max-width: 992px) {
+        .content-section h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            font-size: 1.8em;
+            color: #333;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        .content-section p {
+            margin-bottom: 20px;
+        }
+
+        .content-section ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content-section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Improved Image Grid for Mobile Responsiveness */
+        .content-section .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            justify-items: center;
+        }
+
+        .content-section .image-grid img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-section .image-grid img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Tablet Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .content-section .image-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 15px;
+            }
+            
+            .content-section .image-grid img {
+                max-width: 220px;
+            }
+        }
+
+        /* Small Tablet Responsive Adjustments */
+        @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.8em;
             }
-
-            .hero-content p {
-                font-size: 1.1em;
+            
+            .content-section h2 {
+                font-size: 2em;
             }
-
+            
+            .content-section h3 {
+                font-size: 1.5em;
+            }
+            
+            .content-section .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                margin-top: 25px;
+                margin-bottom: 35px;
+            }
+            
+            .content-section .image-grid img {
+                max-width: none;
+            }
         }
 
+        /* Mobile Responsive Adjustments */
         @media (max-width: 576px) {
             .hero-section {
                 background-attachment: scroll; /* Disable parallax on mobile for better performance */
@@ -119,9 +201,86 @@
             .hero-content h1 {
                 font-size: 2.2em;
             }
+            
+            .content-section {
+                padding: 40px 20px;
+            }
+            
+            .content-section h2 {
+                font-size: 1.8em;
+                line-height: 1.3;
+            }
+            
+            .content-section h3 {
+                font-size: 1.3em;
+            }
+            
+            .content-section p {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+            
+            .content-section ul {
+                margin-left: 15px;
+            }
+            
+            /* Mobile-specific image grid adjustments */
+            .content-section .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-top: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .content-section .image-grid img {
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+        }
 
-            .hero-content p {
-                font-size: 1em;
+        /* Extra Small Mobile Devices */
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8em;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5em;
+            }
+            
+            .content-section h3 {
+                font-size: 1.2em;
+            }
+            
+            .content-section .image-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .content-section .image-grid img {
+                max-width: 280px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Very Small Mobile Devices */
+        @media (max-width: 360px) {
+            .hero-content {
+                padding: 0 15px;
+                padding-top: 100px;
+                padding-bottom: 30px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.6em;
+            }
+            
+            .content-section {
+                padding: 30px 15px;
+            }
+            
+            .content-section .image-grid img {
+                max-width: 250px;
             }
         }
 
@@ -156,26 +315,41 @@
 
     <div class="hero-section">
         <div class="hero-content">
-            <h1>Outsourced Customer Retention Services in the Philippines</h1>
-            <p>Boost your customer loyalty and revenue with our expert retention strategies</p>
-        </div>
-        
-        <div class="scroll-indicator">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 13l3 3 7-7"/>
-                <path d="M7 6l3 3 7-7"/>
-            </svg>
+            <h1>Overflow Call Handling Services</h1>
         </div>
     </div>
 
-    
+    <!-- New content section based on the provided image -->
+    <div class="content-section">
+        <h2>Boost Customer Satisfaction and Revenue With Overflow Services</h2>
+        <p>Is your business missing out on revenue opportunities due to subpar customer support? Call overflow services might be the key to maintaining uninterrupted customer service at an affordable price. Few things are more frustrating for customers than long hold times, leading to abandoned calls, lost sales, dissatisfied customers, and negative reviews. No business wants to leave a poor impression, but handling higher call volumes can be costly and challenging. Fortunately, there's a solution.</p>
 
-        {% include 'myapp/footer.html' %}
+        <h3>What Is Call Overflow?</h3>
+        <p>When your in-house team reaches its capacity to handle incoming calls, call overflow services step in to manage the excess. Value ConnectSolution is strategically located in one of the world's top BPO hubs. With over 1,000 college-educated, highly trained, and English-speaking call center representatives, we are fully equipped to handle your overflow needs across all contact channels.</p>
+        <p>At Value ConnectSolution, we provide each client with a dedicated team of call center agents who seamlessly integrate with your existing operations. Our agents receive the same training and use the same scripts as your in-house staff, ensuring consistency in service quality. You control when to activate overflow support, whether during peak call times, nights, weekends, holidays, or via automatic routing when your lines are busy.</p>
 
+        <div class="image-grid">
+            <!-- Professional call center agent images -->
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80" alt="Professional Call Center Agent 1">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" alt="Professional Call Center Agent 2">
+            <img src="https://images.unsplash.com/photo-1494790108755-2616c90a3a65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" alt="Professional Call Center Agent 3">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Professional Call Center Agent 4">
+        </div>
 
-    <script>
-        
-    </script>
+        <h3>The Benefits of Overflow Call Handling Services</h3>
+        <p>Outsourcing excess call volume to our overflow team allows your internal staff to focus on delivering quality interactions without feeling overwhelmed. Our versatile agents can handle customer inquiries, process orders, provide technical support, book appointments, and more.</p>
+        <ul>
+            <li><strong>Reduce Wait Times:</strong> Decrease the average speed of answer, improving customer satisfaction.</li>
+            <li><strong>Extend Service Hours:</strong> Provide support during evenings, weekends, or holidays when your business is closed.</li>
+            <li><strong>Avoid Long Hold Times:</strong> Ensure customers aren't stuck on hold during peak hours, reducing abandoned calls.</li>
+            <li><strong>Improve Call Resolution:</strong> Allow more time for troubleshooting, upselling, and enhancing customer interactions.</li>
+        </ul>
+
+        <h3>Ensure Business Continuity With Overflow Support</h3>
+        <p>Unexpected events like natural disasters, power outages, or staffing shortages can disrupt your call center operations. With Value ConnectSolution's overflow services, you can eliminate these concerns. Our services ensure you never miss a customer inquiry, even in the face of unforeseen circumstances. Outsourcing call overflow is a cost-effective way to maintain business continuity while offering your in-house staff the benefit of regular schedules. With our support, you gain the flexibility and power of a 24/7 workforce, 365 days a year.</p>
+    </div>
+{% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
 
 </body>
 

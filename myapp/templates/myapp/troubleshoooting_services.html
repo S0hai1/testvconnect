@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Change text/icon colors when */
+        .navbar .logo .text-select,
+        .navbar .logo .text-connectsolution,
+        .navbar .nav-item>a,
+        .navbar .search-icon,
+        .navbar .lang {
+            color: var(--text-color-dark);
+        }
+
+        .navbar .hamburger-menu span {
+            background-color: var(--text-color-dark);
+        }
+
+        /* Hero Section with Background Image */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background-image: url('{% static "myapp/images/outsourcing1.webp" %}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* This creates the parallax effect */
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for better text readability */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+            padding: 0 30px;
+            padding-top: 140px;
+            padding-bottom: 60px;
+            background-color: white;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            padding-left: 60px;
+        }
+
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                background-attachment: scroll;
+                /* Disable parallax on mobile for better performance */
+            }
+
+            .hero-content {
+                padding: 0 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: white;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 1440px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .service-item {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .closing-statement {
+            background-color: #e8f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            line-height: 1.7;
+            margin-top: 30px;
+        }
+
+        .blue-section {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 60px 40px;
+            margin-top: 40px;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .blue-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .blue-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .blue-subtitle {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 40px 0 20px 0;
+            color: white;
+        }
+
+        .blue-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #f8f9fa;
+        }
+
+        .image-gallery {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            align-items: flex-start;
+        }
+
+        .image-main {
+            flex: 2;
+        }
+
+        .image-main img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-secondary {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .image-secondary img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blue-section {
+                padding: 40px 20px;
+            }
+
+            .blue-title {
+                font-size: 1.8rem;
+            }
+
+            .blue-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .image-gallery {
+                flex-direction: column;
+            }
+
+            .image-secondary {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Outsourced IT Help Desk Services</h1>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">Enhance Customer Satisfaction with Outsourced IT Help Desk Services from Select
+                VoiceCom</h1>
+            <p class="subtitle">
+                In today's customer-centric world, IT support outsourcing is a strategic move for companies seeking high
+                performance and customer loyalty. Businesses increasingly outsource troubleshooting support services to
+                experts like Value ConnectSolutions. Our call center help desk in the India offers technical
+                outsourcing
+                with a proven record of performance, professionalism, and data protection. Our highly trained technical
+                support agents swiftly address technical issues, ensuring a seamless post-sales experience that enhances
+                customer loyalty and satisfaction.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Comprehensive Troubleshooting Help Desk Services</h2>
+            <p class="section-description">
+                Value ConnectSolutions offers a wide range of troubleshooting support and help desk outsourcing
+                services, all
+                aimed at achieving total customer satisfaction. By trusting a dedicated outsourcing partner like Select
+                VoiceCom, you can benefit from:
+            </p>
+
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3 class="service-title">Tailored Technical Support</h3>
+                    <p class="service-description">Customized solutions that meet your specific business needs.</p>
+                </div>
+
+                <div class="service-item">
+                    <h3 class="service-title">Expert Technicians</h3>
+                    <p class="service-description">Highly trained professionals ready to tackle any technical
+                        challenges.</p>
+                </div>
+
+                <div class="service-item">
+                    <h3 class="service-title">24/7 Availability</h3>
+                    <p class="service-description">Around-the-clock support to keep your operations running smoothly.
+                    </p>
+                </div>
+
+                <div class="service-item">
+                    <h3 class="service-title">Secure Multichannel Platforms</h3>
+                    <p class="service-description">Support is available via phone, email, chat, and more.</p>
+                </div>
+
+                <div class="service-item">
+                    <h3 class="service-title">Cost Efficiency</h3>
+                    <p class="service-description">More affordable than maintaining an in-house IT team.</p>
+                </div>
+
+                <div class="service-item">
+                    <h3 class="service-title">Swift Resolutions</h3>
+                    <p class="service-description">Quick problem-solving that boosts customer satisfaction and
+                        retention.</p>
+                </div>
+
+                <div class="service-item">
+                    <h3 class="service-title">Full-Time Dedicated Agents</h3>
+                    <p class="service-description">No shared resources because each agent is committed only to your
+                        account.</p>
+                </div>
+
+                <div class="service-item">
+                    <h3 class="service-title">Extensive Knowledge Base</h3>
+                    <p class="service-description">Supporting your support ticket resolution and better self-service
+                        options.</p>
+                </div>
+
+                <div class="service-item">
+                    <h3 class="service-title">Data Security and Compliance</h3>
+                    <p class="service-description">Our systems follow strict data protection protocols.</p>
+                </div>
+            </div>
+
+            <div class="closing-statement">
+                Our support agents are part of a stable, long-term workforce with some of the <span
+                    class="highlight">lowest turnover rates in the industry</span>, bringing consistency to your help
+                desk support.
+            </div>
+        </div>
+
+        <!-- Blue Section -->
+        <div class="blue-section">
+            <div class="blue-content">
+                <h2 class="blue-title">The Importance of Effective Troubleshooting</h2>
+                <p class="blue-text">
+                    Whether your internet browser keeps crashing, your laptop won't power on, or you're facing the
+                    dreaded Blue Screen of Death, Value ConnectSolutions service desk
+                    support can offer you with peace of mind. You know we offer expert troubleshooting support to keep
+                    your systems running smoothly.
+                </p>
+                <p class="blue-text">
+                    Technical outsourcing not only lowers costs—it improves scalability, provides access to a deeper
+                    talent pool, and boosts service quality. Whether you need ongoing
+                    support or help resolving a one-time issue, our desk services are here to support you.
+                </p>
+
+                <h3 class="blue-subtitle">Our Proven Troubleshooting Process</h3>
+                <p class="blue-text">
+                    Once the problem is fully understood, our experts systematically rule out potential causes, from
+                    nonessential components to third-party software incompatibilities. If
+                    these steps don't resolve the issue, we move on to examining more complex factors using the process
+                    of elimination. Once the root cause is identified, we develop a
+                    tailored plan of action to repair or replace your system and restore full functionality.
+                </p>
+                <p class="blue-text">
+                    Each client is assigned a project manager to ensure every support ticket is resolved efficiently and
+                    according to service level agreements (SLAs). Our tech support
+                    team follows rigorous quality assurance protocols with daily reporting and weekly analytics.
+                </p>
+
+                <h3 class="blue-subtitle">Specialized Computer Troubleshooting</h3>
+                <p class="blue-text">
+                    If your computer is running slowly, exhibiting "buggy" behavior, or randomly crashing, it's time for
+                    troubleshooting. Computer troubleshooting can be complex, with
+                    numerous variables at play.
+                </p>
+                <p class="blue-text">
+                    Our India-based support agents bring both technical expertise and outstanding English
+                    communication skills with minimal accents. We provide prompt,
+                    professional, and reliable solutions to keep your systems running efficiently.
+                </p>
+
+                <div class="image-gallery">
+                    <div class="image-main">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600&q=80"
+                            alt="IT technician troubleshooting computer system remotely"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+                    </div>
+                    <div class="image-secondary">
+                        <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                            alt="Hardware troubleshooting and system diagnostics"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                            alt="India-based technical support specialist"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+                    </div>
+                </div>
+
+                <h3 class="blue-subtitle">Expert Hardware Troubleshooting</h3>
+                <p class="blue-text">
+                    Problems can arise from incompatible software, loose connections, or improper hardware
+                    configurations. Value ConnectSolutions offers comprehensive hardware troubleshooting support to
+                    diagnose
+                    and resolve even the most challenging issues.
+                </p>
+                <p class="blue-text">
+                    We offer full documentation of all resolutions, including updates to your internal systems or
+                    support logs.
+                </p>
+
+                <h3 class="blue-subtitle">Reliable Software Troubleshooting</h3>
+                <p class="blue-text">
+                    With multiple programs running simultaneously on most PCs, diagnosing and fixing software problems
+                    can be tricky. Software troubleshooting requires a deep understanding of the underlying symptoms and
+                    their causes. Whether it’s an installation error, slow system performance, or a virus, our
+                    technicians at Value ConnectSolutions are adept at identifying and correcting software issues
+                    through our
+                    remote tech support services.
+                </p>
+                <p class="blue-text">
+                    Our team follows best practices in software outsourcing to deliver stable, secure, and compliant
+                    solutions tailored to your environment.
+                </p>
+            </div>
+        </div>
+
+
+
+        <div>
+            <h3 class="blue-subtitle" style="color: black;">Choose Value ConnectSolution for Outsourced IT Help Desk
+                Services</h3>
+            <p class="blue-text" style="color: black;">
+                We specialize in IT help desk outsourcing that’s secure, scalable, and always on. With robust
+                infrastructure, English-fluent agents, and decades of experience, we provide the benefits of outsourced
+                support without sacrificing quality.
+            </p>
+
+
+            <div class="image-gallery">
+                <div class="image-main">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600&q=80"
+                        alt="Value ConnectSolutions IT help desk team providing outsourced support"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+                </div>
+                <div class="image-secondary">
+                    <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                        alt="Secure and scalable IT infrastructure support"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                        alt="English-fluent agents with decades of experience"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+{% include 'myapp/index_countriesweserve.html' %}
+
+    {% include 'myapp/footer.html' %}
+
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>

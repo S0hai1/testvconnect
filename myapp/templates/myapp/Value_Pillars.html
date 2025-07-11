@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <meta name="description" content="Discover Value Connect Solutions' core values that make us a trusted outsourcing partner from India. Our commitment to quality, efficiency, and success drives results.">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://valueconnectsolutions.com/favicon.ico">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Value Pillars | Value Connect Solutions">
+    <meta property="og:description" content="Discover Value Connect Solutions' core values that make us a trusted outsourcing partner from India.">
+    <meta property="og:url" content="https://valueconnectsolutions.com/why-choose-us/value-pillars">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2962ff;
+            --primary-dark: #0039cb;
+            --primary-light: #768fff;
+            --secondary-color: #00c853;
+            --dark-color: #263238;
+            --light-color: #f5f7fa;
+            --white: #ffffff;
+            --gray: #eceff1;
+            --dark-gray: #90a4ae;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            color: var(--primary-color);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            font-weight: 600;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+        
+        .nav-menu a {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 1.5rem;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Banner */
+        .hero-banner {
+              background: linear-gradient(rgb(0 0 0 / 80%), rgba(41, 98, 255, 0.8)), url(https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80);
+    background-size: cover;
+    background-position: center;
+    padding: 10rem 2rem;
+    text-align: center;
+    /* margin-top: 80px; */
+    color: var(--white);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-banner h1 {
+            color: var(--white);
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 4rem 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .two-column {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .two-column .col {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .image-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Colored Sections */
+        .bg-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .bg-primary h2 {
+            color: var(--white);
+        }
+        
+        .bg-light {
+            background-color: var(--light-color);
+        }
+        
+        /* Value Pillars Section */
+        .value-pillar {
+            margin-bottom: 3rem;
+        }
+        
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Location showcase */
+        .location-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .location-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .location-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-menu ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-banner {
+                padding: 8rem 1.5rem;
+            }
+            
+            .section {
+                padding: 3rem 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+            
+            .hero-banner {
+                padding: 6rem 1rem;
+                margin-top: 70px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .two-column {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .cta-button {
+                margin-left: 1rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .hero-banner {
+                padding: 5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    {% include 'myapp/header.html' %}
+    
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h1>Value Pillars</h1>
+            <p>The foundation of our commitment to excellence and client success</p>
+        </div>
+    </section>
+    
+  
+    
+    <!-- Our People Section -->
+    <section class="section">
+        <div class="container">
+            <div class="two-column">
+                <div class="col">
+                    <div class="value-pillar">
+                        <h2>Our People</h2>
+                        <p>At Value Connect Solutions, our people are our greatest asset. We pride ourselves on building teams of highly skilled professionals who are dedicated to delivering exceptional service.</p>
+                        
+                        <p><strong>What sets our team apart:</strong></p>
+                        <ul>
+                            <li><strong>The average age of our representatives is 28 years</strong>, bringing youthful energy with professional maturity</li>
+                            <li><strong>Average of 3-5 years of industry experience</strong> across our team members</li>
+                            <li><strong>90% hold bachelor's degrees</strong> with specialized training in customer service and technical support</li>
+                            <li><strong>Industry-low turnover rate of 20% annually</strong> thanks to our positive work environment and career growth opportunities</li>
+                        </ul>
+                        
+                        <p><strong>Management Expertise:</strong> Our leadership team averages 8+ years of experience in the BPO industry, with specialized knowledge in various verticals.</p>
+                        <p><strong>Executive Leadership:</strong> Our C-suite brings 50+ combined years of experience in global business process outsourcing.</p>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Professional diverse team collaborating in modern office">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results Section -->
+    <section class="section bg-primary">
+        <div class="container">
+            <div class="value-pillar">
+                <h2>Results That Matter</h2>
+                <p>We understand that our clients measure success by tangible outcomes. That's why we focus on delivering measurable results across all our engagements.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">30-50%</span>
+                        <span class="stat-label">Customer Satisfaction Increase</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">First-Call Resolution Rate</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">20-40%</span>
+                        <span class="stat-label">Handle Time Reduction</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">15-25%</span>
+                        <span class="stat-label">Conversion Rate Improvement</span>
+                    </div>
+                </div>
+                
+                <p>At Value Connect Solutions, we've built a culture of excellence where every team member - from executives to frontline staff - is committed to achieving outstanding results. Our approach combines:</p>
+                
+                <p><strong>Data-Driven Decision Making:</strong> We leverage analytics to continuously optimize performance.</p>
+                <p><strong>Customized Solutions:</strong> Tailored approaches for each client's unique needs.</p>
+                <p><strong>Proactive Account Management:</strong> Dedicated teams ensuring your success.</p>
+                
+                <p>Since our founding in 2010, our focus on delivering exceptional results has been the cornerstone of our growth and the reason clients continue to partner with us year after year.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Our Location Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="value-pillar">
+                <h2>Strategic Location</h2>
+                <div class="two-column">
+                    <div class="col">
+                        <p>Our state-of-the-art facilities in Bangalore, India's technology capital, provide significant advantages for our clients:</p>
+                        
+                        <div class="location-showcase">
+                            <div class="location-card">
+                                <h3>Cost Efficiency</h3>
+                                <p>Our operational costs are typically 50-60% lower than comparable Western operations, with no compromise on quality.</p>
+                            </div>
+                            <div class="location-card">
+                                <h3>Business Continuity</h3>
+                                <p>Our facilities feature redundant power, network connectivity, and disaster recovery systems ensuring 99.99% uptime over the past five years.</p>
+                            </div>
+                            <div class="location-card">
+                                <h3>Technology Ecosystem</h3>
+                                <p>Located in India's Silicon Valley, we're surrounded by global tech leaders including Infosys, Wipro, and Tata Consultancy Services.</p>
+                            </div>
+                            <div class="location-card">
+                                <h3>Time Zone Advantage</h3>
+                                <p>Our location allows for effective follow-the-sun support for global operations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <div class="image-container">
+                            <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Modern office building in Bangalore tech hub">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Savings Section -->
+    <section class="section bg-primary">
+        <div class="container">
+            <div class="two-column">
+                <div class="col">
+                    <div class="value-pillar">
+                        <h2>Cost Savings</h2>
+                        <p>Partnering with Value Connect Solutions delivers significant financial benefits while maintaining high service quality:</p>
+                        
+                        <ul>
+                            <li><strong>Labor Cost Savings:</strong> Typically 50-70% compared to US/UK/AU-based operations</li>
+                            <li><strong>Reduced Overhead:</strong> No need for capital investments in facilities, technology, or recruitment</li>
+                            <li><strong>Flexible Engagement Models:</strong> Pay only for the resources you need, when you need them</li>
+                            <li><strong>Technology Savings:</strong> Leverage our existing investments in cutting-edge platforms</li>
+                        </ul>
+                        
+                        <p>Our Bangalore location offers an optimal balance of cost efficiency and quality. The city's thriving IT ecosystem provides access to highly educated, English-proficient professionals at competitive rates.</p>
+                        
+                        <p>Beyond labor costs, our operational excellence and continuous improvement programs deliver additional savings through increased efficiency and productivity gains.</p>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80" alt="Financial charts and graphs showing cost savings">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Custom Solutions Section -->
+    <section class="section">
+        <div class="container">
+            <div class="value-pillar">
+                <h2>Custom Solutions</h2>
+                <p>We recognize that every business has unique requirements. That's why we specialize in creating tailored solutions that align perfectly with your specific needs and objectives.</p>
+                
+                <div class="two-column">
+                    <div class="col">
+                        <div class="image-container">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team working on custom solutions and technology">
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <p><strong>Our customization capabilities include:</strong></p>
+                        <ul>
+                            <li>Tailored service level agreements</li>
+                            <li>Custom reporting and analytics</li>
+                            <li>Specialized training programs</li>
+                            <li>Integration with your existing systems</li>
+                            <li>Flexible staffing models</li>
+                            <li>Industry-specific compliance</li>
+                        </ul>
+                        
+                        <p>Unlike many providers who offer rigid, one-size-fits-all solutions, we take the time to understand your business processes, customer expectations, and strategic goals. This enables us to design service delivery models that:</p>
+                        <ul>
+                            <li>Reflect your brand values</li>
+                            <li>Align with your operational priorities</li>
+                            <li>Integrate seamlessly with your existing operations</li>
+                            <li>Deliver measurable business outcomes</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p>Our approach ensures that every customer interaction is handled with the care, precision, and brand alignment your customers expect.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    {% include 'myapp/index_countriesweserve.html' %}
+    <!-- footer section -->
+     {% include 'myapp/footer.html' %}
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-menu ul').classList.toggle('show');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Sticky header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+        
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --bg-gray: #f1f5f9;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
+            --border-radius-xl: 20px;
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --spacing-3xl: 64px;
+            --container-max-width: 1200px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.2;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Containers */
+        .section {
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .section-alt {
+            background-color: var(--bg-light);
+        }
+
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* Content Layout */
+        .content-row {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3xl);
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .content-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .content-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .content-visual {
+            flex: 0 0 500px;
+            height: 350px;
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .content-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .content-visual:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Typography */
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+            letter-spacing: -0.025em;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-2xl);
+            line-height: 1.7;
+            max-width: 800px;
+        }
+
+        .content-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .content-text p {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.7;
+        }
+
+        .content-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Blue Section */
+        .blue-section {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .blue-section .content-title,
+        .blue-section .section-title {
+            color: white;
+        }
+
+        .blue-section .content-text p,
+        .blue-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Feature Grid */
+        .features-section {
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-icon {
+            width: 100%;
+            height: 200px;
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-lg);
+            overflow: hidden;
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .feature-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.9375rem;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .benefits-section .section-title {
+            color: white;
+            text-align: center;
+        }
+
+        .benefits-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin: 0 auto var(--spacing-2xl) auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            gap: var(--spacing-2xl);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .benefit-card {
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+            display: flex;
+            align-items: stretch;
+            min-height: 300px;
+        }
+
+        .benefit-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .benefit-card:nth-child(even) .benefit-content {
+            border-radius: 25px 0px 0px 25px;
+        }
+
+        .benefit-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .benefit-image img {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            border-radius: 25px;
+            background-color: white;
+            object-fit: cover;
+        }
+
+        .benefit-content {
+            flex: 1;
+            padding: var(--spacing-2xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 300px;
+            margin: 40px 0px;
+            background-color: white;
+            border-radius: 0px 25px 25px 0px;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        .benefit-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.0625rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-row {
+                flex-direction: column;
+                gap: var(--spacing-xl);
+            }
+
+            .content-row.reverse {
+                flex-direction: column-reverse;
+            }
+
+            .content-visual {
+                flex: none;
+                width: 100%;
+                height: 250px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .benefit-card {
+                flex-direction: column;
+            }
+
+            .benefit-card:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .benefit-image {
+                min-width: auto;
+                min-height: 200px;
+            }
+
+            .benefit-image img {
+                border-radius: 0px 0px;
+            }
+
+            .benefit-content {
+                min-width: auto;
+                margin: 0px;
+                padding: var(--spacing-lg);
+                border-radius: 0px;
+                flex: none;
+            }
+
+            .section {
+                padding: var(--spacing-2xl) 0;
+            }
+
+            .benefit-card:nth-child(even) .benefit-content {
+                border-radius: 0px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .hero-section {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .feature-card {
+                padding: var(--spacing-lg);
+            }
+
+            .content-visual {
+                height: 200px;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero-background">
+        <div class="hero-overlay"></div>
+    </div>
+
+    {% include 'myapp/header.html' %}
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Claims Processing Outsourcing</h1>
+            <p class="hero-subtitle">Streamline your operations with professional, cost-effective claims processing services from India</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="section">
+        <div class="container">
+            <div class="content-row">
+                <div class="content-text">
+                    <h2 class="content-title">Outsource Your Claim E-Filing Services to Value ConnectSolutions for Cost Savings and Efficiency</h2>
+                    <p>Outsourcing claim filing services is an increasingly popular strategy for insurance providers and brokers looking to reduce costs and improve operational efficiency. By partnering with Value ConnectSolutions, you can focus your internal resources on core business areas that drive growth.</p>
+                    <p>At the same time, we handle the complex, time-consuming tasks of claim filing and processing. Our comprehensive suite of claim filing services allows businesses to streamline operations, maintain a competitive edge, and save on time, money, and human capital.</p>
+                </div>
+                <div class="content-visual">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2070&auto=format&fit=crop" alt="Professional claims processing team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blue Section -->
+    <section class="section blue-section">
+        <div class="container">
+            <div class="content-row reverse">
+                <div class="content-text">
+                    <h2 class="content-title">Enhanced Efficiency Through Expert Claims Processing</h2>
+                    <p>Claims filing and processing can be tedious and resource-intensive, demanding strict quality control and specialized knowledge. Managing fluctuating claim volumes in-house can overwhelm staff, leading to delays, errors, and customer dissatisfaction.</p>
+                    <p>By outsourcing claim filing to Value ConnectSolutions, you can enhance the policyholder experience by reducing their touchpoints and improving the efficiency of the claims process.</p>
+                </div>
+                <div class="content-visual">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop" alt="Claims processing workflow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Grid Section -->
+    <section class="section features-section">
+        <div class="container">
+            <h2 class="section-title">How Outsourcing Claim Filing Services Benefit Your Business</h2>
+            <p class="section-subtitle">
+                Choosing Value ConnectSolutions for your claim filing needs offers several key advantages that transform your operations.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" alt="Skilled professionals">
+                    </div>
+                    <h3 class="feature-title">Access to Skilled Personnel</h3>
+                    <p class="feature-text">Our team comprises college-educated, experienced professionals who are well versed in providing superior customer service and claims processing expertise.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop" alt="Happy customers">
+                    </div>
+                    <h3 class="feature-title">Improved Customer Satisfaction</h3>
+                    <p class="feature-text">Efficient processing leads to happier policyholders and strengthens customer loyalty through faster resolution times.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=2070&auto=format&fit=crop" alt="Cost savings">
+                    </div>
+                    <h3 class="feature-title">Cost Reduction</h3>
+                    <p class="feature-text">Save on administrative costs by outsourcing claims filing, eliminating the need for training internal staff or investing in expensive infrastructure.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2070&auto=format&fit=crop" alt="Fast processing">
+                    </div>
+                    <h3 class="feature-title">Faster Claims Turnaround</h3>
+                    <p class="feature-text">Accelerate the claims process with our dedicated support agents and automated systems for rapid processing.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop" alt="Compliance documentation">
+                    </div>
+                    <h3 class="feature-title">Fewer Compliance Issues</h3>
+                    <p class="feature-text">Our processes adhere to industry regulations, reducing the risk of compliance problems and regulatory violations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Strategic focus">
+                    </div>
+                    <h3 class="feature-title">Focus on Core Activities</h3>
+                    <p class="feature-text">Free up your internal resources to focus on strategic growth and business development initiatives.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2070&auto=format&fit=crop" alt="Enhanced productivity">
+                    </div>
+                    <h3 class="feature-title">Enhanced Productivity</h3>
+                    <p class="feature-text">Optimize workflows and improve overall business efficiency through streamlined processes and expert handling.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop" alt="Data security">
+                    </div>
+                    <h3 class="feature-title">Data Security and Transparency</h3>
+                    <p class="feature-text">We process claims using secure platforms, with real-time access to claim status through our web-based system.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070&auto=format&fit=crop" alt="Scalable services">
+                    </div>
+                    <h3 class="feature-title">Scalable Services</h3>
+                    <p class="feature-text">Our services are fully scalable to meet your fluctuating business needs and growth requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section section-alt features-section">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Claim Filing Services</h2>
+            <p class="section-subtitle">
+                At Value ConnectSolutions, we understand that each business has unique needs. Our claim filing services are fully customizable and scalable to match your requirements.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2070&auto=format&fit=crop" alt="Data analysis">
+                    </div>
+                    <h3 class="feature-title">Data Confirmation and Evaluation</h3>
+                    <p class="feature-text">Ensuring all claim data is accurate and up to date through comprehensive verification processes.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2070&auto=format&fit=crop" alt="Document verification">
+                    </div>
+                    <h3 class="feature-title">Claim Authentication</h3>
+                    <p class="feature-text">Verifying the validity of each claim to prevent fraud and errors through rigorous authentication protocols.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop" alt="Quality auditing">
+                    </div>
+                    <h3 class="feature-title">Auditing for Accuracy</h3>
+                    <p class="feature-text">Conducting thorough checks to maintain the highest level of data integrity and processing accuracy.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop" alt="Comprehensive reporting">
+                    </div>
+                    <h3 class="feature-title">Claim Reporting and Documentation</h3>
+                    <p class="feature-text">Providing comprehensive documentation and reporting for all processed claims with detailed analytics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section benefits-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Value ConnectSolutions for Claims Processing?</h2>
+            <p class="section-subtitle">
+                Value ConnectSolutions offers professional, cost-efficient claim filing services to help your business thrive in a competitive market. Our India-based operation is equipped with cutting-edge technology for processing insurance claims with quality control and regulatory compliance.
+            </p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-image">
+                        <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=2070&auto=format&fit=crop" alt="Cost savings">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">Competitive Pricing</h3>
+                        <p class="benefit-text">Save up to 60% on operational costs compared to in-house processing while maintaining the highest quality standards.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-image">
+                        <img src="{% static 'myapp/images/contracts.jpg' %}" alt="Flexible contracts">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">No Long-Term Contracts</h3>
+                        <p class="benefit-text">Enjoy flexible, competitively priced services without the burden of long-term commitments or hidden fees.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-image">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop" alt="24/7 support">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">24/7 Availability</h3>
+                        <p class="benefit-text">Our agents are available around the clock to ensure continuous support and faster claims processing.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-image">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop" alt="Real-time access">
+                    </div>
+                    <div class="benefit-content">
+                        <h3 class="benefit-title">Real-Time Data Access</h3>
+                        <p class="benefit-text">Keep track of your claims with a secure, web-based system that offers complete transparency and instant updates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section class="section">
+        <div class="container">
+            <div class="content-row">
+                <div class="content-text">
+                    <h2 class="content-title">Streamline Your Operations With Value ConnectSolutions</h2>
+                    <p>At Value ConnectSolutions, we pride ourselves on providing high-quality, cost-effective services for various back-office processes. We focus not only on cutting costs but also on helping you optimize your operations and make the most of your internal resources to drive profitability.</p>
+                    <p>In today's volatile market, insurers seek innovative ways to manage claims more economically without sacrificing customer service quality or control. Our specialized approach delivers cost savings, superior customer service, and strict compliance with regulatory standards.</p>
+                </div>
+                <div class="content-visual">
+                    <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=2070&auto=format&fit=crop" alt="Modern office operations">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
+</body>
+
+</html>

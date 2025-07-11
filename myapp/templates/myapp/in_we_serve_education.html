@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Education Global Styles */
+        :root {
+            --education-primary: #2c5aa0;
+            --education-secondary: #333;
+            --education-accent: #ff9e1b;
+            --education-light: #f8f9fa;
+            --education-dark: #212529;
+            --education-white: #ffffff;
+            --education-gray: #6c757d;
+        }
+
+        /* Education Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--education-secondary);
+            background-color: var(--education-white);
+        }
+
+        /* Education Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--education-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--education-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--education-accent);
+        }
+
+        /* Education Layout */
+        .education-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Education Header */
+        .education-header {
+            background-color: var(--education-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .education-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .education-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--education-primary);
+        }
+
+        .education-logo span {
+            color: var(--education-accent);
+        }
+
+        .education-nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .education-nav-links li {
+            margin-left: 2rem;
+        }
+
+        .education-nav-links a {
+            font-weight: 600;
+        }
+
+        .education-mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Education Hero Section */
+        .education-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .education-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .education-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .education-btn {
+            display: inline-block;
+            background-color: var(--education-primary);
+            color: var(--education-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .education-btn:hover {
+            background-color: var(--education-accent);
+            color: var(--education-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Education Solutions Section */
+        .education-solutions {
+            padding: 100px 0;
+        }
+
+        .education-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .education-section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .education-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--education-accent);
+        }
+
+        .education-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .education-solution-card {
+            background-color: var(--education-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .education-solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .education-solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .education-solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .education-solution-card:hover .education-solution-img img {
+            transform: scale(1.1);
+        }
+
+        .education-solution-content {
+            padding: 25px;
+        }
+
+        .education-solution-content h3 {
+            margin-bottom: 15px;
+            color: var(--education-primary);
+        }
+
+        /* Education Benefits Section */
+        .education-benefits {
+            padding: 100px 0;
+            background-color: var(--education-light);
+        }
+
+        .education-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .education-benefit-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--education-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .education-benefit-icon {
+            font-size: 3rem;
+            color: var(--education-accent);
+            margin-bottom: 20px;
+        }
+
+        /* Education Support Services Section */
+        .education-support-services {
+            padding: 100px 0;
+        }
+
+        .education-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .education-service-card {
+            background-color: var(--education-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .education-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .education-service-icon {
+            font-size: 2.5rem;
+            color: var(--education-accent);
+            margin-bottom: 20px;
+        }
+
+        .education-service-card h3 {
+            margin-bottom: 15px;
+            color: var(--education-primary);
+        }
+
+        /* Education Testimonials */
+        .education-testimonials {
+            padding: 100px 0;
+            background-color: var(--education-light);
+        }
+
+        .education-testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .education-testimonial {
+            padding: 30px;
+        }
+
+        .education-testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .education-testimonial-author {
+            font-weight: 700;
+        }
+
+        .education-testimonial-role {
+            color: var(--education-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Education CTA Section */
+        .education-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--education-primary), #1a3a6e);
+            color: var(--education-white);
+            text-align: center;
+        }
+
+        .education-cta h2 {
+            color: var(--education-white);
+            margin-bottom: 30px;
+        }
+
+        .education-cta .education-btn {
+            background-color: var(--education-white);
+            color: var(--education-primary);
+        }
+
+        .education-cta .education-btn:hover {
+            background-color: var(--education-accent);
+            color: var(--education-white);
+        }
+
+        
+
+        /* Education Responsive */
+        @media (max-width: 992px) {
+            .education-nav-links {
+                display: none;
+            }
+
+            .education-mobile-menu {
+                display: block;
+            }
+
+            .education-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .education-hero {
+                padding: 150px 0 80px;
+            }
+
+            .education-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .education-hero p {
+                font-size: 1.1rem;
+            }
+
+            .education-section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .education-hero {
+                padding: 120px 0 60px;
+            }
+
+            .education-hero h1 {
+                font-size: 2rem;
+            }
+
+            .education-btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Education Header -->
+     {% include 'myapp/header.html' %}
+
+    <!-- Education Hero Section -->
+    <section class="education-hero">
+        <div class="education-container">
+            <h1>Education Technology Solutions</h1>
+            <p>Transform learning experiences with our innovative education technology solutions designed to enhance student engagement, streamline administration, and connect educational communities.</p>
+            <a href="#" class="education-btn"  onclick="scrollToSection()">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Education Solutions Section -->
+    <!-- <section class="education-solutions">
+        <div class="education-container">
+            <div class="education-section-title">
+                <h2>Comprehensive Education Solutions</h2>
+                <p>We understand the unique challenges of educational institutions and deliver customized solutions to address them.</p>
+            </div>
+            <div class="education-solutions-grid">
+                <div class="education-solution-card">
+                    <div class="education-solution-img">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Learning Management Systems">
+                    </div>
+                    <div class="education-solution-content">
+                        <h3>Learning Management Systems</h3>
+                        <p>Comprehensive platforms that facilitate online learning, course management, and student engagement for institutions of all sizes.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="education-solution-card">
+                    <div class="education-solution-img">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Student Information Systems">
+                    </div>
+                    <div class="education-solution-content">
+                        <h3>Student Information Systems</h3>
+                        <p>Centralized solutions for managing student data, attendance, grades, and communication with parents and staff.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="education-solution-card">
+                    <div class="education-solution-img">
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Virtual Classroom Technology">
+                    </div>
+                    <div class="education-solution-content">
+                        <h3>Virtual Classroom Technology</h3>
+                        <p>Interactive platforms that enable real-time collaboration between teachers and students in remote learning environments.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Education Support Services Section -->
+    <section class="education-support-services">
+        <div class="education-container">
+            <div class="education-section-title">
+                <h2>Education Support Services</h2>
+                <p>Outsourcing education services allows institutions to focus on teaching while we handle the operational support.</p>
+            </div>
+            <div class="education-services-grid">
+                <div class="education-service-card">
+                    <div class="education-service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Help Desk Support</h3>
+                    <p>24/7 technical assistance for students, faculty, and staff facing technology challenges.</p>
+                </div>
+                <div class="education-service-card">
+                    <div class="education-service-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Student Services</h3>
+                    <p>Comprehensive support for enrollment, financial aid, and academic advising inquiries.</p>
+                </div>
+                <div class="education-service-card">
+                    <div class="education-service-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Faculty Support</h3>
+                    <p>Dedicated assistance for educators implementing technology in their curriculum.</p>
+                </div>
+                <div class="education-service-card">
+                    <div class="education-service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Management</h3>
+                    <p>Secure handling of student records, performance data, and institutional analytics.</p>
+                </div>
+                <div class="education-service-card">
+                    <div class="education-service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Parent Communication</h3>
+                    <p>Multichannel support for parent inquiries about student progress and school programs.</p>
+                </div>
+                <div class="education-service-card">
+                    <div class="education-service-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Curriculum Support</h3>
+                    <p>Assistance with digital resource implementation and learning material distribution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Benefits Section -->
+    <section class="education-benefits">
+        <div class="education-container">
+            <div class="education-section-title">
+                <h2>Advantages for Educational Institutions</h2>
+                <p>Partnering with Value Connect Solutions delivers measurable benefits for schools and universities.</p>
+            </div>
+            <div class="education-benefits-grid">
+                <div class="education-benefit-item">
+                    <div class="education-benefit-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Technology Integration</h3>
+                    <p>Seamlessly incorporate the latest educational technologies without infrastructure investment.</p>
+                </div>
+                <div class="education-benefit-item">
+                    <div class="education-benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>24/7 Availability</h3>
+                    <p>Support students and faculty whenever they need assistance, regardless of time zones.</p>
+                </div>
+                <div class="education-benefit-item">
+                    <div class="education-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Improved Outcomes</h3>
+                    <p>Enhance student success through reliable systems and immediate support access.</p>
+                </div>
+                <div class="education-benefit-item">
+                    <div class="education-benefit-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Cost Efficiency</h3>
+                    <p>Reduce operational costs while maintaining high-quality support services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Testimonials -->
+    <!-- <section class="education-testimonials">
+        <div class="education-container">
+            <div class="education-section-title">
+                <h2>What Our Education Partners Say</h2>
+            </div>
+            <div class="education-testimonial-slider">
+                <div class="education-testimonial">
+                    <p class="education-testimonial-text">"Value Connect's solutions transformed our distance learning program, resulting in a 40% increase in student engagement and satisfaction scores within the first semester."</p>
+                    <p class="education-testimonial-author">Dr. Michael Johnson</p>
+                    <p class="education-testimonial-role">Dean of Online Education, State University</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Education CTA Section -->
+    <section class="education-cta">
+        <div class="education-container">
+            <h2>Ready to Enhance Your Educational Institution?</h2>
+            <p>Our team of education technology experts is ready to help you implement solutions that improve learning outcomes and operational efficiency.</p>
+            <a href="#" class="education-btn">Schedule a Consultation</a>
+        </div>
+    </section>
+     <!-- contact us form -->
+     <div id="target-section">
+         {% include 'myapp/index_countriesweserve.html' %}
+     </div>
+
+    <!-- Education Footer -->
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.education-mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.education-nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Responsive adjustment for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                document.querySelector('.education-nav-links').style.display = 'flex';
+            } else {
+                document.querySelector('.education-nav-links').style.display = 'none';
+            }
+        });
+        function scrollToSection() {
+    document.getElementById('target-section').scrollIntoView({
+      behavior: 'smooth'  // smooth scrolling animation
+    });
+  }
+    </script>
+</body>
+</html>

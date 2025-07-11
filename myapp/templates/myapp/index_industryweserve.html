@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Value Connect Solution - Industries We Serve</title>
+    {% include 'myapp/meta_tags.html' %}
     <style>
         * {
             margin: 0;
@@ -15,15 +13,20 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 2rem 0;
+          
         }
         
 
-        .container {
-            max-width: 1400px;
+        .container1 {
+          
             margin: 0 auto;
-            padding: 0 2rem;
+             
+    background: #fffcfc;
             position: relative;
+    display: flex;
+    flex-direction: column;
+ 
+            
         }
 
         .header {
@@ -33,41 +36,45 @@
         }
 
         .company-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+                color: black;
+    margin-top: 2%;
+    font-size: 1.2rem;
+    font-weight: 600;
+    /* margin-bottom: 0.5rem; */
+    opacity: 0.9;
+    letter-spacing: 2px;
+    text-transform: uppercase;
         }
 
         .main-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ffffff, #f8f9ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+                color: #000000;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    /* margin-bottom: 1rem; */
+    background: linear-gradient(45deg, #000000, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
+              color: black;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
         }
 
         .scroll-wrapper {
-            position: relative;
-            padding: 2rem 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* Ensure content outside is hidden */
+               position: relative;
+    padding: 2rem 0;
+    background: rgb(32 10 10 / 10%);
+    backdrop-filter: blur(10px);
+    /* border-radius: 20px; */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
         }
 
         .scroll-container {
@@ -236,7 +243,7 @@
         }
 
         @media (max-width: 768px) {
-            .container {
+            .container1 {
                 padding: 0 1rem;
             }
 
@@ -271,7 +278,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container1">
         <div class="header">
             <div class="company-name">Value Connect Solution</div>
             <h1 class="main-title">Industries We Serve</h1>
@@ -281,89 +288,68 @@
         <div class="scroll-wrapper" id="scrollWrapper">
             <div class="scroll-container" id="scrollContainer">
                 <div class="cards-wrapper" id="cardsWrapper">
-                    <div class="card">
-                        <div class="card-icon">📞</div>
-                        <h3 class="card-title">Telecommunication</h3>
-                        <p class="card-description">Meet customer demands, manage technical support, and enhance network operations more efficiently.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+                       <div class="card">
+                <div class="card-icon">🛒</div>
+                <h3 class="card-title">Retail & E-Commerce</h3>
+                <p class="card-description">Whether you need help after hours or a full-scale contact center to handle multiple service platforms 24/7, we're up to the task.</p>
+                <a href="industry-experience/retail-ecommerce/" class="card-link">Learn more</a>
+            </div>
 
-                    <div class="card">
-                        <div class="card-icon">🛒</div>
-                        <h3 class="card-title">Retail and E-Commerce</h3>
-                        <p class="card-description">Whether you need help after hours or a full-scale contact center to handle multiple service platforms 24/7, we're up to the task.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+            <div class="card">
+                <div class="card-icon">🏥</div>
+                <h3 class="card-title">Insurance</h3>
+                <p class="card-description">Delegate administrative duties like claims and forms processing, and other non-core duties to free up money, resources, and time.</p>
+                <a href="industry-experience/insurance/" class="card-link">Learn more</a>
+            </div>
 
-                    <div class="card">
-                        <div class="card-icon">💰</div>
-                        <h3 class="card-title">Financial Services</h3>
-                        <p class="card-description">We can handle your time-intensive tasks, from general bookkeeping to in-house payroll management and more.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+            <div class="card">
+                <div class="card-icon">🎓</div>
+                <h3 class="card-title">Education</h3>
+                <p class="card-description">Ease your workload during the school year so you can focus on providing quality education to students.</p>
+                <a href="industry-experience/education/" class="card-link">Learn more</a>
+            </div>
 
-                    <div class="card">
-                        <div class="card-icon">🏥</div>
-                        <h3 class="card-title">Health and Life Insurance</h3>
-                        <p class="card-description">Delegate administrative duties like claims and forms processing, and other non-core duties to free up money, resources, and time.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+            <div class="card">
+                <div class="card-icon">📈</div>
+                <h3 class="card-title">Marketing Services</h3>
+                <p class="card-description">Our experienced talent can help you build smart, strategic marketing plans to reach your campaign objectives.</p>
+                <a href="industry-experience/marketing-services/" class="card-link">Learn more</a>
+            </div>
 
-                    <div class="card">
-                        <div class="card-icon">⚕️</div>
-                        <h3 class="card-title">Healthcare</h3>
-                        <p class="card-description">Leave the administrative tasks to us so you can dedicate your time to patient care.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <h3 class="card-title">Financial Services</h3>
+                <p class="card-description">We can handle your time-intensive tasks, from general bookkeeping to in-house payroll management and more.</p>
+                <a href="industry-experience/financial-services/" class="card-link">Learn more</a>
+            </div>
 
-                    <div class="card">
-                        <div class="card-icon">🔬</div>
-                        <h3 class="card-title">Clinical Research</h3>
-                        <p class="card-description">Accelerate study timelines by outsourcing critical yet time-consuming tasks to our experts.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+            <div class="card">
+                <div class="card-icon">📞</div>
+                <h3 class="card-title">Telecommunications</h3>
+                <p class="card-description">Meet customer demands, manage technical support, and enhance network operations more efficiently.</p>
+                <a href="industry-experience/telecommunications/" class="card-link">Learn more</a>
+            </div>
 
-                    <div class="card">
-                        <div class="card-icon">🎯</div>
-                        <h3 class="card-title">Lead Generation and Verification</h3>
-                        <p class="card-description">Enhance the accuracy and efficiency of identifying and qualifying potential leads with help from our expert team.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+            <div class="card">
+                <div class="card-icon">🏠</div>
+                <h3 class="card-title">Real Estate</h3>
+                <p class="card-description">We handle calls, appointment scheduling, lead generation, and forms processing for your real estate firm.</p>
+                <a href="industry-experience/real-estate/" class="card-link">Learn more</a>
+            </div>
 
-                    <div class="card">
-                        <div class="card-icon">🎓</div>
-                        <h3 class="card-title">Higher Education</h3>
-                        <p class="card-description">Ease your workload during the school year so you can focus on providing quality education to students.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+            <div class="card">
+                <div class="card-icon">📺</div>
+                <h3 class="card-title">Media & Communications</h3>
+                <p class="card-description">Streamline your content operations, audience engagement, and communication workflows with our specialized media support services.</p>
+                <a href="industry-experience/media-communications/" class="card-link">Learn more</a>
+            </div>
 
-                    <div class="card">
-                        <div class="card-icon">💻</div>
-                        <h3 class="card-title">IT and Managed Service Providers</h3>
-                        <p class="card-description">We solve your technical issues promptly and effectively to minimize downtime and maintain smooth operations.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">📈</div>
-                        <h3 class="card-title">Marketing Services</h3>
-                        <p class="card-description">Our experienced talent can help you build smart, strategic marketing plans to reach your campaign objectives.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">💊</div>
-                        <h3 class="card-title">Pharmaceutical Marketing</h3>
-                        <p class="card-description">With specialized expertise you can effectively reach healthcare professionals and stay competitive in the industry.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">🏠</div>
-                        <h3 class="card-title">Real Estate</h3>
-                        <p class="card-description">We handle calls, appointment scheduling, lead generation, and forms processing for your real estate firm.</p>
-                        <a href="#" class="card-link">Learn more</a>
-                    </div>
+            <div class="card">
+                <div class="card-icon">💻</div>
+                <h3 class="card-title">Website Design & Development</h3>
+                <p class="card-description">From responsive web design to full-stack development, we create digital experiences that drive results and user engagement.</p>
+                <a href="industry-experience/website-design-development/" class="card-link">Learn more</a>
+            </div>
                 </div>
             </div>
 

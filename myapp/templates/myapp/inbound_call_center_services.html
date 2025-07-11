@@ -2,9 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inbound Call Center Services - ValueConnectSolution</title>
+    {% include 'myapp/meta_tags.html' %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     {% load static %}
@@ -473,9 +471,8 @@
         }
     </style>
 </head>
-
 <body>
-    <div class="image-background" style="background-image: url('{% static 'myapp/images/services_hero_bg.jpg' %}');">
+    <div class="image-background" style="background-image: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');">
         <div class="image-overlay"></div>
     </div>
 
@@ -530,7 +527,7 @@
                         <p>And Much More!</p>
                     </ul>
                     <div class="image-column">
-                        <img src="{% static 'myapp/images/demo.avif' %}"
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
                             alt="Smiling woman looking up, representing thoughtful customer service" />
                     </div>
                 </div>
@@ -541,7 +538,7 @@
     <div class="gain-section">
         <div class="gain-container">
             <div class="image-wrapper">
-                <img src="{% static 'myapp/images/outsourcing1.webp' %}" alt="Team of smiling call center agents" />
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Team of smiling call center agents" />
             </div>
             <div class="text-wrapper">
                 <h2>What You Gain from Inbound Call Center Outsourcing</h2>
@@ -595,19 +592,21 @@
                         </li>
                         <li>
                             <strong>Reduced Wait Times</strong>
-                            With the ability to scale your support team up or down as needed, you’ll
+                            With the ability to scale your support team up or down as needed, you'll
                             always have the right number of agents to handle inbound calls efficiently,
                             minimizing customer wait times.
                         </li>
                     </ul>
                 </div>
                 <div class="image-content">
-                    <img src="{% static 'myapp/images/outsourcing2.webp' %}"
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
                         alt="Two smiling call center agents giving a thumbs up" />
                 </div>
             </div>
         </div>
     </div>
+
+    {% include 'myapp/index_countriesweserve.html' %}
 
     <div class="Services_Section">
         {% include 'myapp/footer.html' %}
@@ -630,5 +629,4 @@
         });
     </script>
 </body>
-
 </html>

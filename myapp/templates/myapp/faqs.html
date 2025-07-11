@@ -1,0 +1,748 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --primary-blue: #2176d7;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --text-light: #666;
+            --bg-light: #f8f8f8;
+            --bg-white: #ffffff;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --border-radius: 15px;
+            --border-radius-large: 20px;
+            --spacing-xs: 10px;
+            --spacing-sm: 15px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            --spacing-xxl: 50px;
+            --container-max-width: 1440px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            height: auto;
+        }
+
+        /* Background Image Styles for Hero */
+        .image-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* Services Hero Section Styles */
+        .services-hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* Changed to column for better vertical centering */
+            align-items: center;
+            justify-content: center;
+            /* Center content vertically */
+            color: #fff;
+            padding-top: var(--header-height);
+            box-sizing: border-box;
+            z-index: 0;
+            text-align: center;
+            /* Center text */
+        }
+
+        .services-hero-content {
+            max-width: 1130px;
+            margin: auto;
+            padding: var(--spacing-md);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .services-hero-content h1 {
+            font-size: 4.5em;
+            /* Even larger for hero */
+            margin-bottom: var(--spacing-lg);
+            font-weight: 800;
+            /* Extra bolder */
+            letter-spacing: -2px;
+        }
+
+        .services-hero-content p {
+            font-size: 1.4em;
+            /* Larger paragraph */
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-xl) auto;
+        }
+
+
+        /* Hero Buttons */
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        .button-primary {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            /* For anchor tags */
+            display: inline-block;
+            /* For padding to work */
+        }
+
+        .button-primary:hover {
+            background-color: #1a60b9;
+        }
+
+        .button-secondary {
+            background-color: transparent;
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: 2px solid white;
+            border-radius: var(--border-radius);
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+            /* For anchor tags */
+            display: inline-block;
+            /* For padding to work */
+        }
+
+        .button-secondary:hover {
+            background-color: white;
+            color: var(--primary-blue);
+        }
+
+
+
+
+
+        .faq-main-wrapper {
+            width: 100%;
+            max-width: 1440px;
+            padding: 20px;
+            margin: 0px auto;
+            box-sizing: border-box;
+        }
+        /* Removed .faq-header-area styles as the header element is removed */
+        .faq-content-section {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .faq-content-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+        }
+        .faq-detail-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .faq-summary-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 15px 20px;
+            cursor: pointer;
+            list-style: none; /* Remove default marker */
+            position: relative;
+            color: #555;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #eee;
+        }
+        .faq-summary-title::-webkit-details-marker {
+            display: none; /* Hide default marker for Webkit browsers */
+        }
+        .faq-summary-title::after {
+            content: '+'; /* Custom plus icon */
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+        .faq-detail-item[open] .faq-summary-title::after {
+            content: '-'; /* Custom minus icon when open */
+            transform: translateY(-50%) rotate(0deg);
+        }
+        .faq-detail-item[open] .faq-summary-title {
+            border-bottom: 1px solid #ddd;
+        }
+        .faq-answer-content {
+            padding: 15px 20px;
+            color: #444;
+            line-height: 1.6;
+        }
+        .faq-answer-content p {
+            margin: 0 0 10px 0;
+        }
+        .faq-answer-content p:last-child {
+            margin-bottom: 0;
+        }
+        .faq-answer-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        .faq-answer-content ul li {
+            margin-bottom: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .faq-header-area h1 { /* These styles are now redundant if header is removed from HTML */
+                font-size: 2em;
+            }
+            .faq-header-area p { /* These styles are now redundant if header is removed from HTML */
+                font-size: 1em;
+            }
+            .faq-content-section h2 {
+                font-size: 1.5em;
+            }
+            .faq-summary-title {
+                font-size: 1em;
+                padding: 12px 15px;
+            }
+            .faq-summary-title::after {
+                right: 15px;
+            }
+            .faq-answer-content {
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-background"
+        style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+        <div class="image-overlay"></div>
+    </div>
+
+    <!-- Header Section (Django include restored) -->
+    {% include 'myapp/header.html' %}
+
+    <div class="services-hero-section">
+        <div class="services-hero-content">
+            <h1>Global Telecalling Hubs</h1>
+            <p>
+                Connecting businesses worldwide with exceptional telecalling services. Discover our strategic locations
+                and state-of-the-art facilities.
+            </p>
+            <div class="hero-buttons">
+                <a href="#map-section" class="button-primary">Explore Locations</a>
+                <a href="#office-features" class="button-secondary">View Facilities</a>
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="faq-main-wrapper">
+        <!-- FAQ Section -->
+        <section class="faq-content-section">
+            <!-- General Questions -->
+            <h2>General</h2>
+            <div>
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Why is India a suitable locale for outsourced call centers and business support centers?</summary>
+                    <div class="faq-answer-content">
+                        <p>India is a prized outsourcing destination due to its competitive labor costs, exceptional customer service, and high English proficiency among graduates. India is the second-largest English-speaking country in the world with over 125 million English speakers, has a world-class educational system, and produces more than 4 million college graduates each year. The country's strong IT infrastructure, 24/7 work culture, and cultural compatibility with Western business practices make it ideal for outsourcing. Among the many companies that outsource to, or have internal support teams in, India are Microsoft, Dell, Amazon, Apple, Google, American Express, Facebook, Hewlett-Packard, IBM, and LinkedIn. Large and small businesses cannot ignore the combination of high-quality, skilled talent and cost-effective solutions.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Do Value ConnectSolutions' agents have an accent?</summary>
+                    <div class="faq-answer-content">
+                        <p>Value ConnectSolutions agents are carefully screened for superior verbal and written communication skills and have minimal to no accent. We selected India as our outsourcing center because it is the second-largest English-speaking nation in the world with over 125 million fluent English speakers. Indian students learn English from primary school, and English is one of the official languages of India, taught with neutral pronunciation and international usage. In addition, all Value ConnectSolutions agents have completed comprehensive call center training courses that include specialized accent neutralization training and communication enhancement programs.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Can I hear how the agents speak?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, we have sample voices that you can listen to. We can also schedule a time for you to speak directly with some of our agents before you commit to work with us. In addition, you will be able to interview each of the agents assigned to you before they begin work to ensure your 100% satisfaction.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Will the agents working for me also be working for other clients simultaneously?</summary>
+                    <div class="faq-answer-content">
+                        <p>No. Our policy is to assign each agent to work exclusively with one client at a time, intending to provide you with a dedicated extension of your office staff.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What is the ratio of agents to supervisors?</summary>
+                    <div class="faq-answer-content">
+                        <p>Approximately 1 Team Lead to 15 direct agents.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Current hours of operation and availability?</summary>
+                    <div class="faq-answer-content">
+                        <p>We operate 24/7.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What is the total number of seats in the call center?</summary>
+                    <div class="faq-answer-content">
+                        <p>Currently, we have 1,500 seats, though we can increase seating capacity on relatively short notice.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Hiring, Training, and Retention Questions -->
+            <h2 style="margin-top: 30px;">Hiring, Training, and Retention</h2>
+            <div>
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Can you hire someone with a specific skill set?</summary>
+                    <div class="faq-answer-content">
+                        <p>Value ConnectSolutions can hire specialized professionals that fit the client's qualification standards and requirements. Note that this may require a longer lead time for hiring and a higher salary for the agent. You can call or email us directly for a quote.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What are your hiring and recruiting procedures?</summary>
+                    <div class="faq-answer-content">
+                        <p>We have rigorous hiring procedures in place to ensure that we only hire the most qualified candidates to meet the needs of our clients. Our HR team carefully reviews each resume and checks all prior work and educational references. Successful candidates must pass oral and written communication tests, score above average on our EQ and IQ tests, have at least a college-level education and prior call center experience, obtain police verification clearance in India, and complete a medical screening test. We adhere to all legal and ethical standards in our hiring practices.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">How do you train your agents?</summary>
+                    <div class="faq-answer-content">
+                        <p>We have a highly experienced team of trainers who work closely with our clients and agents to ensure that our agents possess the skills, tools, and experience necessary to deliver top-notch services.</p>
+                        <p>Our agents have prior call center experience and have received base training in their previous roles. To provide our customers with seamless service, we follow a comprehensive training process that includes orientation training (1-2 days), client product training (CPT), and ongoing up-training. We also employ experience-based training across all levels. The duration of our CPT varies depending on factors such as the complexity of the client/product knowledge and the agent's previous experience. Typically, our CPT lasts from one to six weeks.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What is your turnover rate for agents?</summary>
+                    <div class="faq-answer-content">
+                        <p>Our monthly turnover rate for the past 12 months averages approximately 2%, well below the industry average. We attribute this to our recruiting and screening efforts, professional work environment, pay and benefits, career advancement opportunities, and our culture, which focuses on positive employee morale and engagement.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Are clients encouraged to visit for on-site training?</summary>
+                    <div class="faq-answer-content">
+                        <p>We always welcome our clients to our offices to conduct training. However, that isn't always feasible for everyone, and most clients conduct training sessions through web conferences.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Account Setup and Management Questions -->
+            <h2 style="margin-top: 30px;">Account Setup and Management</h2>
+            <div>
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Who will manage my agents?</summary>
+                    <div class="faq-answer-content">
+                        <p>Your staff will be managed by our US-based executive team and premise-based India management team.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Can we conduct interviews and select specific agents for our campaigns/services?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes. We will choose a group of qualified agents for the job and arrange for telephone interviews, which typically include a role-playing exercise so that the prospective client can assess each agent's communication skills. In cases where the job requires specific computer skills, we can also administer advanced testing prior to the interviews.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What are your client-specific training procedures?</summary>
+                    <div class="faq-answer-content">
+                        <p>Our trainers will work closely with your company to oversee the training of your agents and manager. While we encourage in-person client visits during the training period, most training can be conducted remotely over Zoom or or other web-based screen sharing services. Our training rooms are equipped with state-of-the-art projectors or large-screen monitors, and we can also conduct training with each agent sitting at their work station. To ensure a seamless training experience, clients typically provide us with training materials in advance so that we can assist in preparing training modules and estimate the time needed to complete the training. Our training exercises incorporate role plays, simulations, and test calls. We also provide outlines for agent procedures such as call scripts, call handling procedures, and customer management.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Are clients encouraged to visit for on-site training?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, but it's not required. Although it's not mandatory, many clients choose to conduct training over the phone using a screen-sharing program.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Which tools do you use to facilitate remote training?</summary>
+                    <div class="faq-answer-content">
+                        <p>Zoom, Google Meet, MS Teams, and GoToMeeting.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Do you assist in the preparation of the training materials and scripts?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes. We review and comment on client-prepared materials by request.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Describe your quality assurance practices and internal evaluation process.</summary>
+                    <div class="faq-answer-content">
+                        <p>We customize our QA process based on each client's specific needs. Some clients have dedicated QA monitors who conduct continuous monitoring and evaluations, while others prefer to use our monitoring software to conduct their own QA monitoring. Each account has its own QA standards and scoring sheets that cover various criteria, including objection handling, energy and attitude, filler words, pronunciation and articulation, speed and pace, listening skills, professionalism, disposition and documentation, process adherence, and dialing readiness. In addition to client-specific QA, our team leaders regularly evaluate agent performance, which is taken into account during the agent evaluation process.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Describe how call monitoring is handled both on and off-site.</summary>
+                    <div class="faq-answer-content">
+                        <p>Our monitoring process is flexible and can be conducted both on-site and off-site. Supervisors can use our dialer's "monitoring" feature to listen in on calls and intervene if necessary. For on-site monitoring, we also offer side-by-side coaching where supervisors can listen in on calls using a dual headphone connection. We also use call recordings to evaluate agent performance, with a predetermined set of criteria used for scoring. This approach allows us to conduct quality assurance thoroughly and effectively, regardless of whether monitoring is done on-site or remotely.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Are call recordings archived and available for client review? For how long?</summary>
+                    <div class="faq-answer-content">
+                        <p>We record and store all calls for the duration specified by the client.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">How will our account be managed on a day-to-day basis?</summary>
+                    <div class="faq-answer-content">
+                        <p>Each account is overseen by a team leader, with a ratio of approximately one leader to 15 agents. The team leader reports directly to the center's director of operations, who in turn reports to the president. Supporting each team are our Director of Client Services, IT Department, Training Manager, and QA monitors. Our clients also have direct communication access to the team leaders, managers, and staff members dedicated to their account.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Who will be primarily responsible for our account, and how will we communicate with them?</summary>
+                    <div class="faq-answer-content">
+                        <p>The team leader is the main point of contact and can be reached via phone, email, or chat. Additionally, the Director of Client Services, Director of Operations, and President are actively involved in overseeing each account.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Will our account manager have a local phone number for us to call?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, they can be assigned a local phone number.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Can we chat online with our account manager in real-time?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes. We are flexible and can adapt to any chat program the client currently uses, such as Slack, MS Teams, and Skype.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What KPI (Key Performance Indicators) will be used to judge the effectiveness of your services?</summary>
+                    <div class="faq-answer-content">
+                        <p>After consultation with the client and usually a pilot period, we establish specific Key Performance Indicators (KPIs) for each campaign. For a blended inbound/outbound campaign, KPIs may include:</p>
+                        <ul>
+                            <li>Number of accounts processed</li>
+                            <li>Number of calls answered</li>
+                            <li>Average Handling Time</li>
+                            <li>Total Talk Time</li>
+                            <li>Total Pause Time</li>
+                            <li>Sales/Lead Conversion Rate</li>
+                            <li>Daily QA Score (based on multiple criteria including agent soft skills, call handling ability, and work attitude)</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What types of KPI reporting and capabilities does your system provide?</summary>
+                    <div class="faq-answer-content">
+                        <p>The dialers all have feature-rich reporting capabilities that can be customized further. A partial list of standard reports includes:</p>
+                        <ul>
+                            <li>Productivity and Service Level Reports</li>
+                            <li>Team Occupancy Report</li>
+                            <li>Speed of Answer and Abandon Rate Report</li>
+                            <li>List Conversion and Disposition Reports</li>
+                            <li>Standard break adherence monitoring capability</li>
+                            <li>Call transfer monitoring report</li>
+                            <li>Agent Real-time Report (per campaign)</li>
+                            <li>Agent Performance Detail</li>
+                            <li>Campaign Call Report</li>
+                            <li>Lead Performance by Campaign Report</li>
+                            <li>Lead Performance by List Report</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Can you provide sample activity reports?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, we can.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Telecom and IT Infrastructure Questions -->
+            <h2 style="margin-top: 30px;">Telecom and IT Infrastructure</h2>
+            <div>
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Describe the technology infrastructure of your call center.</summary>
+                    <div class="faq-answer-content">
+                        <p>We have ensured complete redundancy of our internet lines and backup services with the top three providers in India. Microsoft Active Directory powers our local network for access control and authentication. We use Microsoft Server and run Microsoft Windows 10 Professional on our desktops. Furthermore, all servers and desktops are equipped with virus scan software that is updated daily. We ensure daily backups of our network data and have 24/7 in-house IT support to address any technical issues.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What type of telephone system do you use?</summary>
+                    <div class="faq-answer-content">
+                        <p>We use cutting-edge VoIP telephone systems such as Five9, RingCentral, Convoso, and 3CX to deliver exceptional sound quality with transmission times of less than 200 ms, ensuring no noticeable delay during conversations. Our systems provide good quality on par with traditional landlines. We can schedule a demonstration before you commit to working with us.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What is your internet bandwidth?</summary>
+                    <div class="faq-answer-content">
+                        <p>Our primary and backup ISPs each have a bandwidth of 100Mbps.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What is the quality of the telephone lines?</summary>
+                    <div class="faq-answer-content">
+                        <p>Our VOIP system is well-equipped to handle calls to and from the US, UK, CA, Australia, Singapore, and Hong Kong, with exceptional connection quality and a latency rate that guarantees clear communication. Moreover, our system is authenticated with multiple leading telecom carriers to provide seamless service across all the countries we cater to.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What CRM are you using?</summary>
+                    <div class="faq-answer-content">
+                        <p>Value ConnectSolutions has extensive experience with many CRM platforms and is platform agnostic. Some of the most commonly used CRMs our client employ us to use on their programs are Salesforce, HubSpot, FreshDesk, Microsoft Zoho, ZenDesk and Sugar. Our clients set up and pay for user licenses and accounts. Our agents log in using credentials established at the outset of the program.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">(Under Customer Support and Tech Support) Will the agents have access to our CRM or ticketing system?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, our client partners provide us access to their CRMs and ticketing systems to support their customers.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">(Under Lead Generation Campaigns) Do you have a lead management system for real-time lead posting?</summary>
+                    <div class="faq-answer-content">
+                        <p>We offer a lead management system that operates through a web-based platform, enabling automatic distribution of leads to our clients in real time. The distribution process is based on specific criteria, such as degree of interest, lead score, geography, or other relevant data. Leads can be delivered to clients through various channels, including HTML email, plain text email, GET post, or HTTP post.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Can your system make a warm call transfer to a 3rd party?</summary>
+                    <div class="faq-answer-content">
+                        <p>Our dialer permits a "warm transfer" of calls, which involves our agent introducing the customer to an external agent before disconnecting from the call, thereby enabling the external agent and customer to proceed with the conversation.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Can your system leave a prerecorded message when it connects with an answering machine?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, our dialer can automatically detect when an outbound call is answered by an answering machine and play a pre-recorded message. This feature frees up the agents to handle live calls while still leaving a message for the prospect. However, it is important to note that this technology is not available or permitted for calls to mobile phones.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Does your system automatically record all calls and store them for client access? If so, how are they accessible, and how are they organized for easy access?</summary>
+                    <div class="faq-answer-content">
+                        <p>All calls made through the dialer are recorded and stored on our FTP server. These calls are sorted according to the date and outcome of the call, and our database can be searched using the name or telephone number of the caller. Each client is given access to their own password-protected folder on our FTP server so they can access their call recordings. We ensure that our call recording practices comply with all applicable state laws, which may require notifying the other party of the recording.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Do your systems include programmable Interactive Scripting (with branch logic) to ensure agent consistency in messaging and responses to questions?</summary>
+                    <div class="faq-answer-content">
+                        <p>We can design intricate interactive scripts that agents can effortlessly follow. This enables us to precisely regulate the conversation flow of each call, especially in situations where uniformity is imperative.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What types of KPI reporting and capabilities does your system provide?</summary>
+                    <div class="faq-answer-content">
+                        <p>In short, we can report on any data set we can access in your desired format and with your preferred frequency. Our platforms are feature-rich in reporting capability and can be customized as desired. A partial list of standard reports includes: Productivity and Service Level Reports, Team Occupancy Reports, Speed of Answer and Abandon Rate Reports, List Conversion and Disposition Reports, Break Adherence Monitoring Capability Reports, Call Transfer Monitoring Reports, Agent Real-time Reports (per campaign), Agent Performance Detail Campaign Call Report, Lead Performance by Campaign Report, Lead Performance by List Report</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Security and Backup Measures Questions -->
+            <h2 style="margin-top: 30px;">Security and Backup Measures</h2>
+            <div>
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What is your data security policy?</summary>
+                    <div class="faq-answer-content">
+                        <p>We prioritize the security of both our computer systems and personnel. We have implemented various measures and protocols to ensure the confidentiality, availability, and integrity of our clients' data. Our security procedures include the following:</p>
+                        <ul>
+                            <li>Our computer system undergoes an annual security audit by a US-based third-party security company, which is done in conjunction with the issuance of our PCI Certification for credit card transactions.</li>
+                            <li>All our employees are required to obtain police verification clearance in India, and we conduct thorough screening before and during their employment.</li>
+                            <li>We have a computer security and anti-fraud policy that our employees read and sign.</li>
+                            <li>Employees working on campaigns that involve credit card transactions are located in a secure, video-monitored area, and they are strictly prohibited from bringing cell phones, writing instruments, or storage devices into this area.</li>
+                            <li>Agent's computer internet access is limited and restricted.</li>
+                            <li>All servers and workstations have virus scan software that is updated daily.</li>
+                            <li>We utilize Microsoft Active Directory for access control and authentication on our local network.</li>
+                            <li>Our data files are securely backed up daily.</li>
+                            <li>Our internal network is safeguarded by a firewall and is monitored daily for performance and security.</li>
+                            <li>Our IT staff enforce and monitor our strict computer security policy.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What physical security measures are in place to limit access to the call center to authorized personnel?</summary>
+                    <div class="faq-answer-content">
+                        <p>The security of our office space is of utmost importance to us. Our offices are located on the 10th and 7th floor of a building that has 24/7 security measures in place, including security guards stationed at all entrances, a front desk attendant, video monitoring, and restricted access to badge holders and properly identified guests.</p>
+                        <p>To further enhance security, our office entrance and space are also secured by 24/7 security guards, video monitoring, and access restricted to badge holders who clock in and out using a biometric fingerprint scanner linked to our HR software.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Do you have a backup Internet Service Provider (ISP) in the event of outages?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, we have redundancy in our internet service with three separate ISPs. If one or even two ISPs go down, we can quickly switch to the other ISP to ensure uninterrupted internet service.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Describe your backup electric system.</summary>
+                    <div class="faq-answer-content">
+                        <p>Our office is situated in a modern IT park in Bangalore, one of India's largest and most advanced technology hubs, which is equipped with backup generators to provide uninterrupted service. Moreover, our building has two additional backup generators to ensure that electricity is supplied even in the event of power outages. Additionally, all our workstations and servers are supported by uninterruptible power systems (UPS) that protect against short-term power interruptions.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Pricing and Service Contract Terms Questions -->
+            <h2 style="margin-top: 30px;">Pricing and Service Contract Terms</h2>
+            <div>
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What is your pricing structure?</summary>
+                    <div class="faq-answer-content">
+                        <p>We charge on an hourly basis per agent.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Are there any fees in addition to the base service fees?</summary>
+                    <div class="faq-answer-content">
+                        <p>There are no additional fees except for telecom charges in select countries outside of the US where the telephone charges exceed $0.01 per minute.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Do you allow additional bonuses to be paid by the customer to the agents?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, we do.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Do you have an agent bonus incentive plan built into your rate structure?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, we do.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Do you pay for health insurance for your agents?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, we do.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Can you provide a copy of your standard form of agreement?</summary>
+                    <div class="faq-answer-content">
+                        <p>Yes, we can.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Is there a minimum term?</summary>
+                    <div class="faq-answer-content">
+                        <p>Our service operates month-to-month, with a minimum trial period of 30 days. However, for larger accounts, we require a longer lead time for cancellation, typically between 60-90 days.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Is there a minimum number of agents we need to hire?</summary>
+                    <div class="faq-answer-content">
+                        <p>Typically, we have a minimum requirement of 5 agents. However, we may make exceptions based on the potential for future growth.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">What is your cancellation policy? How many days' notice is required?</summary>
+                    <div class="faq-answer-content">
+                        <p>We require 30 days' notice for cancellation.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Are there any set-up fees?</summary>
+                    <div class="faq-answer-content">
+                        <p>No. We do not charge a set-up fee.</p>
+                    </div>
+                </details>
+
+                <details class="faq-detail-item">
+                    <summary class="faq-summary-title">Do you charge for the agent’s computer or other workstation hardware?</summary>
+                    <div class="faq-answer-content">
+                        <p>No, we pay for all standard computer hardware.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+    </div>
+
+    {% include 'myapp/index_countriesweserve.html' %}
+
+    <!-- Footer Section (Django include restored) -->
+    {% include 'myapp/footer.html' %}
+
+</body>
+
+</html>

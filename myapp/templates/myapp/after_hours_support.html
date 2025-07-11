@@ -1,0 +1,534 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        {% include 'myapp/meta_tags.html' %}
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --primary-color: #333;
+            --secondary-color: #555;
+            --bg-light: #f9f9f9;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--primary-color);
+            background-color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+
+        .navbar .logo .text-select,
+        .navbar .logo .text-voicecom,
+        .navbar .nav-item>a,
+        .navbar .search-icon,
+        .navbar .lang {
+            color: var(--primary-color);
+        }
+
+        .navbar .hamburger-menu span {
+            background-color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            background-image: url("{% static 'myapp/images/outsourcing1.webp' %}" );
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+            padding: 140px 30px 60px;
+            background-color: white;
+            width: 100%;
+            max-width: 1440px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            padding-left: 60px;
+            text-align: left;
+        }
+
+        /* Global Market Section */
+        .global-market-section {
+            padding: 60px 0;
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        .content-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .section-description {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            text-align: justify;
+            color: var(--secondary-color);
+        }
+
+        /* Enhanced Image Gallery */
+        .image-gallery-alt {
+            display: grid;
+            gap: 20px;
+            margin-top: 40px;
+            grid-template-columns: 2fr 1fr;
+            align-items: start;
+        }
+
+        .gallery-img-alt {
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-img-alt:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .large-img-container {
+            grid-row: span 2;
+            height: 450px;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+
+        .small-images-alt {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            height: 450px;
+        }
+
+        .small-img-container {
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+
+        /* Importance Section */
+        .importance-section {
+            padding: 60px 0;
+            background-color: #ffffff;
+            color: var(--primary-color);
+        }
+
+        .importance-section .section-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .importance-section .section-title:first-child {
+            margin-top: 0;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            margin: 30px 0;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-left: 3px solid transparent;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .service-item:hover {
+            border-left-color: #4a90e2;
+            background-color: rgba(74, 144, 226, 0.05);
+            padding-left: 15px;
+        }
+
+        .service-bullet {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-right: 15px;
+            min-width: 20px;
+            line-height: 1.4;
+        }
+
+        .service-text {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            font-weight: 500;
+            line-height: 1.6;
+            color: var(--secondary-color);
+            flex: 1;
+        }
+
+        /* Tablet Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                padding: 120px 20px 40px;
+            }
+
+            .hero-content h1 {
+                padding-left: 20px;
+                text-align: center;
+            }
+
+            .content-wrapper {
+                padding: 0 20px;
+            }
+
+            .image-gallery-alt {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 15px;
+            }
+
+            .large-img-container {
+                height: 250px;
+                grid-row: span 1;
+            }
+
+            .small-images-alt {
+                display: contents;
+            }
+
+            .small-img-container {
+                height: 250px;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-section {
+                background-attachment: scroll;
+                min-height: 400px;
+            }
+
+            .hero-content {
+                padding: 100px 15px 30px;
+            }
+
+            .hero-content h1 {
+                padding-left: 0;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .content-wrapper {
+                padding: 0 15px;
+            }
+
+            .section-description {
+                text-align: left;
+            }
+
+            .image-gallery-alt {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                gap: 15px;
+                margin-top: 30px;
+            }
+
+            .large-img-container {
+                height: 220px;
+            }
+
+            .small-img-container {
+                height: 220px;
+            }
+
+            .small-img-container:last-child {
+                grid-column: 1 / -1;
+                justify-self: center;
+                width: 50%;
+            }
+
+            .service-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px 0;
+            }
+
+            .service-bullet {
+                margin-bottom: 5px;
+                margin-right: 0;
+            }
+        }
+
+        /* Extra Small Mobile */
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: 350px;
+            }
+
+            .hero-content {
+                padding: 80px 10px 20px;
+            }
+
+            .content-wrapper {
+                padding: 0 10px;
+            }
+
+            .global-market-section,
+            .importance-section {
+                padding: 40px 0;
+            }
+
+            .image-gallery-alt {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                gap: 12px;
+                margin-top: 20px;
+            }
+
+            .large-img-container {
+                height: 180px;
+            }
+
+            .small-img-container {
+                height: 180px;
+            }
+
+            .small-img-container:last-child {
+                grid-column: 1 / -1;
+                justify-self: center;
+                width: 50%;
+            }
+
+            .service-item {
+                margin-bottom: 10px;
+                padding: 10px 0;
+            }
+
+            .service-item:hover {
+                padding-left: 10px;
+            }
+        }
+
+        /* Loading and Performance Optimizations */
+        .gallery-img-alt {
+            loading: lazy;
+        }
+
+        /* Accessibility Improvements */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-section {
+                background-attachment: scroll;
+            }
+
+            .gallery-img-alt,
+            .service-item {
+                transition: none;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .hero-section {
+                background: none;
+                color: #000;
+            }
+
+            .hero-section::before {
+                display: none;
+            }
+
+            .image-gallery-alt {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar placeholder -->
+    {% include 'myapp/header.html' %}
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>After-Hours Customer Services</h1>
+        </div>
+    </div>
+
+    <section class="global-market-section">
+        <div class="content-wrapper">
+            <h2 class="section-title">Round-the-Clock Customer Services for a Global Market</h2>
+            <p class="section-description">In today's global economy, the standard 9-to-5 workday is a thing of the
+                past. Customers can make purchases and seek support anytime, day or night. With this constant
+                accessibility comes an expectation: customer service must be available 24/7. When customers can't get
+                answers immediately, they often turn to competitors, resulting in lost sales and damaged reputations.
+                Not every business can afford to build and staff an in-house call center for after-hours support. That's
+                where Value ConnectSolution comes in. Located in India, our call center is led by seasoned
+                business executives with expertise in customer service, IT, law, finance, sales, and marketing. We
+                leverage this diverse experience to offer top-tier after-hours support tailored to your needs.</p>
+            <p class="section-description">At Value ConnectSolution, we prioritize quality over quantity. Unlike many
+                call centers where high call volumes compromise service, our dedicated professionals are committed to
+                delivering exceptional customer care. We take pride in creating loyal customers and generating positive
+                word-of-mouth for your brand. With our team working tirelessly around the clock, you can rest assured
+                that your customer support is in good hands. Our comprehensive team includes skilled agents, IT
+                specialists, a Training Manager, QA analysts, and team leaders. Additionally, you will have direct
+                access to your Account Manager via phone, email, or chat.</p>
+            <div class="image-gallery-alt">
+    <div class="large-img-container">
+        <img src="{% static 'myapp/images/smiling_call_center_individual.png' %}" 
+             alt="Smiling call center agent with headset providing customer support" class="gallery-img-alt">
+    </div>
+    <div class="small-images-alt">
+        <div class="small-img-container">
+            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" 
+                 alt="Happy customer service representative wearing headphones" class="gallery-img-alt">
+        </div>
+        <div class="small-img-container">
+            <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Professional call center worker with headset smiling" class="gallery-img-alt">
+        </div>
+    </div>
+</div>
+        </div>
+    </section>
+
+    <section class="importance-section">
+        <div class="content-wrapper">
+            <h2 class="section-title">The Importance of 24-Hour Customer Service</h2>
+            <p class="section-description">Ask any successful entrepreneur about the key to their company's success, and
+                you often hear "excellent customer service." In today's fast-paced world, quality customer service must
+                include 24-hour availability. Customers who can't reach a support agent when needed are more likely to
+                take their business elsewhere.</p>
+            <p class="section-description">Our after-hours customer service combines highly trained professionals with
+                cutting-edge technology to deliver superior results. Our telecom infrastructure includes advanced IVR
+                systems, hybrid VOIP SD lines internet bandwidth, a customized VIO DataOps Dialer platform, a
+                fully-featured Automatic Call Distributor with skills-based routing, and Multiple Hosted-based and
+                Hosted IP-based premises-Based Phone technologies.</p>
+            <p class="section-description">At Value ConnectSolution, customer support goes beyond merely "getting the
+                job done." We maintain a robust quality assurance program to ensure the highest service standards. Our
+                dedicated Quality Assurance team monitors and records calls, regularly evaluates team member
+                performance, and conducts ongoing training sessions to maintain professionalism and excellence.</p>
+
+            <h2 class="section-title">Why Outsource After-Hours Customer Service to India?</h2>
+            <p class="section-description">Building an in-house customer service team is costly and complex, especially
+                when staffing for late nights, weekends, and holidays. Effectively predicting call volumes and adjusting
+                staffing levels can be challenging and expensive. Outsourcing to a flexible, overseas team like Value
+                ConnectSolution solves these issues by providing cost-effective, skilled professionals available 24/7
+                without the challenges of hiring, training, and managing staff.</p>
+            <p class="section-description">India is known as the "Call Center Capital of the World," with over
+                400,000 skilled professionals handling calls for European and American companies. While cost savings are
+                a significant advantage of outsourcing, companies quickly discover that India offers much more. Our
+                workforce is known for its attentive hospitality, compassionate customer care, strong work ethic, and
+                impeccable English skills—qualities that drive customer retention, boost sales, and enhance overall
+                process efficiency.</p>
+
+            <h2 class="section-title">After-Hours Customer Services Offered by Value ConnectSolution</h2>
+            <p class="section-description">Think of Value ConnectSolution as your 24/7 partner, providing seamless
+                customer support without the overhead costs. Our after-hours services include customer order processing
+                for products or services.</p>
+
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-bullet">•</div>
+                    <div class="service-text">Customer Order Processing for Products or Services</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-bullet">•</div>
+                    <div class="service-text">Responding to Customer Inquiries and Providing Additional Information
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-bullet">•</div>
+                    <div class="service-text">Appointment Scheduling</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-bullet">•</div>
+                    <div class="service-text">Product or Service Upselling</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-bullet">•</div>
+                    <div class="service-text">Comprehensive Technical Support Services</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-bullet">•</div>
+                    <div class="service-text">Billing Inquiries and Returns Processing</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-item">
+                    <div class="service-bullet">•</div>
+                    <div class="service-text">Attendee Registrations for Conferences or Events</div>
+                </div>
+            </div>
+
+            <p class="section-description">If you need additional services not listed here, we can customize our
+                offerings to meet your specific after-hours support needs. Our team integrates closely with your
+                in-house staff, ensuring a smooth transition to 24/7 coverage.</p>
+        </div>
+    </section>
+{% include 'myapp/index_countriesweserve.html' %}
+    <!-- Footer placeholder -->
+    {% include 'myapp/footer.html' %}
+
+</body>
+
+</html>

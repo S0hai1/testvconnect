@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estate Global Styles */
+        :root {
+            --estate-primary: #8B4513;
+            --estate-secondary: #333;
+            --estate-accent: #CD853F;
+            --estate-light: #f8f9fa;
+            --estate-dark: #212529;
+            --estate-white: #ffffff;
+            --estate-gray: #6c757d;
+        }
+
+        /* Estate Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--estate-secondary);
+            background-color: var(--estate-white);
+        }
+
+        /* Estate Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--estate-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--estate-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--estate-accent);
+        }
+
+        /* Estate Layout */
+        .estate-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Estate Header */
+        .estate-header {
+            background-color: var(--estate-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .estate-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .estate-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--estate-primary);
+        }
+
+        .estate-logo span {
+            color: var(--estate-accent);
+        }
+
+        .estate-nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .estate-nav-links li {
+            margin-left: 2rem;
+        }
+
+        .estate-nav-links a {
+            font-weight: 600;
+        }
+
+        .estate-mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Estate Hero Section */
+        .estate-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+            color: var(--estate-white);
+        }
+
+        .estate-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--estate-white);
+        }
+
+        .estate-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--estate-white);
+        }
+
+        .estate-btn {
+            display: inline-block;
+            background-color: var(--estate-primary);
+            color: var(--estate-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .estate-btn:hover {
+            background-color: var(--estate-accent);
+            color: var(--estate-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estate Solutions Section */
+        .estate-solutions {
+            padding: 100px 0;
+        }
+
+        .estate-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .estate-section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .estate-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--estate-accent);
+        }
+
+        .estate-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .estate-solution-card {
+            background-color: var(--estate-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .estate-solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .estate-solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .estate-solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .estate-solution-card:hover .estate-solution-img img {
+            transform: scale(1.1);
+        }
+
+        .estate-solution-content {
+            padding: 25px;
+        }
+
+        .estate-solution-content h3 {
+            margin-bottom: 15px;
+            color: var(--estate-primary);
+        }
+
+        /* Estate Benefits Section */
+        .estate-benefits {
+            padding: 100px 0;
+            background-color: var(--estate-light);
+        }
+
+        .estate-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .estate-benefit-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--estate-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .estate-benefit-icon {
+            font-size: 3rem;
+            color: var(--estate-accent);
+            margin-bottom: 20px;
+        }
+
+        /* Estate Support Services Section */
+        .estate-support-services {
+            padding: 100px 0;
+        }
+
+        .estate-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .estate-service-card {
+            background-color: var(--estate-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .estate-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .estate-service-icon {
+            font-size: 2.5rem;
+            color: var(--estate-accent);
+            margin-bottom: 20px;
+        }
+
+        .estate-service-card h3 {
+            margin-bottom: 15px;
+            color: var(--estate-primary);
+        }
+
+        /* Estate Extended Services Section */
+        .estate-extended-services {
+            padding: 100px 0;
+            background-color: var(--estate-white);
+        }
+
+        .estate-services-combined {
+            display: grid;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .estate-services-grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            list-style: none;
+        }
+
+        .estate-services-grid-list li {
+            background-color: var(--estate-light);
+            padding: 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .estate-services-grid-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .estate-services-grid-list i {
+            font-size: 1.8rem;
+            color: var(--estate-accent);
+            margin-bottom: 15px;
+        }
+
+        .estate-services-grid-list h4 {
+            color: var(--estate-primary);
+            margin-bottom: 10px;
+        }
+
+        .estate-benefits-list {
+            margin-top: 60px;
+        }
+
+        .estate-benefits-grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .estate-benefit-card {
+            background-color: var(--estate-light);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--estate-accent);
+        }
+
+        .estate-benefit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .estate-benefit-header i {
+            font-size: 1.5rem;
+            color: var(--estate-accent);
+            margin-right: 15px;
+        }
+
+        .estate-benefit-header h4 {
+            color: var(--estate-primary);
+            margin-bottom: 0;
+        }
+
+        /* Estate Testimonials */
+        .estate-testimonials {
+            padding: 100px 0;
+            background-color: var(--estate-light);
+        }
+
+        .estate-testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .estate-testimonial {
+            padding: 30px;
+        }
+
+        .estate-testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .estate-testimonial-author {
+            font-weight: 700;
+        }
+
+        .estate-testimonial-role {
+            color: var(--estate-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Estate CTA Section */
+        .estate-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--estate-primary), #5D2906);
+            color: var(--estate-white);
+            text-align: center;
+        }
+
+        .estate-cta h2 {
+            color: var(--estate-white);
+            margin-bottom: 30px;
+        }
+
+        .estate-cta .estate-btn {
+            background-color: var(--estate-white);
+            color: var(--estate-primary);
+        }
+
+        .estate-cta .estate-btn:hover {
+            background-color: var(--estate-accent);
+            color: var(--estate-white);
+        }
+
+        /* Estate Footer */
+        .estate-footer {
+            background-color: var(--estate-dark);
+            color: var(--estate-white);
+            padding: 60px 0 20px;
+        }
+
+        .estate-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .estate-footer-col h3 {
+            color: var(--estate-white);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .estate-footer-links {
+            list-style: none;
+        }
+
+        .estate-footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .estate-footer-links a {
+            color: var(--estate-gray);
+        }
+
+        .estate-footer-links a:hover {
+            color: var(--estate-white);
+        }
+
+        .estate-footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--estate-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Estate Responsive */
+        @media (max-width: 992px) {
+            .estate-nav-links {
+                display: none;
+            }
+
+            .estate-mobile-menu {
+                display: block;
+            }
+
+            .estate-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .estate-hero {
+                padding: 150px 0 80px;
+            }
+
+            .estate-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .estate-hero p {
+                font-size: 1.1rem;
+            }
+
+            .estate-section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .estate-services-combined {
+                grid-template-columns: 1fr;
+            }
+            
+            .estate-benefits-list {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .estate-hero {
+                padding: 120px 0 60px;
+            }
+
+            .estate-hero h1 {
+                font-size: 2rem;
+            }
+
+            .estate-btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Estate Header -->
+  {% include 'myapp/header.html' %}
+
+    <!-- Estate Hero Section -->
+    <section class="estate-hero">
+        <div class="estate-container">
+            <h1>Real Estate Solutions</h1>
+            <p>Transform your real estate business with our innovative technology solutions designed to enhance property management, streamline transactions, and improve customer experiences.</p>
+            <a href="#" class="estate-btn" onclick="scrollToSection()">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Estate Solutions Section -->
+    <!-- <section class="estate-solutions">
+        <div class="estate-container">
+            <div class="estate-section-title">
+                <h2>Tailored Solutions for Real Estate Success</h2>
+                <p>We understand the unique challenges of the real estate industry and deliver customized solutions to address them.</p>
+            </div>
+            <div class="estate-solutions-grid">
+                <div class="estate-solution-card">
+                    <div class="estate-solution-img">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Property Management">
+                    </div>
+                    <div class="estate-solution-content">
+                        <h3>Property Management</h3>
+                        <p>Comprehensive platforms for managing residential and commercial properties, tenants, and maintenance.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="estate-solution-card">
+                    <div class="estate-solution-img">
+                        <img src="https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="CRM Solutions">
+                    </div>
+                    <div class="estate-solution-content">
+                        <h3>CRM Solutions</h3>
+                        <p>Powerful customer relationship management tools tailored for real estate professionals.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="estate-solution-card">
+                    <div class="estate-solution-img">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Virtual Tours">
+                    </div>
+                    <div class="estate-solution-content">
+                        <h3>Virtual Tours</h3>
+                        <p>Immersive 360° property showcases that engage potential buyers and renters.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Estate Support Services Section -->
+    <section class="estate-support-services">
+        <div class="estate-container">
+            <div class="estate-section-title">
+                <h2>Real Estate Support Services</h2>
+                <p>Outsource critical real estate operations to focus on your core business while we handle the service delivery.</p>
+            </div>
+            <div class="estate-services-grid">
+                <div class="estate-service-card">
+                    <div class="estate-service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Customer Support</h3>
+                    <p>24/7 multilingual support for property inquiries, scheduling, and tenant issues.</p>
+                </div>
+                <div class="estate-service-card">
+                    <div class="estate-service-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3>Transaction Coordination</h3>
+                    <p>Professional handling of purchase agreements, disclosures, and closing documents.</p>
+                </div>
+                <div class="estate-service-card">
+                    <div class="estate-service-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3>Lead Qualification</h3>
+                    <p>Pre-screening and qualifying potential buyers and renters for your properties.</p>
+                </div>
+                <div class="estate-service-card">
+                    <div class="estate-service-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Appointment Scheduling</h3>
+                    <p>Efficient management of property showings and agent consultations.</p>
+                </div>
+                <div class="estate-service-card">
+                    <div class="estate-service-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3>Billing & Collections</h3>
+                    <p>Professional handling of rent payments, late fees, and collections.</p>
+                </div>
+                <div class="estate-service-card">
+                    <div class="estate-service-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Maintenance Coordination</h3>
+                    <p>24/7 dispatch and tracking of property maintenance requests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estate Extended Services Section -->
+    <section class="estate-extended-services">
+        <div class="estate-container">
+            <div class="estate-section-title">
+                <h2>Comprehensive Real Estate Services</h2>
+                <p>Beyond core real estate, we offer specialized services to enhance your operations.</p>
+            </div>
+            
+            <div class="estate-services-combined">
+                <div class="estate-services-list">
+                    <h3>Additional Real Estate Services</h3>
+                    <ul class="estate-services-grid-list">
+                        <li>
+                            <i class="fas fa-phone-volume"></i>
+                            <h4>Call Center Services</h4>
+                            <p>Professional handling of inbound and outbound real estate calls.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-mail-bulk"></i>
+                            <h4>Email Management</h4>
+                            <p>Timely responses to property inquiries and client communications.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-comments"></i>
+                            <h4>Chat Support</h4>
+                            <p>Live chat assistance for website visitors and potential clients.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-hashtag"></i>
+                            <h4>Social Media Management</h4>
+                            <p>Professional handling of your real estate social media presence.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-database"></i>
+                            <h4>Data Entry</h4>
+                            <p>Accurate MLS listings and property database management.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Market Research</h4>
+                            <p>Comprehensive local market analysis and competitive intelligence.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="estate-benefits-list">
+                    <h3>Advantages of Partnering With Value Connect Solutions</h3>
+                    <div class="estate-benefits-grid-cards">
+                        <div class="estate-benefit-card">
+                            <div class="estate-benefit-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>24/7 Availability</h4>
+                            </div>
+                            <p>Never miss a lead with round-the-clock support for your clients.</p>
+                        </div>
+                        <div class="estate-benefit-card">
+                            <div class="estate-benefit-header">
+                                <i class="fas fa-dollar-sign"></i>
+                                <h4>Cost Efficiency</h4>
+                            </div>
+                            <p>Reduce overhead costs while maintaining high-quality service.</p>
+                        </div>
+                        <div class="estate-benefit-card">
+                            <div class="estate-benefit-header">
+                                <i class="fas fa-expand"></i>
+                                <h4>Scalability</h4>
+                            </div>
+                            <p>Easily adjust resources to handle seasonal market fluctuations.</p>
+                        </div>
+                        <div class="estate-benefit-card">
+                            <div class="estate-benefit-header">
+                                <i class="fas fa-chart-pie"></i>
+                                <h4>Performance Metrics</h4>
+                            </div>
+                            <p>Detailed reporting on all key real estate service metrics.</p>
+                        </div>
+                        <div class="estate-benefit-card">
+                            <div class="estate-benefit-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Industry Expertise</h4>
+                            </div>
+                            <p>Specialized knowledge of real estate processes and terminology.</p>
+                        </div>
+                        <div class="estate-benefit-card">
+                            <div class="estate-benefit-header">
+                                <i class="fas fa-mobile-alt"></i>
+                                <h4>Technology Integration</h4>
+                            </div>
+                            <p>Seamless connection with your existing real estate tech stack.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estate Benefits Section -->
+    <section class="estate-benefits">
+        <div class="estate-container">
+            <div class="estate-section-title">
+                <h2>Why Real Estate Professionals Choose Value Connect</h2>
+                <p>Our solutions deliver measurable results for brokers, agents, and property managers.</p>
+            </div>
+            <div class="estate-benefits-grid">
+                <div class="estate-benefit-item">
+                    <div class="estate-benefit-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>More Listings</h3>
+                    <p>Increase your property portfolio with efficient management solutions.</p>
+                </div>
+                <div class="estate-benefit-item">
+                    <div class="estate-benefit-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Faster Sales</h3>
+                    <p>Close deals quicker with streamlined transaction processes.</p>
+                </div>
+                <div class="estate-benefit-item">
+                    <div class="estate-benefit-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3>Happier Clients</h3>
+                    <p>Enhance customer satisfaction with responsive, professional service.</p>
+                </div>
+                <div class="estate-benefit-item">
+                    <div class="estate-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Higher ROI</h3>
+                    <p>Maximize your marketing spend with targeted lead generation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estate Testimonials -->
+    <!-- <section class="estate-testimonials">
+        <div class="estate-container">
+            <div class="estate-section-title">
+                <h2>What Our Real Estate Partners Say</h2>
+            </div>
+            <div class="estate-testimonial-slider">
+                <div class="estate-testimonial">
+                    <p class="estate-testimonial-text">"Value Connect's real estate solutions helped us increase our lead conversion rate by 40% while reducing our operational costs. Their transaction coordination team has become an invaluable extension of our brokerage."</p>
+                    <p class="estate-testimonial-author">Michael Johnson</p>
+                    <p class="estate-testimonial-role">Broker/Owner, Premier Realty Group</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Estate CTA Section -->
+    <section class="estate-cta">
+        <div class="estate-container">
+            <h2>Ready to Transform Your Real Estate Business?</h2>
+            <p>Our team of real estate experts is ready to help you implement solutions that drive growth and client satisfaction.</p>
+            <a href="#" class="estate-btn">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <div id="target-section">
+        <!-- Include your contact form here -->
+       {% include 'myapp/index_countriesweserve.html' %}
+    </div>
+
+    <!-- Estate Footer -->
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.estate-mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.estate-nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Responsive adjustment for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                document.querySelector('.estate-nav-links').style.display = 'flex';
+            } else {
+                document.querySelector('.estate-nav-links').style.display = 'none';
+            }
+        });
+
+        // Auto-scroll function
+        function scrollToSection() {
+            document.getElementById('target-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

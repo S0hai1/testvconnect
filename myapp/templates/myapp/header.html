@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,14 @@
         :root {
             --header-height: 70px;
             --main-dropdown-bg: #222;
-            --sub-dropdown-bg: #222; /* Keeping same as main for now, adjust if needed */
+            --sub-dropdown-bg: #222;
+            /* Keeping same as main for now, adjust if needed */
             --hover-bg: #333;
             --text-color-light: #fff;
             --text-color-dark: #000;
             --accent-color: #3b82f6;
         }
-        
+
         /* Global styles for the header */
         body {
             margin: 0;
@@ -50,7 +52,7 @@
         /* Change text/icon colors when scrolled */
         .navbar.scrolled .logo .text-select,
         .navbar.scrolled .logo .text-voicecom,
-        .navbar.scrolled .nav-item > a,
+        .navbar.scrolled .nav-item>a,
         .navbar.scrolled .search-icon,
         .navbar.scrolled .lang {
             color: var(--text-color-dark);
@@ -61,12 +63,14 @@
         }
 
         .logo-link {
-            text-decoration: none; /* Removes underline */
-            
+            text-decoration: none;
+            /* Removes underline */
+
         }
 
         .logo {
-            text-decoration: none; /* Removes underline */
+            text-decoration: none;
+            /* Removes underline */
             color: var(--text-color-light);
             font-size: 24px;
             font-weight: bold;
@@ -103,7 +107,7 @@
             align-items: center;
         }
 
-        .nav-item > a {
+        .nav-item>a {
             color: var(--text-color-light);
             text-decoration: none;
             padding: 5px 0;
@@ -118,7 +122,8 @@
             left: 0;
             background-color: var(--main-dropdown-bg);
             padding: 10px 0;
-            min-width: 220px; /* Increased width to accommodate arrows and text */
+            min-width: 220px;
+            /* Increased width to accommodate arrows and text */
             display: none;
             flex-direction: column;
             border-radius: 4px;
@@ -129,8 +134,10 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .dropdown-item { /* Changed from direct 'a' to a class for better targeting */
-            position: relative; /* Needed for positioning sub-sub-dropdowns */
+        .dropdown-item {
+            /* Changed from direct 'a' to a class for better targeting */
+            position: relative;
+            /* Needed for positioning sub-sub-dropdowns */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -150,9 +157,10 @@
         /* Specific hover for "Order Processing" */
         .dropdown-item.sub-item:hover {
             background-color: var(--accent-color);
-            color: var(--text-color-light); /* Or white */
+            color: var(--text-color-light);
+            /* Or white */
         }
-        
+
         /* Style for the arrows */
         .dropdown-item .arrow {
             font-size: 10px;
@@ -161,8 +169,9 @@
         }
 
         /* Hover effect for specific items with arrows */
-        .dropdown-item.has-sub:hover > .arrow {
-            color: var(--text-color-light); /* Keep arrow visible and matching parent */
+        .dropdown-item.has-sub:hover>.arrow {
+            color: var(--text-color-light);
+            /* Keep arrow visible and matching parent */
         }
 
 
@@ -174,15 +183,20 @@
 
         /* Sub-dropdown styles (Level 2) */
         .sub-dropdown {
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
             position: absolute;
-            top: 0; /* Align with the top of the parent dropdown-item */
-            left: 100%; /* Position to the right of the parent dropdown-item */
+            top: 0;
+            /* Align with the top of the parent dropdown-item */
+            left: 100%;
+            /* Position to the right of the parent dropdown-item */
             background-color: var(--sub-dropdown-bg);
-            min-width: 200px; /* Adjust width as needed */
+            min-width: 200px;
+            /* Adjust width as needed */
             border-radius: 4px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 101; /* Ensure it's above other elements if needed */
+            z-index: 101;
+            /* Ensure it's above other elements if needed */
             flex-direction: column;
             opacity: 0;
             transform: translateX(10px);
@@ -190,7 +204,7 @@
         }
 
         /* Show sub-dropdown when its parent dropdown-item is hovered */
-        .dropdown-item.has-sub:hover > .sub-dropdown {
+        .dropdown-item.has-sub:hover>.sub-dropdown {
             display: flex;
             opacity: 1;
             transform: translateX(0);
@@ -198,11 +212,13 @@
 
         /* Sub-sub-dropdown styles (Level 3 - for Customer Service, Technical Support) */
         .sub-sub-dropdown {
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
             position: absolute;
             top: 0;
             left: 100%;
-            background-color: var(--sub-dropdown-bg); /* Use same background or differentiate */
+            background-color: var(--sub-dropdown-bg);
+            /* Use same background or differentiate */
             min-width: 200px;
             border-radius: 4px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -214,7 +230,7 @@
         }
 
         /* Show sub-sub-dropdown when its parent dropdown-item is hovered */
-        .dropdown-item.has-sub-sub:hover > .sub-sub-dropdown {
+        .dropdown-item.has-sub-sub:hover>.sub-sub-dropdown {
             display: flex;
             opacity: 1;
             transform: translateX(0);
@@ -317,6 +333,7 @@
             .navbar {
                 padding: 10px 15px;
             }
+
             .btn-call {
                 padding: 10px 15px;
                 font-size: 12px;
@@ -333,15 +350,17 @@
             .logo {
                 font-size: 20px;
             }
+
             .logo .text-select,
             .logo .text-voicecom {
-                color: var(--text-color-dark); /* Ensure logo is dark on scrolled/mobile */
+                color: var(--text-color-dark);
+                /* Ensure logo is dark on scrolled/mobile */
             }
 
             .hamburger-menu {
                 display: flex;
             }
-            
+
 
 
             /* Hide desktop call button on mobile */
@@ -390,7 +409,8 @@
                 width: 100%;
                 text-align: center;
                 padding: 5px 0;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Darker border for light background */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                /* Darker border for light background */
                 flex-direction: column;
                 align-items: center;
             }
@@ -399,31 +419,37 @@
                 border-bottom: none;
             }
 
-            .nav-item > a {
+            .nav-item>a {
                 color: var(--text-color-dark);
                 font-size: 18px;
                 padding: 10px 0;
                 width: 100%;
                 justify-content: center;
             }
+
             /* Remove desktop hover for the main parent links in mobile */
-            .nav-item > a:hover {
+            .nav-item>a:hover {
                 background-color: transparent;
                 color: var(--text-color-dark);
             }
 
             .dropdown {
-                position: static; /* Remove absolute positioning for mobile */
-                background-color: transparent; /* Transparent background for mobile dropdown */
-                width: 100%; /* Take full width in mobile dropdown */
+                position: static;
+                /* Remove absolute positioning for mobile */
+                background-color: transparent;
+                /* Transparent background for mobile dropdown */
+                width: 100%;
+                /* Take full width in mobile dropdown */
                 margin-top: 0;
                 border-radius: 0;
                 box-shadow: none;
                 opacity: 1;
                 transform: translateY(0);
-                display: none; /* Controlled by JS click */
+                display: none;
+                /* Controlled by JS click */
                 padding: 0;
             }
+
             /* Explicitly hide the main dropdown hover on mobile */
             .nav-item:hover .dropdown {
                 display: none;
@@ -435,46 +461,59 @@
                 text-align: center;
                 width: 100%;
                 box-sizing: border-box;
-                justify-content: center; /* Center text in mobile dropdown */
-                color: var(--text-color-dark); /* Ensure text is dark */
+                justify-content: center;
+                /* Center text in mobile dropdown */
+                color: var(--text-color-dark);
+                /* Ensure text is dark */
             }
 
             .dropdown-item:hover {
-                background-color: #eee; /* Lighter hover for mobile */
+                background-color: #eee;
+                /* Lighter hover for mobile */
                 color: var(--text-color-dark);
             }
 
             /* Sub-dropdown (Level 2) and Sub-sub-dropdown (Level 3) for mobile */
             .sub-dropdown,
             .sub-sub-dropdown {
-                position: static; /* Remove absolute positioning */
+                position: static;
+                /* Remove absolute positioning */
                 width: 100%;
-                background-color: transparent; /* No background for mobile nested */
+                background-color: transparent;
+                /* No background for mobile nested */
                 box-shadow: none;
                 border-radius: 0;
                 margin-top: 0;
                 padding: 0;
-                display: none; /* Controlled by JS click */
+                display: none;
+                /* Controlled by JS click */
             }
+
             /* Explicitly hide desktop hover for sub-dropdowns on mobile */
-            .dropdown-item.has-sub:hover > .sub-dropdown,
-            .dropdown-item.has-sub-sub:hover > .sub-sub-dropdown {
+            .dropdown-item.has-sub:hover>.sub-dropdown,
+            .dropdown-item.has-sub-sub:hover>.sub-sub-dropdown {
                 display: none;
             }
 
             .sub-dropdown .dropdown-item,
             .sub-sub-dropdown .dropdown-item {
-                padding-left: 30px; /* Indent nested items */
+                padding-left: 30px;
+                /* Indent nested items */
                 font-size: 15px;
-                justify-content: flex-start; /* Align text to left when indented */
+                justify-content: flex-start;
+                /* Align text to left when indented */
             }
+
             .sub-sub-dropdown .dropdown-item {
-                padding-left: 45px; /* Further indent */
+                padding-left: 45px;
+                /* Further indent */
             }
 
             .dropdown-item .arrow {
-                display: inline-block; /* Ensure arrow is visible on mobile */
-                margin-left: auto; /* Push arrow to the right */
+                display: inline-block;
+                /* Ensure arrow is visible on mobile */
+                margin-left: auto;
+                /* Push arrow to the right */
             }
 
             /* Hide search and lang on mobile */
@@ -488,8 +527,8 @@
             }
 
             /* Active state for dropdown items in mobile */
-            .dropdown-item.active-mobile-toggle + .sub-dropdown,
-            .dropdown-item.active-mobile-toggle + .sub-sub-dropdown {
+            .dropdown-item.active-mobile-toggle+.sub-dropdown,
+            .dropdown-item.active-mobile-toggle+.sub-sub-dropdown {
                 display: flex;
             }
         }
@@ -508,13 +547,14 @@
                 max-width: 100%;
             }
 
-            .nav-item > a {
+            .nav-item>a {
                 font-size: 16px;
             }
 
             .dropdown-item {
                 font-size: 14px;
             }
+
             .sub-dropdown .dropdown-item,
             .sub-sub-dropdown .dropdown-item {
                 font-size: 13px;
@@ -524,145 +564,158 @@
 
         /* Add these styles to your existing CSS for accordion animation */
 
-@media (max-width: 1200px) {
-    .nav-item {
-        width: 100%;
-        text-align: left; /* Changed from center to left */
-        padding: 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        flex-direction: column;
-        align-items: stretch; /* Changed from center to stretch */
-    }
+        @media (max-width: 1200px) {
+            .nav-item {
+                width: 100%;
+                text-align: left;
+                /* Changed from center to left */
+                padding: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                align-items: stretch;
+                /* Changed from center to stretch */
+            }
 
-    .nav-item > a {
-        color: var(--text-color-dark);
-        font-size: 18px;
-        padding: 15px 20px; /* Added horizontal padding */
-        width: 100%;
-        justify-content: space-between; /* Space between text and arrow */
-        align-items: center;
-        display: flex;
-        position: relative;
-        background-color: transparent;
-        transition: background-color 0.3s ease;
-    }
+            .nav-item>a {
+                color: var(--text-color-dark);
+                font-size: 18px;
+                padding: 15px 20px;
+                /* Added horizontal padding */
+                width: 100%;
+                justify-content: space-between;
+                /* Space between text and arrow */
+                align-items: center;
+                display: flex;
+                position: relative;
+                background-color: transparent;
+                transition: background-color 0.3s ease;
+            }
 
-    .nav-item > a:hover {
-        background-color: #f5f5f5;
-    }
+            .nav-item>a:hover {
+                background-color: #f5f5f5;
+            }
 
-    /* Add plus/minus icons for accordion */
-    .nav-item > a::after {
-        content: '+';
-        font-size: 18px;
-        font-weight: bold;
-        color: var(--text-color-dark);
-        transition: transform 0.3s ease;
-    }
+            /* Add plus/minus icons for accordion */
+            .nav-item>a::after {
+                content: '+';
+                font-size: 18px;
+                font-weight: bold;
+                color: var(--text-color-dark);
+                transition: transform 0.3s ease;
+            }
 
-    .nav-item.active-mobile-toggle > a::after {
-        content: '−';
-        transform: rotate(180deg);
-    }
+            .nav-item.active-mobile-toggle>a::after {
+                content: '−';
+                transform: rotate(180deg);
+            }
 
-    /* Remove the small arrow from the original design */
-    .nav-item > a span {
-        display: none;
-    }
+            /* Remove the small arrow from the original design */
+            .nav-item>a span {
+                display: none;
+            }
 
-    .dropdown {
-        position: static;
-        background-color: #f9f9f9; /* Light background for dropdown */
-        width: 100%;
-        margin-top: 0;
-        border-radius: 0;
-        box-shadow: none;
-        opacity: 1;
-        transform: translateY(0);
-        display: none;
-        padding: 0;
-        border-left: 3px solid var(--accent-color); /* Blue accent border */
-    }
+            .dropdown {
+                position: static;
+                background-color: #f9f9f9;
+                /* Light background for dropdown */
+                width: 100%;
+                margin-top: 0;
+                border-radius: 0;
+                box-shadow: none;
+                opacity: 1;
+                transform: translateY(0);
+                display: none;
+                padding: 0;
+                border-left: 3px solid var(--accent-color);
+                /* Blue accent border */
+            }
 
-    .dropdown-item {
-        padding: 12px 25px; /* Increased left padding for indentation */
-        font-size: 16px;
-        text-align: left; /* Changed from center to left */
-        width: 100%;
-        box-sizing: border-box;
-        justify-content: space-between; /* Space between text and arrow */
-        color: var(--text-color-dark);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        transition: background-color 0.3s ease, padding-left 0.3s ease;
-    }
+            .dropdown-item {
+                padding: 12px 25px;
+                /* Increased left padding for indentation */
+                font-size: 16px;
+                text-align: left;
+                /* Changed from center to left */
+                width: 100%;
+                box-sizing: border-box;
+                justify-content: space-between;
+                /* Space between text and arrow */
+                color: var(--text-color-dark);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                transition: background-color 0.3s ease, padding-left 0.3s ease;
+            }
 
-    .dropdown-item:hover {
-        background-color: #eee;
-        padding-left: 30px; /* Slight indent on hover */
-    }
+            .dropdown-item:hover {
+                background-color: #eee;
+                padding-left: 30px;
+                /* Slight indent on hover */
+            }
 
-    .dropdown-item:last-child {
-        border-bottom: none;
-    }
+            .dropdown-item:last-child {
+                border-bottom: none;
+            }
 
-    /* Sub-dropdown styles */
-    .sub-dropdown,
-    .sub-sub-dropdown {
-        position: static;
-        width: 100%;
-        background-color: #f0f0f0; /* Slightly darker for nested items */
-        box-shadow: none;
-        border-radius: 0;
-        margin-top: 0;
-        padding: 0;
-        display: none;
-        border-left: 3px solid #fdd835; /* Yellow accent for sub-items */
-    }
+            /* Sub-dropdown styles */
+            .sub-dropdown,
+            .sub-sub-dropdown {
+                position: static;
+                width: 100%;
+                background-color: #f0f0f0;
+                /* Slightly darker for nested items */
+                box-shadow: none;
+                border-radius: 0;
+                margin-top: 0;
+                padding: 0;
+                display: none;
+                border-left: 3px solid #fdd835;
+                /* Yellow accent for sub-items */
+            }
 
-    .sub-dropdown .dropdown-item {
-        padding-left: 40px; /* More indentation for sub-items */
-        font-size: 15px;
-        justify-content: flex-start;
-    }
+            .sub-dropdown .dropdown-item {
+                padding-left: 40px;
+                /* More indentation for sub-items */
+                font-size: 15px;
+                justify-content: flex-start;
+            }
 
-    .sub-sub-dropdown .dropdown-item {
-        padding-left: 55px; /* Even more indentation for sub-sub-items */
-        font-size: 14px;
-        background-color: #e8e8e8; /* Even lighter background */
-    }
+            .sub-sub-dropdown .dropdown-item {
+                padding-left: 55px;
+                /* Even more indentation for sub-sub-items */
+                font-size: 14px;
+                background-color: #e8e8e8;
+                /* Even lighter background */
+            }
 
-    .dropdown-item .arrow {
-        display: inline-block;
-        margin-left: auto;
-        font-size: 14px;
-        color: #666;
-    }
+            .dropdown-item .arrow {
+                display: inline-block;
+                margin-left: auto;
+                font-size: 14px;
+                color: #666;
+            }
 
-    /* Mobile call button styling */
-    .nav-links .mobile-call-btn {
-        display: block;
-        margin: 20px;
-        margin-top: auto;
-        background-color: var(--accent-color);
-        color: white;
-        border: none;
-        padding: 15px 25px;
-        border-radius: 6px;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+            /* Mobile call button styling */
+            .nav-links .mobile-call-btn {
+                display: block;
+                margin: 20px;
+                margin-top: auto;
+                background-color: var(--accent-color);
+                color: white;
+                border: none;
+                padding: 15px 25px;
+                border-radius: 6px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
 
-    .mobile-call-btn:hover {
-        background-color: #2563eb;
-    }
-}
-        
-
-
+            .mobile-call-btn:hover {
+                background-color: #2563eb;
+            }
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <a href="{% url 'index' %}" class="logo-link">
@@ -677,100 +730,160 @@
                 <a href="{% url 'our_services'%}">Our Services <span style="font-size: 10px;">▼</span></a>
                 <div class="dropdown">
                     <div class="dropdown-item has-sub" tabindex="0">
-                        <a href="{% url 'inbound_call_center_services' %}" style="text-decoration: none; color: inherit; display: contents;">
+                        <a href="{% url 'inbound_call_center_services' %}"
+                            style="text-decoration: none; color: inherit; display: contents;">
                             Inbound Services
                         </a>
                         <span class="arrow">▶</span>
                         <div class="sub-dropdown">
-                            <a href="{% url 'order_processing' %}" class="dropdown-item sub-item">Order Processing</a>
-                            
+                            <a href="{% url 'order_processing' %}" class="dropdown-item sub-item">Order
+                                Processing</a>
+
                             <div class="dropdown-item sub-item has-sub-sub" tabindex="0">
-                                <a href="{% url 'customer_service_outsourcing' %}" style="text-decoration: none; color: inherit; display: contents;">
+                                <a href="{% url 'customer_service_outsourcing' %}"
+                                    style="text-decoration: none; color: inherit; display: contents;">
                                     Customer Service
                                 </a>
                                 <span class="arrow">▶</span>
                                 <div class="sub-sub-dropdown">
-                                    <a href="{% url 'customer_retention_support' %}" class="dropdown-item">Customer Retention Support</a>
-                                    <a href="#" class="dropdown-item">Overflow Services</a>
-                                    <a href="#" class="dropdown-item">Billing Inquiries</a>
-                                    <a href="#" class="dropdown-item">After-hours Support</a>
+                                    <a href="{% url 'customer_retention_support' %}" class="dropdown-item">Customer
+                                        Retention Support</a>
+                                    <a href="{% url 'overflow_call_handling' %}" class="dropdown-item">Overflow
+                                        Services</a>
+                                    <a href="{% url 'billing_inquiries' %}" class="dropdown-item">Billing
+                                        Inquiries</a>
+                                    <a href="{% url 'after_hours_support' %}" class="dropdown-item">After-hours
+                                        Support</a>
                                 </div>
                             </div>
-                            
+
                             <div class="dropdown-item sub-item has-sub-sub" tabindex="0">
-                                <a href="{% url 'technical_support' %}" style="text-decoration: none; color: inherit; display: contents;">
+                                <a href="{% url 'technical_support' %}"
+                                    style="text-decoration: none; color: inherit; display: contents;">
                                     Technical Support
                                 </a>
                                 <span class="arrow">▶</span>
                                 <div class="sub-sub-dropdown">
-                                    <a href="#" class="dropdown-item">Troubleshooting Services</a>
-                                    <a href="#" class="dropdown-item">Software Training Services</a>
-                                    <a href="#" class="dropdown-item">Software Installation Support</a>
-                                    <a href="#" class="dropdown-item">Software And App Support</a>
+                                    <a href="{% url 'troubleshoooting_services' %}"
+                                        class="dropdown-item">Troubleshooting Services</a>
+                                    <a href="{% url 'software_training_services' %}" class="dropdown-item">Software
+                                        Training Services</a>
+                                    <a href="{% url 'software_installation_support' %}" class="dropdown-item">Software
+                                        Installation Support</a>
+                                    <a href="{% url 'software_and_app_support' %}" class="dropdown-item">Software
+                                        And App Support</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="dropdown-item has-sub" tabindex="0">
-                        Outbound Services <span class="arrow">▶</span>
+                        <a href="{% url 'outbound_call_center_solutions' %}"
+                            style="text-decoration: none; color: inherit; display: contents;">
+                            Outbound Services
+                        </a>
+                        <span class="arrow">▶</span>
                         <div class="sub-dropdown">
-                            <a href="#" class="dropdown-item sub-item">Lead Generation & Qualification</a>
-                            <a href="#" class="dropdown-item sub-item">Appointment Setting</a>
-                            <a href="#" class="dropdown-item sub-item">Telemarketing Services</a>
-                            <a href="#" class="dropdown-item sub-item">Market Research</a>
-                            <a href="#" class="dropdown-item sub-item">Clinical Trial Recruiting</a>
-                            <a href="#" class="dropdown-item sub-item">Data Verification</a>
+                            <a href="{% url 'lead_generation' %}" class="dropdown-item sub-item">Lead Generation &
+                                Qualification</a>
+                            <a href="{% url 'appointment_setting' %}" class="dropdown-item sub-item">Appointment
+                                Setting</a>
+                            <a href="{% url 'telemarketing' %}" class="dropdown-item sub-item">Telemarketing
+                                Services</a>
+                            <!-- <a href="#" class="dropdown-item sub-item">Market Research</a> -->
+                            <a href="{% url 'clinical_trial_recruiting' %}" class="dropdown-item sub-item">Clinical
+                                Trial Recruiting</a>
+                            <!-- <a href="#" class="dropdown-item sub-item">Data Verification</a>
                             <a href="#" class="dropdown-item sub-item">Post-Sale Follow-up</a>
-                            <a href="#" class="dropdown-item sub-item">Surveys</a>
+                            <a href="#" class="dropdown-item sub-item">Surveys</a> -->
                         </div>
                     </div>
 
                     <div class="dropdown-item has-sub" tabindex="0">
-                        Back-Office Support <span class="arrow">▶</span>
+                        <a href="{% url 'back_office_support' %}"
+                            style="text-decoration: none; color: inherit; display: contents;">
+                            Back-Office Support
+                        </a><span class="arrow">▶</span>
                         <div class="sub-dropdown">
-                            <a href="#" class="dropdown-item sub-item">Data Entry</a>
-                            <a href="#" class="dropdown-item sub-item">Data Mining</a>
-                            <a href="#" class="dropdown-item sub-item">Clain Filing Services</a>
-                            <a href="#" class="dropdown-item sub-item">Form Processing</a>
+                            <a href="{% url 'data_entry' %}" class="dropdown-item sub-item">Data Entry</a>
+                            <a href="{% url 'data_mining' %}" class="dropdown-item sub-item">Data Mining</a>
+                            <a href="{% url 'claim_filing' %}" class="dropdown-item sub-item">Claim Filing
+                                Services</a>
+                            <a href="{% url 'form_processing' %}" class="dropdown-item sub-item">Form Processing</a>
+                        </div>
+                    </div>
+                    <!-- 
+                    <a href="#" class="dropdown-item">AI Solutions</a>
+                    <a href="#" class="dropdown-item">Staff Augmentation</a> -->
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <a href="{% url 'Why-Value-Connect-Solution' %}">Why VCS<span style="font-size: 10px;">▼</span></a>
+                <div class="dropdown">
+                    <a href="{% url 'Why-Value-Connect-Solution/Value-Pillars' %}" class="dropdown-item">Value
+                        Pillars</a>
+                    <a href="{% url 'Why-Value-Connect-Solution/Reasons-to-Outsource' %}" class="dropdown-item">Reasons
+                        to Outsource</a>
+
+
+                    <div class="dropdown-item has-sub" tabindex="0">
+                        <a href="{% url 'Why-Value-Connect-Solution/Processes' %}"
+                            style="text-decoration: none; color: inherit; display: contents;">
+                            Processes
+                        </a><span class="arrow">▶</span>
+                        <div class="sub-dropdown">
+                            <a href="{% url 'Why-Value-Connect-Solution/Processes/Training' %}"
+                                class="dropdown-item sub-item">Training</a>
+                            <a href="{% url 'Why-Value-Connect-Solution/Processes/Quality-Assurance' %}"
+                                class="dropdown-item sub-item">Quality Assurance</a>
+                            <a href="{% url 'Why-Value-Connect-Solution/Processes/Recruiting-and-Staffing' %}"
+                                class="dropdown-item sub-item">Recruiting and Staffing</a>
+                            <a href="{% url 'Why-Value-Connect-Solution/Processes/Implementation' %}"
+                                class="dropdown-item sub-item">Implementation</a>
+                            <a href="{% url 'Why-Value-Connect-Solution/Processes/Client-Services' %}"
+                                class="dropdown-item sub-item">Client Services</a>
                         </div>
                     </div>
 
-                    <a href="#" class="dropdown-item">AI Solutions</a>
-                    <a href="#" class="dropdown-item">Staff Augmentation</a>
+
+                    <!-- <a href="{% url 'Why-Value-Connect-Solution/Security-Standards-And-Disaster-Recovery-Planning'%}"
+                        class="dropdown-item">Security Standards & Disaster Recovery Planning</a> -->
                 </div>
             </div>
+<div class="nav-item">
+                    <a href="{% url 'about_us' %}">About Us <span style="font-size: 10px;">▼</span></a>
+                    <div class="dropdown">
+                        <a href="{% url 'our_team' %}" class="dropdown-item">Our Team</a>
+                        <!-- <a href="#" class="dropdown-item">Culture & Philanthropy</a> -->
+                        <a href="{% url 'values_mission_and_vision' %}" class="dropdown-item">Values, Mission &
+                            Vision</a>
+                        <a href="{% url 'locations' %}" class="dropdown-item">Locations</a>
+                        <a href="{% url 'faqs' %}" class="dropdown-item">FAQs</a>
+                    </div>
+                </div>
+
 
             <div class="nav-item">
-                <a href="#">Why VCS <span style="font-size: 10px;">▼</span></a>
+                <a href="{% url 'industry-experience' %}">Industry Experience <span
+                        style="font-size: 10px;">▼</span></a>
                 <div class="dropdown">
-                    <a href="#" class="dropdown-item">Value Pillars</a>
-                    <a href="#" class="dropdown-item">Reasons to Outsource</a>
-                    <a href="#" class="dropdown-item">Processes</a>
-                    <a href="#" class="dropdown-item">Security Standards & Disaster Recovery Planning</a>
+                    <a href="/industry-experience/retail-ecommerce/" class="dropdown-item">Retail & Ecommerce</a>
+                    <a href="/industry-experience/insurance/" class="dropdown-item">Insurance</a>
+                    <a href="/industry-experience/education/" class="dropdown-item">Education</a>
+                    <a href="/industry-experience/marketing-services/" class="dropdown-item">Marketing Services</a>
+                    <a href="/industry-experience/financial-services/" class="dropdown-item">Financial Services</a>
+                    <a href="/industry-experience/telecommunications/" class="dropdown-item">Telecommunications</a>
+                    <a href="/industry-experience/real-estate/" class="dropdown-item">Real Estate</a>
+                    <a href="/industry-experience/media-communications/" class="dropdown-item">Media &
+                        Communications</a>
+                    <a href="/industry-experience/website-design-development/" class="dropdown-item">Website Design &
+                        Development</a>
+
+
                 </div>
             </div>
 
-            <div class="nav-item">
-                <a href="#">About Us <span style="font-size: 10px;">▼</span></a>
-                <div class="dropdown">
-                    <a href="#" class="dropdown-item">Our Team</a>
-                    <a href="#" class="dropdown-item">Culture & Philanthropy</a>
-                    <a href="#" class="dropdown-item">Values, Mission & Vision</a>
-                    <a href="#" class="dropdown-item">Locations</a>
-                    <a href="#" class="dropdown-item">FAQs</a>
-                </div>
-            </div>
-
-            <div class="nav-item">
-                <a href="#">Industry Experience <span style="font-size: 10px;">▼</span></a>
-                <div class="dropdown">
-                    <a href="#" class="dropdown-item">Healthcare</a>
-                    <a href="#" class="dropdown-item">Finance</a>
-                    <a href="#" class="dropdown-item">Retail</a>
-                </div>
-            </div>
-
-            <div class="nav-item">
+            <!-- <div class="nav-item">
                 <a href="#">Resources <span style="font-size: 10px;">▼</span></a>
                 <div class="dropdown">
                     <a href="#" class="dropdown-item">Company News</a>
@@ -782,14 +895,14 @@
                     <a href="#" class="dropdown-item">Testimonials</a>
                     <a href="#" class="dropdown-item">Social Impact News</a>
                 </div>
-            </div>
+            </div> -->
 
             <div class="nav-item">
-                <a href="#">Contact Us <span style="font-size: 10px;">▼</span></a>
+                <a href="{%url 'contact-us'%}">Contact Us <span style="font-size: 10px;">▼</span></a>
                 <div class="dropdown">
-                    <a href="#" class="dropdown-item">Complimentary Consultation</a>
-                    <a href="#" class="dropdown-item">Careers / Apply</a>
-                    <a href="#" class="dropdown-item">Send us a message</a>
+                    <!-- <a href="#" class="dropdown-item">Complimentary Consultation</a>
+                    <a href="#" class="dropdown-item">Careers / Apply</a> -->
+                    <a href="{%url 'contact-us'%}" class="dropdown-item">Send us a message</a>
                 </div>
             </div>
 
@@ -797,9 +910,10 @@
         </div>
 
         <div class="right-section">
-            <div class="search-icon">🔍</div>
-            <button class="btn-call">Book A Discovery Call</button>
-            <div class="lang">🇬🇧 EN</div>
+            <!-- <div class="search-icon">🔍</div> -->
+           <a href="{% url 'contact-us' %}" class="btn-call">Book A Discovery Call</a>
+
+            <!-- <div class="lang">🇬🇧 EN</div> -->
             <div class="hamburger-menu" id="hamburgerMenu">
                 <span></span>
                 <span></span>
@@ -811,206 +925,207 @@
 
     <script>
         const hamburger = document.querySelector('.hamburger-menu');
-const navLinks = document.getElementById('navLinks');
+        const navLinks = document.getElementById('navLinks');
 
-// Prevent body scroll when mobile menu is open
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    
-    // Prevent body scroll when menu is open
-    if (navLinks.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
-    }
-});
+        // Prevent body scroll when mobile menu is open
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        document.body.style.overflow = '';
-        // Also close any open mobile dropdowns
-        navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
-            d.style.display = 'none';
-        });
-        navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-            item.classList.remove('active-mobile-toggle');
-        });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const navLinks = document.getElementById('navLinks');
-
-    // Handle dropdown toggling for main menu items on mobile (click on parent link)
-    navLinks.querySelectorAll('.nav-item > a').forEach(link => {
-        link.addEventListener('click', function (e) {
-            const parentItem = this.closest('.nav-item');
-            const dropdown = parentItem.querySelector('.dropdown');
-
-            if (window.innerWidth <= 1200) {
-                if (dropdown) {
-                    e.preventDefault(); // Prevent default link behavior
-
-                    // Close other open main dropdowns with animation
-                    navLinks.querySelectorAll('.nav-item').forEach(otherNavItem => {
-                        if (otherNavItem !== parentItem) {
-                            const otherDropdown = otherNavItem.querySelector('.dropdown');
-                            if (otherDropdown && otherDropdown.style.display === 'flex') {
-                                otherDropdown.style.display = 'none';
-                                otherNavItem.classList.remove('active-mobile-toggle');
-                            }
-                        }
-                    });
-
-                    // Close any open sub-dropdowns
-                    navLinks.querySelectorAll('.sub-dropdown, .sub-sub-dropdown').forEach(d => {
-                        d.style.display = 'none';
-                    });
-                    navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-                        item.classList.remove('active-mobile-toggle');
-                    });
-
-                    // Toggle current main dropdown with accordion animation
-                    const isOpen = dropdown.style.display === 'flex';
-                    dropdown.style.display = isOpen ? 'none' : 'flex';
-                    parentItem.classList.toggle('active-mobile-toggle', !isOpen);
-                }
+            // Prevent body scroll when menu is open
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
             }
         });
-    });
 
-    // Handle mobile click for dropdown items with sub-menus
-    navLinks.querySelectorAll('.dropdown-item.has-sub, .dropdown-item.has-sub-sub').forEach(item => {
-        // Add click handler to the arrow or toggle area, not the entire item
-        const toggleArea = document.createElement('span');
-        toggleArea.className = 'mobile-toggle-area';
-        toggleArea.style.cssText = 'position: absolute; right: 0; top: 0; width: 50px; height: 100%; cursor: pointer; z-index: 1;';
-        item.style.position = 'relative';
-        item.appendChild(toggleArea);
-
-        toggleArea.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            if (window.innerWidth <= 1200) {
-                const subMenu = item.querySelector('.sub-dropdown') || item.querySelector('.sub-sub-dropdown');
-                
-                if (subMenu) {
-                    // Close other open sub-menus at the same level
-                    const siblings = Array.from(item.parentNode.children);
-                    siblings.forEach(sibling => {
-                        if (sibling !== item && sibling.classList.contains('dropdown-item')) {
-                            const siblingSubMenu = sibling.querySelector('.sub-dropdown') || sibling.querySelector('.sub-sub-dropdown');
-                            if (siblingSubMenu && siblingSubMenu.style.display === 'flex') {
-                                siblingSubMenu.style.display = 'none';
-                                sibling.classList.remove('active-mobile-toggle');
-                            }
-                        }
-                    });
-
-                    // Toggle current sub-menu
-                    const isOpen = subMenu.style.display === 'flex';
-                    subMenu.style.display = isOpen ? 'none' : 'flex';
-                    item.classList.toggle('active-mobile-toggle', !isOpen);
-
-                    // For immediate children of .dropdown, when sub-menu opens, close other .sub-dropdowns that are open
-                    if (item.classList.contains('has-sub')) {
-                        const mainDropdown = item.closest('.dropdown');
-                        if (mainDropdown) {
-                            mainDropdown.querySelectorAll('.sub-dropdown').forEach(otherSubDropdown => {
-                                if (otherSubDropdown !== subMenu && otherSubDropdown.style.display === 'flex') {
-                                    otherSubDropdown.style.display = 'none';
-                                    otherSubDropdown.parentNode.classList.remove('active-mobile-toggle');
-                                }
-                            });
-                        }
-                    }
-                }
-            }
-        });
-    });
-
-    // Handle anchor links within dropdown items - ensure they work properly
-    navLinks.querySelectorAll('.dropdown-item a, .dropdown-item').forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Only handle if it's a direct anchor link (not a toggle area)
-            if (e.target.classList.contains('mobile-toggle-area')) {
-                return; // Let the toggle handler deal with it
-            }
-            
-            // If it's an actual link (has href and it's not just "#"), allow navigation
-            const href = this.getAttribute('href') || (this.tagName === 'A' ? this.href : null);
-            const isValidLink = href && href !== '#' && href !== 'javascript:void(0)';
-            
-            if (isValidLink && window.innerWidth <= 1200) {
-                // Close the mobile menu when navigating to a real link
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
                 document.body.style.overflow = '';
+                // Also close any open mobile dropdowns
                 navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
                     d.style.display = 'none';
                 });
                 navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
                     item.classList.remove('active-mobile-toggle');
                 });
-                // Don't prevent default - let the link work normally
             }
         });
-    });
 
-    // Close mobile menu when mobile call button is clicked
-    const mobileCallBtn = document.querySelector('.mobile-call-btn');
-    if (mobileCallBtn) {
-        mobileCallBtn.addEventListener('click', function () {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.style.overflow = '';
-            navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
-                d.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.getElementById('navLinks');
+
+            // Handle dropdown toggling for main menu items on mobile (click on parent link)
+            navLinks.querySelectorAll('.nav-item > a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const parentItem = this.closest('.nav-item');
+                    const dropdown = parentItem.querySelector('.dropdown');
+
+                    if (window.innerWidth <= 1200) {
+                        if (dropdown) {
+                            e.preventDefault(); // Prevent default link behavior
+
+                            // Close other open main dropdowns with animation
+                            navLinks.querySelectorAll('.nav-item').forEach(otherNavItem => {
+                                if (otherNavItem !== parentItem) {
+                                    const otherDropdown = otherNavItem.querySelector('.dropdown');
+                                    if (otherDropdown && otherDropdown.style.display === 'flex') {
+                                        otherDropdown.style.display = 'none';
+                                        otherNavItem.classList.remove('active-mobile-toggle');
+                                    }
+                                }
+                            });
+
+                            // Close any open sub-dropdowns
+                            navLinks.querySelectorAll('.sub-dropdown, .sub-sub-dropdown').forEach(d => {
+                                d.style.display = 'none';
+                            });
+                            navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
+                                item.classList.remove('active-mobile-toggle');
+                            });
+
+                            // Toggle current main dropdown with accordion animation
+                            const isOpen = dropdown.style.display === 'flex';
+                            dropdown.style.display = isOpen ? 'none' : 'flex';
+                            parentItem.classList.toggle('active-mobile-toggle', !isOpen);
+                        }
+                    }
+                });
             });
-            navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-                item.classList.remove('active-mobile-toggle');
+
+            // Handle mobile click for dropdown items with sub-menus
+            navLinks.querySelectorAll('.dropdown-item.has-sub, .dropdown-item.has-sub-sub').forEach(item => {
+                // Add click handler to the arrow or toggle area, not the entire item
+                const toggleArea = document.createElement('span');
+                toggleArea.className = 'mobile-toggle-area';
+                toggleArea.style.cssText = 'position: absolute; right: 0; top: 0; width: 50px; height: 100%; cursor: pointer; z-index: 1;';
+                item.style.position = 'relative';
+                item.appendChild(toggleArea);
+
+                toggleArea.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (window.innerWidth <= 1200) {
+                        const subMenu = item.querySelector('.sub-dropdown') || item.querySelector('.sub-sub-dropdown');
+
+                        if (subMenu) {
+                            // Close other open sub-menus at the same level
+                            const siblings = Array.from(item.parentNode.children);
+                            siblings.forEach(sibling => {
+                                if (sibling !== item && sibling.classList.contains('dropdown-item')) {
+                                    const siblingSubMenu = sibling.querySelector('.sub-dropdown') || sibling.querySelector('.sub-sub-dropdown');
+                                    if (siblingSubMenu && siblingSubMenu.style.display === 'flex') {
+                                        siblingSubMenu.style.display = 'none';
+                                        sibling.classList.remove('active-mobile-toggle');
+                                    }
+                                }
+                            });
+
+                            // Toggle current sub-menu
+                            const isOpen = subMenu.style.display === 'flex';
+                            subMenu.style.display = isOpen ? 'none' : 'flex';
+                            item.classList.toggle('active-mobile-toggle', !isOpen);
+
+                            // For immediate children of .dropdown, when sub-menu opens, close other .sub-dropdowns that are open
+                            if (item.classList.contains('has-sub')) {
+                                const mainDropdown = item.closest('.dropdown');
+                                if (mainDropdown) {
+                                    mainDropdown.querySelectorAll('.sub-dropdown').forEach(otherSubDropdown => {
+                                        if (otherSubDropdown !== subMenu && otherSubDropdown.style.display === 'flex') {
+                                            otherSubDropdown.style.display = 'none';
+                                            otherSubDropdown.parentNode.classList.remove('active-mobile-toggle');
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                });
             });
-            console.log('Discovery call button clicked');
+
+            // Handle anchor links within dropdown items - ensure they work properly
+            navLinks.querySelectorAll('.dropdown-item a, .dropdown-item').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    // Only handle if it's a direct anchor link (not a toggle area)
+                    if (e.target.classList.contains('mobile-toggle-area')) {
+                        return; // Let the toggle handler deal with it
+                    }
+
+                    // If it's an actual link (has href and it's not just "#"), allow navigation
+                    const href = this.getAttribute('href') || (this.tagName === 'A' ? this.href : null);
+                    const isValidLink = href && href !== '#' && href !== 'javascript:void(0)';
+
+                    if (isValidLink && window.innerWidth <= 1200) {
+                        // Close the mobile menu when navigating to a real link
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                        navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
+                            d.style.display = 'none';
+                        });
+                        navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
+                            item.classList.remove('active-mobile-toggle');
+                        });
+                        // Don't prevent default - let the link work normally
+                    }
+                });
+            });
+
+            // Close mobile menu when mobile call button is clicked
+            const mobileCallBtn = document.querySelector('.mobile-call-btn');
+            if (mobileCallBtn) {
+                mobileCallBtn.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                    navLinks.querySelectorAll('.dropdown, .sub-dropdown, .sub-sub-dropdown').forEach(d => {
+                        d.style.display = 'none';
+                    });
+                    navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
+                        item.classList.remove('active-mobile-toggle');
+                    });
+                    console.log('Discovery call button clicked');
+                });
+            }
+
+            // Reset dropdowns on window resize
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 1200) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                    navLinks.querySelectorAll('.dropdown').forEach(d => {
+                        d.style.display = '';
+                        d.style.opacity = '';
+                        d.style.transform = '';
+                    });
+                    navLinks.querySelectorAll('.sub-dropdown, .sub-sub-dropdown').forEach(sd => {
+                        sd.style.display = 'none';
+                        sd.style.opacity = '';
+                        sd.style.transform = '';
+                    });
+                    navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
+                        item.classList.remove('active-mobile-toggle');
+                    });
+                }
+            });
+
+            // Optional: Add scroll effect for navbar background
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
         });
-    }
-
-    // Reset dropdowns on window resize
-    window.addEventListener('resize', function () {
-        if (window.innerWidth > 1200) {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.style.overflow = '';
-            navLinks.querySelectorAll('.dropdown').forEach(d => {
-                d.style.display = '';
-                d.style.opacity = '';
-                d.style.transform = '';
-            });
-            navLinks.querySelectorAll('.sub-dropdown, .sub-sub-dropdown').forEach(sd => {
-                sd.style.display = 'none';
-                sd.style.opacity = '';
-                sd.style.transform = '';
-            });
-            navLinks.querySelectorAll('.dropdown-item.active-mobile-toggle').forEach(item => {
-                item.classList.remove('active-mobile-toggle');
-            });
-        }
-    });
-
-    // Optional: Add scroll effect for navbar background
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-});
     </script>
 </body>
+
 </html>

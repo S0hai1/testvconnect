@@ -19,7 +19,7 @@
         }
 
         .footer-container {
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
@@ -381,11 +381,11 @@
                     <h3>Services</h3>
                     <ul>
                         <li><a href="#">Contact Center</a></li>
-                        <li><a href="#">Outbound Call Center</a></li>
-                        <li><a href="#">Back-Office Support</a></li>
-                        <li><a href="#">Customer Service Outsourcing</a></li>
-                        <li><a href="#">Technical Support</a></li>
-                        <li><a href="#">AI Solutions</a></li>
+                        <li><a href="{% url 'outbound_call_center_solutions' %}">Outbound Service</a></li>
+                        <li><a href="{% url 'back_office_support' %}">Back-Office Support</a></li>
+                        <li><a href="{% url 'back_office_support' %}">Inbound Service</a></li>
+                        <!-- <li><a href="#">Technical Support</a></li>
+                        <li><a href="#">AI Solutions</a></li> -->
                     </ul>
                 </div>
 
@@ -393,23 +393,29 @@
                 <div class="footer-section">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="#">Who We Are</a></li>
-                        <li><a href="#">Our Team</a></li>
-                        <li><a href="#">Our Advantage</a></li>
-                        <li><a href="#">Our Compliance</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">CSR</a></li>
+                        <li><a href="{% url 'about_us' %}">About Us</a></li>
+                        <li><a href="{% url 'our_team' %}">Our Team</a></li>
+                        <li><a href="{% url 'values_mission_and_vision' %}">Values, Mission & Vision</a></li>
+                        <li><a href="{% url 'locations' %}">Locations</a></li>
+                        <li><a href="{% url 'faqs' %}">FAQs</a></li>
+                     
                     </ul>
                 </div>
 
                 <!-- Resources Column -->
                 <div class="footer-section">
-                    <h3>Resources</h3>
+                    <h3>Industry Experience</h3>
                     <ul>
-                        <li><a href="#">Case Studies</a></li>
-                        <li><a href="#">Company News</a></li>
-                        <li><a href="#">Blogs</a></li>
-                        <li><a href="#">FAQs</a></li>
+                        <li> <a href="/industry-experience/retail-ecommerce/">Retail & Ecommerce</a></li>
+                        <li><a href="/industry-experience/insurance/" class="dropdown-item">Insurance</a></li>
+                        <li> <a href="/industry-experience/education/" class="dropdown-item">Education</a></li>
+                        <li><a href="/industry-experience/marketing-services/" class="dropdown-item">Marketing Services</a></li>
+                         <li><a href="/industry-experience/financial-services/" class="dropdown-item">Financial Services</a></li>
+                        <li><a href="/industry-experience/telecommunications/" class="dropdown-item">Telecommunications</a></li>
+                        <li><a href="/industry-experience/real-estate/" class="dropdown-item">Real Estate</a></li>
+                        <li><a href="/industry-experience/media-communications/" class="dropdown-item">Media & Communications</a></li>
+                        <li><a href="/industry-experience/website-design-development/" class="dropdown-item">Website Design & Development</a></li>
+                        
                     </ul>
                 </div>
 
@@ -419,9 +425,9 @@
                     <div class="contact-info">
                         <p> <a href="tel:+91 8879530494">+91 8879530494</a></p>
                         <p><strong>Email:</strong> <a href="mailto:info@valueconnectsolution.com">info@valueconnectsolutions.org</a></p>
-                        <p><a href="#" style="color: #3b82f6; font-weight: 500;">Get a Free Quote</a></p>
+                        <!-- <p><a href="#" style="color: #3b82f6; font-weight: 500;">Get a Free Quote</a></p> -->
                         <p><a href="#" style="color: #3b82f6; font-weight: 500;">Contact Us</a></p>
-                        <p><a href="#" style="color: #3b82f6; font-weight: 500;">Book a Discovery Call</a></p>
+                        <!-- <p><a href="#" style="color: #3b82f6; font-weight: 500;">Book a Discovery Call</a></p> -->
                     </div>
                 </div>
             </div>
@@ -429,7 +435,7 @@
             <!-- Footer Bottom -->
             <div class="footer-bottom">
                 <p>&copy; 2025 ValueConnectSolution. All rights reserved.</p>
-                <p><a href="#">Privacy Policy</a></p>
+                <!-- <p><a href="#">Privacy Policy</a></p> -->
             </div>
         </div>
     </footer>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Tele Global Styles */
+        :root {
+            --tele-primary: #0066cc;
+            --tele-secondary: #333;
+            --tele-accent: #ff6600;
+            --tele-light: #f8f9fa;
+            --tele-dark: #212529;
+            --tele-white: #ffffff;
+            --tele-gray: #6c757d;
+        }
+
+        /* Tele Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--tele-secondary);
+            background-color: var(--tele-white);
+        }
+
+        /* Tele Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--tele-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--tele-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--tele-accent);
+        }
+
+        /* Tele Layout */
+        .tele-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Tele Header */
+        .tele-header {
+            background-color: var(--tele-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .tele-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .tele-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--tele-primary);
+        }
+
+        .tele-logo span {
+            color: var(--tele-accent);
+        }
+
+        .tele-nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .tele-nav-links li {
+            margin-left: 2rem;
+        }
+
+        .tele-nav-links a {
+            font-weight: 600;
+        }
+
+        .tele-mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Tele Hero Section */
+        .tele-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.7)), url('https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+            color: var(--tele-white);
+        }
+
+        .tele-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--tele-white);
+        }
+
+        .tele-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--tele-white);
+        }
+
+        .tele-btn {
+            display: inline-block;
+            background-color: var(--tele-primary);
+            color: var(--tele-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tele-btn:hover {
+            background-color: var(--tele-accent);
+            color: var(--tele-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tele Solutions Section */
+        .tele-solutions {
+            padding: 100px 0;
+        }
+
+        .tele-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .tele-section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .tele-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--tele-accent);
+        }
+
+        .tele-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tele-solution-card {
+            background-color: var(--tele-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .tele-solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .tele-solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .tele-solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .tele-solution-card:hover .tele-solution-img img {
+            transform: scale(1.1);
+        }
+
+        .tele-solution-content {
+            padding: 25px;
+        }
+
+        .tele-solution-content h3 {
+            margin-bottom: 15px;
+            color: var(--tele-primary);
+        }
+
+        /* Tele Benefits Section */
+        .tele-benefits {
+            padding: 100px 0;
+            background-color: var(--tele-light);
+        }
+
+        .tele-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .tele-benefit-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--tele-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .tele-benefit-icon {
+            font-size: 3rem;
+            color: var(--tele-accent);
+            margin-bottom: 20px;
+        }
+
+        /* Tele Support Services Section */
+        .tele-support-services {
+            padding: 100px 0;
+        }
+
+        .tele-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tele-service-card {
+            background-color: var(--tele-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tele-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .tele-service-icon {
+            font-size: 2.5rem;
+            color: var(--tele-accent);
+            margin-bottom: 20px;
+        }
+
+        .tele-service-card h3 {
+            margin-bottom: 15px;
+            color: var(--tele-primary);
+        }
+
+        /* Tele Extended Services Section */
+        .tele-extended-services {
+            padding: 100px 0;
+            background-color: var(--tele-white);
+        }
+
+        .tele-services-combined {
+            display: grid;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .tele-services-grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            list-style: none;
+        }
+
+        .tele-services-grid-list li {
+            background-color: var(--tele-light);
+            padding: 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tele-services-grid-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .tele-services-grid-list i {
+            font-size: 1.8rem;
+            color: var(--tele-accent);
+            margin-bottom: 15px;
+        }
+
+        .tele-services-grid-list h4 {
+            color: var(--tele-primary);
+            margin-bottom: 10px;
+        }
+
+        .tele-benefits-list {
+            margin-top: 60px;
+        }
+
+        .tele-benefits-grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .tele-benefit-card {
+            background-color: var(--tele-light);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--tele-accent);
+        }
+
+        .tele-benefit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .tele-benefit-header i {
+            font-size: 1.5rem;
+            color: var(--tele-accent);
+            margin-right: 15px;
+        }
+
+        .tele-benefit-header h4 {
+            color: var(--tele-primary);
+            margin-bottom: 0;
+        }
+
+        /* Tele Testimonials */
+        .tele-testimonials {
+            padding: 100px 0;
+            background-color: var(--tele-light);
+        }
+
+        .tele-testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .tele-testimonial {
+            padding: 30px;
+        }
+
+        .tele-testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .tele-testimonial-author {
+            font-weight: 700;
+        }
+
+        .tele-testimonial-role {
+            color: var(--tele-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Tele CTA Section */
+        .tele-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--tele-primary), #004080);
+            color: var(--tele-white);
+            text-align: center;
+        }
+
+        .tele-cta h2 {
+            color: var(--tele-white);
+            margin-bottom: 30px;
+        }
+
+        .tele-cta .tele-btn {
+            background-color: var(--tele-white);
+            color: var(--tele-primary);
+        }
+
+        .tele-cta .tele-btn:hover {
+            background-color: var(--tele-accent);
+            color: var(--tele-white);
+        }
+
+        /* Tele Footer */
+        .tele-footer {
+            background-color: var(--tele-dark);
+            color: var(--tele-white);
+            padding: 60px 0 20px;
+        }
+
+        .tele-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .tele-footer-col h3 {
+            color: var(--tele-white);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .tele-footer-links {
+            list-style: none;
+        }
+
+        .tele-footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .tele-footer-links a {
+            color: var(--tele-gray);
+        }
+
+        .tele-footer-links a:hover {
+            color: var(--tele-white);
+        }
+
+        .tele-footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--tele-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Tele Responsive */
+        @media (max-width: 992px) {
+            .tele-nav-links {
+                display: none;
+            }
+
+            .tele-mobile-menu {
+                display: block;
+            }
+
+            .tele-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tele-hero {
+                padding: 150px 0 80px;
+            }
+
+            .tele-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .tele-hero p {
+                font-size: 1.1rem;
+            }
+
+            .tele-section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .tele-services-combined {
+                grid-template-columns: 1fr;
+            }
+            
+            .tele-benefits-list {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tele-hero {
+                padding: 120px 0 60px;
+            }
+
+            .tele-hero h1 {
+                font-size: 2rem;
+            }
+
+            .tele-btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tele Header -->
+    {% include 'myapp/header.html' %}
+
+    <!-- Tele Hero Section -->
+    <section class="tele-hero">
+        <div class="tele-container">
+            <h1>Telecommunications Solutions</h1>
+            <p>Transform your telecom operations with our cutting-edge technology solutions designed to enhance connectivity, streamline services, and improve customer experiences.</p>
+            <a href="#" class="tele-btn" onclick="scrollToSection()">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Tele Solutions Section -->
+    <!-- <section class="tele-solutions">
+        <div class="tele-container">
+            <div class="tele-section-title">
+                <h2>Innovative Telecom Solutions</h2>
+                <p>We understand the unique challenges of the telecommunications industry and deliver customized solutions to address them.</p>
+            </div>
+            <div class="tele-solutions-grid">
+                <div class="tele-solution-card">
+                    <div class="tele-solution-img">
+                        <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Network Solutions">
+                    </div>
+                    <div class="tele-solution-content">
+                        <h3>Network Infrastructure</h3>
+                        <p>Comprehensive solutions for building and managing robust telecom networks with maximum uptime.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="tele-solution-card">
+                    <div class="tele-solution-img">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Customer Experience">
+                    </div>
+                    <div class="tele-solution-content">
+                        <h3>Customer Experience</h3>
+                        <p>Omnichannel platforms that deliver seamless customer interactions across all touchpoints.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="tele-solution-card">
+                    <div class="tele-solution-img">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="5G Solutions">
+                    </div>
+                    <div class="tele-solution-content">
+                        <h3>5G & IoT Solutions</h3>
+                        <p>Next-generation technologies to power your 5G networks and IoT ecosystems.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Tele Support Services Section -->
+    <section class="tele-support-services">
+        <div class="tele-container">
+            <div class="tele-section-title">
+                <h2>Telecom Support Services</h2>
+                <p>Outsource critical telecom operations to focus on innovation while we handle the service delivery.</p>
+            </div>
+            <div class="tele-services-grid">
+                <div class="tele-service-card">
+                    <div class="tele-service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Customer Care</h3>
+                    <p>24/7 multilingual support for billing inquiries, technical issues, and service questions.</p>
+                </div>
+                <div class="tele-service-card">
+                    <div class="tele-service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Technical Support</h3>
+                    <p>Tier 1-3 technical assistance for network and device troubleshooting.</p>
+                </div>
+                <div class="tele-service-card">
+                    <div class="tele-service-icon">
+                        <i class="fas fa-sim-card"></i>
+                    </div>
+                    <h3>Activation Services</h3>
+                    <p>Efficient handling of new service activations and account setups.</p>
+                </div>
+                <div class="tele-service-card">
+                    <div class="tele-service-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3>Billing Support</h3>
+                    <p>Professional handling of billing inquiries and payment processing.</p>
+                </div>
+                <div class="tele-service-card">
+                    <div class="tele-service-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>Network Monitoring</h3>
+                    <p>24/7 surveillance of network performance and outage management.</p>
+                </div>
+                <div class="tele-service-card">
+                    <div class="tele-service-icon">
+                        <i class="fas fa-retweet"></i>
+                    </div>
+                    <h3>Retention Services</h3>
+                    <p>Specialized support to reduce churn and improve customer loyalty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tele Extended Services Section -->
+    <section class="tele-extended-services">
+        <div class="tele-container">
+            <div class="tele-section-title">
+                <h2>Comprehensive Telecom Services</h2>
+                <p>Beyond core telecom, we offer specialized services to enhance your operations.</p>
+            </div>
+            
+            <div class="tele-services-combined">
+                <div class="tele-services-list">
+                    <h3>Additional Telecom Services</h3>
+                    <ul class="tele-services-grid-list">
+                        <li>
+                            <i class="fas fa-comments"></i>
+                            <h4>Chat & Messaging</h4>
+                            <p>Professional handling of customer interactions via chat and messaging platforms.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <h4>Multilingual Support</h4>
+                            <p>Global customer service in multiple languages for international telecom providers.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>Device Support</h4>
+                            <p>Technical assistance for smartphones, routers, and other telecom devices.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-broadcast-tower"></i>
+                            <h4>Field Dispatch</h4>
+                            <p>Coordination of field technicians for installations and repairs.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Performance Analytics</h4>
+                            <p>Detailed reporting on network performance and customer satisfaction.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-sms"></i>
+                            <h4>SMS Campaigns</h4>
+                            <p>Management of promotional and transactional SMS communications.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tele-benefits-list">
+                    <h3>Advantages of Partnering With Value Connect Solutions</h3>
+                    <div class="tele-benefits-grid-cards">
+                        <div class="tele-benefit-card">
+                            <div class="tele-benefit-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>24/7 Availability</h4>
+                            </div>
+                            <p>Round-the-clock support for your customers across all time zones.</p>
+                        </div>
+                        <div class="tele-benefit-card">
+                            <div class="tele-benefit-header">
+                                <i class="fas fa-expand"></i>
+                                <h4>Scalability</h4>
+                            </div>
+                            <p>Easily adjust resources to handle peak periods or service launches.</p>
+                        </div>
+                        <div class="tele-benefit-card">
+                            <div class="tele-benefit-header">
+                                <i class="fas fa-dollar-sign"></i>
+                                <h4>Cost Efficiency</h4>
+                            </div>
+                            <p>Reduce operational costs while maintaining high-quality service.</p>
+                        </div>
+                        <div class="tele-benefit-card">
+                            <div class="tele-benefit-header">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <h4>Faster Resolution</h4>
+                            </div>
+                            <p>Improved first-call resolution rates and reduced handle times.</p>
+                        </div>
+                        <div class="tele-benefit-card">
+                            <div class="tele-benefit-header">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Performance Metrics</h4>
+                            </div>
+                            <p>Comprehensive reporting on all key telecom service metrics.</p>
+                        </div>
+                        <div class="tele-benefit-card">
+                            <div class="tele-benefit-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Innovation</h4>
+                            </div>
+                            <p>Access to the latest telecom technologies and best practices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tele Benefits Section -->
+    <section class="tele-benefits">
+        <div class="tele-container">
+            <div class="tele-section-title">
+                <h2>Why Telecom Providers Choose Value Connect</h2>
+                <p>Our solutions deliver measurable results for telecom companies of all sizes.</p>
+            </div>
+            <div class="tele-benefits-grid">
+                <div class="tele-benefit-item">
+                    <div class="tele-benefit-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Improved CX</h3>
+                    <p>Enhance customer satisfaction with faster response times and expert support.</p>
+                </div>
+                <div class="tele-benefit-item">
+                    <div class="tele-benefit-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Network Reliability</h3>
+                    <p>Maintain high network uptime with proactive monitoring solutions.</p>
+                </div>
+                <div class="tele-benefit-item">
+                    <div class="tele-benefit-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Reduced Costs</h3>
+                    <p>Lower operational expenses while maintaining service quality.</p>
+                </div>
+                <div class="tele-benefit-item">
+                    <div class="tele-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Revenue Growth</h3>
+                    <p>Increase ARPU with effective upselling and retention strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tele Testimonials -->
+    <!-- <section class="tele-testimonials">
+        <div class="tele-container">
+            <div class="tele-section-title">
+                <h2>What Our Telecom Partners Say</h2>
+            </div>
+            <div class="tele-testimonial-slider">
+                <div class="tele-testimonial">
+                    <p class="tele-testimonial-text">"Value Connect's telecom solutions helped us reduce customer service wait times by 35% while improving our first-call resolution rate to 92%. Their technical expertise in telecom operations is unmatched."</p>
+                    <p class="tele-testimonial-author">David Chen</p>
+                    <p class="tele-testimonial-role">Director of Operations, MetroTel Communications</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Tele CTA Section -->
+    <section class="tele-cta">
+        <div class="tele-container">
+            <h2>Ready to Enhance Your Telecom Services?</h2>
+            <p>Our team of telecom experts is ready to help you implement solutions that improve customer satisfaction and operational efficiency.</p>
+            <a href="#" class="tele-btn">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <div id="target-section">
+      {% include 'myapp/index_countriesweserve.html' %}
+    </div>
+
+    <!-- Tele Footer -->
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.tele-mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.tele-nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Responsive adjustment for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                document.querySelector('.tele-nav-links').style.display = 'flex';
+            } else {
+                document.querySelector('.tele-nav-links').style.display = 'none';
+            }
+        });
+
+        // Auto-scroll function
+        function scrollToSection() {
+            document.getElementById('target-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

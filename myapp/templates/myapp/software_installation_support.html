@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            /* Assuming a header height for layout */
+            --text-color-dark: #333;
+            /* Define a variable for dark text color */
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
+        }
+
+        /* Navbar Styles (assuming HTML for navbar is included externally) */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Add shadow for depth */
+        }
+
+        /* Navbar text/icon colors */
+        .navbar .logo .text-value,
+        .navbar .logo .text-connectsolution,
+        .navbar .nav-item>a,
+        .navbar .search-icon,
+        .navbar .lang {
+            color: var(--text-color-dark);
+        }
+
+        .navbar .hamburger-menu span {
+            background-color: var(--text-color-dark);
+        }
+
+        /* Hero Section with Background Image */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            /* Full viewport height */
+            /* Placeholder image URL - replace with your actual image path */
+            background-image: url("{% static 'myapp/images/pexels-mart-production-7709166.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* This creates the parallax effect */
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for better text readability */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent dark overlay */
+            z-index: 1;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+            padding: 0 30px;
+            padding-top: 140px;
+            padding-bottom: 60px;
+            background-color: white;
+            width: 100%;
+            max-width: 1440px;
+            /* Match wrapper max-width */
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            padding-left: 60px;
+        }
+
+        /* Responsive Adjustments for Hero Section */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                background-attachment: scroll;
+                /* Disable parallax on mobile for better performance */
+            }
+
+            .hero-content {
+                padding: 0 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+        }
+
+        /* Scroll indicator (assuming HTML for indicator is included externally) */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Wrapper for tech deployment content */
+        .tech-deployment-wrapper {
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            background-color: #f9fafb;
+            /* Light gray background */
+        }
+
+        @media (min-width: 768px) {
+            .tech-deployment-wrapper {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+        }
+
+        /* Header Section within tech deployment */
+        .header-section {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .header-section {
+                margin-bottom: 5rem;
+                text-align: left;
+            }
+        }
+
+        .header-section h1 {
+            font-size: 2.25rem;
+            line-height: 1.25;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .header-section h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .header-section h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .header-section p {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #4a5568;
+            max-width: 64rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 640px) {
+            .header-section p {
+                font-size: 1.125rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .header-section p {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        /* Main Content Section (text and image) */
+        .main-content-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .main-content-section {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-content-section {
+                gap: 4rem;
+            }
+        }
+
+        /* Text Column */
+        .text-column {
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .text-column {
+                width: 50%;
+            }
+        }
+
+        .text-column h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .text-column h2 {
+                font-size: 1.875rem;
+            }
+        }
+
+        .text-column p {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-column p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (min-width: 640px) {
+            .text-column p {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Image Column */
+        .image-column {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .image-column {
+                width: 50%;
+                justify-content: flex-end;
+            }
+        }
+
+        .image-column img {
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            height: auto;
+            max-width: 28rem;
+            object-fit: cover;
+        }
+
+        @media (min-width: 768px) {
+            .image-column img {
+                max-width: 100%;
+            }
+        }
+
+        /* Benefits Section Container (blue background) */
+        .benefits-container {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            /* Text color for this section */
+        }
+
+        /* Wrapper for benefits content */
+        .benefits-wrapper {
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3rem 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .benefits-wrapper {
+                padding: 5rem 2rem;
+            }
+        }
+
+        /* Heading styles within benefits section */
+        .benefits-wrapper h1,
+        .benefits-wrapper h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 640px) {
+
+            .benefits-wrapper h1,
+            .benefits-wrapper h2 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+
+            .benefits-wrapper h1,
+            .benefits-wrapper h2 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Paragraph styles within benefits section */
+        .benefits-wrapper p {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* List styles within benefits section */
+        .benefits-list {
+            padding-left: 30px;
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .benefits-list li {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .benefits-list li::before {
+            content: "\2022";
+            color: #ffffff;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1.5em;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Bold text within benefits list items */
+        .benefits-list li strong {
+            font-weight: bold;
+        }
+
+        /* Gallery Wrapper */
+        .gallery-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            /* Add some padding around the gallery */
+        }
+
+        .image-gallery {
+            display: grid;
+            gap: 15px;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            height: 500px;
+        }
+
+        .image-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover {
+            transform: scale(1.02);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Specific image item backgrounds */
+        .main-image {
+            grid-row: 1 / -1;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        }
+
+        .side-image-1 {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+        }
+
+        .side-image-2 {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+        }
+
+        /* Tablet styles - horizontal line */
+        @media (max-width: 768px) {
+            .image-gallery {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: 1fr;
+                height: 250px;
+            }
+
+            .main-image {
+                grid-row: 1;
+            }
+        }
+
+        /* Mobile styles - vertical stack */
+        @media (max-width: 480px) {
+            .image-gallery {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, 200px);
+                /* Adjusted to 3 rows as side-image-3 is removed */
+                height: auto;
+            }
+
+            .main-image {
+                grid-row: 1;
+            }
+
+            .image-item {
+                border-radius: 15px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .gallery-wrapper {
+                padding: 0 10px;
+            }
+
+            .image-gallery {
+                gap: 10px;
+                grid-template-rows: repeat(3, 150px);
+                /* Adjusted to 3 rows */
+            }
+
+            .image-item {
+                border-radius: 10px;
+            }
+        }
+
+        .placeholder-text {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .placeholder-text {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .placeholder-text {
+                font-size: 14px;
+            }
+        }
+
+        /* Wrapper for comprehensive support content */
+        .support-wrapper {
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3rem 1.5rem;
+            background-color: #ffffff;
+            /* White background */
+            color: #333333;
+            /* Dark text color */
+        }
+
+        @media (min-width: 768px) {
+            .support-wrapper {
+                padding: 5rem 2rem;
+            }
+        }
+
+        /* Heading styles within support section */
+        .support-wrapper h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: #1a202c;
+        }
+
+        @media (min-width: 640px) {
+            .support-wrapper h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .support-wrapper h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Paragraph styles within support section */
+        .support-wrapper p {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* List styles within support section */
+        .support-list {
+            list-style: none;
+            padding-left: 30px;
+            margin-top: 2rem;
+        }
+
+        .support-list li {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .support-list li::before {
+            content: "\2022";
+            color: #333333;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1.5em;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Bold text within support list items */
+        .support-list li strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Outsourced IT Help Desk Services</h1>
+        </div>
+
+    </div>
+
+    <div class="tech-deployment-wrapper">
+
+        <!-- Header Section -->
+        <section class="header-section">
+            <h1>
+                Streamline Your Tech Deployments with Expert Support
+            </h1>
+            <p>
+                Software installation may seem simple—but at scale, it's anything but. Value ConnectSolutions makes it
+                easy
+                with remote software installation services at a fraction of the cost of hiring in-house IT staff.
+                Whether you're implementing new programs, updating existing software, or optimizing operating systems,
+                we've got you covered. Our expert technicians ensure your systems run smoothly, efficiently, and
+                securely.
+            </p>
+        </section>
+
+        <!-- Main Content Section -->
+        <section class="main-content-section">
+            <!-- Text Column -->
+            <div class="text-column">
+                <h2>
+                    Why Outsource Software Installation?
+                </h2>
+                <p>
+                    Software installation can be complex and time-consuming, especially when working with different
+                    operating systems or custom configurations. Incorrect or incomplete installations can lead to
+                    significant downtime, productivity loss, performance issues, and frustrated end users.
+                </p>
+                <p>
+                    Save your team the hassle and let our professionals handle the details of software installation and
+                    configuration. Our software outsourcing services ensures your systems are set up correctly to
+                    minimize disruptions and maximize efficiency.
+                </p>
+            </div>
+
+            <!-- Image Column -->
+            <div class="image-column">
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1326&q=80"
+                    alt="Two people collaborating on a computer, demonstrating expert support."
+                    style="width: 100%; height: auto; border-radius: 8px;">
+            </div>
+        </section>
+
+    </div>
+
+    <div class="benefits-container">
+        <div class="benefits-wrapper">
+            <h1>The Benefits of Outsourcing Software Installation Services</h1>
+
+            <p>
+                Businesses rely on software to enhance productivity, such as accounting tools, sales tracking systems,
+                and collaborative project management programs, and it's critical they operate effectively. Installing
+                business-critical software across multiple systems can be time-consuming, complex, and prone to errors.
+                Outsourcing software installation services can ensure it's done right the first time.
+            </p>
+
+            <p>
+                Value ConnectSolutions simplifies the process, providing seamless installations that keep your business
+                running
+                smoothly.
+            </p>
+
+            <p>
+                Here's why outsourcing software installation to Value ConnectSolutions is a smart move:
+            </p>
+
+            <ul class="benefits-list">
+                <li>
+                    <strong>Expertise Across Platforms:</strong> Our certified technicians handle installations on
+                    Linux, Microsoft Windows, or Apple OS X with care and precision.
+                </li>
+                <li>
+                    <strong>Cost-Effective:</strong> Avoid the expense of internal IT staff by opting for our
+                    affordable, scalable installation services.
+                </li>
+                <li>
+                    <strong>24/7 Remote Support:</strong> Gain around-the-clock support from our technical support team.
+                    We're always available to handle installations, updates, or troubleshooting.
+                </li>
+                <li>
+                    <strong>Custom Installations:</strong> We tailor each installation to your needs, ensuring
+                    compatibility and optimal performance.
+                </li>
+                <li>
+                    <strong>Reduce Downtime:</strong> Our efficient installation process minimizes disruptions, so your
+                    team stays productive without delays.
+                </li>
+            </ul>
+            <div class="gallery-wrapper">
+                <div class="image-gallery">
+                    <div class="image-item main-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                            alt="Professional IT team working together"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <div class="image-item side-image-1">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Call center support representative"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <div class="image-item side-image-2">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Business meeting in modern office"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <div class="image-item side-image-3" style="display: none;">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Additional team collaboration image"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="support-wrapper">
+        <h1>Comprehensive Software Installation Support</h1>
+
+        <p>
+            Value ConnectSolutions offers a full range of software installation services designed to meet the diverse
+            needs of
+            modern businesses. From small startups to large enterprises, we deliver reliable installation services that
+            align with your infrastructure and workflow.
+        </p>
+
+        <p>
+            Our software installation services include:
+        </p>
+
+        <ul class="support-list">
+            <li>
+                <strong>Remote Software Installation & Desktop Support:</strong> Get your software up and running
+                without needing on-site technicians.
+            </li>
+            <li>
+                <strong>Email Server Configuration:</strong> Install and integrate email systems for reliable
+                communication and top-tier security.
+            </li>
+            <li>
+                <strong>Cross-Platform Installation:</strong> From macOS and Windows to Linux-based systems, we ensure
+                proper setup and compatibility.
+            </li>
+            <li>
+                <strong>Driver Installation for PC Peripherals:</strong> Get your printers, scanners, and other devices
+                running smoothly with the correct driver installations.
+            </li>
+            <li>
+                <strong>24/7 Technical Assistance:</strong> Our team is available around the clock to provide support
+                for urgent or scheduled installations.
+            </li>
+            <li>
+                <strong>Comprehensive Compatibility Testing:</strong> We test across systems, browsers, hardware, and
+                networks to ensure smooth performance and reduce security risks.
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+    <div class="benefits-container">
+        <div class="benefits-wrapper">
+            <h1>Why Choose Value ConnectSolutions for Software Installation?</h1>
+
+            <p>
+                At Value ConnectSolutions, our support services go beyond the initial installation. We provide complete
+                software integration and post-installation support, ensuring your systems operate securely and
+                efficiently.
+            </p>
+
+            <p>
+                We proactively test for compatibility across systems, browsers, hardware, and networks to prevent issues
+                before they arise. This helps you avoid downtime, data loss, and security vulnerabilities, while
+                improving productivity and reducing the risk of software piracy.
+            </p>
+
+            <h2>
+                With Value ConnectSolutions, you can:
+            </h2>
+
+            <ul class="benefits-list">
+                <li>
+                    <strong>Improve Network Security:</strong> We reduce your system’s vulnerability to viruses and
+                    other security threats.
+                </li>
+                <li>
+                    <strong>Prevent Data Loss:</strong> Our thorough installation processes protect your valuable data.
+                </li>
+                <li>
+                    <strong>Enhance Productivity:</strong> Proper software installation ensures that your business tools
+                    always work at peak efficiency.
+                </li>
+                <li>
+                    <strong>Lower Costs:</strong> Outsourcing to Value ConnectSolutions is more cost-effective than
+                    maintaining an in-house IT team.
+                </li>
+            </ul>
+            <div class="gallery-wrapper">
+                <div class="image-gallery">
+                    <div class="image-item main-image">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="IT professionals working on computers"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <div class="image-item side-image-1">
+                        <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                            alt="Customer support representative with headset"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <div class="image-item side-image-2">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                            alt="Professional office meeting room"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <div class="image-item side-image-3" style="display: none;">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Business teamwork and collaboration"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
+
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>

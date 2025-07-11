@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --primary-blue: #2176d7;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --text-light: #666;
+            --bg-light: #f8f8f8;
+            --bg-white: #ffffff;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --border-radius: 15px;
+            --border-radius-large: 20px;
+            --spacing-xs: 10px;
+            --spacing-sm: 15px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            --spacing-xxl: 50px;
+            --container-max-width: 1440px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+            min-height: 100vh;
+            height: auto;
+        }
+
+        /* Background Image Styles for Hero */
+        .image-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* Services Hero Section Styles */
+        .services-hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            padding-top: var(--header-height);
+            box-sizing: border-box;
+            z-index: 0;
+            max-width: 1440px;
+            margin: auto;
+        }
+
+        .services-hero-content {
+            max-width: 1130px;
+            padding: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .services-hero-content h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .services-hero-content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .services-hero-content h1 {
+                font-size: 2.5em;
+            }
+
+            .services-hero-content p {
+                font-size: 1em;
+            }
+        }
+
+
+        /* Page Container Styles */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: var(--container-max-width);
+            padding: var(--spacing-xl) var(--spacing-md);
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        /* Section for the main heading */
+        .heading-section {
+            width: 100%;
+            text-align: left;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .main-page-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        /* Content layout section */
+        .content-layout-area {
+            display: flex;
+            flex-direction: row;
+            gap: var(--spacing-xl);
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        .appointment-setting {
+            flex-direction: row-reverse;
+        }
+
+        /* Text content area */
+        .text-description-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            min-width: 0;
+        }
+
+        .text-description-area p {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .text-description-area h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 var(--spacing-md) 0;
+            line-height: 1.3;
+        }
+
+        /* Image display area */
+        .visual-display-area {
+            flex-shrink: 0;
+            width: min(400px, 100%);
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius-large);
+        }
+
+        .visual-display-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--border-radius-large);
+        }
+
+        /* Small decorative element on the image */
+        .image-accent-overlay {
+            position: absolute;
+            bottom: var(--spacing-xs);
+            right: var(--spacing-xs);
+            width: 80px;
+            height: 20px;
+            background: linear-gradient(90deg, #ffcc00, #ffa500);
+            border-radius: 5px;
+            transform: skewX(-20deg);
+        }
+
+        /* Responsive adjustments for page-container and its internal elements */
+        @media (max-width: 768px) {
+            .content-layout-area {
+                flex-direction: column;
+            }
+
+            .visual-display-area {
+                width: 100%;
+            }
+        }
+
+
+
+        .bpo-services-section {
+            padding: 60px 20px;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        .bpo-services-header {
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .bpo-services-header h1 {
+            font-size: 2.5em;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .bpo-services-header p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .bpo-services-header h2 {
+            font-size: 1.8em;
+            color: #000;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            /* Fixed height for consistency */
+            object-fit: cover;
+            /* Ensures images cover the area without distortion */
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .service-card h3 {
+            font-size: 1.4em;
+            color: #000;
+            margin: 20px 20px 10px 20px;
+            flex-grow: 0;
+            /* Prevents stretching */
+        }
+
+        .service-card p {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.5;
+            margin: 0 20px 20px 20px;
+            flex-grow: 1;
+            /* Allows paragraph to take available space */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .bpo-services-section {
+                padding: 40px 15px;
+            }
+
+            .bpo-services-header h1 {
+                font-size: 2em;
+            }
+
+            .bpo-services-header h2 {
+                font-size: 1.6em;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .service-card h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bpo-services-header h1 {
+                font-size: 1.8em;
+            }
+
+            .bpo-services-header h2 {
+                font-size: 1.4em;
+            }
+
+            .service-card img {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bpo-services-section {
+                padding: 30px 10px;
+            }
+
+            .bpo-services-header h1 {
+                font-size: 1.5em;
+            }
+
+            .bpo-services-header h2 {
+                font-size: 1.2em;
+            }
+
+            .service-card h3 {
+                font-size: 1.2em;
+            }
+
+            .service-card p {
+                font-size: 0.9em;
+            }
+
+            .service-card img {
+                height: 150px;
+            }
+        }
+
+
+
+        .benefits-bpo-section {
+            background-color: #2176d7;
+            /* A shade of blue, similar to the image */
+            color: #fff;
+            padding: 60px 20px;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        }
+
+        .benefits-bpo-header {
+            max-width: var(--container-max-width);
+            margin: 0 auto 50px auto;
+        }
+
+        .benefits-bpo-header h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .benefits-bpo-header p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .benefits-bpo-header h2 {
+            font-size: 2em;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px 20px;
+            /* Adjust gap for better spacing */
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            /* Align text to top within item */
+            padding: 20px;
+        }
+
+        .benefit-item img {
+            height: 140px;
+            /* Ensure consistent height */
+            object-fit: contain;
+            /* Make sure the image scales down without cropping */
+            margin-bottom: 20px;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.2em;
+            font-weight: 500;
+            line-height: 1.4;
+            color: #fff;
+            margin: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .benefits-bpo-header h1 {
+                font-size: 2.5em;
+            }
+
+            .benefits-bpo-header h2 {
+                font-size: 1.8em;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 30px 15px;
+            }
+
+
+            .benefit-item h3 {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .benefits-bpo-section {
+                padding: 40px 15px;
+            }
+
+            .benefits-bpo-header h1 {
+                font-size: 2em;
+            }
+
+            .benefits-bpo-header h2 {
+                font-size: 1.6em;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                /* Allow more items per row if space permits */
+                gap: 25px 10px;
+            }
+
+
+            .benefit-item h3 {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .benefits-bpo-section {
+                padding: 30px 10px;
+            }
+
+            .benefits-bpo-header h1 {
+                font-size: 1.8em;
+            }
+
+            .benefits-bpo-header p {
+                font-size: 1em;
+            }
+
+            .benefits-bpo-header h2 {
+                font-size: 1.4em;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                /* Stack items on very small screens */
+                gap: 30px;
+            }
+
+
+            .benefit-item h3 {
+                font-size: 1.1em;
+            }
+        }
+
+
+
+        /* Why Outsource Section */
+        .why-outsource-section {
+            padding: 60px 20px;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #fff;
+            /* White background */
+        }
+
+        .why-outsource-section .content-wrapper {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        .why-outsource-header {
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .why-outsource-header h1 {
+            font-size: 2.5em;
+            color: #000;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .why-outsource-header p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .advantages-section {
+            text-align: left;
+        }
+
+        .advantages-section h2 {
+            font-size: 1.8em;
+            color: #000;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .advantages-section ul {
+            list-style: none;
+            /* Remove default bullet points */
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .advantages-section ul li {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            /* Space for custom bullet */
+        }
+
+        .advantages-section ul li::before {
+            content: '•';
+            /* Custom bullet point */
+            color: #2176d7;
+            /* Blue color for bullet */
+            font-size: 1.2em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .advantages-section ul li strong {
+            color: #333;
+            /* Darker color for strong text */
+        }
+
+        .advantages-section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Benefits Partnering Section */
+        .benefits-partnering-section {
+            background-color: #2176d7;
+            /* Blue background */
+            color: #fff;
+            padding: 80px 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .benefits-partnering-section .content-flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            align-items: center;
+            /* Vertically align items */
+            gap: 40px;
+            /* Space between columns */
+        }
+
+        .benefits-partnering-section .image-column {
+            flex: 1;
+            /* Allows image column to grow */
+            min-width: 300px;
+            /* Minimum width before wrapping */
+            text-align: center;
+            /* Center image */
+        }
+
+        .benefits-partnering-section .image-column img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            /* Rounded corners for the image */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            /* Subtle shadow */
+        }
+
+        .benefits-partnering-section .text-column {
+            flex: 2;
+            /* Allows text column to take more space */
+            min-width: 300px;
+            /* Minimum width before wrapping */
+            text-align: left;
+        }
+
+        .benefits-partnering-section .text-column h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .benefits-partnering-section .text-column p {
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .benefits-partnering-section .text-column h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .benefits-partnering-section .text-column a {
+            color: #ffcc00;
+            /* Yellow link color */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .benefits-partnering-section .text-column a:hover {
+            color: #ffa500;
+            /* Darker yellow on hover */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .why-outsource-header h1 {
+                font-size: 2.2em;
+            }
+
+            .advantages-section h2 {
+                font-size: 1.6em;
+            }
+
+            .advantages-section ul li,
+            .advantages-section p {
+                font-size: 1em;
+            }
+
+            .benefits-partnering-section .text-column h1 {
+                font-size: 2.2em;
+            }
+
+            .benefits-partnering-section .text-column h2 {
+                font-size: 1.6em;
+            }
+
+            .benefits-partnering-section .text-column p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .why-outsource-section,
+            .benefits-partnering-section {
+                padding: 40px 15px;
+            }
+
+            .why-outsource-header h1 {
+                font-size: 2em;
+            }
+
+            .advantages-section h2 {
+                font-size: 1.4em;
+            }
+
+            .advantages-section ul li,
+            .advantages-section p {
+                font-size: 0.95em;
+            }
+
+            .benefits-partnering-section .content-flex-container {
+                flex-direction: column;
+                /* Stack columns */
+                gap: 30px;
+            }
+
+            .benefits-partnering-section .image-column,
+            .benefits-partnering-section .text-column {
+                min-width: unset;
+                /* Remove min-width to allow full flexibility */
+                width: 100%;
+                /* Take full width */
+            }
+
+            .benefits-partnering-section .image-column img {
+                max-width: 80%;
+                /* Adjust image size when stacked */
+            }
+
+            .benefits-partnering-section .text-column h1 {
+                font-size: 2em;
+            }
+
+            .benefits-partnering-section .text-column h2 {
+                font-size: 1.4em;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .why-outsource-section,
+            .benefits-partnering-section {
+                padding: 30px 10px;
+            }
+
+            .why-outsource-header h1 {
+                font-size: 1.8em;
+            }
+
+            .why-outsource-header p {
+                font-size: 0.9em;
+            }
+
+            .advantages-section h2 {
+                font-size: 1.2em;
+            }
+
+            .advantages-section ul li,
+            .advantages-section p {
+                font-size: 0.9em;
+            }
+
+            .advantages-section ul li::before {
+                font-size: 1em;
+            }
+
+            .benefits-partnering-section .text-column h1 {
+                font-size: 1.8em;
+            }
+
+            .benefits-partnering-section .text-column h2 {
+                font-size: 1.2em;
+            }
+
+            .benefits-partnering-section .text-column p {
+                font-size: 0.9em;
+            }
+
+            .benefits-partnering-section .image-column img {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-background" style="background-image: url('{% static 'myapp/images/back_office.jpg' %}');">
+        <div class="image-overlay"></div>
+    </div>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="services-hero-section">
+        <div class="services-hero-content">
+            <h1>Back-Office Service Provider in the India</h1>
+
+        </div>
+    </div>
+
+
+    <div class="page-container">
+        <div class="heading-section">
+            <h1 class="main-page-title">Outsourced Appointment Setting Services: Accelerate Your Business Growth with
+                value connectsolution</h1>
+        </div>
+
+        <div class="content-layout-area">
+            <div class="text-description-area">
+                <p>Rising operational costs and shrinking profit margins are common challenges for business owners
+                    aiming to scale their operations. Regardless of your company size, a successful B2B marketing
+                    campaign hinges on your ability to convert prospective clients into satisfied customers. Appointment
+                    setting is crucial for generating sales and revenue, yet it remains a significant hurdle for many
+                    business development teams.</p>
+                <p>At value connectsolution, we specialize in connecting your sales team with qualified leads through
+                    effective call center appointment scheduling, delivered by expert appointment setters in the
+                    India.</p>
+            </div>
+            <div class="visual-display-area">
+                <img src="{% static 'myapp/images/customer_support.jpg' %}"
+                    alt="Customer service representative with a headset, smiling.">
+                <div class="image-accent-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bpo-services-section">
+        <div class="bpo-services-header">
+            <h1>BPO Services</h1>
+            <p>Value ConnectSolution offers a range of outsourced back office services designed to help private and
+                public organizations reach their full potential. By outsourcing non-core functions to our experienced
+                team, you can free up internal resources, improve efficiency, and focus on business growth.</p>
+            <h2>Our back office processing call center solutions include:</h2>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Data Entry">
+                <h3>Data Entry</h3>
+                <p>We provide accurate, fast data entry services to keep your systems organized and up to date.</p>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Electronic Filing">
+                <h3>Electronic Filing</h3>
+                <p>Organize and securely store business records in digital formats for easier retrieval and compliance.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Data Mining">
+                <h3>Data Mining</h3>
+                <p>Extract valuable insights from your data to improve decision-making and strategic planning.</p>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Claims Filing">
+                <h3>Claims Filing</h3>
+                <p>Let our experienced agents manage claims documentation and submission to ensure timely processing.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Forms Processing">
+                <h3>Forms Processing</h3>
+                <p>We convert physical and digital forms into structured, usable formats for more efficient workflows.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Contract Processing">
+                <h3>Contract Processing</h3>
+                <p>Streamline contract management with organized, digitized documentation handled by trained
+                    professionals.</p>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Claims Submission">
+                <h3>Claims Submission</h3>
+                <p>Ensure accurate and timely submission of insurance or healthcare claims with dedicated support.</p>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Office Tasks">
+                <h3>Office Tasks</h3>
+                <p>From transcription to administrative support, we handle everyday office tasks that save you time</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="benefits-bpo-section">
+        <div class="benefits-bpo-header">
+            <h1>Benefits of BPO Services</h1>
+            <p>Partnering with a top BPO provider in the India like Value ConnectSolution gives your business a
+                strategic edge. Outsourcing to VCS allows your company to save money, reduce overhead costs, increase
+                productivity, and benefit from the expertise of a highly skilled team.</p>
+            <h2>Key benefits of business process outsourcing with Value ConnectSolution:</h2>
+        </div>
+
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Cost Savings">
+                <h3>Cost Savings</h3>
+            </div>
+
+            <div class="benefit-item">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Time to Focus on Business Innovations">
+                <h3>Time to Focus on Business Innovations</h3>
+            </div>
+
+            <div class="benefit-item">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Access to an Educated, Talented Workforce">
+                <h3>Access to an Educated, Talented Workforce</h3>
+            </div>
+
+            <div class="benefit-item">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Increase Workflow Speeds">
+                <h3>Increase Workflow Speeds</h3>
+            </div>
+
+            <div class="benefit-item">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Improve Profit Margins">
+                <h3>Improve Profit Margins</h3>
+            </div>
+
+            <div class="benefit-item">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Better Supply Planning">
+                <h3>Better Supply Planning</h3>
+            </div>
+
+            <div class="benefit-item">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Ensure Compliance & Data Accuracy">
+                <h3>Ensure Compliance & Data Accuracy</h3>
+            </div>
+
+            <div class="benefit-item">
+                <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Access Enterprise-level Tools & Technologies">
+                <h3>Access Enterprise-level Tools & Technologies</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="why-outsource-section">
+        <div class="content-wrapper">
+            <div class="why-outsource-header">
+                <h1>Why Outsource to the India?</h1>
+                <p>The India is one of the top destinations for business process outsourcing (BPO)—and it's easy to see
+                    why. The country offers a unique combination of talent, technology, and affordability that makes it
+                    an ideal hub for outsourcing. Back office outsourcing to the India is a smart choice for businesses.
+                </p>
+            </div>
+
+            <div class="advantages-section">
+                <h2>Advantages of the India for BPO:</h2>
+                <ul>
+                    <li><strong>Educated, English-Proficient Workforce:</strong> Filipino professionals are highly
+                        skilled, college-educated, and speak fluent English with neutral accents.</li>
+                    <li><strong>Cost Savings:</strong> Labor costs in the India are significantly lower compared to the
+                        U.S., U.K., and Australia without compromising service quality.</li>
+                    <li><strong>Cultural Compatibility:</strong> Filipino workers are known for their professionalism,
+                        adaptability, and customer service orientation.</li>
+                    <li><strong>24/7 Operational Support:</strong> With flexible schedules and robust infrastructure, we
+                        can meet your business needs around the clock.</li>
+                </ul>
+                <p>Value ConnectSolution taps into this talented workforce to deliver cost-effective, high-quality
+                    services across a range of industries. VCS is strategically positioned to provide the best of back office
+                    BPO in the India with top skilled professionals and cutting-edge technology.</p>
+            </div>
+        </div>
+    </div>
+    <div class="benefits-partnering-section">
+        <div class="content-flex-container">
+            <div class="image-column">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Smiling person with headset">
+            </div>
+            <div class="text-column">
+                <h1>Benefits of Partnering with Value ConnectSolution</h1>
+                <p>Outsourcing back-office tasks to Value ConnectSolution offers measurable benefits to businesses
+                    across the globe. Our services help free up internal resources, streamline processes, and improve
+                    your bottom line.</p>
+
+                <h2>Flexible BPO Contracts</h2>
+                <p>We understand that business needs evolve. That's why Value ConnectSolution offers flexible,
+                    month-to-month support with no long-term commitment. Whether you need a short-term solution or
+                    ongoing support, we adapt to your goals.</p>
+                <p>Our management team works with you to identify back office service solutions that align with your
+                    strategy and save your company time and money. And as your business grows, our flexible services
+                    evolve with you.</p>
+
+                <h2>More Than Just Back-Office Support</h2>
+                <p>In addition to administrative services, Value ConnectSolution also offers a full suite of <a
+                        href="{% url 'inbound_call_center_services' %}">inbound</a> and <a
+                        href="{% url 'outbound_call_center_solutions' %}">outbound services</a> to support every area of
+                    your business.</p>
+                <p>Whether your core business activities are currently in the United States, Australia, the U.K., or
+                    Singapore, Value ConnectSolution is poised to help you achieve strategic objectives and performance
+                    milestones.</p>
+            </div>
+        </div>
+    </div>
+    {% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
+
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -2,9 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Services - ValueConnectSolution</title>
+    {% include 'myapp/meta_tags.html' %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     {% load static %}
@@ -142,7 +140,7 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto 80px auto;
             gap: 50px;
         }
@@ -176,9 +174,8 @@
         }
 
         .bpo-overview-sub-section {
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
-            text-align: center;
         }
 
         .bpo-overview-sub-section h2 {
@@ -190,7 +187,7 @@
         .bpo-overview-sub-section p {
             font-size: 1.1em;
             line-height: 1.6;
-            max-width: 900px;
+            max-width: 1440px;
             margin: 0 auto 30px auto;
         }
 
@@ -207,7 +204,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
             padding-top: 20px;
         }
@@ -290,7 +287,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
         }
 
@@ -337,7 +334,6 @@
             /* Light grey background */
             color: #333;
             padding: 80px 30px;
-            text-align: center;
             position: relative;
             z-index: 2;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -346,14 +342,10 @@
         }
 
         .benefits-section .section-header {
-            max-width: 900px;
             margin: 0 auto 50px auto;
             /* Space below header */
-            text-align: center;
             /* Merged from duplicate */
             margin-bottom: 60px;
-            /* Merged from duplicate, keeping larger value */
-            max-width: 800px;
             /* Merged from duplicate, keeping smaller for section-header specifically */
             margin-left: auto;
             margin-right: auto;
@@ -387,7 +379,7 @@
             display: grid;
             /* To display only one card in a horizontal row, set grid-template-columns to 1fr */
             grid-template-columns: 1fr;
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
             gap: 20px;
             /* No gap needed if only one item is displayed */
@@ -793,7 +785,7 @@
         }
 
         .pillar-functions .container {
-            max-width: 1200px;
+            max-width: 1440px;
             /* Max width for content */
             margin: 0 auto;
             /* Center the container */
@@ -855,7 +847,7 @@
             /* Space between the blue section and the cards */
             padding: 0 20px;
             /* Padding for the grid itself */
-            max-width: 1200px;
+            max-width: 1440px;
             /* Match container width */
             margin-left: auto;
             margin-right: auto;
@@ -1122,7 +1114,7 @@
 
 
         .container {
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -1338,9 +1330,8 @@
         }
     </style>
 </head>
-
 <body>
-    <div class="image-background" style="background-image: url('{% static 'myapp/images/services_hero_bg.jpg' %}');">
+    <div class="image-background" style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');">
         <div class="image-overlay"></div>
     </div>
 
@@ -1369,14 +1360,14 @@
                     ValueConnectSolutions can apply our college-educated specialists to your inbound, outbound, or
                     back-office support programs to achieve and exceed expectations.</p>
                 <p>Take your business to the next level, improve customer satisfaction rates, increase revenue, and
-                    enhance efficiencies by partnering with ValueConnectSolutions in Cebu's most desired IT complex.
+                    enhance efficiencies by partnering with ValueConnectSolutions .
                     Call center outsourcing is cost-effective and helps you gain a competitive edge in the global
                     marketplace. By utilizing agents dedicated to delivering consistent, high-quality customer
                     experiences, no matter the program objective, companies have more time and resources to focus on
                     core functions and goals.</p>
             </div>
             <div class="service-description-image">
-                <img src="{% static 'myapp/images/service_description_woman.jpg' %}" alt="Smiling call center agent">
+                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Smiling call center agent">
             </div>
         </div>
 
@@ -1391,25 +1382,25 @@
             <strong>ValueConnectSolutions is a Leading Provider of Outsourced Call Center Services, including:</strong>
             <div class="bpo-services-grid">
                 <div class="bpo-service-card">
-                    <img src="{% static 'myapp/images/inbound-services.svg' %}" alt="Inbound Call Center Icon"
+                    <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/outline/phone-arrow-down-left.svg" alt="Inbound Call Center Icon"
                         class="card-icon">
                     <h3>Inbound Call Center Services</h3>
                     <a href="#" class="btn">Learn more</a>
                 </div>
                 <div class="bpo-service-card">
-                    <img src="{% static 'myapp/images/outbound-services.svg' %}" alt="Outbound Call Center Icon"
+                    <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/outline/phone-arrow-up-right.svg" alt="Outbound Call Center Icon"
                         class="card-icon">
                     <h3>Outbound Call Center Services</h3>
                     <a href="#" class="btn">Learn more</a>
                 </div>
                 <div class="bpo-service-card">
-                    <img src="{% static 'myapp/images/back-office-support.svg' %}" alt="Back Office Support Icon"
+                    <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/outline/building-office-2.svg" alt="Back Office Support Icon"
                         class="card-icon">
                     <h3>Back Office Support</h3>
                     <a href="#" class="btn">Learn more</a>
                 </div>
                 <div class="bpo-service-card">
-                    <img src="{% static 'myapp/images/ai-solutions.svg' %}" alt="AI Solutions Icon" class="card-icon">
+                    <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/outline/cpu-chip.svg" alt="AI Solutions Icon" class="card-icon">
                     <h3>AI Solutions</h3>
                     <a href="#" class="btn">Learn more</a>
                 </div>
@@ -1419,7 +1410,7 @@
 
 
     <div class="benefits-section">
-        <div class="section-header">
+        <div class="section-header"> 
             <h2>Benefits of Outsourced Call Center Services</h2>
             <p>Business process outsourcing—from simple tasks to complex sales—effectively streamlines operations and
                 encourages growth. The primary advantages of BPO with an experienced call center like Value
@@ -1524,8 +1515,8 @@
 
             <div class="benefit-item-card">
                 <div class="benefit-image">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1015&q=80"
-                        alt="Scalability">
+                    <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Business Continuity">
                 </div>
                 <div class="benefit-text">
                     <h3>Business Continuity</h3>
@@ -1572,28 +1563,28 @@
 
             <div class="card-grid">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
                         alt="After-Hours Support" class="card-image">
                     <h3 class="card-title">After-Hours Support</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
                         alt="Billing Inquiries" class="card-image">
                     <h3 class="card-title">Billing Inquiries</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
                         alt="Overflow Services" class="card-image">
                     <h3 class="card-title">Overflow Services</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
                         alt="Customer Retention Support" class="card-image">
                     <h3 class="card-title">Customer Retention Support</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
@@ -1608,7 +1599,7 @@
             <h2 class="subsection-title">Business Development</h2>
             <p class="description-text">
                 Ever wish you had the resources of large companies with a full-time sales force?
-                ValueConnectSolutions’s outbound-focused telemarketing and lead generation teams will
+                ValueConnectSolutions's outbound-focused telemarketing and lead generation teams will
                 help grow your business. Our experienced, college-educated agents have what it
                 takes to make your outbound sales and telemarketing campaigns a success.
                 We use the newest dialing technology and have talented scriptwriters who can effectively
@@ -1621,37 +1612,37 @@
 
             <div class="card-grid">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80"
-                        alt="After-Hours Support" class="card-image">
-                    <h3 class="card-title">After-Hours Support</h3>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Lead Generation" class="card-image">
+                    <h3 class="card-title">Lead Generation</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80"
-                        alt="Billing Inquiries" class="card-image">
-                    <h3 class="card-title">Billing Inquiries</h3>
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Sales Campaigns" class="card-image">
+                    <h3 class="card-title">Sales Campaigns</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80"
-                        alt="Overflow Services" class="card-image">
-                    <h3 class="card-title">Overflow Services</h3>
+                    <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Telemarketing" class="card-image">
+                    <h3 class="card-title">Telemarketing</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80"
-                        alt="Customer Retention Support" class="card-image">
-                    <h3 class="card-title">Customer Retention Support</h3>
+                    <img src="https://images.unsplash.com/photo-1553484771-047a44eee27b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Market Research" class="card-image">
+                    <h3 class="card-title">Market Research</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80"
-                        alt="Customer Retention Support" class="card-image">
-                    <h3 class="card-title">Customer Retention Support</h3>
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Appointment Setting" class="card-image">
+                    <h3 class="card-title">Appointment Setting</h3>
                     <a href="#" class="btn btn-primary">Learn more</a>
                 </div>
             </div>
@@ -1686,7 +1677,7 @@
                     </ul>
                 </div>
                 <div class="image-content">
-                    <img src="{% static 'myapp/images/image-1.webp' %}" alt="Two smiling technical support agents"
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Two smiling technical support agents"
                         class="support-agents-image">
                 </div>
             </div>
@@ -1698,6 +1689,8 @@
             </div>
         </div>
     </section>
+
+    {% include 'myapp/index_countriesweserve.html' %}
 
 
     <div class="Services_Section">

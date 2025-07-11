@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Change text/icon colors when */
+        .navbar .logo .text-select,
+        .navbar .logo .text-voicecom,
+        .navbar .nav-item>a,
+        .navbar .search-icon,
+        .navbar .lang {
+            color: var(--text-color-dark);
+        }
+
+        .navbar .hamburger-menu span {
+            background-color: var(--text-color-dark);
+        }
+
+        /* Hero Section with Background Image */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background-image: url('{% static "myapp/images/outsourcing1.webp" %}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* This creates the parallax effect */
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for better text readability */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+            padding: 0 30px;
+            padding-top: 140px;
+            padding-bottom: 60px;
+            background-color: white;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                background-attachment: scroll;
+                /* Disable parallax on mobile for better performance */
+            }
+
+            .hero-content {
+                padding: 0 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+
+        /* Content Section Styles */
+        .billing-inquiry-content {
+            padding-top: 60px;
+            padding-bottom: 30px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .billing-inquiry-content .content-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .billing-inquiry-content .section-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 30px 0;
+            text-align: left;
+            color: #333;
+        }
+
+        .billing-inquiry-content .subsection-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: left;
+            color: #333;
+        }
+
+        .billing-inquiry-content .section-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* Removed image-gallery styles specific to billing-inquiry-content as image-gallery-alt is used now */
+
+        .billing-inquiry-content .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .billing-inquiry-content .benefits-list li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .billing-inquiry-content .benefits-list li::before {
+            content: '•';
+            /* Bullet point */
+            color: #007bff;
+            /* Example color for bullet */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Responsive adjustments for the content section */
+        @media (max-width: 992px) {
+            .billing-inquiry-content .section-title {
+                font-size: 2em;
+            }
+
+            .billing-inquiry-content .subsection-title {
+                font-size: 1.5em;
+            }
+
+            /* Removed image-gallery responsive styles as image-gallery-alt is used now */
+        }
+
+        @media (max-width: 576px) {
+            .billing-inquiry-content .content-wrapper {
+                padding: 0 20px;
+            }
+
+            .billing-inquiry-content .section-title {
+                font-size: 1.8em;
+            }
+
+            .billing-inquiry-content .subsection-title {
+                font-size: 1.3em;
+            }
+
+            .billing-inquiry-content .section-description,
+            .billing-inquiry-content .benefits-list li {
+                font-size: 1em;
+            }
+        }
+
+
+        /* Additional Benefits Section Styles */
+        .additional-benefits-section {
+            padding-bottom: 60px;
+            /* Slightly different background for distinction */
+            color: #333;
+        }
+
+        .additional-benefits-section .content-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .additional-benefits-section .subsection-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: left;
+            color: #333;
+        }
+
+        .additional-benefits-section .benefits-list-extended {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 40px 0;
+            /* Add margin at bottom for image spacing */
+        }
+
+        .additional-benefits-section .benefits-list-extended li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .additional-benefits-section .benefits-list-extended li::before {
+            content: '•';
+            /* Bullet point */
+            color: #007bff;
+            /* Example color for bullet */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Moved image-gallery-alt and its child styles outside of this section-specific rule */
+        .image-gallery-alt {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .gallery-img-alt {
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .gallery-img-alt.large-img-alt {
+            flex: 1;
+            min-width: 300px;
+            max-width: 60%;
+            height: 450px;
+        }
+
+        .small-images-alt {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .small-images-alt .gallery-img-alt {
+            width: 100%;
+            height: 215px;
+            /* Fixed height for small images (approx half of large with gap) */
+        }
+
+        /* Responsive adjustments for the additional benefits section */
+        @media (max-width: 992px) {
+            .additional-benefits-section .subsection-title {
+                font-size: 2em;
+            }
+
+            .additional-benefits-section .benefits-list-extended li {
+                font-size: 1em;
+            }
+
+            /* Moved responsive rules for image-gallery-alt outside of this section-specific rule */
+            .image-gallery-alt {
+                flex-direction: column;
+                /* Stack images vertically */
+                align-items: center;
+                /* Center stacked images */
+            }
+
+            .gallery-img-alt.large-img-alt {
+                max-width: 100%;
+                /* Take full width when stacked */
+                height: auto;
+                /* Auto height to maintain aspect ratio */
+                min-height: 300px;
+                /* Ensure a decent height */
+            }
+
+            .small-images-alt {
+                width: 100%;
+            }
+
+            .small-images-alt .gallery-img-alt {
+                height: auto;
+                /* Auto height for stacked small images */
+                min-height: 200px;
+                /* Ensure a decent height */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .additional-benefits-section .content-wrapper {
+                padding: 0 20px;
+            }
+
+            .additional-benefits-section .subsection-title {
+                font-size: 1.8em;
+            }
+
+            .additional-benefits-section .benefits-list-extended li {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Billing Inquiries Services in the India</h1>
+        </div>
+    </div>
+
+    <section class="billing-inquiry-content">
+        <div class="content-wrapper">
+            <h2 class="section-title">Enhance Customer Satisfaction With 24/7 Billing Inquiry Services</h2>
+            <p class="section-description">Every savvy business owner understands that excellent customer service is the foundation for long-term growth. Whether they involve canceling a contract, understanding service fees, or exploring payment options, billing inquiries are critical touchpoints in the customer experience. Frustrating interactions in these areas can drive customers to take their business elsewhere. Does your company have the workforce and resources to provide efficient, 24/7 support for billing inquiries without compromising overall operations?</p>
+            <p class="section-description">In today’s global marketplace, professional after-hours billing inquiry support is not just a luxury—it’s a necessity. You can boost customer satisfaction and foster loyalty by ensuring that credit card and billing questions are answered promptly and accurately at any time of day or night.</p>
+            <div class="image-gallery-alt">
+    <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Smiling customer service agent" class="gallery-img-alt large-img-alt">
+    <div class="small-images-alt">
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" alt="Call center agents working" class="gallery-img-alt">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Business meeting with documents" class="gallery-img-alt">
+    </div>
+</div>
+            <h2 class="section-title">Outsourcing Billing Inquiries Services in the India With Value ConnectSolution</h2>
+            <p class="section-description">Take advantage of the expertise, cost-efficiency, and scalable customer support Value ConnectSolution offers. Outsourcing your billing inquiry services to our India-based call center provides numerous benefits that positively impact your bottom line.</p>
+        </div>
+    </section>
+
+    <section class="additional-benefits-section">
+        <div class="content-wrapper">
+            <h3 class="subsection-title">The Benefits of Outsourcing Billing Inquiry Services</h3>
+            <ul class="benefits-list-extended">
+                <li>Fluent English-Speaking Agents With Neutral Accents</li>
+                <li>24/7 Customer Service Availability, 365 Days a Year</li>
+                <li>State-of-the-Art IT Infrastructure</li>
+                <li>Multi-Platform and Omnichannel Support</li>
+                <li>Knowledgeable After-Hours Assistance and Tech Support</li>
+                <li>More Cost-Effective Than in-House Solutions</li>
+                <li>Scalable Services Tailored to Your Specific Needs</li>
+                <li>Free Up Resources to Focus on Core Business Competencies</li>
+            </ul>
+            <div class="image-gallery-alt">
+    <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Smiling customer service agent" class="gallery-img-alt large-img-alt">
+    <div class="small-images-alt">
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" alt="Call center agents working" class="gallery-img-alt">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Business meeting with documents" class="gallery-img-alt">
+    </div>
+</div>
+        </div>
+    </section>
+{% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
+
+</body>
+
+</html>

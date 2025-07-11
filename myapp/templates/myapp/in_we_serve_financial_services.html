@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Financial Global Styles */
+        :root {
+            --financial-primary: #2c3e50;
+            --financial-secondary: #333;
+            --financial-accent: #3498db;
+            --financial-light: #f8f9fa;
+            --financial-dark: #212529;
+            --financial-white: #ffffff;
+            --financial-gray: #6c757d;
+        }
+
+        /* Financial Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--financial-secondary);
+            background-color: var(--financial-white);
+        }
+
+        /* Financial Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--financial-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--financial-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--financial-accent);
+        }
+
+        /* Financial Layout */
+        .financial-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Financial Header */
+        .financial-header {
+            background-color: var(--financial-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .financial-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .financial-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--financial-primary);
+        }
+
+        .financial-logo span {
+            color: var(--financial-accent);
+        }
+
+        .financial-nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .financial-nav-links li {
+            margin-left: 2rem;
+        }
+
+        .financial-nav-links a {
+            font-weight: 600;
+        }
+
+        .financial-mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Financial Hero Section */
+        .financial-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.7)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+            color: var(--financial-white);
+        }
+
+        .financial-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--financial-white);
+        }
+
+        .financial-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--financial-white);
+        }
+
+        .financial-btn {
+            display: inline-block;
+            background-color: var(--financial-primary);
+            color: var(--financial-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .financial-btn:hover {
+            background-color: var(--financial-accent);
+            color: var(--financial-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Financial Solutions Section */
+        .financial-solutions {
+            padding: 100px 0;
+        }
+
+        .financial-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .financial-section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .financial-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--financial-accent);
+        }
+
+        .financial-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .financial-solution-card {
+            background-color: var(--financial-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .financial-solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .financial-solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .financial-solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .financial-solution-card:hover .financial-solution-img img {
+            transform: scale(1.1);
+        }
+
+        .financial-solution-content {
+            padding: 25px;
+        }
+
+        .financial-solution-content h3 {
+            margin-bottom: 15px;
+            color: var(--financial-primary);
+        }
+
+        /* Financial Benefits Section */
+        .financial-benefits {
+            padding: 100px 0;
+            background-color: var(--financial-light);
+        }
+
+        .financial-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .financial-benefit-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--financial-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .financial-benefit-icon {
+            font-size: 3rem;
+            color: var(--financial-accent);
+            margin-bottom: 20px;
+        }
+
+        /* Financial Support Services Section */
+        .financial-support-services {
+            padding: 100px 0;
+        }
+
+        .financial-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .financial-service-card {
+            background-color: var(--financial-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .financial-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .financial-service-icon {
+            font-size: 2.5rem;
+            color: var(--financial-accent);
+            margin-bottom: 20px;
+        }
+
+        .financial-service-card h3 {
+            margin-bottom: 15px;
+            color: var(--financial-primary);
+        }
+
+        /* Financial Extended Services Section */
+        .financial-extended-services {
+            padding: 100px 0;
+            background-color: var(--financial-white);
+        }
+
+        .financial-services-combined {
+            display: grid;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .financial-services-grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            list-style: none;
+        }
+
+        .financial-services-grid-list li {
+            background-color: var(--financial-light);
+            padding: 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .financial-services-grid-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .financial-services-grid-list i {
+            font-size: 1.8rem;
+            color: var(--financial-accent);
+            margin-bottom: 15px;
+        }
+
+        .financial-services-grid-list h4 {
+            color: var(--financial-primary);
+            margin-bottom: 10px;
+        }
+
+        .financial-benefits-list {
+            margin-top: 60px;
+        }
+
+        .financial-benefits-grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .financial-benefit-card {
+            background-color: var(--financial-light);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--financial-accent);
+        }
+
+        .financial-benefit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .financial-benefit-header i {
+            font-size: 1.5rem;
+            color: var(--financial-accent);
+            margin-right: 15px;
+        }
+
+        .financial-benefit-header h4 {
+            color: var(--financial-primary);
+            margin-bottom: 0;
+        }
+
+        /* Financial Testimonials */
+        .financial-testimonials {
+            padding: 100px 0;
+            background-color: var(--financial-light);
+        }
+
+        .financial-testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .financial-testimonial {
+            padding: 30px;
+        }
+
+        .financial-testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .financial-testimonial-author {
+            font-weight: 700;
+        }
+
+        .financial-testimonial-role {
+            color: var(--financial-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Financial CTA Section */
+        .financial-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--financial-primary), #1a252f);
+            color: var(--financial-white);
+            text-align: center;
+        }
+
+        .financial-cta h2 {
+            color: var(--financial-white);
+            margin-bottom: 30px;
+        }
+
+        .financial-cta .financial-btn {
+            background-color: var(--financial-white);
+            color: var(--financial-primary);
+        }
+
+        .financial-cta .financial-btn:hover {
+            background-color: var(--financial-accent);
+            color: var(--financial-white);
+        }
+
+        /* Financial Footer */
+        .financial-footer {
+            background-color: var(--financial-dark);
+            color: var(--financial-white);
+            padding: 60px 0 20px;
+        }
+
+        .financial-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .financial-footer-col h3 {
+            color: var(--financial-white);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .financial-footer-links {
+            list-style: none;
+        }
+
+        .financial-footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .financial-footer-links a {
+            color: var(--financial-gray);
+        }
+
+        .financial-footer-links a:hover {
+            color: var(--financial-white);
+        }
+
+        .financial-footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--financial-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Financial Responsive */
+        @media (max-width: 992px) {
+            .financial-nav-links {
+                display: none;
+            }
+
+            .financial-mobile-menu {
+                display: block;
+            }
+
+            .financial-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .financial-hero {
+                padding: 150px 0 80px;
+            }
+
+            .financial-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .financial-hero p {
+                font-size: 1.1rem;
+            }
+
+            .financial-section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .financial-services-combined {
+                grid-template-columns: 1fr;
+            }
+            
+            .financial-benefits-list {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .financial-hero {
+                padding: 120px 0 60px;
+            }
+
+            .financial-hero h1 {
+                font-size: 2rem;
+            }
+
+            .financial-btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Financial Header -->
+   {% include 'myapp/header.html' %}
+
+    <!-- Financial Hero Section -->
+    <section class="financial-hero">
+        <div class="financial-container">
+            <h1>Financial Services Solutions</h1>
+            <p>Transform your financial operations with our secure, compliant technology solutions designed to enhance customer experiences and streamline financial processes.</p>
+            <a href="#" class="financial-btn" onclick="scrollToSection()">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Financial Solutions Section -->
+    <!-- <section class="financial-solutions">
+        <div class="financial-container">
+            <div class="financial-section-title">
+                <h2>Tailored Solutions for Financial Institutions</h2>
+                <p>We understand the unique challenges of the financial industry and deliver customized solutions to address them.</p>
+            </div>
+            <div class="financial-solutions-grid">
+                <div class="financial-solution-card">
+                    <div class="financial-solution-img">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Digital Banking">
+                    </div>
+                    <div class="financial-solution-content">
+                        <h3>Digital Banking Solutions</h3>
+                        <p>Comprehensive platforms that enable secure online and mobile banking experiences for your customers.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="financial-solution-card">
+                    <div class="financial-solution-img">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Payment Processing">
+                    </div>
+                    <div class="financial-solution-content">
+                        <h3>Payment Processing</h3>
+                        <p>Secure, efficient payment solutions that streamline transactions and reduce processing costs.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="financial-solution-card">
+                    <div class="financial-solution-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Wealth Management">
+                    </div>
+                    <div class="financial-solution-content">
+                        <h3>Wealth Management Tools</h3>
+                        <p>Sophisticated platforms to help financial advisors deliver personalized investment strategies.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Financial Support Services Section -->
+    <section class="financial-support-services">
+        <div class="financial-container">
+            <div class="financial-section-title">
+                <h2>Financial Support Services</h2>
+                <p>Outsource critical financial services to focus on your core business while we handle the operations.</p>
+            </div>
+            <div class="financial-services-grid">
+                <div class="financial-service-card">
+                    <div class="financial-service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Customer Support</h3>
+                    <p>24/7 multilingual support for your banking customers with account inquiries and technical issues.</p>
+                </div>
+                <div class="financial-service-card">
+                    <div class="financial-service-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3>Loan Processing</h3>
+                    <p>End-to-end loan application processing and document verification services.</p>
+                </div>
+                <div class="financial-service-card">
+                    <div class="financial-service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Fraud Detection</h3>
+                    <p>Advanced monitoring and analysis to identify and prevent fraudulent activities.</p>
+                </div>
+                <div class="financial-service-card">
+                    <div class="financial-service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Investment Support</h3>
+                    <p>Assistance with portfolio management and investment research services.</p>
+                </div>
+                <div class="financial-service-card">
+                    <div class="financial-service-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Card Services</h3>
+                    <p>Comprehensive support for credit and debit card operations and disputes.</p>
+                </div>
+                <div class="financial-service-card">
+                    <div class="financial-service-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Compliance Services</h3>
+                    <p>Regulatory compliance monitoring and reporting to meet financial regulations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Extended Services Section -->
+    <section class="financial-extended-services">
+        <div class="financial-container">
+            <div class="financial-section-title">
+                <h2>Comprehensive Financial Services</h2>
+                <p>Beyond core banking, we offer specialized services to enhance your financial operations.</p>
+            </div>
+            
+            <div class="financial-services-combined">
+                <div class="financial-services-list">
+                    <h3>Additional Financial Services</h3>
+                    <ul class="financial-services-grid-list">
+                        <li>
+                            <i class="fas fa-file-alt"></i>
+                            <h4>Document Processing</h4>
+                            <p>Efficient handling of loan applications, account openings, and other financial documents.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <h4>Multilingual Support</h4>
+                            <p>Global customer service in multiple languages for international financial institutions.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-poll"></i>
+                            <h4>Financial Analytics</h4>
+                            <p>Advanced reporting and insights into customer behavior and financial trends.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-user-shield"></i>
+                            <h4>Identity Verification</h4>
+                            <p>Secure KYC (Know Your Customer) and identity verification services.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-comments-dollar"></i>
+                            <h4>Debt Collection</h4>
+                            <p>Professional and compliant debt collection services for financial institutions.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <h4>Claims Processing</h4>
+                            <p>Efficient handling of insurance claims and related documentation.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="financial-benefits-list">
+                    <h3>Advantages of Partnering With Value Connect Solutions</h3>
+                    <div class="financial-benefits-grid-cards">
+                        <div class="financial-benefit-card">
+                            <div class="financial-benefit-header">
+                                <i class="fas fa-lock"></i>
+                                <h4>Enhanced Security</h4>
+                            </div>
+                            <p>Bank-grade security protocols to protect sensitive financial data and transactions.</p>
+                        </div>
+                        <div class="financial-benefit-card">
+                            <div class="financial-benefit-header">
+                                <i class="fas fa-scale-balanced"></i>
+                                <h4>Regulatory Compliance</h4>
+                            </div>
+                            <p>Expertise in financial regulations including KYC, AML, and data protection standards.</p>
+                        </div>
+                        <div class="financial-benefit-card">
+                            <div class="financial-benefit-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>24/7 Availability</h4>
+                            </div>
+                            <p>Round-the-clock support for your global customer base across all time zones.</p>
+                        </div>
+                        <div class="financial-benefit-card">
+                            <div class="financial-benefit-header">
+                                <i class="fas fa-chart-pie"></i>
+                                <h4>Cost Efficiency</h4>
+                            </div>
+                            <p>Reduce operational costs while maintaining high-quality financial services.</p>
+                        </div>
+                        <div class="financial-benefit-card">
+                            <div class="financial-benefit-header">
+                                <i class="fas fa-expand"></i>
+                                <h4>Scalability</h4>
+                            </div>
+                            <p>Easily adjust resources to handle seasonal peaks or business growth.</p>
+                        </div>
+                        <div class="financial-benefit-card">
+                            <div class="financial-benefit-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Innovation</h4>
+                            </div>
+                            <p>Access to the latest financial technologies without capital investment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Benefits Section -->
+    <section class="financial-benefits">
+        <div class="financial-container">
+            <div class="financial-section-title">
+                <h2>Why Financial Institutions Choose Value Connect</h2>
+                <p>Our solutions deliver measurable results for banks, credit unions, and financial service providers.</p>
+            </div>
+            <div class="financial-benefits-grid">
+                <div class="financial-benefit-item">
+                    <div class="financial-benefit-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Improved CX</h3>
+                    <p>Enhance customer satisfaction with seamless, secure financial experiences.</p>
+                </div>
+                <div class="financial-benefit-item">
+                    <div class="financial-benefit-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Increased Efficiency</h3>
+                    <p>Streamline operations and reduce processing times for financial transactions.</p>
+                </div>
+                <div class="financial-benefit-item">
+                    <div class="financial-benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Reduced Risk</h3>
+                    <p>Minimize fraud and compliance risks with our secure solutions.</p>
+                </div>
+                <div class="financial-benefit-item">
+                    <div class="financial-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Revenue Growth</h3>
+                    <p>Drive new business and increase wallet share with innovative services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Testimonials -->
+    <!-- <section class="financial-testimonials">
+        <div class="financial-container">
+            <div class="financial-section-title">
+                <h2>What Our Financial Partners Say</h2>
+            </div>
+            <div class="financial-testimonial-slider">
+                <div class="financial-testimonial">
+                    <p class="financial-testimonial-text">"Value Connect's financial solutions helped us reduce customer service wait times by 40% while improving our first-call resolution rate. Their secure platform gave us confidence in handling sensitive financial data."</p>
+                    <p class="financial-testimonial-author">Sarah Johnson</p>
+                    <p class="financial-testimonial-role">VP of Operations, Community First Bank</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Financial CTA Section -->
+    <section class="financial-cta">
+        <div class="financial-container">
+            <h2>Ready to Transform Your Financial Services?</h2>
+            <p>Our team of financial technology experts is ready to help you implement solutions that drive efficiency and customer satisfaction.</p>
+            <a href="#" class="financial-btn">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <div id="target-section">
+        <!-- Include your contact form here -->
+         {% include 'myapp/index_countriesweserve.html' %}
+    </div>
+
+    <!-- Financial Footer -->
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.financial-mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.financial-nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Responsive adjustment for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                document.querySelector('.financial-nav-links').style.display = 'flex';
+            } else {
+                document.querySelector('.financial-nav-links').style.display = 'none';
+            }
+        });
+
+        // Auto-scroll function
+        function scrollToSection() {
+            document.getElementById('target-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

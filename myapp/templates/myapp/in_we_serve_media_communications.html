@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Media Global Styles */
+        :root {
+            --media-primary: #8e44ad;
+            --media-secondary: #333;
+            --media-accent: #f39c12;
+            --media-light: #f8f9fa;
+            --media-dark: #212529;
+            --media-white: #ffffff;
+            --media-gray: #6c757d;
+        }
+
+        /* Media Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--media-secondary);
+            background-color: var(--media-white);
+        }
+
+        /* Media Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--media-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--media-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--media-accent);
+        }
+
+        /* Media Layout */
+        .media-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Media Header */
+        .media-header {
+            background-color: var(--media-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .media-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .media-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--media-primary);
+        }
+
+        .media-logo span {
+            color: var(--media-accent);
+        }
+
+        .media-nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .media-nav-links li {
+            margin-left: 2rem;
+        }
+
+        .media-nav-links a {
+            font-weight: 600;
+        }
+
+        .media-mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Media Hero Section */
+        .media-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+            color: var(--media-white);
+        }
+
+        .media-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--media-white);
+        }
+
+        .media-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--media-white);
+        }
+
+        .media-btn {
+            display: inline-block;
+            background-color: var(--media-primary);
+            color: var(--media-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .media-btn:hover {
+            background-color: var(--media-accent);
+            color: var(--media-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media Solutions Section */
+        .media-solutions {
+            padding: 100px 0;
+        }
+
+        .media-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .media-section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .media-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--media-accent);
+        }
+
+        .media-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .media-solution-card {
+            background-color: var(--media-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .media-solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .media-solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .media-solution-card:hover .media-solution-img img {
+            transform: scale(1.1);
+        }
+
+        .media-solution-content {
+            padding: 25px;
+        }
+
+        .media-solution-content h3 {
+            margin-bottom: 15px;
+            color: var(--media-primary);
+        }
+
+        /* Media Benefits Section */
+        .media-benefits {
+            padding: 100px 0;
+            background-color: var(--media-light);
+        }
+
+        .media-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .media-benefit-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--media-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .media-benefit-icon {
+            font-size: 3rem;
+            color: var(--media-accent);
+            margin-bottom: 20px;
+        }
+
+        /* Media Support Services Section */
+        .media-support-services {
+            padding: 100px 0;
+        }
+
+        .media-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .media-service-card {
+            background-color: var(--media-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .media-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-service-icon {
+            font-size: 2.5rem;
+            color: var(--media-accent);
+            margin-bottom: 20px;
+        }
+
+        .media-service-card h3 {
+            margin-bottom: 15px;
+            color: var(--media-primary);
+        }
+
+        /* Media Extended Services Section */
+        .media-extended-services {
+            padding: 100px 0;
+            background-color: var(--media-white);
+        }
+
+        .media-services-combined {
+            display: grid;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .media-services-grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            list-style: none;
+        }
+
+        .media-services-grid-list li {
+            background-color: var(--media-light);
+            padding: 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .media-services-grid-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-services-grid-list i {
+            font-size: 1.8rem;
+            color: var(--media-accent);
+            margin-bottom: 15px;
+        }
+
+        .media-services-grid-list h4 {
+            color: var(--media-primary);
+            margin-bottom: 10px;
+        }
+
+        .media-benefits-list {
+            margin-top: 60px;
+        }
+
+        .media-benefits-grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .media-benefit-card {
+            background-color: var(--media-light);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--media-accent);
+        }
+
+        .media-benefit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .media-benefit-header i {
+            font-size: 1.5rem;
+            color: var(--media-accent);
+            margin-right: 15px;
+        }
+
+        .media-benefit-header h4 {
+            color: var(--media-primary);
+            margin-bottom: 0;
+        }
+
+        /* Media Testimonials */
+        .media-testimonials {
+            padding: 100px 0;
+            background-color: var(--media-light);
+        }
+
+        .media-testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .media-testimonial {
+            padding: 30px;
+        }
+
+        .media-testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .media-testimonial-author {
+            font-weight: 700;
+        }
+
+        .media-testimonial-role {
+            color: var(--media-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Media CTA Section */
+        .media-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--media-primary), #6c3483);
+            color: var(--media-white);
+            text-align: center;
+        }
+
+        .media-cta h2 {
+            color: var(--media-white);
+            margin-bottom: 30px;
+        }
+
+        .media-cta .media-btn {
+            background-color: var(--media-white);
+            color: var(--media-primary);
+        }
+
+        .media-cta .media-btn:hover {
+            background-color: var(--media-accent);
+            color: var(--media-white);
+        }
+
+        /* Media Footer */
+        .media-footer {
+            background-color: var(--media-dark);
+            color: var(--media-white);
+            padding: 60px 0 20px;
+        }
+
+        .media-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .media-footer-col h3 {
+            color: var(--media-white);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .media-footer-links {
+            list-style: none;
+        }
+
+        .media-footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .media-footer-links a {
+            color: var(--media-gray);
+        }
+
+        .media-footer-links a:hover {
+            color: var(--media-white);
+        }
+
+        .media-footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--media-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Media Responsive */
+        @media (max-width: 992px) {
+            .media-nav-links {
+                display: none;
+            }
+
+            .media-mobile-menu {
+                display: block;
+            }
+
+            .media-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .media-hero {
+                padding: 150px 0 80px;
+            }
+
+            .media-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .media-hero p {
+                font-size: 1.1rem;
+            }
+
+            .media-section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .media-services-combined {
+                grid-template-columns: 1fr;
+            }
+            
+            .media-benefits-list {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .media-hero {
+                padding: 120px 0 60px;
+            }
+
+            .media-hero h1 {
+                font-size: 2rem;
+            }
+
+            .media-btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Media Header -->
+    {% include 'myapp/header.html' %}
+
+    <!-- Media Hero Section -->
+    <section class="media-hero">
+        <div class="media-container">
+            <h1>Media & Communications Solutions</h1>
+            <p>Transform your media operations with our cutting-edge technology solutions designed to enhance content delivery, streamline production, and engage audiences across all channels.</p>
+            <a href="#" class="media-btn" onclick="scrollToSection()">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Media Solutions Section -->
+    <!-- <section class="media-solutions">
+        <div class="media-container">
+            <div class="media-section-title">
+                <h2>Tailored Solutions for Media Success</h2>
+                <p>We understand the unique challenges of the media industry and deliver customized solutions to address them.</p>
+            </div>
+            <div class="media-solutions-grid">
+                <div class="media-solution-card">
+                    <div class="media-solution-img">
+                        <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Content Management">
+                    </div>
+                    <div class="media-solution-content">
+                        <h3>Content Management Systems</h3>
+                        <p>Powerful platforms for creating, managing, and distributing digital content across multiple channels with ease.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="media-solution-card">
+                    <div class="media-solution-img">
+                        <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Broadcast Solutions">
+                    </div>
+                    <div class="media-solution-content">
+                        <h3>Broadcast Solutions</h3>
+                        <p>End-to-end solutions for live streaming, video on demand, and digital broadcasting with global reach.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="media-solution-card">
+                    <div class="media-solution-img">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Audience Engagement">
+                    </div>
+                    <div class="media-solution-content">
+                        <h3>Audience Engagement</h3>
+                        <p>Tools and platforms to build lasting relationships with your audience through personalized experiences.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Media Support Services Section -->
+    <section class="media-support-services">
+        <div class="media-container">
+            <div class="media-section-title">
+                <h2>Media Support Services</h2>
+                <p>Outsourcing media services allows companies to focus on content creation while we handle the operational support.</p>
+            </div>
+            <div class="media-services-grid">
+                <div class="media-service-card">
+                    <div class="media-service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Viewer Support</h3>
+                    <p>Round-the-clock assistance for your audience with technical issues and content inquiries.</p>
+                </div>
+                <div class="media-service-card">
+                    <div class="media-service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Social Media Management</h3>
+                    <p>Professional handling of your social media presence and audience interactions.</p>
+                </div>
+                <div class="media-service-card">
+                    <div class="media-service-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Media Monitoring</h3>
+                    <p>Comprehensive tracking and analysis of your media coverage across all channels.</p>
+                </div>
+                <div class="media-service-card">
+                    <div class="media-service-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Press & PR Support</h3>
+                    <p>Professional handling of media inquiries and press relations on your behalf.</p>
+                </div>
+                <div class="media-service-card">
+                    <div class="media-service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Content Moderation</h3>
+                    <p>Maintain the quality and safety of your user-generated content with our moderation services.</p>
+                </div>
+                <div class="media-service-card">
+                    <div class="media-service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Audience Analytics</h3>
+                    <p>Detailed reporting and insights into your audience behavior and preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Extended Services Section -->
+    <section class="media-extended-services">
+        <div class="media-container">
+            <div class="media-section-title">
+                <h2>Comprehensive Media Services You Can Outsource</h2>
+                <p>Beyond basic support, we offer a full spectrum of media solutions to streamline your operations and drive engagement.</p>
+            </div>
+            
+            <div class="media-services-combined">
+                <div class="media-services-list">
+                    <h3>Additional Media Support Services</h3>
+                    <ul class="media-services-grid-list">
+                        <li>
+                            <i class="fas fa-broadcast-tower"></i>
+                            <h4>Transcription Services</h4>
+                            <p>Accurate, timely transcription of your audio and video content for accessibility and repurposing.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-closed-captioning"></i>
+                            <h4>Captioning & Subtitling</h4>
+                            <p>Professional captioning services to make your content accessible to all audiences.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <h4>Localization Services</h4>
+                            <p>Adapt your content for global audiences with culturally appropriate translations.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-poll"></i>
+                            <h4>Audience Research</h4>
+                            <p>In-depth studies to understand your viewers' preferences and behaviors.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-ad"></i>
+                            <h4>Ad Operations Support</h4>
+                            <p>Management of your digital advertising campaigns and inventory.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-users"></i>
+                            <h4>Talent & Crew Coordination</h4>
+                            <p>End-to-end management of your production personnel needs.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="media-benefits-list">
+                    <h3>Advantages of Partnering With Value Connect Solutions</h3>
+                    <div class="media-benefits-grid-cards">
+                        <div class="media-benefit-card">
+                            <div class="media-benefit-header">
+                                <i class="fas fa-dollar-sign"></i>
+                                <h4>Cost Efficiency</h4>
+                            </div>
+                            <p>Reduce operational costs while maintaining high-quality media services with our scalable solutions.</p>
+                        </div>
+                        <div class="media-benefit-card">
+                            <div class="media-benefit-header">
+                                <i class="fas fa-microchip"></i>
+                                <h4>Cutting-Edge Technology</h4>
+                            </div>
+                            <p>Access the latest media tools and platforms without capital investment in technology infrastructure.</p>
+                        </div>
+                        <div class="media-benefit-card">
+                            <div class="media-benefit-header">
+                                <i class="fas fa-expand"></i>
+                                <h4>Global Scalability</h4>
+                            </div>
+                            <p>Easily adjust support levels for breaking news, live events, or seasonal content demands.</p>
+                        </div>
+                        <div class="media-benefit-card">
+                            <div class="media-benefit-header">
+                                <i class="fas fa-graduation-cap"></i>
+                                <h4>Industry Expertise</h4>
+                            </div>
+                            <p>Our media-specialized staff understands the unique needs of content creators and distributors.</p>
+                        </div>
+                        <div class="media-benefit-card">
+                            <div class="media-benefit-header">
+                                <i class="fas fa-bullseye"></i>
+                                <h4>Content Focus</h4>
+                            </div>
+                            <p>Free your creative teams to concentrate on producing great content while we handle operations.</p>
+                        </div>
+                        <div class="media-benefit-card">
+                            <div class="media-benefit-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>24/7 Availability</h4>
+                            </div>
+                            <p>Support your global audience around the clock with our worldwide team.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Benefits Section -->
+    <section class="media-benefits">
+        <div class="media-container">
+            <div class="media-section-title">
+                <h2>Why Media Companies Choose Value Connect</h2>
+                <p>Our solutions deliver measurable results for media organizations of all sizes.</p>
+            </div>
+            <div class="media-benefits-grid">
+                <div class="media-benefit-item">
+                    <div class="media-benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Audience Growth</h3>
+                    <p>Expand your reach and engagement with data-driven audience development strategies.</p>
+                </div>
+                <div class="media-benefit-item">
+                    <div class="media-benefit-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Operational Efficiency</h3>
+                    <p>Streamline workflows and reduce costs with optimized media operations.</p>
+                </div>
+                <div class="media-benefit-item">
+                    <div class="media-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Revenue Optimization</h3>
+                    <p>Maximize your monetization potential through advanced analytics and ad operations.</p>
+                </div>
+                <div class="media-benefit-item">
+                    <div class="media-benefit-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovative Solutions</h3>
+                    <p>Stay ahead with cutting-edge technologies for content delivery and audience engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Testimonials -->
+    <!-- <section class="media-testimonials">
+        <div class="media-container">
+            <div class="media-section-title">
+                <h2>What Our Media Partners Say</h2>
+            </div>
+            <div class="media-testimonial-slider">
+                <div class="media-testimonial">
+                    <p class="media-testimonial-text">"Value Connect's solutions transformed our digital newsroom operations, enabling us to publish breaking news 30% faster while maintaining our high editorial standards."</p>
+                    <p class="media-testimonial-author">Jennifer Parker</p>
+                    <p class="media-testimonial-role">Digital Editor, Global News Network</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Media CTA Section -->
+    <section class="media-cta">
+        <div class="media-container">
+            <h2>Ready to Transform Your Media Operations?</h2>
+            <p>Our team of media technology experts is ready to help you implement solutions that drive audience growth and operational efficiency.</p>
+            <a href="#" class="media-btn">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <div id="target-section">
+       {% include 'myapp/index_countriesweserve.html' %}
+    </div>
+
+    <!-- Media Footer -->
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.media-mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.media-nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Responsive adjustment for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                document.querySelector('.media-nav-links').style.display = 'flex';
+            } else {
+                document.querySelector('.media-nav-links').style.display = 'none';
+            }
+        });
+
+        // Auto-scroll function
+        function scrollToSection() {
+            document.getElementById('target-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

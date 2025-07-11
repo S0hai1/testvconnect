@@ -1,0 +1,110 @@
+{% load static %}
+<title>{{ title|default:"ValueConnectSolution - Your Success Is Our Mission" }}</title>
+
+<!-- Charset -->
+<meta charset="UTF-8">
+
+<!-- Viewport (for responsive design) -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Basic Meta Tags -->
+<meta name="description" content="{{ meta_description|default:'ValueConnectSolution - Empowering your digital success with expert IT solutions, consulting, and innovation.' }}">
+<meta name="keywords" content="{{ meta_keywords|default:'ValueConnectSolution, IT solutions, digital services, consulting, tech agency, software development' }}">
+<meta name="author" content="{{ meta_author|default:'ValueConnectSolution Team' }}">
+<meta name="language" content="en">
+<meta name="robots" content="index, follow">
+
+
+<link rel="alternate" hreflang="en" href="https://valueconnectsolutions.org/" />
+<link rel="alternate" hreflang="en-us" href="https://valueconnectsolutions.org/" />
+<link rel="alternate" hreflang="en-gb" href="https://valueconnectsolutions.org/" />
+<link rel="alternate" hreflang="en-ca" href="https://valueconnectsolutions.org/" />
+<link rel="alternate" hreflang="en-au" href="https://valueconnectsolutions.org/" />
+<link rel="alternate" hreflang="en-in" href="https://valueconnectsolutions.org/" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ canonical_url|default:request.build_absolute_uri }}">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="{{ og_title|default:'ValueConnectSolution - Your Success Is Our Mission' }}">
+<meta property="og:description" content="{{ og_description|default:'Empowering your digital success with expert IT solutions, consulting, and innovation.' }}">
+<meta property="og:image" content="{% static og_image|default:'myapp/images/og-image.jpg' %}">
+<meta property="og:url" content="{{ og_url|default:'https://www.valueconnectsolution.com' }}">
+<meta property="og:type" content="{{ og_type|default:'website' }}">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ twitter_title|default:'ValueConnectSolution' }}">
+<meta name="twitter:description" content="{{ twitter_description|default:'Empowering your digital success with expert IT solutions, consulting, and innovation.' }}">
+<meta name="twitter:image" content="{% static twitter_image|default:'myapp/images/twitter-card.jpg' %}">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="{% static favicon|default:'myapp/images/favicon.png' %}">
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7QMKZX7T22"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7QMKZX7T22');
+</script>
+
+
+<!-- Theme Color (for mobile browser UI) -->
+<meta name="theme-color" content="#0d6efd">
+
+<!-- Structured Data: Organization (Schema.org) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "ValueConnectSolution",
+  "url": "https://valueconnectsolutions.org",
+  "logo": "https://valueconnectsolutions.org/static/myapp/images/logo.png",
+  "image": "https://valueconnectsolutions.org/static/myapp/images/office.jpg",
+  "description": "Empowering your digital success with expert IT solutions, consulting, and innovation.",
+  "telephone": "+91 8879530494",
+  "email": "info@valueconnectsolutions.org",
+  "priceRange": "$$",
+  "areaServed": [
+    { "@type": "Country", "name": "United States" },
+    { "@type": "Country", "name": "Canada" },
+    { "@type": "Country", "name": "United Kingdom" },
+    { "@type": "Country", "name": "Australia" },
+    { "@type": "Country", "name": "India" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Tech Park Road, Sector 5",
+    "addressLocality": "Mumbai",
+    "addressRegion": "MH",
+    "postalCode": "400001",
+    "addressCountry": "IN"
+  },
+  "openingHours": [
+    "Mo-Fr 09:00-18:00",
+    "Sa 10:00-14:00"
+  ],
+  "sameAs": [
+    "https://www.facebook.com/yourpage",
+    "https://twitter.com/yourhandle",
+    "https://www.linkedin.com/company/yourcompany"
+  ],
+  "serviceType": [
+    "Inbound Call Center Services",
+    "Technical Support",
+    "Order Processing",
+    "Customer Service Outsourcing",
+    "Lead Generation",
+    "Telemarketing",
+    "Appointment Setting",
+    "Back Office Support",
+    "Data Entry & Mining",
+    "Software & App Support",
+    "Website Design and Development"
+  ]
+}
+</script>

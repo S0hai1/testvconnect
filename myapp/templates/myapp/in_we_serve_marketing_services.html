@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Marketing Global Styles */
+        :root {
+            --marketing-primary: #e74c3c;
+            --marketing-secondary: #333;
+            --marketing-accent: #f1c40f;
+            --marketing-light: #f8f9fa;
+            --marketing-dark: #212529;
+            --marketing-white: #ffffff;
+            --marketing-gray: #6c757d;
+        }
+
+        /* Marketing Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--marketing-secondary);
+            background-color: var(--marketing-white);
+        }
+
+        /* Marketing Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--marketing-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--marketing-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--marketing-accent);
+        }
+
+        /* Marketing Layout */
+        .marketing-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Marketing Header */
+        .marketing-header {
+            background-color: var(--marketing-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .marketing-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .marketing-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--marketing-primary);
+        }
+
+        .marketing-logo span {
+            color: var(--marketing-accent);
+        }
+
+        .marketing-nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .marketing-nav-links li {
+            margin-left: 2rem;
+        }
+
+        .marketing-nav-links a {
+            font-weight: 600;
+        }
+
+        .marketing-mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Marketing Hero Section */
+        .marketing-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.7)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+            color: var(--marketing-white);
+        }
+
+        .marketing-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--marketing-white);
+        }
+
+        .marketing-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--marketing-white);
+        }
+
+        .marketing-btn {
+            display: inline-block;
+            background-color: var(--marketing-primary);
+            color: var(--marketing-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .marketing-btn:hover {
+            background-color: var(--marketing-accent);
+            color: var(--marketing-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Marketing Solutions Section */
+        .marketing-solutions {
+            padding: 100px 0;
+        }
+
+        .marketing-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .marketing-section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .marketing-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--marketing-accent);
+        }
+
+        .marketing-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .marketing-solution-card {
+            background-color: var(--marketing-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .marketing-solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .marketing-solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .marketing-solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .marketing-solution-card:hover .marketing-solution-img img {
+            transform: scale(1.1);
+        }
+
+        .marketing-solution-content {
+            padding: 25px;
+        }
+
+        .marketing-solution-content h3 {
+            margin-bottom: 15px;
+            color: var(--marketing-primary);
+        }
+
+        /* Marketing Benefits Section */
+        .marketing-benefits {
+            padding: 100px 0;
+            background-color: var(--marketing-light);
+        }
+
+        .marketing-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .marketing-benefit-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--marketing-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .marketing-benefit-icon {
+            font-size: 3rem;
+            color: var(--marketing-accent);
+            margin-bottom: 20px;
+        }
+
+        /* Marketing Support Services Section */
+        .marketing-support-services {
+            padding: 100px 0;
+        }
+
+        .marketing-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .marketing-service-card {
+            background-color: var(--marketing-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .marketing-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .marketing-service-icon {
+            font-size: 2.5rem;
+            color: var(--marketing-accent);
+            margin-bottom: 20px;
+        }
+
+        .marketing-service-card h3 {
+            margin-bottom: 15px;
+            color: var(--marketing-primary);
+        }
+
+        /* Marketing Extended Services Section */
+        .marketing-extended-services {
+            padding: 100px 0;
+            background-color: var(--marketing-white);
+        }
+
+        .marketing-services-combined {
+            display: grid;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .marketing-services-grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            list-style: none;
+        }
+
+        .marketing-services-grid-list li {
+            background-color: var(--marketing-light);
+            padding: 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .marketing-services-grid-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .marketing-services-grid-list i {
+            font-size: 1.8rem;
+            color: var(--marketing-accent);
+            margin-bottom: 15px;
+        }
+
+        .marketing-services-grid-list h4 {
+            color: var(--marketing-primary);
+            margin-bottom: 10px;
+        }
+
+        .marketing-benefits-list {
+            margin-top: 60px;
+        }
+
+        .marketing-benefits-grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .marketing-benefit-card {
+            background-color: var(--marketing-light);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--marketing-accent);
+        }
+
+        .marketing-benefit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .marketing-benefit-header i {
+            font-size: 1.5rem;
+            color: var(--marketing-accent);
+            margin-right: 15px;
+        }
+
+        .marketing-benefit-header h4 {
+            color: var(--marketing-primary);
+            margin-bottom: 0;
+        }
+
+        /* Marketing Testimonials */
+        .marketing-testimonials {
+            padding: 100px 0;
+            background-color: var(--marketing-light);
+        }
+
+        .marketing-testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .marketing-testimonial {
+            padding: 30px;
+        }
+
+        .marketing-testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .marketing-testimonial-author {
+            font-weight: 700;
+        }
+
+        .marketing-testimonial-role {
+            color: var(--marketing-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Marketing CTA Section */
+        .marketing-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--marketing-primary), #c0392b);
+            color: var(--marketing-white);
+            text-align: center;
+        }
+
+        .marketing-cta h2 {
+            color: var(--marketing-white);
+            margin-bottom: 30px;
+        }
+
+        .marketing-cta .marketing-btn {
+            background-color: var(--marketing-white);
+            color: var(--marketing-primary);
+        }
+
+        .marketing-cta .marketing-btn:hover {
+            background-color: var(--marketing-accent);
+            color: var(--marketing-white);
+        }
+
+        /* Marketing Footer */
+        .marketing-footer {
+            background-color: var(--marketing-dark);
+            color: var(--marketing-white);
+            padding: 60px 0 20px;
+        }
+
+        .marketing-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .marketing-footer-col h3 {
+            color: var(--marketing-white);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .marketing-footer-links {
+            list-style: none;
+        }
+
+        .marketing-footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .marketing-footer-links a {
+            color: var(--marketing-gray);
+        }
+
+        .marketing-footer-links a:hover {
+            color: var(--marketing-white);
+        }
+
+        .marketing-footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--marketing-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Marketing Responsive */
+        @media (max-width: 992px) {
+            .marketing-nav-links {
+                display: none;
+            }
+
+            .marketing-mobile-menu {
+                display: block;
+            }
+
+            .marketing-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .marketing-hero {
+                padding: 150px 0 80px;
+            }
+
+            .marketing-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .marketing-hero p {
+                font-size: 1.1rem;
+            }
+
+            .marketing-section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .marketing-services-combined {
+                grid-template-columns: 1fr;
+            }
+            
+            .marketing-benefits-list {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .marketing-hero {
+                padding: 120px 0 60px;
+            }
+
+            .marketing-hero h1 {
+                font-size: 2rem;
+            }
+
+            .marketing-btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Marketing Header -->
+    {% include 'myapp/header.html' %}
+
+    <!-- Marketing Hero Section -->
+    <section class="marketing-hero">
+        <div class="marketing-container">
+            <h1>Marketing Services Solutions</h1>
+            <p>Elevate your marketing strategy with our comprehensive solutions designed to boost engagement, increase conversions, and maximize ROI across all channels.</p>
+            <a href="#" class="marketing-btn" onclick="scrollToSection()">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Marketing Solutions Section -->
+    <section class="marketing-solutions">
+        <div class="marketing-container">
+            <div class="marketing-section-title">
+                <h2>Innovative Marketing Solutions</h2>
+                <p>We understand the evolving challenges of modern marketing and deliver customized solutions to address them.</p>
+            </div>
+            <div class="marketing-solutions-grid">
+                <div class="marketing-solution-card">
+                    <div class="marketing-solution-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Digital Marketing">
+                    </div>
+                    <div class="marketing-solution-content">
+                        <h3>Digital Marketing</h3>
+                        <p>End-to-end digital marketing solutions including SEO, PPC, social media, and content marketing to grow your online presence.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="marketing-solution-card">
+                    <div class="marketing-solution-img">
+                        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Marketing Automation">
+                    </div>
+                    <div class="marketing-solution-content">
+                        <h3>Marketing Automation</h3>
+                        <p>Streamline your marketing workflows with powerful automation tools that nurture leads and personalize customer journeys.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="marketing-solution-card">
+                    <div class="marketing-solution-img">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Analytics & Insights">
+                    </div>
+                    <div class="marketing-solution-content">
+                        <h3>Analytics & Insights</h3>
+                        <p>Data-driven marketing strategies powered by advanced analytics and actionable insights.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Support Services Section -->
+    <section class="marketing-support-services">
+        <div class="marketing-container">
+            <div class="marketing-section-title">
+                <h2>Marketing Support Services</h2>
+                <p>Outsource your marketing operations to focus on strategy while we handle the execution.</p>
+            </div>
+            <div class="marketing-services-grid">
+                <div class="marketing-service-card">
+                    <div class="marketing-service-icon">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <h3>Campaign Management</h3>
+                    <p>End-to-end management of your digital and traditional marketing campaigns.</p>
+                </div>
+                <div class="marketing-service-card">
+                    <div class="marketing-service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Lead Generation</h3>
+                    <p>Targeted strategies to identify and qualify high-potential leads for your business.</p>
+                </div>
+                <div class="marketing-service-card">
+                    <div class="marketing-service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Social Media Management</h3>
+                    <p>Professional handling of your social media presence and community engagement.</p>
+                </div>
+                <div class="marketing-service-card">
+                    <div class="marketing-service-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Marketing</h3>
+                    <p>Design, execution, and optimization of email campaigns that convert.</p>
+                </div>
+                <div class="marketing-service-card">
+                    <div class="marketing-service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>SEO Services</h3>
+                    <p>Comprehensive search engine optimization to improve your organic visibility.</p>
+                </div>
+                <div class="marketing-service-card">
+                    <div class="marketing-service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Performance Analytics</h3>
+                    <p>Detailed reporting and insights to measure and optimize your marketing ROI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Extended Services Section -->
+    <section class="marketing-extended-services">
+        <div class="marketing-container">
+            <div class="marketing-section-title">
+                <h2>Comprehensive Marketing Services</h2>
+                <p>Beyond core marketing, we offer specialized services to enhance your marketing operations.</p>
+            </div>
+            
+            <div class="marketing-services-combined">
+                <div class="marketing-services-list">
+                    <h3>Additional Marketing Services</h3>
+                    <ul class="marketing-services-grid-list">
+                        <li>
+                            <i class="fas fa-bullhorn"></i>
+                            <h4>Content Creation</h4>
+                            <p>Professional development of blogs, videos, infographics, and other marketing content.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <h4>Localization Services</h4>
+                            <p>Adapt your marketing materials for global audiences with culturally appropriate translations.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-poll"></i>
+                            <h4>Market Research</h4>
+                            <p>In-depth studies to understand your target audience and competitive landscape.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-user-tie"></i>
+                            <h4>ABM Strategies</h4>
+                            <p>Account-based marketing approaches to target high-value clients.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>SMS Marketing</h4>
+                            <p>Direct mobile messaging campaigns with high open and response rates.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-gem"></i>
+                            <h4>Brand Strategy</h4>
+                            <p>Comprehensive brand development and positioning services.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="marketing-benefits-list">
+                    <h3>Advantages of Partnering With Value Connect Solutions</h3>
+                    <div class="marketing-benefits-grid-cards">
+                        <div class="marketing-benefit-card">
+                            <div class="marketing-benefit-header">
+                                <i class="fas fa-dollar-sign"></i>
+                                <h4>Cost Efficiency</h4>
+                            </div>
+                            <p>Reduce marketing operational costs while maintaining high-quality execution with our scalable solutions.</p>
+                        </div>
+                        <div class="marketing-benefit-card">
+                            <div class="marketing-benefit-header">
+                                <i class="fas fa-rocket"></i>
+                                <h4>Scalable Resources</h4>
+                            </div>
+                            <p>Quickly scale your marketing team up or down based on campaign needs and seasonal demands.</p>
+                        </div>
+                        <div class="marketing-benefit-card">
+                            <div class="marketing-benefit-header">
+                                <i class="fas fa-trophy"></i>
+                                <h4>Proven Expertise</h4>
+                            </div>
+                            <p>Access specialized marketing skills and knowledge without the overhead of full-time hires.</p>
+                        </div>
+                        <div class="marketing-benefit-card">
+                            <div class="marketing-benefit-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>24/7 Availability</h4>
+                            </div>
+                            <p>Global support ensures your marketing operations continue around the clock.</p>
+                        </div>
+                        <div class="marketing-benefit-card">
+                            <div class="marketing-benefit-header">
+                                <i class="fas fa-chart-pie"></i>
+                                <h4>Data-Driven Results</h4>
+                            </div>
+                            <p>Advanced analytics and reporting to continuously optimize your marketing performance.</p>
+                        </div>
+                        <div class="marketing-benefit-card">
+                            <div class="marketing-benefit-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Innovative Approaches</h4>
+                            </div>
+                            <p>Stay ahead with cutting-edge marketing technologies and strategies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Benefits Section -->
+    <section class="marketing-benefits">
+        <div class="marketing-container">
+            <div class="marketing-section-title">
+                <h2>Why Marketing Teams Choose Value Connect</h2>
+                <p>Our solutions deliver measurable results for marketing departments and agencies.</p>
+            </div>
+            <div class="marketing-benefits-grid">
+                <div class="marketing-benefit-item">
+                    <div class="marketing-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Increased Conversions</h3>
+                    <p>Drive more qualified leads and higher conversion rates with optimized marketing strategies.</p>
+                </div>
+                <div class="marketing-benefit-item">
+                    <div class="marketing-benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Faster Execution</h3>
+                    <p>Launch campaigns quicker with our ready-to-go marketing resources and expertise.</p>
+                </div>
+                <div class="marketing-benefit-item">
+                    <div class="marketing-benefit-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3>Better ROI</h3>
+                    <p>Maximize your marketing budget with data-driven strategies that deliver results.</p>
+                </div>
+                <div class="marketing-benefit-item">
+                    <div class="marketing-benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Enhanced Engagement</h3>
+                    <p>Create meaningful connections with your audience through personalized marketing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Testimonials -->
+    <!-- <section class="marketing-testimonials">
+        <div class="marketing-container">
+            <div class="marketing-section-title">
+                <h2>What Our Marketing Partners Say</h2>
+            </div>
+            <div class="marketing-testimonial-slider">
+                <div class="marketing-testimonial">
+                    <p class="marketing-testimonial-text">"Value Connect's marketing services helped us increase our lead conversion rate by 45% while reducing our customer acquisition costs by 30%. Their data-driven approach transformed our marketing strategy."</p>
+                    <p class="marketing-testimonial-author">Michael Johnson</p>
+                    <p class="marketing-testimonial-role">CMO, TechForward Solutions</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Marketing CTA Section -->
+    <section class="marketing-cta">
+        <div class="marketing-container">
+            <h2>Ready to Transform Your Marketing Results?</h2>
+            <p>Our team of marketing experts is ready to help you implement solutions that drive growth and engagement.</p>
+            <a href="#" class="marketing-btn">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <div id="target-section">
+        <!-- Include your contact form here -->
+       {% include 'myapp/index_countriesweserve.html' %}
+    </div>
+
+    <!-- Marketing Footer -->
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.marketing-mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.marketing-nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Responsive adjustment for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                document.querySelector('.marketing-nav-links').style.display = 'flex';
+            } else {
+                document.querySelector('.marketing-nav-links').style.display = 'none';
+            }
+        });
+
+        // Auto-scroll function
+        function scrollToSection() {
+            document.getElementById('target-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

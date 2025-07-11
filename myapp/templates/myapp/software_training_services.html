@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Change text/icon colors when */
+        .navbar .logo .text-select,
+        .navbar .logo .text-voicecom,
+        .navbar .nav-item>a,
+        .navbar .search-icon,
+        .navbar .lang {
+            color: var(--text-color-dark);
+        }
+
+        .navbar .hamburger-menu span {
+            background-color: var(--text-color-dark);
+        }
+
+        /* Hero Section with Background Image */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background-image: url('{% static "myapp/images/outsourcing1.webp" %}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* This creates the parallax effect */
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for better text readability */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+            padding: 0 30px;
+            padding-top: 140px;
+            padding-bottom: 60px;
+            background-color: white;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            padding-left: 60px;
+        }
+
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                background-attachment: scroll;
+                /* Disable parallax on mobile for better performance */
+            }
+
+            .hero-content {
+                padding: 0 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+
+        /* Main container styles */
+        .main-container {
+            max-width: 1440px;
+            /* max-w-7xl */
+            margin-left: auto;
+            /* mx-auto */
+            margin-right: auto;
+            /* mx-auto */
+            background-color: #ffffff;
+            /* bg-white */
+            border-radius: 0.75rem;
+            /* rounded-xl */
+            padding: 1.5rem;
+            /* p-6 */
+        }
+
+        /* Responsive padding for main container */
+        @media (min-width: 640px) {
+
+            /* sm */
+            .main-container {
+                padding: 2rem;
+                /* sm:p-8 */
+            }
+        }
+
+        @media (min-width: 768px) {
+
+            /* md */
+            .main-container {
+                padding: 2.5rem;
+                /* md:p-10 */
+            }
+        }
+
+        @media (min-width: 1024px) {
+
+            /* lg */
+            .main-container {
+                padding: 3rem;
+                /* lg:p-12 */
+            }
+        }
+
+        /* Introduction paragraph */
+        .intro-paragraph {
+            font-size: 0.875rem;
+            /* text-sm */
+            color: #4a5568;
+            /* text-gray-700 */
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+            line-height: 1.625;
+            /* leading-relaxed */
+        }
+
+        /* Responsive font size for intro paragraph */
+        @media (min-width: 640px) {
+
+            /* sm */
+            .intro-paragraph {
+                font-size: 1rem;
+                /* sm:text-base */
+            }
+        }
+
+        /* Main heading */
+        .main-heading {
+            font-size: 1.5rem;
+            /* text-2xl */
+            font-weight: 800;
+            /* font-extrabold */
+            color: #1a202c;
+            /* text-gray-900 */
+            margin-bottom: 2rem;
+            /* border-b-2 border-blue-600 */
+            padding-bottom: 1rem;
+            /* pb-4 */
+        }
+
+        /* Responsive font size for main heading */
+        @media (min-width: 640px) {
+
+            /* sm */
+            .main-heading {
+                font-size: 1.875rem;
+                /* sm:text-3xl */
+            }
+        }
+
+        @media (min-width: 768px) {
+
+            /* md */
+            .main-heading {
+                font-size: 2.5rem;
+                /* md:text-4xl */
+            }
+        }
+
+        /* Services introduction paragraph */
+        .services-intro {
+            font-size: 1rem;
+            /* text-base */
+            color: #2d3748;
+            /* text-gray-800 */
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+            line-height: 1.625;
+            /* leading-relaxed */
+        }
+
+        /* Responsive font size for services intro */
+        @media (min-width: 640px) {
+
+            /* sm */
+            .services-intro {
+                font-size: 1.125rem;
+                /* sm:text-lg */
+            }
+        }
+
+        /* Services list */
+        .services-list {
+            list-style: none;
+            /* Remove default bullet points */
+            padding: 0;
+            margin-bottom: 2.5rem;
+            /* mb-10 */
+        }
+
+        .services-list li {
+            display: flex;
+            /* flex */
+            align-items: flex-start;
+            /* items-start */
+            margin-bottom: 1rem;
+            /* space-y-4 equivalent for list items */
+        }
+
+        .services-list li:last-child {
+            margin-bottom: 0;
+            /* No margin for the last item */
+        }
+
+        .services-list .bullet {
+            color: #2563eb;
+            /* text-blue-600 */
+            font-weight: 700;
+            /* font-bold */
+            margin-right: 0.5rem;
+            /* mr-2 */
+            font-size: 1.25rem;
+            /* text-xl */
+            line-height: 1.5rem;
+            /* Adjust line height to align with text */
+        }
+
+        .services-list p {
+            color: #4a5568;
+            /* text-gray-700 */
+            font-size: 1rem;
+            /* text-base */
+        }
+
+        /* Responsive font size for service list items */
+        @media (min-width: 640px) {
+
+            /* sm */
+            .services-list p {
+                font-size: 1.125rem;
+                /* sm:text-lg */
+            }
+        }
+
+        .services-list strong {
+            color: #1a202c;
+            /* text-gray-900 */
+        }
+
+
+
+
+        /* Container for smaller images */
+        .smaller-images-grid {
+            display: grid;
+            /* grid */
+            grid-template-columns: 1fr;
+            /* grid-cols-1 */
+            gap: 1.5rem;
+            /* gap-6 */
+        }
+
+
+
+
+        .reasons-section {
+            color: white;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            padding: 40px 20px;
+        }
+
+        .container,
+        .section-container {
+            max-width: 1344px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-wrapper {
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .reasons-list {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .reason {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .reason-number {
+            font-weight: bold;
+            color: #fbbf24;
+            margin-right: 8px;
+        }
+
+        .reason-title {
+            font-weight: bold;
+            display: inline;
+        }
+
+        .reason-text {
+            margin-left: 20px;
+            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+
+        .images-section {
+            flex: 0 0 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .image-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 280px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280"><rect width="400" height="280" fill="%23f3f4f6"/><rect x="50" y="50" width="300" height="180" fill="%23e5e7eb" rx="10"/><circle cx="120" cy="140" r="30" fill="%23d1d5db"/><rect x="170" y="120" width="80" height="8" fill="%23d1d5db" rx="4"/><rect x="170" y="140" width="120" height="8" fill="%23d1d5db" rx="4"/><rect x="170" y="160" width="100" height="8" fill="%23d1d5db" rx="4"/></svg>') center/cover;
+        }
+
+        .side-images {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .side-image {
+            width: 100%;
+            height: 130px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 130"><rect width="350" height="130" fill="%23f9fafb"/><rect x="20" y="20" width="310" height="90" fill="%23e5e7eb" rx="8"/><circle cx="80" cy="65" r="20" fill="%23d1d5db"/><rect x="120" y="50" width="60" height="6" fill="%23d1d5db" rx="3"/><rect x="120" y="65" width="80" height="6" fill="%23d1d5db" rx="3"/><rect x="120" y="80" width="70" height="6" fill="%23d1d5db" rx="3"/></svg>') center/cover;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .images-section {
+                flex: none;
+                width: 100%;
+            }
+
+            .side-images {
+                flex-direction: row;
+                gap: 15px;
+            }
+
+            .side-image {
+                width: 48%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            .side-images {
+                flex-direction: column;
+            }
+
+            .side-image {
+                width: 100%;
+            }
+        }
+
+        .why-choose-section {
+            padding: 60px 20px;
+            background: white;
+            color: #1f2937;
+        }
+
+        .why-choose-section h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #1f2937;
+            text-shadow: none;
+        }
+
+        .why-choose-content {
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .why-choose-text {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .why-choose-text p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .why-choose-images {
+            flex: 0 0 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .why-main-image {
+            width: 100%;
+            height: 240px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .why-side-images {
+            display: flex;
+            gap: 15px;
+        }
+
+        .why-side-images .placeholder-image {
+            width: 48%;
+            height: 100px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-placeholder {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240"><rect width="320" height="240" fill="%23f8fafc"/><rect x="40" y="40" width="240" height="160" fill="%23e2e8f0" rx="10"/><circle cx="120" cy="120" r="25" fill="%23cbd5e1"/><rect x="160" y="100" width="80" height="8" fill="%23cbd5e1" rx="4"/><rect x="160" y="120" width="100" height="8" fill="%23cbd5e1" rx="4"/><rect x="160" y="140" width="90" height="8" fill="%23cbd5e1" rx="4"/></svg>') center/cover;
+        }
+
+        .side-placeholder {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 100"><rect width="150" height="100" fill="%23f1f5f9"/><rect x="15" y="15" width="120" height="70" fill="%23e2e8f0" rx="6"/><circle cx="50" cy="50" r="15" fill="%23cbd5e1"/><rect x="75" y="40" width="40" height="5" fill="%23cbd5e1" rx="2"/><rect x="75" y="50" width="50" height="5" fill="%23cbd5e1" rx="2"/><rect x="75" y="60" width="45" height="5" fill="%23cbd5e1" rx="2"/></svg>') center/cover;
+        }
+
+        @media (max-width: 768px) {
+            .why-choose-content {
+                flex-direction: column;
+            }
+
+            .why-choose-images {
+                flex: none;
+                width: 100%;
+            }
+
+            .why-side-images {
+                flex-direction: row;
+                gap: 15px;
+            }
+
+            .why-side-images .placeholder-image {
+                width: 48%;
+            }
+
+            .why-choose-section {
+                margin-top: 40px;
+                padding: 30px 20px;
+            }
+
+            .why-choose-section h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .why-choose-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .why-side-images {
+                flex-direction: column;
+            }
+
+            .why-side-images .placeholder-image {
+                width: 100%;
+            }
+        }
+
+
+
+
+        .gallery-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .image-gallery {
+            display: grid;
+            gap: 15px;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            height: 500px;
+        }
+
+        .image-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover {
+            transform: scale(1.02);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .big-image {
+            grid-row: 1 / -1;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        }
+
+        .side-image-1 {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+        }
+
+        .side-image-2 {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+        }
+
+        .side-image-3 {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+        }
+
+        /* Tablet styles - horizontal line */
+        @media (max-width: 768px) {
+            .image-gallery {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: 1fr;
+                height: 250px;
+            }
+
+            .big-image {
+                grid-row: 1;
+            }
+        }
+
+        /* Mobile styles - vertical stack */
+        @media (max-width: 480px) {
+            .image-gallery {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 200px);
+                height: auto;
+            }
+
+            .big-image {
+                grid-row: 1;
+            }
+
+            .image-item {
+                border-radius: 15px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .gallery-wrapper {
+                padding: 0 10px;
+            }
+
+            .image-gallery {
+                gap: 10px;
+                grid-template-rows: repeat(4, 150px);
+            }
+
+            .image-item {
+                border-radius: 10px;
+            }
+        }
+
+        .placeholder-text {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .placeholder-text {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .placeholder-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Software Training Services</h1>
+        </div>
+    </div>
+
+
+    <div class="main-container">
+
+        <h1 class="main-heading">
+            Maximize Efficiency With Outsourced Software Training Services From Value ConnectSolutions
+        </h1>
+
+        <p class="intro-paragraph">
+            In today's fast-paced business environment, practical software training is essential to keep your team
+            proficient and your operations running smoothly. More businesses are discovering the value of outsourcing
+            software training to experts who can deliver high-quality instruction without the overhead costs. Select
+            VoiceCom Call Center offers comprehensive software training services using state-of-the-art technology and
+            multiple learning methods, all supported by real, live experts for personalized problem-solving.
+        </p>
+
+        <p class="intro-paragraph">
+            We design our software training programs to get beginners up to speed quickly and help advanced users unlock
+            the full potential of your software. With well-trained employees, your business can achieve higher
+            productivity, fewer errors, and greater customer satisfaction.
+        </p>
+
+        <!-- Main Heading -->
+        <h1 class="main-heading">
+            Comprehensive Software Training Services
+        </h1>
+
+        <!-- Services Introduction -->
+        <p class="services-intro">
+            At Value ConnectSolutions, we tailor our software training services to meet your needs, ensuring your team is
+            equipped with the skills needed to succeed. Our offerings include:
+        </p>
+
+        <!-- Services List -->
+        <ul class="services-list">
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>New Software Setup and Installation:</strong> We will install and configure your software to
+                    ensure a fully functional system with no bugs or issues.
+                </p>
+            </li>
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>Software Troubleshooting:</strong> Our experts remotely scan your computers to diagnose and
+                    resolve any software problems.
+                </p>
+            </li>
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>On-Demand Tutorials:</strong> Access video tutorials that cover common software topics and
+                    help users understand key features.
+                </p>
+            </li>
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>Webinars:</strong> Participate in live, expert-led webinars that bring the learning
+                    experience directly to you.
+                </p>
+            </li>
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>Live Classes:</strong> Attend traditional classes remotely, combining the best of in-person
+                    and online learning.
+                </p>
+            </li>
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>Coaching:</strong> Receive personalized coaching for team leaders or employees who need
+                    extra support, via phone, webconference or email.
+                </p>
+            </li>
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>Live Session Tutorials:</strong> Our instructors provide one-on-one, hands-on training
+                    through screen capture tools.
+                </p>
+            </li>
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>Consulting:</strong> Need specialized training materials or customized software documents?
+                    Our experts can assist with that too.
+                </p>
+            </li>
+            <li>
+                <span class="bullet">&bull;</span>
+                <p>
+                    <strong>Follow-Up Training:</strong> Ensure your team meets specific training goals with our ongoing
+                    support and assessments.
+                </p>
+            </li>
+        </ul>
+
+        <!-- Image Gallery Section -->
+        <div class="gallery-wrapper">
+    <div class="image-gallery">
+        <div class="image-item big-image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Team Photo - Software Training Team">
+        </div>
+        <div class="image-item side-image-1">
+            <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" alt="Call Center Support">
+        </div>
+        <div class="image-item side-image-2">
+            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Office Meeting">
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <div class="reasons-section">
+        <div class="section-container">
+            <h1>7 Reasons To Outsource Software Training</h1>
+
+            <div class="content-wrapper">
+                <div class="reasons-list">
+                    <div class="reason">
+                        <span class="reason-number">1.</span>
+                        <span class="reason-title">Access to Expert Trainers:</span>
+                        <div class="reason-text">Software training is critical, but it's not a core function for most
+                            businesses. By outsourcing, you gain access to industry-leading trainers who specialize in
+                            software education.</div>
+                    </div>
+
+                    <div class="reason">
+                        <span class="reason-number">2.</span>
+                        <span class="reason-title">Fresh Perspectives:</span>
+                        <div class="reason-text">Outsourcing brings new ideas and innovative approaches to training,
+                            helping your business stay ahead of the curve.</div>
+                    </div>
+
+                    <div class="reason">
+                        <span class="reason-number">3.</span>
+                        <span class="reason-title">Flexibility and Scalability:</span>
+                        <div class="reason-text">Whether you need to train a few employees now or a larger group later,
+                            outsourcing offers the flexibility to scale your training efforts as required without
+                            maintaining a full-time training staff.</div>
+                    </div>
+
+                    <div class="reason">
+                        <span class="reason-number">4.</span>
+                        <span class="reason-title">Faster Implementation:</span>
+                        <div class="reason-text">Tight deadlines require quick, efficient training. Our services ensure
+                            your workforce is up to speed on new software systems without delays, helping you bring
+                            products and services to market faster.</div>
+                    </div>
+
+                    <div class="reason">
+                        <span class="reason-number">5.</span>
+                        <span class="reason-title">Reduced Risk:</span>
+                        <div class="reason-text">Partnering with a specialized firm like Value ConnectSolutions ensures that
+                            your software training is administered correctly the first time, minimizing the risk of
+                            errors and costly delays.</div>
+                    </div>
+
+                    <div class="reason">
+                        <span class="reason-number">6.</span>
+                        <span class="reason-title">Cost-Effective Talent:</span>
+                        <div class="reason-text">Our trainers are among the best in the
+                            industry, offering top-tier training at a fraction of the cost of similar services in the
+                            U.S.,Canada, U.K., or Australia.</div>
+                    </div>
+
+                    <div class="reason">
+                        <span class="reason-number">7.</span>
+                        <span class="reason-title">Improved Profitability:</span>
+                        <div class="reason-text">Research shows that companies that outsource vital functions, like
+                            software training, consistently outperform their competitors on crucial financial metrics,
+                            including operating income and return on assets.</div>
+                    </div>
+                </div>
+<div class="gallery-wrapper">
+    <div class="image-gallery">
+        <div class="image-item big-image">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Software Training Team">
+        </div>
+        <div class="image-item side-image-1">
+            <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Online Training Support">
+        </div>
+        <div class="image-item side-image-2">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Business Training Session">
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="why-choose-section">
+        <div class="section-container">
+            <h2>Why Choose Value ConnectSolutions for Your Software Training Needs?</h2>
+
+            <div class="why-choose-content">
+                <div class="why-choose-text">
+                    <p>Value ConnectSolutions Call Center, offers flexible, high-quality
+                        software training for small and mid-sized businesses. Our team has extensive experience working
+                        with some of the largest technology firms, and our trainers hold advanced computer degrees and
+                        specialized training certificates. We've successfully trained employees in various industries,
+                        including retail, healthcare, manufacturing, insurance, hospitality, finance, and more.</p>
+
+                    <p>With Value ConnectSolutions, you will benefit from fully documented, personalized training that aligns
+                        with your company's culture and goals. We provide 24/7 support to ensure your team has the
+                        necessary resources to excel. Our competitive rates make us an affordable choice for businesses
+                        looking to optimize their software training efforts.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+{% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
+
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>

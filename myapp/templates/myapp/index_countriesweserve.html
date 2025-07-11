@@ -1,0 +1,712 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .contact-us-hover-zoom:hover {
+            transform: scale(1.03);
+        }
+
+        @keyframes contact-us-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .contact-us-container {
+            display: flex;
+            min-height: 100vh;
+            background: white;
+        }
+
+        .contact-us-content-wrapper {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-us-hero-section {
+            flex: 1;
+            margin-bottom: 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            color: white;
+            align-items: center;
+        }
+
+        .contact-us-hero-content {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .contact-us-hero-content h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: black;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .contact-us-hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            color: black;
+        }
+
+        .contact-us-hero-image {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin: 2rem auto 0;
+        }
+
+        .contact-us-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .contact-us-hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+            background-color: white;
+        }
+
+        .contact-us-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgb(29 25 33 / 70%) 0%, transparent 100%);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .contact-us-image-overlay p {
+            color: white;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .contact-us-badge-24-7 {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #6B4C93;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            animation: contact-us-pulse 2s infinite;
+        }
+
+        .contact-us-form-section {
+            flex: 1;
+            border-radius: 5%;
+            background: white;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-us-inquiry-form {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .contact-us-inquiry-form h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .contact-us-form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .contact-us-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .contact-us-form-group input,
+        .contact-us-form-group select,
+        .contact-us-form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .contact-us-form-group input:focus,
+        .contact-us-form-group select:focus,
+        .contact-us-form-group textarea:focus {
+            outline: none;
+            border-color: #6B4C93;
+            box-shadow: 0 0 0 3px rgba(107, 76, 147, 0.1);
+        }
+
+        .contact-us-form-group.error input,
+        .contact-us-form-group.error select,
+        .contact-us-form-group.error textarea {
+            border-color: #e74c3c;
+        }
+
+        .contact-us-form-group.success input,
+        .contact-us-form-group.success select,
+        .contact-us-form-group.success textarea {
+            border-color: #27ae60;
+        }
+
+        .contact-us-error-message {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .contact-us-form-group.error .contact-us-error-message {
+            display: block;
+        }
+
+        .contact-us-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .contact-us-form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-us-submit-btn {
+            width: 100%;
+            background: green;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .contact-us-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 76, 147, 0.3);
+        }
+
+        .contact-us-submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .contact-us-submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .contact-us-success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .contact-us-loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-us-content-wrapper {
+                flex-direction: column;
+            }
+
+            .contact-us-hero-section {
+                min-height: auto;
+                padding: 1.5rem;
+            }
+
+            .contact-us-hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .contact-us-hero-content p {
+                font-size: 1rem;
+            }
+
+            .contact-us-hero-image {
+                max-width: 380px;
+            }
+
+            .contact-us-form-section {
+                padding: 1.5rem;
+            }
+
+            .contact-us-form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-us-hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .contact-us-hero-image {
+                max-width: 300px;
+            }
+
+            .contact-us-badge-24-7 {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .contact-us-form-section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-us-container">
+        <div class="contact-us-content-wrapper">
+            <div class="contact-us-hero-section">
+                <div class="contact-us-hero-content">
+                    <h1>Ready to Transform Your Operations?</h1>
+                    <p>Join hundreds of global companies leveraging the best of our next outsourcing in the India.</p>
+                    <p>Fill out the contact form to discover how we can help your approach to meet your unique needs.</p>
+                </div>
+                
+                <div class="contact-us-hero-image">
+                    <div class="contact-us-image-container">
+                        <img src="{% static 'myapp/images/contactus_image.png' %}"
+                             alt="Smiling woman looking up, representing thoughtful customer service"
+                             class="contact-us-hover-zoom">
+                        <div class="contact-us-image-overlay">
+                            <p>Professional Support Team</p>
+                        </div>  
+                    </div>
+                    <div class="contact-us-badge-24-7">24/7</div>
+                </div>
+            </div>
+
+            <div class="contact-us-form-section">
+                <form class="contact-us-inquiry-form" id="contactUsForm">
+                    <h2>Contact Us</h2>
+                    
+                    <div class="contact-us-success-message" id="contactUsSuccessMessage">
+                        Thank you! Your message has been sent successfully. We'll get back to you soon.
+                    </div>
+
+                    <div class="contact-us-form-row">
+                        <div class="contact-us-form-group">
+                            <label for="contactUsFirstName">First Name *</label>
+                            <input type="text" id="contactUsFirstName" name="first_name" required>
+                            <div class="contact-us-error-message">Please enter your first name</div>
+                        </div>
+                        <div class="contact-us-form-group">
+                            <label for="contactUsLastName">Last Name *</label>
+                            <input type="text" id="contactUsLastName" name="last_name" required>
+                            <div class="contact-us-error-message">Please enter your last name</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-us-form-group">
+                        <label for="contactUsEmail">Email Address *</label>
+                        <input type="email" id="contactUsEmail" name="email" required>
+                        <div class="contact-us-error-message">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="contact-us-form-group">
+                        <label for="contactUsPhone">Phone Number</label>
+                        <input type="tel" id="contactUsPhone" name="phone" placeholder="Optional">
+                        <div class="contact-us-error-message">Please enter only digits</div>
+                    </div>
+
+                    <div class="contact-us-form-row">
+                        <div class="contact-us-form-group">
+                            <label for="contactUsCompany">Company *</label>
+                            <input type="text" id="contactUsCompany" name="company" required>
+                            <div class="contact-us-error-message">Please enter your company name</div>
+                        </div>
+                        <div class="contact-us-form-group">
+                            <label for="contactUsCountry">Country/Region *</label>
+                            <select id="contactUsCountry" name="country" required>
+                                <option value="">Select Country/Region</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="IT">Italy</option>
+                                <option value="ES">Spain</option>
+                                <option value="JP">Japan</option>
+                                <option value="CN">China</option>
+                                <option value="IN">India</option>
+                                <option value="BR">Brazil</option>
+                                <option value="MX">Mexico</option>
+                                <option value="PH">Philippines</option>
+                                <option value="SG">Singapore</option>
+                                <option value="AE">United Arab Emirates</option>
+                                <option value="ZA">South Africa</option>
+                                <option value="NG">Nigeria</option>
+                                <option value="KE">Kenya</option>
+                                <option value="EG">Egypt</option>
+                                <option value="SA">Saudi Arabia</option>
+                                <option value="KR">South Korea</option>
+                                <option value="ID">Indonesia</option>
+                                <option value="MY">Malaysia</option>
+                                <option value="TH">Thailand</option>
+                                <option value="VN">Vietnam</option>
+                                <option value="PK">Pakistan</option>
+                                <option value="BD">Bangladesh</option>
+                                <option value="RU">Russia</option>
+                                <option value="TR">Turkey</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="SE">Sweden</option>
+                                <option value="CH">Switzerland</option>
+                                <option value="NO">Norway</option>
+                                <option value="FI">Finland</option>
+                                <option value="DK">Denmark</option>
+                                <option value="BE">Belgium</option>
+                                <option value="AT">Austria</option>
+                                <option value="IE">Ireland</option>
+                                <option value="PL">Poland</option>
+                                <option value="PT">Portugal</option>
+                                <option value="GR">Greece</option>
+                                <option value="CZ">Czech Republic</option>
+                                <option value="HU">Hungary</option>
+                                <option value="RO">Romania</option>
+                                <option value="IL">Israel</option>
+                                <option value="AR">Argentina</option>
+                                <option value="CL">Chile</option>
+                                <option value="CO">Colombia</option>
+                                <option value="PE">Peru</option>
+                                <option value="NZ">New Zealand</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="contact-us-error-message">Please select your country/region</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-us-form-row">
+                        <div class="contact-us-form-group">
+                            <label for="contactUsIndustry">Industry *</label>
+                            <select id="contactUsIndustry" name="industry" required>
+                                <option value="">Select Industry</option>
+                                <option value="technology">Technology</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="finance">Finance</option>
+                                <option value="retail">Retail</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="education">Education</option>
+                                <option value="telecom">Telecommunications</option>
+                                <option value="hospitality">Hospitality</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="energy">Energy</option>
+                                <option value="agriculture">Agriculture</option>
+                                <option value="construction">Construction</option>
+                                <option value="media">Media & Entertainment</option>
+                                <option value="government">Government</option>
+                                <option value="nonprofit">Non-Profit</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="contact-us-error-message">Please select your industry</div>
+                        </div>
+                        <div class="contact-us-form-group">
+                            <label for="contactUsCompanySize">Company Size *</label>
+                            <select id="contactUsCompanySize" name="company_size" required>
+                                <option value="">Select Size</option>
+                                <option value="1-10">1-10 employees</option>
+                                <option value="11-50">11-50 employees</option>
+                                <option value="51-200">51-200 employees</option>
+                                <option value="201-500">201-500 employees</option>
+                                <option value="501-1000">501-1000 employees</option>
+                                <option value="1001-5000">1001-5000 employees</option>
+                                <option value="5000+">5000+ employees</option>
+                            </select>
+                            <div class="contact-us-error-message">Please select company size</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-us-form-group">
+                        <label for="contactUsService">Service Interest *</label>
+                        <select id="contactUsService" name="service" required>
+                            <option value="">Select Service</option>
+                            <option value="customer-support">Customer Support</option>
+                            <option value="data-entry">Data Entry</option>
+                            <option value="virtual-assistant">Virtual Assistant</option>
+                            <option value="software-development">Software Development</option>
+                            <option value="accounting">Accounting & Finance</option>
+                            <option value="marketing">Digital Marketing</option>
+                            <option value="hr">Human Resources</option>
+                            <option value="it-support">IT Support</option>
+                            <option value="content-moderation">Content Moderation</option>
+                            <option value="ecommerce-support">E-commerce Support</option>
+                            <option value="transcription">Transcription Services</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="contact-us-error-message">Please select a service</div>
+                    </div>
+
+                    <div class="contact-us-form-group">
+                        <label for="contactUsMessage">Message</label>
+                        <textarea id="contactUsMessage" name="message" rows="4" placeholder="Tell us about your project requirements..."></textarea>
+                        <div class="contact-us-error-message">Please enter your message</div>
+                    </div>
+
+                    <button type="submit" class="contact-us-submit-btn" id="contactUsSubmitBtn">
+                        <span id="contactUsBtnText">Submit</span>
+                        <div class="contact-us-loading" id="contactUsLoadingSpinner" style="display: none;"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactUsForm');
+            const submitBtn = document.getElementById('contactUsSubmitBtn');
+            const btnText = document.getElementById('contactUsBtnText');
+            const loadingSpinner = document.getElementById('contactUsLoadingSpinner');
+            const successMessage = document.getElementById('contactUsSuccessMessage');
+
+            // Form validation functions
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function validatePhone(phone) {
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                return phone === '' || phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+            }
+
+            function validateField(field) {
+                const formGroup = field.closest('.contact-us-form-group');
+                
+                if (!formGroup) {
+                    console.warn('Form group not found for field:', field);
+                    return true;
+                }
+
+                const value = field.value.trim();
+                let isValid = true;
+
+                formGroup.classList.remove('error', 'success');
+
+                if (field.hasAttribute('required') && value === '') {
+                    isValid = false;
+                } else if (field.type === 'email' && value !== '' && !validateEmail(value)) {
+                    isValid = false;
+                } else if (field.type === 'tel' && !validatePhone(value)) {
+                    isValid = false;
+                }
+
+                if (isValid && value !== '') {
+                    formGroup.classList.add('success');
+                } else if (!isValid) {
+                    formGroup.classList.add('error');
+                }
+
+                return isValid;
+            }
+
+            const inputs = form.querySelectorAll('input, select, textarea');
+
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => validateField(input));
+                input.addEventListener('input', () => {
+                    const formGroup = input.closest('.contact-us-form-group');
+                    if (formGroup && formGroup.classList.contains('error')) {
+                        validateField(input);
+                    }
+                });
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                let isFormValid = true;
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                    }
+                });
+
+                if (!isFormValid) {
+                    const firstError = form.querySelector('.contact-us-form-group.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+
+                // Show loading state
+                submitBtn.disabled = true;
+                btnText.style.display = 'none';
+                loadingSpinner.style.display = 'inline-block';
+
+                // Prepare form data
+                const formData = {
+                    'first_name': document.getElementById('contactUsFirstName').value,
+                    'last_name': document.getElementById('contactUsLastName').value,
+                    'email': document.getElementById('contactUsEmail').value,
+                    'phone': document.getElementById('contactUsPhone').value,
+                    'company': document.getElementById('contactUsCompany').value,
+                    'country': document.getElementById('contactUsCountry').value,
+                    'industry': document.getElementById('contactUsIndustry').value,
+                    'company_size': document.getElementById('contactUsCompanySize').value,
+                    'service': document.getElementById('contactUsService').value,
+                    'message': document.getElementById('contactUsMessage').value
+                };
+
+                // Make AJAX request
+                fetch('/contact-form-submit/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loading state
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    loadingSpinner.style.display = 'none';
+
+                    if (data.success) {
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        // Reset form
+                        form.reset();
+                        inputs.forEach(input => {
+                            const formGroup = input.closest('.contact-us-form-group');
+                            if (formGroup) {
+                                formGroup.classList.remove('error', 'success');
+                            }
+                        });
+
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        // Show server-side validation errors
+                        Object.keys(data.errors).forEach(fieldName => {
+                            const field = document.getElementById('contactUs' + fieldName.charAt(0).toUpperCase() + fieldName.slice(1));
+                            if (field) {
+                                const formGroup = field.closest('.contact-us-form-group');
+                                if (formGroup) {
+                                    formGroup.classList.add('error');
+                                    const errorMessage = formGroup.querySelector('.contact-us-error-message');
+                                    if (errorMessage) {
+                                        errorMessage.textContent = data.errors[fieldName];
+                                        errorMessage.style.display = 'block';
+                                    }
+                                }
+                            }
+                        });
+                        
+                        // Scroll to first error
+                        const firstError = form.querySelector('.contact-us-form-group.error');
+                        if (firstError) {
+                            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    loadingSpinner.style.display = 'none';
+                    alert('An error occurred. Please try again.');
+                });
+            });
+
+            // Function to get CSRF token from cookies
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        });
+    </script>
+</body>
+</html>

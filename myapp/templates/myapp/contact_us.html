@@ -1,0 +1,912 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+         
+          
+           
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(255, 255, 255, 0)), 
+                        url('{% static 'myapp/images/contact_us.jpg' %}');
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="400" cy="300" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="600" cy="150" r="4" fill="rgba(255,255,255,0.1)"/><circle cx="800" cy="400" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Content */
+        main {
+           
+        }
+
+        .contact-section {
+           
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+           
+            padding: 3rem;
+            border-radius: 20px;
+          
+            transition: transform 0.3s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #000000;
+            line-height: 1.8;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #007bff;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-item strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-form:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-form h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .contact-us-form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .contact-us-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .contact-us-form-group input,
+        .contact-us-form-group select,
+        .contact-us-form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .contact-us-form-group input:focus,
+        .contact-us-form-group select:focus,
+        .contact-us-form-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .contact-us-form-group.error input,
+        .contact-us-form-group.error select,
+        .contact-us-form-group.error textarea {
+            border-color: #e74c3c;
+        }
+
+        .contact-us-form-group.success input,
+        .contact-us-form-group.success select,
+        .contact-us-form-group.success textarea {
+            border-color: #27ae60;
+        }
+
+        .contact-us-error-message {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .contact-us-form-group.error .contact-us-error-message {
+            display: block;
+        }
+
+        .contact-us-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .contact-us-form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-us-submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .contact-us-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .contact-us-submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .contact-us-submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .contact-us-success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .contact-us-loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Locations Section */
+        .locations {
+            margin-top: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .locations h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #333;
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .location-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .location-card:hover::before {
+            left: 100%;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+
+        .location-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info, .contact-form {
+                padding: 2rem;
+            }
+
+            .contact-us-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .locations {
+                padding: 2rem;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info, .contact-form {
+                padding: 1.5rem;
+            }
+
+            .locations {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    {% include 'myapp/header.html' %}
+<section class="hero">
+        <div class="container">
+            <h1>Start Your Digital Transformation Journey</h1>
+            <p>Partner with Value Connect Solution as your trusted technology service provider to ensure your company thrives with innovative solutions and proven results.</p>
+            <a href="#contact" class="cta-button">Get Started Today</a>
+        </div>
+    </section>
+
+    
+
+    <main class="container">
+        <section class="contact-section" id="contact">
+            <div class="contact-info">
+                <h2>Transform Your Business Through Technology</h2>
+                <p style="color: black;">Value Connect Solution makes digital transformation an easy and hassle-free experience for you. Let us handle the complexities of your technology needs so you can focus on growing your company with confidence. Contact us today to learn how our seasoned industry experts can help propel your business toward success!</p>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong style="color: black;">Phone:</strong><br>
+                        +91 98765 43210<br>
+                        +91 87654 32109
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong style="color: black;">Email:</strong><br>
+                        info@valueconnectsolutions.com<br>
+                        contact@valueconnectsolutions.com
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong style="color: black;" >Business Hours:</strong><br>
+                        Monday - Friday: 9:00 AM - 6:00 PM IST<br>
+                        Saturday: 10:00 AM - 4:00 PM IST
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            {% include 'myapp/index_countriesweserve.html' %}
+       
+
+
+       {% include 'myapp/footer.html' %}
+
+    <script>
+        // Form submission handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactUsForm');
+            const submitBtn = document.getElementById('contactUsSubmitBtn');
+            const btnText = document.getElementById('contactUsBtnText');
+            const loadingSpinner = document.getElementById('contactUsLoadingSpinner');
+            const successMessage = document.getElementById('contactUsSuccessMessage');
+
+            // Form validation functions
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function validatePhone(phone) {
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                return phone === '' || phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+            }
+
+            function validateField(field) {
+                const formGroup = field.closest('.contact-us-form-group');
+                
+                if (!formGroup) {
+                    console.warn('Form group not found for field:', field);
+                    return true;
+                }
+
+                const value = field.value.trim();
+                let isValid = true;
+
+                formGroup.classList.remove('error', 'success');
+
+                if (field.hasAttribute('required') && value === '') {
+                    isValid = false;
+                } else if (field.type === 'email' && value !== '' && !validateEmail(value)) {
+                    isValid = false;
+                } else if (field.type === 'tel' && !validatePhone(value)) {
+                    isValid = false;
+                }
+
+                if (isValid && value !== '') {
+                    formGroup.classList.add('success');
+                } else if (!isValid) {
+                    formGroup.classList.add('error');
+                }
+
+                return isValid;
+            }
+
+            const inputs = form.querySelectorAll('input, select, textarea');
+
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => validateField(input));
+                input.addEventListener('input', () => {
+                    const formGroup = input.closest('.contact-us-form-group');
+                    if (formGroup && formGroup.classList.contains('error')) {
+                        validateField(input);
+                    }
+                });
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                let isFormValid = true;
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                    }
+                });
+
+                if (!isFormValid) {
+                    const firstError = form.querySelector('.contact-us-form-group.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+
+                // Show loading state
+                submitBtn.disabled = true;
+                btnText.style.display = 'none';
+                loadingSpinner.style.display = 'inline-block';
+
+                // Prepare form data
+                const formData = {
+                    'first_name': document.getElementById('contactUsFirstName').value,
+                    'last_name': document.getElementById('contactUsLastName').value,
+                    'email': document.getElementById('contactUsEmail').value,
+                    'phone': document.getElementById('contactUsPhone').value,
+                    'company': document.getElementById('contactUsCompany').value,
+                    'country': document.getElementById('contactUsCountry').value,
+                    'industry': document.getElementById('contactUsIndustry').value,
+                    'company_size': document.getElementById('contactUsCompanySize').value,
+                    'service': document.getElementById('contactUsService').value,
+                    'message': document.getElementById('contactUsMessage').value
+                };
+
+                // Simulate form submission (replace with actual endpoint)
+                setTimeout(() => {
+                    // Hide loading state
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    loadingSpinner.style.display = 'none';
+
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Reset form
+                    form.reset();
+                    inputs.forEach(input => {
+                        const formGroup = input.closest('.contact-us-form-group');
+                        if (formGroup) {
+                            formGroup.classList.remove('error', 'success');
+                        }
+                    });
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }, 2000);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe contact cards and form
+        document.querySelectorAll('.contact-info, .contact-form, .location-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactUsForm');
+            const submitBtn = document.getElementById('contactUsSubmitBtn');
+            const btnText = document.getElementById('contactUsBtnText');
+            const loadingSpinner = document.getElementById('contactUsLoadingSpinner');
+            const successMessage = document.getElementById('contactUsSuccessMessage');
+
+            // Form validation functions
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function validatePhone(phone) {
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                return phone === '' || phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+            }
+
+            function validateField(field) {
+                const formGroup = field.closest('.contact-us-form-group');
+                
+                if (!formGroup) {
+                    console.warn('Form group not found for field:', field);
+                    return true;
+                }
+
+                const value = field.value.trim();
+                let isValid = true;
+
+                formGroup.classList.remove('error', 'success');
+
+                if (field.hasAttribute('required') && value === '') {
+                    isValid = false;
+                } else if (field.type === 'email' && value !== '' && !validateEmail(value)) {
+                    isValid = false;
+                } else if (field.type === 'tel' && !validatePhone(value)) {
+                    isValid = false;
+                }
+
+                if (isValid && value !== '') {
+                    formGroup.classList.add('success');
+                } else if (!isValid) {
+                    formGroup.classList.add('error');
+                }
+
+                return isValid;
+            }
+
+            const inputs = form.querySelectorAll('input, select, textarea');
+
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => validateField(input));
+                input.addEventListener('input', () => {
+                    const formGroup = input.closest('.contact-us-form-group');
+                    if (formGroup && formGroup.classList.contains('error')) {
+                        validateField(input);
+                    }
+                });
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                let isFormValid = true;
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                    }
+                });
+
+                if (!isFormValid) {
+                    const firstError = form.querySelector('.contact-us-form-group.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+
+                // Show loading state
+                submitBtn.disabled = true;
+                btnText.style.display = 'none';
+                loadingSpinner.style.display = 'inline-block';
+
+                // Prepare form data
+                const formData = {
+                    'first_name': document.getElementById('contactUsFirstName').value,
+                    'last_name': document.getElementById('contactUsLastName').value,
+                    'email': document.getElementById('contactUsEmail').value,
+                    'phone': document.getElementById('contactUsPhone').value,
+                    'company': document.getElementById('contactUsCompany').value,
+                    'country': document.getElementById('contactUsCountry').value,
+                    'industry': document.getElementById('contactUsIndustry').value,
+                    'company_size': document.getElementById('contactUsCompanySize').value,
+                    'service': document.getElementById('contactUsService').value,
+                    'message': document.getElementById('contactUsMessage').value
+                };
+
+                // Make AJAX request
+                fetch('/contact-form-submit/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loading state
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    loadingSpinner.style.display = 'none';
+
+                    if (data.success) {
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        // Reset form
+                        form.reset();
+                        inputs.forEach(input => {
+                            const formGroup = input.closest('.contact-us-form-group');
+                            if (formGroup) {
+                                formGroup.classList.remove('error', 'success');
+                            }
+                        });
+
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        // Show server-side validation errors
+                        Object.keys(data.errors).forEach(fieldName => {
+                            const field = document.getElementById('contactUs' + fieldName.charAt(0).toUpperCase() + fieldName.slice(1));
+                            if (field) {
+                                const formGroup = field.closest('.contact-us-form-group');
+                                if (formGroup) {
+                                    formGroup.classList.add('error');
+                                    const errorMessage = formGroup.querySelector('.contact-us-error-message');
+                                    if (errorMessage) {
+                                        errorMessage.textContent = data.errors[fieldName];
+                                        errorMessage.style.display = 'block';
+                                    }
+                                }
+                            }
+                        });
+                        
+                        // Scroll to first error
+                        const firstError = form.querySelector('.contact-us-form-group.error');
+                        if (firstError) {
+                            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    loadingSpinner.style.display = 'none';
+                    alert('An error occurred. Please try again.');
+                });
+            });
+
+            // Function to get CSRF token from cookies
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        });
+    </script>
+</body>
+</html>

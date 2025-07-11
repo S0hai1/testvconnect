@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --primary-blue: #2176d7;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --text-light: #666;
+            --bg-light: #f8f8f8;
+            --bg-white: #ffffff;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --border-radius: 15px;
+            --border-radius-large: 20px;
+            --spacing-xs: 10px;
+            --spacing-sm: 15px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            --spacing-xxl: 50px;
+            --container-max-width: 1440px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            height: auto;
+            line-height: 1.6;
+        }
+
+        /* Background Image Styles for Hero */
+        .image-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* Services Hero Section Styles */
+        .services-hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: var(--header-height) var(--spacing-md) 0;
+            box-sizing: border-box;
+            z-index: 0;
+        }
+
+        .services-hero-content {
+            max-width: 1440px;
+            width: 100%;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            
+            padding: 30px;
+        }
+
+        .services-hero-content h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+            line-height: 1.2;
+            font-size: 60px;
+            max-width: 1130px;
+        }
+
+        .services-hero-content p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Main content container */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: var(--container-max-width);
+            padding: var(--spacing-xl) var(--spacing-md);
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        /* Section for the main heading */
+        .heading-section {
+            width: 100%;
+            text-align: left;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .main-page-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        /* Content layout section */
+        .content-layout-area {
+            display: flex;
+            flex-direction: row;
+            gap: var(--spacing-xl);
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        .appointment-setting {
+            flex-direction: row-reverse;
+        }
+
+        /* Text content area */
+        .text-description-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            min-width: 0;
+        }
+
+        .text-description-area p {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Image display area */
+        .visual-display-area {
+            flex-shrink: 0;
+            width: min(400px, 100%);
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius-large);
+        }
+
+        .visual-display-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--border-radius-large);
+        }
+
+        /* Small decorative element on the image */
+        .image-accent-overlay {
+            position: absolute;
+            bottom: var(--spacing-xs);
+            right: var(--spacing-xs);
+            width: 80px;
+            height: 20px;
+            background: linear-gradient(90deg, #ffcc00, #ffa500);
+            border-radius: 5px;
+            transform: skewX(-20deg);
+        }
+
+        /* Content wrapper with reverse layout */
+
+
+
+        /* Benefits section */
+        .page-wrapper-benefits {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: var(--container-max-width);
+            padding: var(--spacing-xl) var(--spacing-md);
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        /* Top section with main heading and subtitle */
+        .header-content {
+            margin-bottom: var(--spacing-xxl);
+            width: 100%;
+        }
+
+        .header-content h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 var(--spacing-sm) 0;
+            line-height: 1.2;
+        }
+
+        .header-content p {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* Benefits grid container */
+        .benefits-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: var(--spacing-lg);
+            width: 100%;
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        /* Individual benefit card */
+        .benefit-card-item {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .benefit-card-item .icon-placeholder {
+            width: 70px;
+            height: 70px;
+            margin-bottom: var(--spacing-md);
+            background-color: #e6f2ff;
+            border-radius: var(--spacing-xs);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+        }
+
+        /* Specific icon styles */
+        .icon-placeholder.quality-leads::before {
+            content: '✅';
+        }
+
+        .icon-placeholder.sales-efficiency::before {
+            content: '📋';
+        }
+
+        .icon-placeholder.conversion-rates::before {
+            content: '🎯';
+        }
+
+        .icon-placeholder.cost-efficiency::before {
+            content: '💰';
+        }
+
+        .icon-placeholder.availability-247::before {
+            content: '📞';
+        }
+
+        .benefit-card-item h3 {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            font-weight: 600;
+            margin: 0 0 var(--spacing-xs) 0;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .benefit-card-item p {
+            font-size: clamp(0.9rem, 1.8vw, 0.95rem);
+            line-height: 1.6;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Single benefit section at the bottom */
+        .single-benefit-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .single-benefit-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .single-benefit-section .icon-placeholder {
+            width: 70px;
+            height: 70px;
+            margin-bottom: var(--spacing-md);
+            background-color: #e6f2ff;
+            border-radius: var(--spacing-xs);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+
+        .single-benefit-section h3 {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            font-weight: 600;
+            margin: 0 0 var(--spacing-xs) 0;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .single-benefit-section p {
+            font-size: clamp(0.9rem, 1.8vw, 0.95rem);
+            line-height: 1.6;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Responsive Design */
+
+        /* Large Desktop (1200px and above) */
+        @media (min-width: 1200px) {
+
+            .page-container,
+            .page-wrapper-benefits {
+                padding-left: var(--spacing-xxl);
+                padding-right: var(--spacing-xxl);
+            }
+        }
+
+        /* Desktop and Tablet (768px to 1199px) */
+        @media (max-width: 1199px) {
+            .visual-display-area {
+                width: min(350px, 100%);
+                height: 250px;
+            }
+
+            .visual-container {
+                width: min(400px, 100%);
+                height: 300px;
+            }
+        }
+
+        /* Tablet Portrait and Small Desktop (768px to 991px) */
+        @media (max-width: 991px) {
+            .content-layout-area {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-lg);
+            }
+
+
+            .visual-display-area {
+                width: 100%;
+                max-width: 500px;
+                height: auto;
+                aspect-ratio: 4/3;
+            }
+
+            .visual-container {
+                width: 100%;
+                max-width: 500px;
+                height: auto;
+                aspect-ratio: 4/3;
+            }
+
+            .visual-container img,
+            .visual-display-area img {
+                height: 100%;
+            }
+
+
+        }
+
+        /* Mobile Landscape (576px to 767px) */
+        @media (max-width: 767px) {
+            .services-hero-section {
+                padding: var(--header-height) var(--spacing-sm) 0;
+            }
+
+            .page-container,
+            .page-wrapper-benefits {
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+
+            .benefits-grid-container {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .benefit-card-item {
+                padding: var(--spacing-md);
+            }
+
+            .single-benefit-section {
+                max-width: 100%;
+                padding: var(--spacing-md);
+            }
+
+        }
+
+        /* Mobile Portrait (480px to 575px) */
+        @media (max-width: 575px) {
+            .services-hero-content{
+                padding: 0px;
+            }
+
+            .page-container,
+            .page-wrapper-benefits {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+
+            .content-layout-area {
+                gap: var(--spacing-md);
+            }
+
+            .benefit-card-item,
+            .single-benefit-section {
+                padding: var(--spacing-sm);
+            }
+
+            .benefit-card-item .icon-placeholder,
+            .single-benefit-section .icon-placeholder {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+
+            .image-accent-overlay {
+                width: 60px;
+                height: 15px;
+            }
+        }
+
+        /* Small Mobile (320px to 479px) */
+        @media (max-width: 479px) {
+
+            .page-container,
+            .page-wrapper-benefits {
+                padding: var(--spacing-sm) var(--spacing-xs);
+            }
+
+            .services-hero-section {
+                padding: var(--header-height) var(--spacing-xs) 0;
+            }
+
+            .benefit-card-item,
+            .single-benefit-section {
+                padding: var(--spacing-sm);
+            }
+
+        }
+
+        /* Extra Small Mobile (up to 319px) */
+        @media (max-width: 319px) {
+
+            .page-container,
+            .page-wrapper-benefits {
+                padding: var(--spacing-xs) 5px;
+            }
+
+            .services-hero-section {
+                padding: var(--header-height) 5px 0;
+            }
+
+            .benefit-card-item .icon-placeholder,
+            .single-benefit-section .icon-placeholder {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* High DPI / Retina Display Optimization */
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+            .services-hero-content {
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        /* Landscape orientation adjustments for mobile */
+        @media (max-width: 767px) and (orientation: landscape) {
+            .services-hero-section {
+                min-height: 70vh;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+
+            .image-background,
+            .image-overlay {
+                display: none;
+            }
+
+            .services-hero-section {
+                background: none;
+                color: var(--text-primary);
+                min-height: auto;
+                padding: var(--spacing-md);
+            }
+
+            .benefit-card-item,
+            .single-benefit-section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+
+        /* Main content container */
+        .main-page-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1440px;
+            /* Max width for the content */
+            padding: 40px 20px;
+            box-sizing: border-box;
+            margin: auto;
+        }
+
+        /* Top section with main heading */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+
+        .section-header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0;
+        }
+
+        /* Grid container for the feature cards */
+        .features-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            /* Responsive grid columns */
+            gap: 30px;
+            /* Space between grid items */
+            width: 100%;
+        }
+
+        /* Individual feature card */
+        .feature-item-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            /* Subtle shadow */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-item-card .image-top-container {
+            width: 100%;
+            height: 150px;
+            /* Fixed height for the image */
+            background-color: #ffcc00;
+            /* Yellow background for image placeholder */
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-item-card .image-top-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Cover the container while maintaining aspect ratio */
+            border-radius: 10px;
+        }
+
+        .feature-item-card h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-item-card p {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-header h1 {
+                font-size: 2em;
+            }
+
+
+            .feature-item-card {
+                padding: 20px;
+            }
+
+            .feature-item-card .image-top-container {
+                height: 180px;
+                /* Slightly taller images on small screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-header h1 {
+                font-size: 1.8em;
+            }
+
+            .main-page-content {
+                padding: 20px 15px;
+            }
+        }
+
+        .main-content-container {
+            background-color: #2176d7;
+        }
+
+        .main-content-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1440px;
+            /* Max width for the content */
+            padding: 40px 20px;
+            box-sizing: border-box;
+            margin: auto;
+            color: white;
+        }
+
+        /* Top introductory text section */
+        .intro-text-block {
+            margin-bottom: 60px;
+            width: 100%;
+            max-width: 1440px;
+        }
+
+        .intro-text-block h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .intro-text-block p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        /* Training process heading */
+        .training-heading {
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Training features grid container */
+        .training-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            /* Responsive grid columns */
+            gap: 30px;
+            /* Space between grid items */
+            width: 100%;
+        }
+
+        /* Individual training feature card */
+        .feature-card-training {
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Slightly transparent white background */
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            /* Subtle shadow */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card-training .icon-graphic {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 25px;
+            background-color: #ffffff;
+            /* White background for icon */
+            border-radius: 50%;
+            /* Circular icon background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.5em;
+            /* Emoji size */
+            color: #2176d7;
+            /* Blue color for emoji */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Specific icon styles (using emojis as placeholders for visual representation) */
+        .icon-graphic.product-knowledge::before {
+            content: '🎧';
+        }
+
+        .icon-graphic.interactive-methods::before {
+            content: '💡';
+        }
+
+        .icon-graphic.flexible-sessions::before {
+            content: '🗓️';
+        }
+
+
+        .feature-card-training h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feature-card-training p {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .intro-text-block h1 {
+                font-size: 2em;
+            }
+
+            .intro-text-block p {
+                font-size: 1em;
+            }
+
+            .training-heading {
+                font-size: 1.8em;
+            }
+
+            .training-features-grid {
+                grid-template-columns: 1fr;
+                /* Stack items on smaller screens */
+            }
+
+            .feature-card-training {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .intro-text-block h1 {
+                font-size: 1.8em;
+            }
+
+            .training-heading {
+                font-size: 1.5em;
+            }
+
+            .main-content-section {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Main content container */
+        .main-page-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1440px; /* Max width for the content */
+            padding: 60px 20px; /* Increased padding for more vertical space */
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+        /* Heading style */
+        .section-main-heading {
+            font-size: 2.8em; /* Larger font size for impact */
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 25px; /* Space below heading */
+            line-height: 1.2;
+        }
+
+        /* Paragraph text styles */
+        .section-description-text {
+            font-size: 1.15em; /* Slightly larger text for readability */
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px; /* Space below paragraph */
+            max-width: 1440px; /* Limit width for better readability */
+        }
+
+        /* Call to action text and link */
+        .call-to-action-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .call-to-action-text a {
+            color: #2176d7; /* Blue color for the link */
+            text-decoration: none; /* No underline by default */
+            font-weight: 600;
+            transition: color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .call-to-action-text a:hover {
+            color: #1a5aa6; /* Darker blue on hover */
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .section-main-heading {
+                font-size: 2.2em;
+            }
+
+            .section-description-text {
+                font-size: 1.05em;
+            }
+
+            .call-to-action-text {
+                font-size: 1em;
+            }
+
+            .main-page-section {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-main-heading {
+                font-size: 1.8em;
+            }
+
+            .section-description-text {
+                font-size: 0.95em;
+            }
+
+            .call-to-action-text {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-background" style="background-image: url('{% static 'myapp/images/pexels-pixabay-267507.jpg' %}');">
+        <div class="image-overlay"></div>
+    </div>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="services-hero-section">
+        <div class="services-hero-content">
+            <h1>Appointment Setting Services in the India</h1>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="heading-section">
+            <h1 class="main-page-title">Outsourced Appointment Setting Services: Accelerate Your Business Growth with
+                value connectsolution</h1>
+        </div>
+
+        <div class="content-layout-area">
+            <div class="text-description-area">
+                <p>Rising operational costs and shrinking profit margins are common challenges for business owners
+                    aiming to scale their operations. Regardless of your company size, a successful B2B marketing
+                    campaign hinges on your ability to convert prospective clients into satisfied customers. Appointment
+                    setting is crucial for generating sales and revenue, yet it remains a significant hurdle for many
+                    business development teams.</p>
+                <p>At value connectsolution, we specialize in connecting your sales team with qualified leads through
+                    effective call center appointment scheduling, delivered by expert appointment setters in the
+                    India.</p>
+            </div>
+            <div class="visual-display-area">
+                <img src="{% static 'myapp/images/pexels-yankrukov-8867474.jpg' %}"
+                    alt="Customer service representative with a headset, smiling.">
+                <div class="image-accent-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="heading-section">
+            <h1 class="main-page-title">What Is Appointment Setting?</h1>
+        </div>
+
+        <div class="content-layout-area appointment-setting">
+            <div class="text-description-area">
+                <p>Appointment setting is the process of connecting your business with potential clients or customers by
+                    scheduling meetings between qualified prospects and your sales team. It plays a critical role in
+                    turning interest into revenue.</p>
+                <p>At value connectsolution, our appointment setters do more than just book calls. They engage potential
+                    customers in meaningful conversations, qualify them based on interest and buying potential, and
+                    schedule appointments that give your sales reps the best chance to close.</p>
+                <p>Our appointment setters are thoroughly trained in your company's offering, industry dynamics, and
+                    competitive landscape. This expertise allows them to function as an extension of your sales team and
+                    represent your brand with confidence.</p>
+            </div>
+            <div class="visual-display-area">
+                <img src="{% static 'myapp/images/vcs_agent1.jpg' %}"
+                    alt="Smiling professional in an office setting.">
+                <div class="image-accent-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="page-wrapper-benefits">
+        <div class="header-content">
+            <h1>The Benefits of Outsourcing Your Appointment Setting</h1>
+            <p>Outsourcing your appointment setting offers numerous advantages that directly impact your business'
+                growth and efficiency.</p>
+        </div>
+
+        <div class="benefits-grid-container">
+            <div class="benefit-card-item">
+                <div class="icon-placeholder quality-leads"></div>
+                <h3>Generate Quality Leads</h3>
+                <p>Our expert appointment setters focus on identifying and engaging high-quality leads who are most
+                    likely to convert. This ensures that only the most promising prospects are passed to your sales
+                    team, saving time and improving closing rates.</p>
+            </div>
+
+            <div class="benefit-card-item">
+                <div class="icon-placeholder sales-efficiency"></div>
+                <h3>Boost Sales Efficiency</h3>
+                <p>We handle the initial outreach and qualification process so your team can focus on what they do best:
+                    building relationships and closing deals.</p>
+            </div>
+
+            <div class="benefit-card-item">
+                <div class="icon-placeholder conversion-rates"></div>
+                <h3>Increased Conversion Rates</h3>
+                <p>By delivering pre-qualified appointments, we help streamline your sales funnel and increase the
+                    likelihood of turning prospects into paying customers.</p>
+            </div>
+
+            <div class="benefit-card-item">
+                <div class="icon-placeholder cost-efficiency"></div>
+                <h3>Cost Efficiency</h3>
+                <p>Reduce costs associated with training, managing, and maintaining an in-house appointment-setting
+                    team. Outsourcing to value connectsolution in the India offers a cost-effective alternative without
+                    compromising quality.</p>
+            </div>
+
+            <div class="benefit-card-item">
+                <div class="icon-placeholder availability-247"></div>
+                <h3>24/7 Availability</h3>
+                <p>Our round-the-clock operations ensure that your potential leads can be reached at their convenience,
+                    regardless of time zones.</p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="main-page-content">
+        <div class="section-header">
+            <h1>Why Choose value connectsolution for Your Appointment Setting Needs?</h1>
+        </div>
+
+        <div class="features-grid-layout">
+            <div class="feature-item-card">
+                <div class="image-top-container">
+                    <img src="https://placehold.co/300x150/ffcc00/333333?text=Expertise" alt="Professional on a call.">
+                </div>
+                <h3>Expertise & Experience</h3>
+                <p>With nearly two decades of experience in B2B call center appointment setting, our team understands
+                    the nuances of different industries and tailors their approach to meet your specific needs.</p>
+            </div>
+
+            <div class="feature-item-card">
+                <div class="image-top-container">
+                    <img src="https://placehold.co/300x150/ffcc00/333333?text=Technology"
+                        alt="People working with technology.">
+                </div>
+                <h3>Advanced Technology</h3>
+                <p>We utilize the latest CRM and call management technologies to ensure efficient and effective
+                    appointment-setting processes.</p>
+            </div>
+
+            <div class="feature-item-card">
+                <div class="image-top-container">
+                    <img src="https://placehold.co/300x150/ffcc00/333333?text=Trained+Agents"
+                        alt="Agent with a headset.">
+                </div>
+                <h3>Highly Trained Agents</h3>
+                <p>Our agents are highly trained professionals with excellent communication skills, deep industry
+                    knowledge, and a customer-centric approach.</p>
+            </div>
+
+            <div class="feature-item-card">
+                <div class="image-top-container">
+                    <img src="https://placehold.co/300x150/ffcc00/333333?text=Customized"
+                        alt="Person working on a laptop with charts.">
+                </div>
+                <h3>Customized Strategies</h3>
+                <p>We develop tailored appointment-setting strategies that align with your business goals and target
+                    audience, ensuring maximum impact.</p>
+            </div>
+
+            <div class="feature-item-card">
+                <div class="image-top-container">
+                    <img src="https://placehold.co/300x150/ffcc00/333333?text=Reporting"
+                        alt="Person looking at reports.">
+                </div>
+                <h3>Transparent Reporting</h3>
+                <p>Stay informed with detailed reports and insights on your appointment-setting campaigns, enabling you
+                    to track performance and make data-driven decisions.</p>
+            </div>
+
+            <div class="feature-item-card">
+                <div class="image-top-container">
+                    <img src="https://placehold.co/300x150/ffcc00/333333?text=Scalable"
+                        alt="Person working on a laptop.">
+                </div>
+                <h3>Scalable Solutions</h3>
+                <p>Whether you're scaling up for a major campaign or adjusting for seasonal fluctuations, our services
+                    are flexible to meet your evolving needs.</p>
+            </div>
+
+            <div class="feature-item-card">
+                <div class="image-top-container">
+                    <img src="https://placehold.co/300x150/ffcc00/333333?text=Compliance" alt="Agent with a headset.">
+                </div>
+                <h3>Legal Compliance</h3>
+                <p>We adhere to all relevant regulations and best practices, ensuring your appointment-setting campaigns
+                    are compliant and ethical.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content-container">
+
+        <div class="main-content-section">
+            <div class="intro-text-block">
+                <h1>How to Get Started with Outsourced Appointment Setting</h1>
+                <p>Getting started with value connectsolution is simple and seamless. From onboarding to launch, we make it
+                    easy for your business to tap into expert appointment-setting support.</p>
+                <p>Our state-of-the-art appointment setting call center operates 24/7 and is
+                    staffed with 1,000 pre-screened, trained, and qualified agents. Each agent is carefully selected,
+                    with proven call center experience and strong communication skills, so you can trust that your brand
+                    is in capable hands.</p>
+            </div>
+
+            <h2 class="training-heading">Comprehensive Training Process</h2>
+
+            <div class="training-features-grid">
+                <div class="feature-card-training">
+                    <div class="icon-graphic product-knowledge"></div>
+                    <h3>In-Depth Product Knowledge</h3>
+                    <p>Our agents receive thorough training on your products, services, business vision, and goals.</p>
+                </div>
+
+                <div class="feature-card-training">
+                    <div class="icon-graphic interactive-methods"></div>
+                    <h3>Interactive Training Methods</h3>
+                    <p>Training includes role-playing simulations, test calls, call scripts, and video resources to
+                        ensure agents are fully prepared.</p>
+                </div>
+
+                <div class="feature-card-training">
+                    <div class="icon-graphic flexible-sessions"></div>
+                    <h3>Flexible Training Sessions</h3>
+                    <p>Training sessions can be conducted in our large conference rooms or via web conference,
+                        accommodating your preferences.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main-page-section">
+        <h1 class="section-main-heading">Ready to Accelerate Sales? Partner With value connectsolution Today</h1>
+        <p class="section-description-text">Let value connectsolution generate quality leads and set appointments, so you can focus on closing more deals. Our outsourced appointment setting services connect you with the right prospects, streamline your sales process, and drive real business growth.</p>
+        <p class="call-to-action-text">Ready to surpass your sales goals? <a href="#">Contact value connectsolution</a> today to learn how our appointment-setting services in the India can transform your business.</p>
+    </div>
+    {% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
+
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Insurance Global Styles */
+        :root {
+            --insurance-primary: #005b96;
+            --insurance-secondary: #333;
+            --insurance-accent: #0d8abc;
+            --insurance-light: #f8f9fa;
+            --insurance-dark: #212529;
+            --insurance-white: #ffffff;
+            --insurance-gray: #6c757d;
+        }
+
+        /* Insurance Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--insurance-secondary);
+            background-color: var(--insurance-white);
+        }
+
+        /* Insurance Why Outsource Section */
+.insurance-why-outsource {
+    padding: 100px 0;
+    background-color: var(--insurance-light);
+}
+
+.insurance-reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.insurance-reason-card {
+    background-color: var(--insurance-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border-top: 4px solid var(--insurance-accent);
+}
+
+.insurance-reason-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.insurance-reason-icon {
+    font-size: 2.5rem;
+    color: var(--insurance-accent);
+    margin-bottom: 20px;
+}
+
+.insurance-reason-card h3 {
+    margin-bottom: 15px;
+    color: var(--insurance-primary);
+}
+
+@media (max-width: 768px) {
+    .insurance-why-outsource {
+        padding: 80px 0;
+    }
+    
+    .insurance-reasons-grid {
+        gap: 20px;
+    }
+    
+    .insurance-reason-card {
+        padding: 25px;
+    }
+}
+
+        /* Insurance Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--insurance-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--insurance-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--insurance-accent);
+        }
+
+        /* Insurance Layout */
+        .insurance-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Insurance Header */
+        .insurance-header {
+            background-color: var(--insurance-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .insurance-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .insurance-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--insurance-primary);
+        }
+
+        .insurance-logo span {
+            color: var(--insurance-accent);
+        }
+
+        .insurance-nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .insurance-nav-links li {
+            margin-left: 2rem;
+        }
+
+        .insurance-nav-links a {
+            font-weight: 600;
+        }
+
+        .insurance-mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Insurance Hero Section */
+        .insurance-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+            color: var(--insurance-white);
+        }
+
+        .insurance-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--insurance-white);
+        }
+
+        .insurance-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--insurance-white);
+        }
+
+        .insurance-btn {
+            display: inline-block;
+            background-color: var(--insurance-primary);
+            color: var(--insurance-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .insurance-btn:hover {
+            background-color: var(--insurance-accent);
+            color: var(--insurance-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Insurance Solutions Section */
+        .insurance-solutions {
+            padding: 100px 0;
+        }
+
+        .insurance-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .insurance-section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .insurance-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--insurance-accent);
+        }
+
+        .insurance-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .insurance-solution-card {
+            background-color: var(--insurance-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .insurance-solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .insurance-solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .insurance-solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .insurance-solution-card:hover .insurance-solution-img img {
+            transform: scale(1.1);
+        }
+
+        .insurance-solution-content {
+            padding: 25px;
+        }
+
+        .insurance-solution-content h3 {
+            margin-bottom: 15px;
+            color: var(--insurance-primary);
+        }
+
+        /* Insurance Benefits Section */
+        .insurance-benefits {
+            padding: 100px 0;
+            background-color: var(--insurance-light);
+        }
+
+        .insurance-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .insurance-benefit-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--insurance-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .insurance-benefit-icon {
+            font-size: 3rem;
+            color: var(--insurance-accent);
+            margin-bottom: 20px;
+        }
+
+        /* Insurance Support Services Section */
+        .insurance-support-services {
+            padding: 100px 0;
+        }
+
+        .insurance-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .insurance-service-card {
+            background-color: var(--insurance-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .insurance-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .insurance-service-icon {
+            font-size: 2.5rem;
+            color: var(--insurance-accent);
+            margin-bottom: 20px;
+        }
+
+        .insurance-service-card h3 {
+            margin-bottom: 15px;
+            color: var(--insurance-primary);
+        }
+
+        /* Insurance Extended Services Section */
+        .insurance-extended-services {
+            padding: 100px 0;
+            background-color: var(--insurance-white);
+        }
+
+        .insurance-services-combined {
+            display: grid;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .insurance-services-grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            list-style: none;
+        }
+
+        .insurance-services-grid-list li {
+            background-color: var(--insurance-light);
+            padding: 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .insurance-services-grid-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .insurance-services-grid-list i {
+            font-size: 1.8rem;
+            color: var(--insurance-accent);
+            margin-bottom: 15px;
+        }
+
+        .insurance-services-grid-list h4 {
+            color: var(--insurance-primary);
+            margin-bottom: 10px;
+        }
+
+        .insurance-benefits-list {
+            margin-top: 60px;
+        }
+
+        .insurance-benefits-grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .insurance-benefit-card {
+            background-color: var(--insurance-light);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--insurance-accent);
+        }
+
+        .insurance-benefit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .insurance-benefit-header i {
+            font-size: 1.5rem;
+            color: var(--insurance-accent);
+            margin-right: 15px;
+        }
+
+        .insurance-benefit-header h4 {
+            color: var(--insurance-primary);
+            margin-bottom: 0;
+        }
+
+        /* Insurance Testimonials */
+        .insurance-testimonials {
+            padding: 100px 0;
+            background-color: var(--insurance-light);
+        }
+
+        .insurance-testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .insurance-testimonial {
+            padding: 30px;
+        }
+
+        .insurance-testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .insurance-testimonial-author {
+            font-weight: 700;
+        }
+
+        .insurance-testimonial-role {
+            color: var(--insurance-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Insurance CTA Section */
+        .insurance-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--insurance-primary), #003d66);
+            color: var(--insurance-white);
+            text-align: center;
+        }
+
+        .insurance-cta h2 {
+            color: var(--insurance-white);
+            margin-bottom: 30px;
+        }
+
+        .insurance-cta .insurance-btn {
+            background-color: var(--insurance-white);
+            color: var(--insurance-primary);
+        }
+
+        .insurance-cta .insurance-btn:hover {
+            background-color: var(--insurance-accent);
+            color: var(--insurance-white);
+        }
+
+        /* Insurance Footer */
+        .insurance-footer {
+            background-color: var(--insurance-dark);
+            color: var(--insurance-white);
+            padding: 60px 0 20px;
+        }
+
+        .insurance-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .insurance-footer-col h3 {
+            color: var(--insurance-white);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .insurance-footer-links {
+            list-style: none;
+        }
+
+        .insurance-footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .insurance-footer-links a {
+            color: var(--insurance-gray);
+        }
+
+        .insurance-footer-links a:hover {
+            color: var(--insurance-white);
+        }
+
+        .insurance-footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--insurance-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Insurance Responsive */
+        @media (max-width: 992px) {
+            .insurance-nav-links {
+                display: none;
+            }
+
+            .insurance-mobile-menu {
+                display: block;
+            }
+
+            .insurance-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .insurance-hero {
+                padding: 150px 0 80px;
+            }
+
+            .insurance-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .insurance-hero p {
+                font-size: 1.1rem;
+            }
+
+            .insurance-section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .insurance-services-combined {
+                grid-template-columns: 1fr;
+            }
+            
+            .insurance-benefits-list {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .insurance-hero {
+                padding: 120px 0 60px;
+            }
+
+            .insurance-hero h1 {
+                font-size: 2rem;
+            }
+
+            .insurance-btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Insurance Header -->
+    {% include 'myapp/header.html' %}
+
+    <!-- Insurance Hero Section -->
+    <section class="insurance-hero">
+        <div class="insurance-container">
+            <h1>Insurance Agency Outsourcing</h1>
+            <p>Enhance your insurance operations with our specialized outsourcing solutions designed to improve efficiency, reduce costs, and elevate customer service.</p>
+            <a href="#" class="insurance-btn" onclick="scrollToSection()">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Insurance Support Services Section -->
+    <section class="insurance-support-services">
+        <div class="insurance-container">
+            <div class="insurance-section-title">
+                <h2>Insurance Agency Support Services</h2>
+                <p>Outsource critical insurance operations to focus on growing your business while we handle service delivery.</p>
+            </div>
+            <div class="insurance-services-grid">
+                <div class="insurance-service-card">
+                    <div class="insurance-service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Customer Support</h3>
+                    <p>24/7 multilingual support for policy inquiries, claims assistance, and general questions.</p>
+                </div>
+                <div class="insurance-service-card">
+                    <div class="insurance-service-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3>Policy Processing</h3>
+                    <p>Efficient handling of new policy applications, renewals, and endorsements.</p>
+                </div>
+                <div class="insurance-service-card">
+                    <div class="insurance-service-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3>Lead Qualification</h3>
+                    <p>Pre-screening and qualifying potential clients for your insurance products.</p>
+                </div>
+                <div class="insurance-service-card">
+                    <div class="insurance-service-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Appointment Scheduling</h3>
+                    <p>Professional management of agent consultations and client meetings.</p>
+                </div>
+                <div class="insurance-service-card">
+                    <div class="insurance-service-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3>Billing & Collections</h3>
+                    <p>Handling of premium payments, payment plans, and collections.</p>
+                </div>
+                <div class="insurance-service-card">
+                    <div class="insurance-service-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Claims Support</h3>
+                    <p>Initial claims intake, documentation collection, and status updates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insurance Extended Services Section -->
+    <section class="insurance-extended-services">
+        <div class="insurance-container">
+            <div class="insurance-section-title">
+                <h2>Comprehensive Insurance Services</h2>
+                <p>Beyond core insurance operations, we offer specialized services to enhance your agency.</p>
+            </div>
+            
+            <div class="insurance-services-combined">
+                <div class="insurance-services-list">
+                    <h3>Additional Insurance Services</h3>
+                    <ul class="insurance-services-grid-list">
+                        <li>
+                            <i class="fas fa-phone-volume"></i>
+                            <h4>Call Center Services</h4>
+                            <p>Professional handling of inbound and outbound insurance calls.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-mail-bulk"></i>
+                            <h4>Email Management</h4>
+                            <p>Timely responses to client inquiries and policy communications.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-comments"></i>
+                            <h4>Chat Support</h4>
+                            <p>Live chat assistance for website visitors and potential clients.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-hashtag"></i>
+                            <h4>Social Media Management</h4>
+                            <p>Professional handling of your insurance social media presence.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-database"></i>
+                            <h4>Data Entry</h4>
+                            <p>Accurate policy data entry and customer database management.</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Market Research</h4>
+                            <p>Competitive analysis and insurance product research.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="insurance-benefits-list">
+                    <h3>Advantages of Partnering With Value Connect Solutions</h3>
+                    <div class="insurance-benefits-grid-cards">
+                        <div class="insurance-benefit-card">
+                            <div class="insurance-benefit-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>24/7 Availability</h4>
+                            </div>
+                            <p>Never miss a client inquiry with round-the-clock support.</p>
+                        </div>
+                        <div class="insurance-benefit-card">
+                            <div class="insurance-benefit-header">
+                                <i class="fas fa-dollar-sign"></i>
+                                <h4>Cost Efficiency</h4>
+                            </div>
+                            <p>Reduce operational costs while maintaining service quality.</p>
+                        </div>
+                        <div class="insurance-benefit-card">
+                            <div class="insurance-benefit-header">
+                                <i class="fas fa-expand"></i>
+                                <h4>Scalability</h4>
+                            </div>
+                            <p>Easily adjust resources for seasonal fluctuations.</p>
+                        </div>
+                        <div class="insurance-benefit-card">
+                            <div class="insurance-benefit-header">
+                                <i class="fas fa-chart-pie"></i>
+                                <h4>Performance Metrics</h4>
+                            </div>
+                            <p>Detailed reporting on all key insurance service metrics.</p>
+                        </div>
+                        <div class="insurance-benefit-card">
+                            <div class="insurance-benefit-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Industry Expertise</h4>
+                            </div>
+                            <p>Specialized knowledge of insurance processes and terminology.</p>
+                        </div>
+                        <div class="insurance-benefit-card">
+                            <div class="insurance-benefit-header">
+                                <i class="fas fa-mobile-alt"></i>
+                                <h4>Technology Integration</h4>
+                            </div>
+                            <p>Seamless connection with your existing insurance systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insurance Why Outsource Section -->
+<section class="insurance-why-outsource">
+    <div class="insurance-container">
+        <div class="insurance-section-title">
+            <h2>Why Do Insurance Companies Outsource?</h2>
+            <p>There are many reasons why insurance companies and agencies choose to outsource various functions of their company. Here are just a few:</p>
+        </div>
+        
+        <div class="insurance-reasons-grid">
+            <div class="insurance-reason-card">
+                <div class="insurance-reason-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h3>Reducing Staff Cost</h3>
+                <p>Saving money is one of the primary reasons insurance companies outsource their claims and customer care services to companies outside the USA. The cost of hiring quality, trained, and college-educated staff in the India is much more affordable than hiring and training local talent.</p>
+            </div>
+            
+            <div class="insurance-reason-card">
+                <div class="insurance-reason-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Alleviating Work Pressure</h3>
+                <p>Are your employees wearing too many hats? If your staff is assigned the daily tasks of claims processing or customer care, they likely don't have the time to focus on the strategic part of their job. Hiring an external staff to take over tedious tasks such as claims processing will free up time and headspace for your team to do what they do best.</p>
+            </div>
+            
+            <div class="insurance-reason-card">
+                <div class="insurance-reason-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Ability to Quickly Scale Up</h3>
+                <p>Events like natural disasters and acts of terrorism can cause a drastic spike in claims. Suppose your exclusive support team is internal—staff. In that case, your members can quickly become overwhelmed, and claims can drag on for months or even years, creating discontent among policyholders and giving your company a bad name. Partnering with a strategic BPO provider provides access to a large team of trained individuals to help you and your customers get back on track.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Insurance Benefits Section -->
+    <section class="insurance-benefits">
+        <div class="insurance-container">
+            <div class="insurance-section-title">
+                <h2>Why Insurance Agencies Choose Value Connect</h2>
+                <p>Our solutions deliver measurable results for independent agents and large agencies alike.</p>
+            </div>
+            <div class="insurance-benefits-grid">
+                <div class="insurance-benefit-item">
+                    <div class="insurance-benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>More Policies</h3>
+                    <p>Increase policy retention and new business with better client service.</p>
+                </div>
+                <div class="insurance-benefit-item">
+                    <div class="insurance-benefit-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Faster Processing</h3>
+                    <p>Reduce turnaround time for policy issuance and endorsements.</p>
+                </div>
+                <div class="insurance-benefit-item">
+                    <div class="insurance-benefit-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3>Happier Clients</h3>
+                    <p>Enhance customer satisfaction with responsive, professional service.</p>
+                </div>
+                <div class="insurance-benefit-item">
+                    <div class="insurance-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Higher ROI</h3>
+                    <p>Maximize your marketing spend with better lead conversion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insurance CTA Section -->
+    <section class="insurance-cta">
+        <div class="insurance-container">
+            <h2>Ready to Transform Your Insurance Agency?</h2>
+            <p>Our team of insurance experts is ready to help you implement solutions that drive growth and client satisfaction.</p>
+            <a href="#" class="insurance-btn">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <div id="target-section">
+        <!-- Include your contact form here -->
+        {% include 'myapp/index_countriesweserve.html' %}
+    </div>
+
+    <!-- Insurance Footer -->
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.insurance-mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.insurance-nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Responsive adjustment for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                document.querySelector('.insurance-nav-links').style.display = 'flex';
+            } else {
+                document.querySelector('.insurance-nav-links').style.display = 'none';
+            }
+        });
+
+        // Auto-scroll function
+        function scrollToSection() {
+            document.getElementById('target-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

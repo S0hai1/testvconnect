@@ -1,0 +1,685 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1C6ACA;
+            --secondary-color: #2D3748;
+            --accent-color: #4FD1C5;
+            --light-gray: #F7FAFC;
+            --medium-gray: #E2E8F0;
+            --dark-gray: #4A5568;
+            --white: #FFFFFF;
+            --black: #1A202C;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--black);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+        
+        .body-wrapper {
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        .header-main {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-main__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-main__logo img {
+            max-width: 180px;
+            height: auto;
+        }
+        
+        .header-main__menu-nav-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-main__menu-nav-wrapper .hs-menu-wrapper > ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header-main__menu-nav-wrapper .hs-menu-wrapper > ul > li > a {
+            color: var(--black);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .header-main__menu-nav-wrapper .hs-menu-wrapper > ul > li > a:hover {
+            color: var(--primary-color);
+        }
+        
+        .header-main__cta {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-left: 15px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .header-main__cta:hover {
+            background-color: #1557B0;
+        }
+        
+        /* Banner Styles */
+        .banner-implementation {
+           background: linear-gradient(135deg, rgb(0, 0, 0), rgba(0, 0, 0, 0)), 
+                        url('{% static "myapp/images/implemention.jpg" %}');
+            padding: 180px 0 120px;
+            position: relative;
+            color: var(--white);
+            text-align: center;
+            overflow: hidden;
+           
+        }
+        
+        .banner-implementation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .banner-implementation__inner {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .banner-implementation h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .banner-implementation__icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Content Sections */
+        .implementation-section {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .implementation-section--gray {
+            background-color: var(--light-gray);
+        }
+        
+        .implementation-section--blue {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .implementation-section__header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .implementation-section__header h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .implementation-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .implementation-feature {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .implementation-feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .implementation-feature--blue {
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .implementation-feature__icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+        
+        .implementation-feature--blue .implementation-feature__icon {
+            background-color: var(--white);
+        }
+        
+        .implementation-feature--blue .implementation-feature__icon svg {
+            stroke: var(--primary-color);
+        }
+        
+        .implementation-feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        /* Two Column Layout */
+        .implementation-two-column {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .implementation-column {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .implementation-column img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .implementation-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .implementation-image svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            stroke: var(--primary-color);
+        }
+        
+        /* Contact Form */
+        .implementation-contact {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 80px 0;
+        }
+        
+        .implementation-contact__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 0 20px;
+        }
+        
+        .implementation-contact__info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .implementation-contact__form {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .implementation-contact__form h3 {
+            color: var(--black);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .contact-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent-color), #38B2AC);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .contact-image svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            stroke: var(--white);
+        }
+        
+        /* Footer */
+        .footer-implementation {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-implementation__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 0 20px;
+        }
+        
+        .footer-implementation__logo {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-implementation__logo img {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-implementation__menu {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .footer-implementation__menu h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-implementation__menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-implementation__menu li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-implementation__menu a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-implementation__menu a:hover {
+            color: var(--white);
+        }
+        
+        .footer-implementation__bottom {
+            width: 100%;
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* List styling */
+        .implementation-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .implementation-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--medium-gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .implementation-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .implementation-list li::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-right: 15px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .implementation-list li::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            position: absolute;
+            left: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-main__container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .header-main__menu-nav-wrapper {
+                margin-top: 15px;
+            }
+            
+            .banner-implementation {
+                padding: 120px 0 80px;
+            }
+            
+            .banner-implementation h1 {
+                font-size: 2rem;
+            }
+            
+            .implementation-section {
+                padding: 60px 20px;
+            }
+            
+            .implementation-section__header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .implementation-feature {
+                min-width: 100%;
+            }
+            
+            .implementation-two-column {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    {% include 'myapp/header.html' %}
+
+    <!-- Main Content -->
+    <main>
+        <!-- Banner Section -->
+        <section class="banner-implementation">
+            <div class="banner-implementation__inner">
+                <div class="banner-implementation__icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <h1>Implementation Process</h1>
+                <p>Seamless onboarding and integration for your business operations</p>
+            </div>
+        </section>
+        
+        <!-- Introduction Section -->
+        <section class="implementation-section">
+            <div class="implementation-section__header">
+                <h2>Seamless BPO Implementation at Value Connect Solutions</h2>
+                <p>Our structured implementation process ensures your program launches effectively and on time</p>
+            </div>
+            
+            <div class="implementation-two-column">
+                <div class="implementation-column">
+                    <h3>Leadership and Collaboration From Day One</h3>
+                    <p>Our Director of Client Support leads the implementation process as your primary point of contact. With extensive BPO industry experience, she ensures your program is built to your specifications and aligned with your objectives.</p>
+                    <p>From the initial setup, we collaborate closely with your team to understand your needs, customizing every aspect to deliver the results you expect.</p>
+                    <p>We also assign a dedicated Team Leader who becomes your primary contact during the training phase, ensuring continuity and maintaining high support levels.</p>
+                </div>
+                <div class="implementation-column">
+                    <div class="implementation-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <path d="M20 8v6"></path>
+                            <path d="M23 11h-6"></path>
+                        </svg>
+                        <p>Implementation Team<br>Leadership & Collaboration</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="implementation-section implementation-section--gray">
+            <div class="implementation-section__header">
+                <h2>Our Structured Implementation Process</h2>
+                <p>We follow a transparent, client-focused approach to ensure success from day one</p>
+            </div>
+            
+            <div class="implementation-features">
+                <div class="implementation-feature">
+                    <div class="implementation-feature__icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <h3>Initial Consultation</h3>
+                    <p>We begin with a comprehensive onboarding meeting involving our leadership team to establish clear requirements and outline roles and responsibilities.</p>
+                </div>
+                
+                <div class="implementation-feature">
+                    <div class="implementation-feature__icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4"></path>
+                            <path d="M15 11h4a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2h-4"></path>
+                            <path d="M9 7V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3"></path>
+                            <path d="M9 11v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4"></path>
+                        </svg>
+                    </div>
+                    <h3>Implementation Plan</h3>
+                    <p>We create a detailed roadmap for the entire process, continuously updated to reflect progress and ensure all deadlines are met.</p>
+                </div>
+                
+                <div class="implementation-feature">
+                    <div class="implementation-feature__icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3>Technical Integration</h3>
+                    <p>We conduct dedicated technical calls to ensure all systems are fully integrated and functioning as expected for a smooth transition.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Blue Section -->
+        <section class="implementation-section implementation-section--blue">
+            <div class="implementation-section__header">
+                <h2>Key Implementation Focus Areas</h2>
+                <p>We address all critical aspects to ensure operational success</p>
+            </div>
+            
+            <div class="implementation-features">
+                <div class="implementation-feature implementation-feature--blue">
+                    <div class="implementation-feature__icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12.89 1.45l8 4A2 2 0 0 1 22 7.24v9.53a2 2 0 0 1-1.11 1.79l-8 4a2 2 0 0 1-1.78 0l-8-4a2 2 0 0 1-1.11-1.79V7.24a2 2 0 0 1 1.11-1.79l8-4a2 2 0 0 1 1.78 0z"></path>
+                            <path d="M2.32 6.16l10 5.68 10-5.68"></path>
+                            <path d="M12 22.76V12.04"></path>
+                        </svg>
+                    </div>
+                    <h3>Systems & Tools</h3>
+                    <p>Seamless integration with your existing infrastructure and creation of shared documents for clear communication.</p>
+                </div>
+                
+                <div class="implementation-feature implementation-feature--blue">
+                    <div class="implementation-feature__icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <path d="M20 8v6"></path>
+                            <path d="M23 11h-6"></path>
+                        </svg>
+                    </div>
+                    <h3>Staffing & Scheduling</h3>
+                    <p>Determining optimal staffing needs including agent count and scheduling requirements.</p>
+                </div>
+                
+                <div class="implementation-feature implementation-feature--blue">
+                    <div class="implementation-feature__icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <h3>Training Logistics</h3>
+                    <p>Comprehensive training programs tailored to your specific operational requirements.</p>
+                </div>
+                
+                <div class="implementation-feature implementation-feature--blue">
+                    <div class="implementation-feature__icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18"></path>
+                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+                        </svg>
+                    </div>
+                    <h3>Performance Metrics</h3>
+                    <p>Establishing KPIs to measure success and identify areas for continuous improvement.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Continuous Support Section -->
+        <section class="implementation-section">
+            <div class="implementation-two-column">
+                <div class="implementation-column">
+                    <div class="implementation-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <p>Continuous Support<br>& Communication</p>
+                    </div>
+                </div>
+                <div class="implementation-column">
+                    <h2>Continuous Support and Communication</h2>
+                    <p>Throughout implementation, we maintain open communication with weekly progress reviews to address questions and reinforce the Implementation Plan.</p>
+                    <p>Our commitment continues after go-live, with our Director of Client Support actively involved to ensure we meet your partnership goals. Our leadership team monitors program success and addresses any emerging needs.</p>
+                    <p>With typical implementation taking 3-4 weeks from contract to training, you'll quickly realize the benefits of our partnership with minimal operational disruption.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Why Choose Us Section -->
+        <section class="implementation-section implementation-section--gray">
+            <div class="implementation-section__header">
+                <h2>Why Choose Value Connect Solutions?</h2>
+                <p>Our India-based operations deliver exceptional value with global standards</p>
+            </div>
+            
+            <div class="implementation-two-column">
+                <div class="implementation-column">
+                    <h3>Proven Implementation Expertise</h3>
+                    <p>With hundreds of successful implementations across industries, we've refined our process to ensure efficiency and effectiveness.</p>
+                    <p>Our India-based teams combine global best practices with local expertise to deliver exceptional service at competitive rates.</p>
+                </div>
+                <div class="implementation-column">
+                    <ul class="implementation-list">
+                        <li>ISO 27001 certified security standards</li>
+                        <li>24/7 operational support</li>
+                        <li>Multilingual capabilities</li>
+                        <li>State-of-the-art technology infrastructure</li>
+                        <li>Scalable solutions for businesses of all sizes</li>
+                        <li>Proven track record in the Indian and global markets</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        {% include 'myapp/index_countriesweserve.html' %}
+        <!-- footer -->
+         {% include 'myapp/footer.html' %}
+
+  </body>
+</html>       

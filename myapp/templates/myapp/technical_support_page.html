@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ValueConnectSolution - Your Success Is Our Mission</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
     {% load static %}
     <style>
-        /* CSS Variables (Keep at the top for easy access) */
+        /* CSS Variables */
         :root {
-            --header-height: 70px; /* Define your header's height here */
+            --header-height: 70px;
+            /* Define your header's height here */
         }
 
         /* General Body Styles */
@@ -17,21 +18,26 @@
             margin: 0;
             font-family: 'Inter', sans-serif;
             color: #fff;
-            background-color: #000; /* Overall dark background */
-            overflow-x: hidden; /* Prevent horizontal scroll from overflow, especially on mobile */
-            min-height: 100vh; /* Ensure body is at least viewport height */
-            height: auto; /* Allow body to expand with content */
+            overflow-x: hidden;
+            /* Prevent horizontal scroll from overflow, especially on mobile */
+            min-height: 100vh;
+            /* Ensure body is at least viewport height */
+            height: auto;
+            /* Allow body to expand with content */
         }
 
         /* Image Background Styles (for Header and Hero) */
         .hero-background-image {
-            position: absolute; /* Position relative to its parent .hero-content-wrapper */
+            position: absolute;
+            /* Position relative to its parent .hero-content-wrapper */
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%; /* Make it fill the wrapper */
+            height: 100%;
+            /* Make it fill the wrapper */
             overflow: hidden;
-            z-index: -2; /* Puts it behind all content, including the header */
+            z-index: -2;
+            /* Puts it behind all content, including the header */
         }
 
         .hero-background-image img {
@@ -43,7 +49,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            object-fit: cover; /* Ensures the image covers the entire container */
+            object-fit: cover;
+            /* Ensures the image covers the entire container */
         }
 
         .image-overlay {
@@ -52,41 +59,51 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Dark overlay for better text readability */
-            z-index: -1; /* Above image, below all foreground content (including header) */
+            background: rgba(0, 0, 0, 0.6);
+            /* Dark overlay for better text readability */
+            z-index: -1;
+            /* Above image, below all foreground content (including header) */
         }
 
         /* Wrapper for main content to sit on top of the image */
         .hero-content-wrapper {
-            position: relative; /* Allows content inside to be positioned normally */
-            z-index: 1; /* Ensures content is above the image and overlay */
-            min-height: calc(100vh - var(--header-height)); /* Ensure it's at least one screen height */
+            position: relative;
+            /* Allows content inside to be positioned normally */
+            /* Ensures content is above the image and overlay */
+            min-height: calc(100vh - var(--header-height));
+            /* Ensure it's at least one screen height */
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Center hero content vertically */
-            padding-bottom: 50px; /* Add some padding at the bottom for separation */
+            justify-content: center;
+            /* Center hero content vertically */
+            padding-bottom: 50px;
+            /* Add some padding at the bottom for separation */
         }
 
-        /* Hero Section Styles (already good, just ensure no conflicting backgrounds) */
+        /* Hero Section Styles */
         .hero-section {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0px 30px; /* Reduced vertical padding */
+            padding: 0px 30px;
+            /* Reduced vertical padding */
             margin-top: 80px;
-            background: none; /* No background on hero section itself */
-            min-height: calc(100vh - var(--header-height) - 80px - 80px); /* Adjust to fit initially */
+            background: none;
+            /* No background on hero section itself */
+            min-height: calc(100vh - var(--header-height) - 80px - 80px);
+            /* Adjust to fit initially */
             box-sizing: border-box;
             position: relative;
             overflow: hidden;
-            color: #fff; /* Ensure text is white as per body style */
+            color: #fff;
+            /* Ensure text is white as per body style */
         }
 
         .hero-content {
             flex: 1;
             max-width: 650px;
             margin-right: 50px;
-            z-index: 1;
+
             color: #fff;
         }
 
@@ -103,85 +120,6 @@
             line-height: 1.6;
             margin-bottom: 35px;
             color: #e0e0e0;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.05em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .btn-primary {
-            background-color: #3b82f6;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #2563eb;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #3b82f6;
-            border: 1px solid #3b82f6;
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .clutch-reviews {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fff;
-            font-size: 1em;
-            font-weight: 500;
-        }
-
-        .clutch-logo {
-            font-size: 1.8em;
-            font-weight: 800;
-            color: #d1d5db;
-        }
-
-        .stars {
-            display: flex;
-            gap: 2px;
-        }
-
-        .stars span {
-            color: #fdd835;
-            font-size: 1.2em;
-        }
-
-        .hero-image-container {
-            flex: 0.8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .hero-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 1;
         }
 
         .hero-section::before,
@@ -209,149 +147,563 @@
             background: rgba(253, 216, 53, 0.05);
         }
 
-        /* --- New Content Section Styles --- */
-        .content-section {
-            background-color: #f8f8f8; /* Light background for new section */
-            color: #333; /* Dark text for readability */
-            padding: 80px 30px;
-            text-align: center;
-            position: relative; /* Essential for z-index to work */
-            z-index: 2; /* Make sure it sits above the fixed image background */
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Optional shadow to distinguish from image */
-        }
-
-        .content-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            color: #222;
-        }
-
-        .content-section p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto 40px auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-item {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            text-align: left;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-item h3 {
-            font-size: 1.5em;
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #3b82f6; /* Matching your primary blue */
-        }
-
-        .feature-item p {
-            font-size: 0.95em;
-            line-height: 1.5;
-            color: #555;
-            margin-bottom: 0;
-        }
-
-
         /* Responsive Adjustments */
         @media (max-width: 992px) {
             .hero-section {
                 flex-direction: column;
                 text-align: center;
-                padding: 30px 20px; /* Further reduce vertical padding */
+                padding: 30px 20px;
+                /* Further reduce vertical padding */
             }
 
             .hero-content {
                 margin-right: 0;
-                margin-bottom: 30px; /* Reduced margin */
+                margin-bottom: 30px;
+                /* Reduced margin */
                 max-width: 100%;
             }
 
             .hero-content h1 {
-                font-size: 2.2em; /* Slightly smaller on tablets */
-            }
-
-            .hero-buttons {
-                justify-content: center;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .clutch-reviews {
-                justify-content: center;
-            }
-
-            .hero-image-container {
-                flex: none;
-                width: 80%;
-                max-width: 350px; /* Slightly smaller image container */
-            }
-
-            .content-section {
-                padding: 60px 20px;
+                font-size: 2.2em;
+                /* Slightly smaller on tablets */
             }
         }
 
         @media (max-width: 576px) {
             .hero-content h1 {
-                font-size: 1.8em; /* Even smaller on mobile */
+                font-size: 1.8em;
+                /* Even smaller on mobile */
             }
 
             .hero-content p {
-                font-size: 0.95em; /* Slightly smaller paragraph */
+                font-size: 0.95em;
+                /* Slightly smaller paragraph */
+            }
+        }
+
+        .tech-support-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .tech-intro-section {
+            margin-bottom: 60px;
+        }
+
+        .tech-intro-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .tech-intro-text {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin: 0 auto 30px;
+        }
+
+        .services-section {
+            margin-top: 60px;
+        }
+
+        .services-section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .services-intro {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.4);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            position: relative;
+
+        }
+
+        .service-card h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+
+        }
+
+        .read-more-btn {
+            background: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            position: relative;
+
+        }
+
+        .read-more-btn:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Service specific icons using CSS */
+        .help-desk-icon::before {
+            content: '🎧';
+        }
+
+        .software-support-icon::before {
+            content: '⚙️';
+        }
+
+        .installation-icon::before {
+            content: '💻';
+        }
+
+        .training-icon::before {
+            content: '🎓';
+        }
+
+        @media (max-width: 768px) {
+            .tech-intro-section h1 {
+                font-size: 2rem;
             }
 
-            .btn {
-                padding: 10px 18px; /* Smaller button padding */
-                font-size: 0.85em;
+            .services-section h2 {
+                font-size: 1.7rem;
             }
 
-            .hero-image-container {
-                width: 90%;
-                max-width: 300px; /* Smaller image container on mobile */
+            .services-grid {
+                gap: 20px;
             }
 
-            .content-section h2 {
-                font-size: 1.8em;
+            .service-card {
+                padding: 30px 20px;
             }
 
-            .content-section p {
-                font-size: 1em;
+            .tech-support-container {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tech-intro-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .tech-intro-text,
+            .services-intro {
+                font-size: 1rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Benefits Section Styles */
+        .benefits-section {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            margin-top: 60px;
+            padding: 60px 40px;
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefits-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .benefits-content {
+            position: relative;
+
+        }
+
+        .benefits-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .benefits-intro {
+            margin-bottom: 40px;
+        }
+
+        .benefits-intro p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .benefits-section h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .advantages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .advantage-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .advantage-item:last-child {
+            border-bottom: none;
+        }
+
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .advantage-content h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .advantage-content p {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .benefits-footer {
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Advantage icons using CSS */
+        .headset-icon::before {
+            content: '🎧';
+        }
+
+        .rocket-icon::before {
+            content: '🚀';
+        }
+
+        .team-icon::before {
+            content: '👥';
+        }
+
+        .phone-icon::before {
+            content: '📞';
+        }
+
+        .cloud-icon::before {
+            content: '☁️';
+        }
+
+        @media (max-width: 768px) {
+            .benefits-section {
+                padding: 40px 20px;
+                margin-top: 40px;
+            }
+
+            .benefits-section h2 {
+                font-size: 2rem;
+                text-align: center;
+            }
+
+            .benefits-section h3 {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            .advantage-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .advantage-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .benefits-section {
+                padding: 30px 15px;
+            }
+
+            .benefits-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .benefits-intro p {
+                font-size: 1rem;
+            }
+
+            .advantage-content h4 {
+                font-size: 1.1rem;
+            }
+
+            .advantage-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Why India Section */
+        .why-india-section {
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+
+        .why-india-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .content-block {
+            margin: 0 auto;
+        }
+
+        .content-block p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        /* What You Get Section */
+        .what-you-get-section {
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+
+        .what-you-get-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            margin-top: 20px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .feature-list li {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Why ConnectSolutions Section */
+        .why-vcs-section {
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+
+        .why-vcs-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .feature-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+
+            .why-india-section,
+            .what-you-get-section,
+            .why-vcs-section {
+                margin-top: 40px;
+                padding: 0 15px;
+            }
+
+            .why-india-section h2,
+            .what-you-get-section h2,
+            .why-vcs-section h2 {
+                font-size: 1.8rem;
             }
 
             .features-grid {
-                grid-template-columns: 1fr; /* Stack features on very small screens */
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            .content-block p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .why-india-section h2,
+            .what-you-get-section h2,
+            .why-vcs-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .feature-card .feature-icon {
+                font-size: 2.5rem;
             }
         }
     </style>
 </head>
+
 <body>
 
     <div class="hero-content-wrapper">
         <div class="hero-background-image">
-            <img src="{% static 'myapp/images/your_background_image.jpg' %}" alt="Background Image">
+            <img src="{% static 'myapp/images/japan-background-digital-art.jpg' %}" alt="Background Image">
             <div class="image-overlay"></div>
         </div>
 
@@ -359,217 +711,227 @@
 
         <main class="hero-section">
             <div class="hero-content">
-                <h1>Your Success Is Our Mission with India's Call Center Excellence</h1>
+                <h1>Technical Support Help Desk</h1>
                 <p>
-                    Power your company's growth with top-notch call center outsourcing in India. At ValueConnectSolution, we provide
-                    scalable, cost-effective solutions tailored to your business needs to keep you ahead in your industry.
+                    Ensure fast and reliable resolutions to technical issues with our expert technical support services.
+                    Call Value ConnectSolutions for top-tier customer assistance and support for your business today!
                 </p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary">Get Your Free Quote</button>
-                    <button class="btn btn-secondary">Explore Our Services</button>
-                </div>
-                <div class="clutch-reviews">
-                    <span class="clutch-logo">C</span>
-                    <span class="clutch-text">Clutch Reviews - 4.9 Rating</span>
-                    <div class="stars">
-                        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-                    </div>
-                </div>
             </div>
         </main>
     </div>
 
 
-    <div class="Services_Section">
-        {% include 'myapp/footer.html' %}
-    </div>
-
-    <script>
-    </script>
-
-</body>
-</html>
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ValueConnectSolution - Your Success Is Our Mission</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet" />
-    {% load static %}
-    <style>
-        /* CSS Variables */
-        :root {
-            --header-height: 70px;
-        }
-
-        /* General Body Styles */
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            color: #333;
-            background-color: #fff;
-            overflow-x: hidden;
-        }
-
-        .navbar {
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Change text/icon colors when */
-        .navbar .logo .text-select,
-        .navbar .logo .text-voicecom,
-        .navbar .nav-item > a,
-        .navbar .search-icon,
-        .navbar .lang {
-            color: var(--text-color-dark);
-        }
-
-        .navbar .hamburger-menu span {
-            background-color: var(--text-color-dark);
-        }
-
-        /* Hero Section with Background Image */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            background-image: url('{% static "myapp/images/outsourcing1.webp" %}');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* This creates the parallax effect */
-            background-repeat: no-repeat;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        /* Dark overlay for better text readability */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-
-        /* Hero Content */
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            margin: 0 auto;
-            padding: 0 30px;
-            padding-top: 140px;
-            padding-bottom: 60px;
-            background-color: white;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5em;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 30px;
-        }
-
-        .hero-content p {
-            font-size: 1.2em;
-            margin-bottom: 40px;
-        }
-
-        
-        /* Responsive Adjustments */
-        @media (max-width: 992px) {
-            .hero-content h1 {
-                font-size: 2.8em;
-            }
-
-            .hero-content p {
-                font-size: 1.1em;
-            }
-
-        }
-
-        @media (max-width: 576px) {
-            .hero-section {
-                background-attachment: scroll; /* Disable parallax on mobile for better performance */
-            }
-
-            .hero-content {
-                padding: 0 20px;
-            }
-
-            .hero-content h1 {
-                font-size: 2.2em;
-            }
-
-            .hero-content p {
-                font-size: 1em;
-            }
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            color: #fff;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    {% include 'myapp/header.html' %}
-
-    <div class="hero-section">
-        <div class="hero-content">
-            <h1>Outsourced Customer Retention Services in the Philippines</h1>
-            <p>Boost your customer loyalty and revenue with our expert retention strategies</p>
+    <div class="tech-support-container">
+        <div class="tech-intro-section">
+            <h1>Technical Support Outsourcing: The Smart Choice for Businesses</h1>
+            <p class="tech-intro-text">
+                Outsourcing your technical support to a call center in the India is a strategic decision that can
+                give your business a competitive edge. Maintaining operational efficiency becomes increasingly
+                challenging as modern businesses rely more on cost-effective, skilled, and accessible customer service
+                solutions.
+            </p>
+            <p class="tech-intro-text">
+                At Value ConnectSolutions, we provide exceptional technical and help desk support services designed to
+                meet the
+                unique needs of your business. Our dedicated team ensures your customers receive unparalleled support,
+                empowering them to resolve issues efficiently while enhancing their overall experience with your brand.
+            </p>
         </div>
-        
-        <div class="scroll-indicator">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 13l3 3 7-7"/>
-                <path d="M7 6l3 3 7-7"/>
-            </svg>
+
+        <div class="services-section">
+            <h2>Value ConnectSolutions Help Desk Technical Support Services</h2>
+            <p class="services-intro">
+                At our large call center, we provide comprehensive technical support services, including:
+            </p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon help-desk-icon"></div>
+                    <h3>Help Desk Services</h3>
+                    <button class="read-more-btn">Read more</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon software-support-icon"></div>
+                    <h3>Software & App Support</h3>
+                    <button class="read-more-btn">Read more</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon installation-icon"></div>
+                    <h3>Software Installation Assistance</h3>
+                    <button class="read-more-btn">Read more</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon training-icon"></div>
+                    <h3>Software Training Programs</h3>
+                    <button class="read-more-btn">Read more</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="benefits-section">
+            <div class="benefits-content">
+                <h2>The Benefits of Outsourcing Technical Support Services</h2>
+                <div class="benefits-intro">
+                    <p>Outsourcing your technical help desk to the India helps you optimize resources and focus on
+                        core business areas like product development, service enhancement, and market expansion—all
+                        while maintaining top-tier customer support.</p>
+                    <p>Outsourcing technical support also provides access to cutting-edge technology without the need
+                        for costly investments. At Value ConnectSolutions, our team is proficient in the latest industry
+                        technologies, ensuring seamless integration and exceptional service to your customers.</p>
+                    <p>With Value ConnectSolutions, your India technical help desk is managed by a dedicated team of
+                        specialists who deliver reliable, high-quality support. Our staff, fluent in English and trained
+                        to understand your business inside-out, serve as an extension of your internal team. Your
+                        customers will receive the support they expect without ever realizing your team is overseas.</p>
+                </div>
+
+                <h3>Advantages of Outsourcing Technical Support Service:</h3>
+                <div class="advantages-list">
+                    <div class="advantage-item">
+                        <div class="advantage-icon headset-icon"></div>
+                        <div class="advantage-content">
+                            <h4>Lower Overhead Costs</h4>
+                            <p>Save on salaries, training and benefits.</p>
+                        </div>
+                    </div>
+
+                    <div class="advantage-item">
+                        <div class="advantage-icon rocket-icon"></div>
+                        <div class="advantage-content">
+                            <h4>Enhanced Performance</h4>
+                            <p>Faster response time and superior service</p>
+                        </div>
+                    </div>
+
+                    <div class="advantage-item">
+                        <div class="advantage-icon team-icon"></div>
+                        <div class="advantage-content">
+                            <h4>Flexible Staffing Options</h4>
+                            <p>Scale your team up or down based on demand</p>
+                        </div>
+                    </div>
+
+                    <div class="advantage-item">
+                        <div class="advantage-icon phone-icon"></div>
+                        <div class="advantage-content">
+                            <h4>24/7 Customer Support</h4>
+                            <p>Round-the-clock support, including weekends and holidays</p>
+                        </div>
+                    </div>
+
+                    <div class="advantage-item">
+                        <div class="advantage-icon cloud-icon"></div>
+                        <div class="advantage-content">
+                            <h4>Access to Modern Technology</h4>
+                            <p>Cloud-based technology with minimal learning curve</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="benefits-footer">
+                    Value ConnectSolutions makes technical support outsourcing in the India a seamless and
+                    cost-effective
+                    solution for your business.
+                </p>
+            </div>
+        </div>
+
+        <div class="why-india-section">
+            <h2>Why Choose the India for Your Technical Support</h2>
+            <div class="content-block">
+                <p>The India has become a leading destination for outsourcing business services, particularly for
+                    technical help desk support representatives. The country boasts a 96% literacy rate, a large pool of
+                    young, college-educated, English-speaking professionals, and a work ethic aligned with Western
+                    standards.</p>
+                <p>Value ConnectSolutions, consistently ranks among the top cities for tech support
+                    outsourcing thanks to its robust educational system, government incentives, and state-of-the-art
+                    infrastructure.</p>
+                <p>By choosing the India for your technical support, you gain access to an exceptional talent pool
+                    and a proven outsourcing hub that delivers quality, reliability, and value.</p>
+            </div>
+        </div>
+
+        <div class="what-you-get-section">
+            <h2>What You Get with Value ConnectSolutions</h2>
+            <div class="content-block">
+                <p>When you partner with Value ConnectSolutions, we handle everything from employee recruitment and
+                    screening
+                    to training and ongoing support, all tailored to your needs. Our candidates hold computer degrees,
+                    and many have experience working with Fortune 500 companies.</p>
+                <p>Our flexible environment allows for seamless integration with your existing systems, or you can opt
+                    to utilize our cloud-based platform featuring:</p>
+                <ul class="feature-list">
+                    <li>Automatic Call Distribution</li>
+                    <li>Interactive Voice Recordings</li>
+                    <li>Cloud Hosting</li>
+                    <li>CRM Integration with Salesforce, HubSpot, ZenDesk, and Other Software</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="why-vcs-section">
+            <h2>Why Choose Value ConnectSolutions</h2>
+            <div class="content-block">
+                <p>Value ConnectSolutions is more than just a technical support provider—we are your trusted partner in
+                    delivering exceptional customer experiences. Our dedicated team, advanced infrastructure, and
+                    customized approach ensure that your business gets the support it needs to thrive. Here's what sets
+                    us apart:</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Top-Quality Agents</h3>
+                    <p>Our team consists of mature, experienced professionals who are carefully selected and extensively
+                        trained. Each agent is fully dedicated to your account, ensuring that your customers receive
+                        consistent, personalized assistance every time.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Robust Infrastructure</h3>
+                    <p>Our state-of-the-art infrastructure enables seamless, reliable operations. You can trust that
+                        your support services will run smoothly and efficiently, no matter how complex your needs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Experienced Management</h3>
+                    <p>With decades of combined experience, our leadership team brings unmatched expertise to managing
+                        your technical support operations. We're here to ensure your goals are met with precision and
+                        excellence.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Top-Tier Security</h3>
+                    <p>We prioritize your data's safety with advanced security protocols that meet global standards.
+                        Your customers' information is in trusted hands, ensuring peace of mind for you and your
+                        clients.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Custom Solutions</h3>
+                    <p>At Value ConnectSolutions, we understand that no two businesses are the same. Our team works
+                        closely with you to craft customized solutions tailored to your specific technical support
+                        needs. Whether it's a complex setup or a unique service request, we're here to make it happen.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Attractive Pricing</h3>
+                    <p>While we deliver premium services, our competitive pricing ensures you get the best value for
+                        your investment.</p>
+                </div>
+            </div>
         </div>
     </div>
-
-    
-
-        {% include 'myapp/footer.html' %}
-
-
-    <script>
-        
-    </script>
+    {% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
 
 </body>
 

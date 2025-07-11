@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --primary-blue: #2176d7;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --text-primary: #333;
+            --text-secondary: #555;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --border-radius: 15px;
+            --border-radius-large: 25px;
+            --spacing-xs: 10px;
+            --spacing-sm: 15px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            --spacing-xxl: 60px;
+            --container-max-width: 1440px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Background Image Styles for Hero */
+        .image-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&h=1080&fit=crop') center/cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Services Hero Section Styles */
+        .services-hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding-top: var(--header-height);
+            box-sizing: border-box;
+            z-index: 0;
+            max-width: var(--container-max-width);
+            margin: auto;
+        }
+
+        .services-hero-content {
+            max-width: 1130px;
+            padding: var(--spacing-xl);
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .services-hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: var(--spacing-md);
+            font-weight: 800;
+            -webkit-background-clip: text;
+            background-clip: text;
+            position: relative;
+        }
+
+        .services-hero-content h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .services-hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Page Container Styles */
+        .page-container-background {
+            background-color: #ffffff;
+        }
+
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: var(--container-max-width);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            box-sizing: border-box;
+            margin: 0 auto;
+            background: var(--bg-white);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section for the main heading */
+        .heading-section {
+            width: 100%;
+            text-align: center;
+            margin-bottom: var(--spacing-xxl);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .main-page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin: 0;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .main-page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        /* Content layout section */
+        .content-layout-area {
+            display: flex;
+            flex-direction: row;
+            gap: var(--spacing-xxl);
+            width: 100%;
+            align-items: center;
+            margin-bottom: var(--spacing-xxl);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .appointment-setting {
+            flex-direction: row-reverse;
+        }
+
+        /* Text content area */
+        .text-description-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+            min-width: 0;
+        }
+
+        .text-description-area p {
+            font-size: clamp(1.1rem, 2vw, 1.2rem);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin: 0;
+            text-align: justify;
+        }
+
+        .text-description-area h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 var(--spacing-md) 0;
+            line-height: 1.3;
+        }
+
+        /* Image display area */
+        .visual-display-area {
+            flex-shrink: 0;
+            width: min(450px, 100%);
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+        }
+
+        .visual-display-area:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .visual-display-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--border-radius-large);
+            transition: var(--transition);
+        }
+
+        .visual-display-area:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Small decorative element on the image */
+        .image-accent-overlay {
+            position: absolute;
+            bottom: var(--spacing-sm);
+            right: var(--spacing-sm);
+            width: 100px;
+            height: 30px;
+            background: var(--accent-gradient);
+            border-radius: 15px;
+            transform: skewX(-15deg);
+            animation: pulse 2s infinite;
+        }
+
+        /* Background for both sections */
+        .page-background {
+            background: var(--dark-gradient);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop') center/cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        /* Section Styling */
+        .first-section,
+        .second-section {
+            color: white;
+            width: 100%;
+            padding: var(--spacing-xxl) var(--spacing-md);
+            text-align: center;
+            max-width: var(--container-max-width);
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Heading Styles */
+        .main-heading {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .main-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        /* Subtitle/Paragraph Styles */
+        .sub-description {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            margin-bottom: var(--spacing-xxl);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Grid Layout for Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        /* Individual Feature Card Styles */
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-large);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out calc(0.6s + var(--stagger, 0) * 0.2s) both;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: var(--spacing-md);
+            border-radius: 50%;
+            transition: var(--transition);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: #ffffff;
+        }
+
+        .feature-text {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Second Section Specific Styles */
+        .second-section-heading {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .second-section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .second-section-content {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            width: 95%;
+            margin: var(--spacing-lg) auto 0;
+            text-align: left;
+            padding: var(--spacing-xl);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-large);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* White section styling */
+        .white-section-container {
+            background: var(--bg-white);
+        }
+        .white-section {
+            color: var(--text-primary);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            margin: 0 auto;
+        }
+
+        .white-section .main-heading {
+            color: var(--text-primary);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .white-section .sub-description {
+            color: var(--text-secondary);
+        }
+
+        .white-section .feature-item {
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            color: var(--text-primary);
+        }
+
+        .white-section .feature-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .white-section .feature-title {
+            color: var(--text-primary);
+        }
+
+        .white-section .feature-text {
+            color: var(--text-secondary);
+        }
+
+        .second-section-content-container{
+            display: flex;
+            flex-direction: row-reverse;
+            gap: var(--spacing-lg);
+        }
+
+        @media (max-width: 768px) {
+    .second-section-content-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+    }
+}
+
+
+
+        /* Image styling for sections */
+        .section-image {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: var(--border-radius-large);
+            margin: var(--spacing-lg) 0;
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+        }
+
+        .section-image:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: skewX(-15deg) scale(1);
+            }
+            50% {
+                transform: skewX(-15deg) scale(1.05);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-layout-area {
+                flex-direction: column;
+                gap: var(--spacing-xl);
+            }
+
+            .visual-display-area {
+                width: 100%;
+                height: 250px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-container {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+        }
+
+        /* Stagger animation for feature items */
+        .feature-item:nth-child(1) { --stagger: 0; }
+        .feature-item:nth-child(2) { --stagger: 1; }
+        .feature-item:nth-child(3) { --stagger: 2; }
+        .feature-item:nth-child(4) { --stagger: 3; }
+        .feature-item:nth-child(5) { --stagger: 4; }
+        .feature-item:nth-child(6) { --stagger: 5; }
+    </style>
+</head>
+
+<body>
+    <div class="image-background">
+        <div class="image-overlay"></div>
+    </div>
+
+       {% include 'myapp/header.html' %}
+
+
+    <div class="services-hero-section">
+        <div class="services-hero-content">
+            <h1>Data Entry Services</h1>
+            <p>Professional, accurate, and cost-effective data entry solutions for your business needs</p>
+        </div>
+    </div>
+
+    <div class="page-container-background">
+    <div class="page-container">
+        <div class="heading-section">
+            <h1 class="main-page-title">Outsource Your Data Entry Services to Value ConnectSolutions for Cost Efficiency and Accuracy</h1>
+        </div>
+
+        <div class="content-layout-area">
+            <div class="text-description-area">
+                <p>Are you looking for a cost-effective solution for data entry services? Value ConnectSolutions offers the expertise and reliability to streamline your data management processes. Data entry can be a time-consuming and error-prone task that diverts your valuable internal resources from core activities like customer service and sales. By outsourcing data entry to our experienced, English-speaking team of professionals in India, you can save money, improve data accuracy, and allow your agents to focus on what they do best – serving customers and driving revenue.</p>
+                
+                <p>Your company's database is a critical asset, holding essential information that drives customer interactions, service improvements, and strategic decisions. Accurate data is the backbone of successful marketing and customer service efforts. As the central hub for customer data, call centers play a vital role in gathering insights that can fuel business growth. Streamlining data entry allows companies to gain a comprehensive understanding of customer interactions, enhancing sales, reducing churn, and boosting efficiency.</p>
+            </div>
+            <div class="visual-display-area">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop" alt="Professional data entry team working with modern technology">
+                <div class="image-accent-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <
+    <div class="page-background">
+        <!-- First Section: How Data Entry Services Benefit Your Business -->
+        <section class="first-section">
+            <h1 class="main-heading">How Data Entry Services Benefit Your Business</h1>
+            <p class="sub-description">Effective data entry has a direct impact on business success</p>
+
+            <div class="feature-grid">
+                <!-- Feature Item 1: Customer Insights -->
+                <div class="feature-item">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=100&h=100&fit=crop&crop=center" alt="Customer Insights - Data Analytics Dashboard" class="feature-icon">
+                    <h3 class="feature-title">Customer Insights</h3>
+                    <p class="feature-text">Understand what customers like or dislike about your products and services, enabling data-driven improvements.</p>
+                </div>
+
+                <!-- Feature Item 2: Efficiency Improvements -->
+                <div class="feature-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&h=100&fit=crop&crop=center" alt="Efficiency Improvements - Business Growth Chart" class="feature-icon">
+                    <h3 class="feature-title">Efficiency Improvements</h3>
+                    <p class="feature-text">Optimize sales, marketing, and service scripts to enhance performance and reduce waste.</p>
+                </div>
+
+                <!-- Feature Item 3: Process Optimization -->
+                <div class="feature-item">
+                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=100&h=100&fit=crop&crop=center" alt="Process Optimization - Workflow Management" class="feature-icon">
+                    <h3 class="feature-title">Process Optimization</h3>
+                    <p class="feature-text">Identify bottlenecks in customer interactions to streamline processes and minimize wasted time.</p>
+                </div>
+
+                <!-- Feature Item 4: Training Enhancements -->
+                <div class="feature-item">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=100&h=100&fit=crop&crop=center" alt="Training Enhancements - Team Learning" class="feature-icon">
+                    <h3 class="feature-title">Training Enhancements</h3>
+                    <p class="feature-text">Facilitate better training for new and existing agents to improve overall service delivery.</p>
+                </div>
+
+                <!-- Feature Item 5: Relationship Management -->
+                <div class="feature-item">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=100&h=100&fit=crop&crop=center" alt="Relationship Management - Customer Connection" class="feature-icon">
+                    <h3 class="feature-title">Relationship Management</h3>
+                    <p class="feature-text">Keep customer data up to date for better engagement, retention, and upselling opportunities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Second Section: Data Entry: A Key Area for Cost Savings -->
+        <section class="second-section">
+            <h2 class="second-section-heading">Data Entry: A Key Area for Cost Savings</h2>
+            <div class="second-section-content-container">
+            <div style="text-align: center; ">
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop&crop=center" alt="Data Entry Cost Savings - Financial Analysis" class="section-image">
+            </div>
+            <div class="second-section-content">
+                Data entry is essential but often viewed as a mundane task that consumes valuable time for sales and support agents. Studies show that up to 10% of a call center agent's time is spent on after-call data entry tasks, costing the industry over $20 billion annually. A 500-seat call center handling 5 million calls annually could spend over $2 million on wrap-up time alone. Reducing this time by just 25% can save over $500,000 annually. Additional savings can come from reduced agent turnover, lower training costs, shorter customer wait times, and improved customer satisfaction.
+            </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="white-section-container">
+    <section class="first-section white-section">
+        <h1 class="main-heading">Why Outsource Data Entry Needs to Value ConnectSolutions?</h1>
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=400&fit=crop&crop=center" alt="Professional Data Entry Team at Work" class="section-image">
+        </div>
+        <p class="sub-description">Outsourcing data entry is a cost-effective and efficient way to enhance business operations in a global marketplace. Here's why Value ConnectSolutions is the right choice for your data entry needs:</p>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=100&h=100&fit=crop&crop=center" alt="Cost Savings - Financial Benefits" class="feature-icon">
+                <h3 class="feature-title">Cost Savings</h3>
+                <p class="feature-text">Outsourced data entry services from Value ConnectSolutions are highly cost-effective. Operating in India, where the cost of living is significantly lower than in the U.S. or U.K., allows us to offer competitive wages to our agents at a fraction of the price you'd incur domestically.</p>
+            </div>
+
+            <div class="feature-item">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=100&h=100&fit=crop&crop=center" alt="Increased Accuracy - Data Quality Control" class="feature-icon">
+                <h3 class="feature-title">Increased Accuracy</h3>
+                <p class="feature-text">Outsourcing data entry to Value ConnectSolutions reduces human error and enhances data accuracy. Our agents are dedicated to data entry tasks, ensuring focused and consistent work.</p>
+            </div>
+
+            <div class="feature-item">
+                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=100&h=100&fit=crop&crop=center" alt="Enhanced Data Security - Cybersecurity Protection" class="feature-icon">
+                <h3 class="feature-title">Enhanced Data Security</h3>
+                <p class="feature-text">At Value ConnectSolutions, we prioritize data security to protect your sensitive information. Our data entry services comply with the highest standards, including certifications in PCI DSS, HIPAA and SOC2, and ISO 27002 compliance.</p>
+            </div>
+
+            <div class="feature-item">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=100&h=100&fit=crop&crop=center" alt="Access to Skilled Workforce - Professional Team" class="feature-icon">
+                <h3 class="feature-title">Access to a Skilled Workforce</h3>
+                <p class="feature-text">Our team consists of college-educated, native English-speaking professionals who are rigorously screened through background checks and random testing. We invest in continuous training through video conferencing, mentoring, and mock call review sessions to ensure our agents deliver top-tier service.</p>
+            </div>
+
+            <div class="feature-item">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=100&h=100&fit=crop&crop=center" alt="Focus on Core Activities - Strategic Business Planning" class="feature-icon">
+                <h3 class="feature-title">Focus on Core Activities</h3>
+                <p class="feature-text">By outsourcing data entry tasks to Value ConnectSolutions, your in-house staff can concentrate on core activities like customer engagement, sales, and strategic planning. Our agents handle all data entry, verification, and management tasks efficiently.</p>
+            </div>
+        </div>
+    </section>
+    </div>
+
+        {% include 'myapp/footer.html' %}
+
+
+    <script>
+        // Add smooth scrolling and entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+
+
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.heading-section, .content-layout-area, .first-section, .second-section, .white-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Add a class for animation to the hero section content
+            const servicesHeroContent = document.querySelector('.services-hero-content');
+            if (servicesHeroContent) {
+                servicesHeroContent.style.animation = 'fadeInUp 1s ease-out forwards';
+            }
+
+            // Apply stagger animation to feature items
+            document.querySelectorAll('.feature-item').forEach((item, index) => {
+                item.style.setProperty('--stagger', index);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -2,9 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ValueConnectSolution - Your Success Is Our Mission</title>
+    {% include 'myapp/meta_tags.html' %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
         /* CSS Variables (Keep at the top for easy access) */
@@ -325,7 +323,7 @@
         .why-choose-image img {
             max-width: 100%;
             height: auto;
-            border-radius: 50%; /* Circular image */
+            border-radius: 25%; /* Circular image */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
@@ -481,16 +479,16 @@
                 </ul>
             </div>
             <div class="order-processing-image">
-                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Woman working on computer">
+                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Indian woman working in call center">
             </div>
         </div>
 
         <div class="outsourcing-advantage">
             <div class="image-left">
-                <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Man looking at screen">
+                <img src="{% static 'myapp/images/discussing.png' %}" alt="Indian business professionals discussing">
             </div>
             <div class="text-right">
-                <h3>The Advantages of Outsourcing Order Processing Services in the India</h3>
+                <h3>The Advantages of Outsourcing Order Processing Services in India</h3>
                 <p>
                     Outsourcing your order processing to a specialized third-party offers significant benefits for
                     your business, both in the short and long term. Value Connect Solutions is a global leader in
@@ -518,7 +516,7 @@
                 </ul>
             </div>
             <div class="benefits-image">
-                <img src="{% static 'myapp/images/interview-techniques.webp' %}" alt="Group of smiling professionals">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Indian team collaborating in office">
             </div>
         </div>
     </section>
@@ -527,7 +525,7 @@
         <h2>Why Choose Value Connect Solutions for Your Order Processing Needs?</h2>
         <div class="why-choose-content">
             <div class="why-choose-image">
-                <img src="https://images.unsplash.com/photo-1596526131078-0c3093155734?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Woman with headset">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Indian customer service representative with headset">
             </div>
             <div class="why-choose-text">
                 <p>
@@ -541,6 +539,8 @@
             </div>
         </div>
     </section>
+
+    {% include 'myapp/index_countriesweserve.html' %}
 
     {% include 'myapp/footer.html' %}
 

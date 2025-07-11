@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Retail Global Styles */
+        :root {
+            --retail-primary: #0056b3;
+            --retail-secondary: #333;
+            --retail-accent: #ff6b00;
+            --retail-light: #f8f9fa;
+            --retail-dark: #212529;
+            --retail-white: #ffffff;
+            --retail-gray: #6c757d;
+        }
+
+        /* Retail Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--retail-secondary);
+            background-color: var(--retail-white);
+        }
+
+        /* Retail Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--retail-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--retail-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--retail-accent);
+        }
+
+        /* Retail Layout */
+        .retail-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Retail Header */
+        .retail-header {
+            background-color: var(--retail-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .retail-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .retail-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--retail-primary);
+        }
+
+        .retail-logo span {
+            color: var(--retail-accent);
+        }
+
+        .retail-nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .retail-nav-links li {
+            margin-left: 2rem;
+        }
+
+        .retail-nav-links a {
+            font-weight: 600;
+        }
+
+        .retail-mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Retail Hero Section */
+        .retail-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .retail-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .retail-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .retail-btn {
+            display: inline-block;
+            background-color: var(--retail-primary);
+            color: var(--retail-white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .retail-btn:hover {
+            background-color: var(--retail-accent);
+            color: var(--retail-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Retail Extended Services Section */
+.retail-extended-services {
+    padding: 100px 0;
+    background-color: var(--retail-white);
+}
+
+.retail-services-combined {
+    display: grid;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.retail-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    list-style: none;
+}
+
+.retail-services-grid li {
+    background-color: var(--retail-light);
+    padding: 25px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.retail-services-grid li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.retail-services-grid i {
+    font-size: 1.8rem;
+    color: var(--retail-accent);
+    margin-bottom: 15px;
+}
+
+.retail-services-grid h4 {
+    color: var(--retail-primary);
+    margin-bottom: 10px;
+}
+
+.retail-benefits-list {
+    margin-top: 60px;
+}
+
+.retail-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.retail-benefit-card {
+    background-color: var(--retail-light);
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid var(--retail-accent);
+}
+
+.retail-benefit-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.retail-benefit-header i {
+    font-size: 1.5rem;
+    color: var(--retail-accent);
+    margin-right: 15px;
+}
+
+.retail-benefit-header h4 {
+    color: var(--retail-primary);
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .retail-services-combined {
+        grid-template-columns: 1fr;
+    }
+    
+    .retail-benefits-list {
+        margin-top: 40px;
+    }
+}
+
+/* Retail Outsourcing Section */
+.retail-outsourcing {
+    padding: 100px 0;
+    background-color: var(--retail-light);
+}
+
+.retail-outsourcing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 50px 0;
+}
+
+.retail-service-card {
+    background-color: var(--retail-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.retail-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.retail-service-icon {
+    font-size: 2.5rem;
+    color: var(--retail-accent);
+    margin-bottom: 20px;
+}
+
+.retail-service-card h3 {
+    margin-bottom: 15px;
+    color: var(--retail-primary);
+}
+
+.retail-outsourcing-cta {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.retail-btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--retail-primary);
+    color: var(--retail-primary);
+    margin-top: 20px;
+}
+
+.retail-btn-outline:hover {
+    background-color: var(--retail-primary);
+    color: var(--retail-white);
+}
+        /* Retail Solutions Section */
+        .retail-solutions {
+            padding: 100px 0;
+        }
+
+        .retail-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .retail-section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .retail-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--retail-accent);
+        }
+
+        .retail-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .retail-solution-card {
+            background-color: var(--retail-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .retail-solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .retail-solution-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .retail-solution-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .retail-solution-card:hover .retail-solution-img img {
+            transform: scale(1.1);
+        }
+
+        .retail-solution-content {
+            padding: 25px;
+        }
+
+        .retail-solution-content h3 {
+            margin-bottom: 15px;
+            color: var(--retail-primary);
+        }
+
+        /* Retail Benefits Section */
+        .retail-benefits {
+            padding: 100px 0;
+            background-color: var(--retail-light);
+        }
+
+        .retail-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .retail-benefit-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--retail-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .retail-benefit-icon {
+            font-size: 3rem;
+            color: var(--retail-accent);
+            margin-bottom: 20px;
+        }
+
+        /* Retail Testimonials */
+        .retail-testimonials {
+            padding: 100px 0;
+        }
+
+        .retail-testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .retail-testimonial {
+            padding: 30px;
+        }
+
+        .retail-testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .retail-testimonial-author {
+            font-weight: 700;
+        }
+
+        .retail-testimonial-role {
+            color: var(--retail-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Retail CTA Section */
+        .retail-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--retail-primary), #003366);
+            color: var(--retail-white);
+            text-align: center;
+        }
+
+        .retail-cta h2 {
+            color: var(--retail-white);
+            margin-bottom: 30px;
+        }
+
+        .retail-cta .retail-btn {
+            background-color: var(--retail-white);
+            color: var(--retail-primary);
+        }
+
+        .retail-cta .retail-btn:hover {
+            background-color: var(--retail-accent);
+            color: var(--retail-white);
+        }
+
+       
+
+        /* Retail Responsive */
+        @media (max-width: 992px) {
+            .retail-nav-links {
+                display: none;
+            }
+
+            .retail-mobile-menu {
+                display: block;
+            }
+
+            .retail-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .retail-hero {
+                padding: 150px 0 80px;
+            }
+
+            .retail-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .retail-hero p {
+                font-size: 1.1rem;
+            }
+
+            .retail-section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .retail-hero {
+                padding: 120px 0 60px;
+            }
+
+            .retail-hero h1 {
+                font-size: 2rem;
+            }
+
+            .retail-btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Retail Header -->
+    <header class="retail-header">
+       {% include 'myapp/header.html' %}
+    </header>
+
+    <!-- Retail Hero Section -->
+    <section class="retail-hero">
+        <div class="retail-container">
+            <h1>Retail & E-Commerce Solutions</h1>
+            <p>Transform your retail business with our cutting-edge technology solutions designed to enhance customer experiences, streamline operations, and boost sales across all channels.</p>
+            <a href="#" class="retail-btn"  onclick="scrollToSection()">Get Started</a>
+        </div>
+    </section>
+    <!-- Retail Extended Services Section -->
+<section class="retail-extended-services">
+    <div class="retail-container">
+        <div class="retail-section-title">
+            <h2>Comprehensive E-Commerce Services You Can Outsource</h2>
+            <p>Beyond customer support, we offer a full spectrum of e-commerce solutions to streamline your operations and drive growth.</p>
+        </div>
+        
+        <div class="retail-services-combined">
+            <div class="retail-services-list">
+                <h3>Additional Operational Support Services</h3>
+                <ul class="retail-services-grid">
+                    <li>
+                        <i class="fas fa-truck"></i>
+                        <h4>Order Tracking & Fulfillment</h4>
+                        <p>Streamline your logistics and ensure timely delivery with our end-to-end order management.</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-poll"></i>
+                        <h4>Customer Surveys</h4>
+                        <p>Gather valuable feedback to continuously improve your products and customer experience.</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-search-dollar"></i>
+                        <h4>Market Research</h4>
+                        <p>Stay ahead of industry trends and gain deeper understanding of your target market.</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-database"></i>
+                        <h4>Data Analytics & Reporting</h4>
+                        <p>Transform raw data into actionable insights with our custom reporting solutions.</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-award"></i>
+                        <h4>Loyalty Program Management</h4>
+                        <p>Boost customer retention with expertly managed rewards and incentive programs.</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-bullseye"></i>
+                        <h4>Lead Generation</h4>
+                        <p>Expand your customer base with targeted prospecting and conversion strategies.</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="retail-benefits-list">
+                <h3>Advantages of Partnering With Value Connect Solutions</h3>
+                <div class="retail-benefits-grid">
+                    <div class="retail-benefit-card">
+                        <div class="retail-benefit-header">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h4>Cost Efficiency</h4>
+                        </div>
+                        <p>Scale your team rapidly with our trained professionals, eliminating the overhead of full-time hires.</p>
+                    </div>
+                    <div class="retail-benefit-card">
+                        <div class="retail-benefit-header">
+                            <i class="fas fa-microchip"></i>
+                            <h4>Cutting-Edge Technology</h4>
+                        </div>
+                        <p>Access the latest e-commerce tools and platforms without capital investment in technology.</p>
+                    </div>
+                    <div class="retail-benefit-card">
+                        <div class="retail-benefit-header">
+                            <i class="fas fa-expand"></i>
+                            <h4>Flexible Scalability</h4>
+                        </div>
+                        <p>Easily adjust support levels for seasonal peaks, promotions, or unexpected demand surges.</p>
+                    </div>
+                    <div class="retail-benefit-card">
+                        <div class="retail-benefit-header">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h4>Specialized Expertise</h4>
+                        </div>
+                        <p>Our continuously trained staff brings current industry knowledge and best practices.</p>
+                    </div>
+                    <div class="retail-benefit-card">
+                        <div class="retail-benefit-header">
+                            <i class="fas fa-bullseye"></i>
+                            <h4>Strategic Focus</h4>
+                        </div>
+                        <p>Free your internal team to concentrate on core business innovation and growth initiatives.</p>
+                    </div>
+                    <div class="retail-benefit-card">
+                        <div class="retail-benefit-header">
+                            <i class="fas fa-globe"></i>
+                            <h4>24/7 Global Support</h4>
+                        </div>
+                        <p>Maintain constant availability for your customers across all time zones and markets.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Retail Solutions Section -->
+    <!-- <section class="retail-solutions">
+        <div class="retail-container">
+            <div class="retail-section-title">
+                <h2>Tailored Solutions for Retail Success</h2>
+                <p>We understand the unique challenges of the retail industry and deliver customized solutions to address them.</p>
+            </div>
+            <div class="retail-solutions-grid">
+                <div class="retail-solution-card">
+                    <div class="retail-solution-img">
+                        <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Omnichannel Retail">
+                    </div>
+                    <div class="retail-solution-content">
+                        <h3>Omnichannel Retail</h3>
+                        <p>Seamlessly connect your physical stores, e-commerce platform, and mobile apps to deliver a unified shopping experience that increases customer loyalty and sales.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="retail-solution-card">
+                    <div class="retail-solution-img">
+                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="AI-Powered Analytics">
+                    </div>
+                    <div class="retail-solution-content">
+                        <h3>AI-Powered Analytics</h3>
+                        <p>Leverage artificial intelligence to gain deep insights into customer behavior, inventory trends, and sales performance to make data-driven decisions.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+                <div class="retail-solution-card">
+                    <div class="retail-solution-img">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Customer Engagement">
+                    </div>
+                    <div class="retail-solution-content">
+                        <h3>Customer Engagement</h3>
+                        <p>Build lasting relationships with personalized marketing, loyalty programs, and targeted promotions that drive repeat business.</p>
+                        <a href="#">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Retail Benefits Section -->
+    <section class="retail-benefits">
+        <div class="retail-container">
+            <div class="retail-section-title">
+                <h2>Why Retailers Choose Value Connect Solution</h2>
+                <p>Our solutions deliver measurable results for retail businesses of all sizes.</p>
+            </div>
+            <div class="retail-benefits-grid">
+                <div class="retail-benefit-item">
+                    <div class="retail-benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Increased Sales</h3>
+                    <p>Drive more conversions with personalized shopping experiences across all channels.</p>
+                </div>
+                <div class="retail-benefit-item">
+                    <div class="retail-benefit-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Operational Efficiency</h3>
+                    <p>Automate processes and reduce costs with intelligent inventory and workforce management.</p>
+                </div>
+                <div class="retail-benefit-item">
+                    <div class="retail-benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Customer Satisfaction</h3>
+                    <p>Deliver exceptional experiences that keep customers coming back.</p>
+                </div>
+                <div class="retail-benefit-item">
+                    <div class="retail-benefit-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Actionable Insights</h3>
+                    <p>Make smarter decisions with real-time data and predictive analytics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Retail Testimonials -->
+    <!-- <section class="retail-testimonials">
+        <div class="retail-container">
+            <div class="retail-section-title">
+                <h2>What Our Retail Partners Say</h2>
+            </div>
+            <div class="retail-testimonial-slider">
+                <div class="retail-testimonial">
+                    <p class="retail-testimonial-text">"Value Connect's solutions transformed our e-commerce operations, resulting in a 35% increase in online sales within the first quarter of implementation."</p>
+                    <p class="retail-testimonial-author">Sarah Johnson</p>
+                    <p class="retail-testimonial-role">CEO, Fashion Forward Retail</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- what will you get -->
+    <!-- Retail Outsourcing Section -->
+<section class="retail-outsourcing">
+    <div class="retail-container">
+        <div class="retail-section-title">
+            <h2>Why Outsource Your E-Commerce Customer Service?</h2>
+            <p>Outsourcing customer service for e-commerce businesses is a strategic move that can significantly enhance your operations. At Value Connect Solutions, we offer a team of college-educated, English-speaking customer care experts trained to deliver exceptional service across various B2C and B2B business models.</p>
+        </div>
+        
+        <div class="retail-outsourcing-grid">
+            <div class="retail-service-card">
+                <div class="retail-service-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>Traditional Call Center Services</h3>
+                <p>Handling inbound and outbound calls to support your customers with professionalism and care.</p>
+            </div>
+            
+            <div class="retail-service-card">
+                <div class="retail-service-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email Inquiry Management</h3>
+                <p>Timely responses to customer emails, complaints, and inquiries with brand-appropriate tone.</p>
+            </div>
+            
+            <div class="retail-service-card">
+                <div class="retail-service-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Web Chat and Email Support</h3>
+                <p>Real-time assistance for purchasing questions, upselling, and cross-selling opportunities.</p>
+            </div>
+            
+            <div class="retail-service-card">
+                <div class="retail-service-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>DIY Support Options</h3>
+                <p>Implementing self-service solutions for common issues that customers can resolve quickly.</p>
+            </div>
+            
+            <div class="retail-service-card">
+                <div class="retail-service-icon">
+                    <i class="fas fa-hashtag"></i>
+                </div>
+                <h3>Social Media Support</h3>
+                <p>Managing customer interactions across all your social platforms with brand consistency.</p>
+            </div>
+            
+            <div class="retail-service-card">
+                <div class="retail-service-icon">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <h3>After-Hours Support</h3>
+                <p>Ensuring your customers always have access to help, no matter the time of day or night.</p>
+            </div>
+        </div>
+        
+        <div class="retail-outsourcing-cta">
+            <p>Whether you need after-hours support or a full-service contact center to manage customer interactions around the clock, we are here to help.</p>
+            <a href="#" class="retail-btn retail-btn-outline">Learn About Our Customer Support Solutions</a>
+        </div>
+    </div>
+</section>
+
+    <!-- Retail CTA Section -->
+    <section class="retail-cta">
+        <div class="retail-container">
+            <h2>Ready to Transform Your Retail Business?</h2>
+            <p>Our team of retail experts is ready to help you implement solutions that drive growth and customer satisfaction.</p>
+            <a href="#" class="retail-btn">Schedule a Consultation</a>
+        </div>
+    </section>
+    <!-- contact us form -->
+     <div id="target-section">
+         {% include 'myapp/index_countriesweserve.html' %}
+     </div>
+    
+    <!-- Retail Footer -->
+    {% include 'myapp/footer.html' %}
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.retail-mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.retail-nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Responsive adjustment for mobile menu
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                document.querySelector('.retail-nav-links').style.display = 'flex';
+            } else {
+                document.querySelector('.retail-nav-links').style.display = 'none';
+            }
+        });
+
+         function scrollToSection() {
+    document.getElementById('target-section').scrollIntoView({
+      behavior: 'smooth'  // smooth scrolling animation
+    });
+  }
+    </script>
+</body>
+</html>

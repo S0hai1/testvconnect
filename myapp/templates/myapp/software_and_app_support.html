@@ -1,0 +1,566 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Change text/icon colors when */
+        .navbar .logo .text-select,
+        .navbar .logo .text-voicecom,
+        .navbar .nav-item>a,
+        .navbar .search-icon,
+        .navbar .lang {
+            color: var(--text-color-dark);
+        }
+
+        .navbar .hamburger-menu span {
+            background-color: var(--text-color-dark);
+        }
+
+        /* Hero Section with Background Image */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background-image: url("{% static 'myapp/images/pexels-mart-production-7709166.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* This creates the parallax effect */
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for better text readability */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+            padding: 0 30px;
+            padding-top: 140px;
+            padding-bottom: 60px;
+            background-color: white;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            padding-left: 60px;
+        }
+
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                background-attachment: scroll;
+                /* Disable parallax on mobile for better performance */
+            }
+
+            .hero-content {
+                padding: 0 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+
+
+
+
+        .outsource-support-section {
+            background-color: #0d6efd;
+            padding: 60px 20px;
+            text-align: left;
+        }
+
+        .outsource-support-block {
+            max-width: 1440px;
+            color: #ffffff;
+            margin: 0 auto;
+        }
+
+        .outsource-support-block h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .outsource-support-block p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #ffffff;
+        }
+
+        .outsourcing-benefits-section {
+            background-color: #ffffff;
+            padding: 60px 20px;
+            color: #000000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .outsourcing-benefits-content {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .outsourcing-benefits-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .outsourcing-benefits-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .outsourcing-benefits-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .outsourcing-benefits-content li {
+            margin-bottom: 16px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .custom-support-section h1,
+            .outsourcing-benefits-content h2 {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            .custom-support-section p,
+            .outsourcing-benefits-content p,
+            .outsourcing-benefits-content li {
+                font-size: 0.95rem;
+            }
+
+            .outsourcing-benefits-section,
+            .custom-support-section {
+                padding: 40px 15px;
+            }
+
+            .outsourcing-benefits-content,
+            .custom-support-content {
+                padding: 0 10px;
+            }
+        }
+
+
+        .gallery-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .image-gallery {
+            display: grid;
+            gap: 15px;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            height: 500px;
+        }
+
+        .image-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover {
+            transform: scale(1.02);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-image {
+            grid-row: 1 / -1;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        }
+
+        .side-image-1 {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+        }
+
+        .side-image-2 {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+        }
+
+        .side-image-3 {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+        }
+
+        /* Tablet styles - horizontal line */
+        @media (max-width: 768px) {
+            .image-gallery {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: 1fr;
+                height: 250px;
+            }
+
+            .main-image {
+                grid-row: 1;
+            }
+        }
+
+        /* Mobile styles - vertical stack */
+        @media (max-width: 480px) {
+            .image-gallery {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 200px);
+                height: auto;
+            }
+
+            .main-image {
+                grid-row: 1;
+            }
+
+            .image-item {
+                border-radius: 15px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .gallery-wrapper {
+                padding: 0 10px;
+            }
+
+            .image-gallery {
+                gap: 10px;
+                grid-template-rows: repeat(4, 150px);
+            }
+
+            .image-item {
+                border-radius: 10px;
+            }
+        }
+
+        .placeholder-text {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .placeholder-text {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .placeholder-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Software and In-App Support in the India</h1>
+        </div>
+
+    </div>
+
+    <section class="outsource-support-section">
+        <div class="outsource-support-block">
+            <h1>
+                Outsource Software, Mobile, and In-App Support to the India to Improve Customer Satisfaction and
+                Save Costs
+            </h1>
+            <p>
+                In today’s digital age, providing 24/7 app and software support is essential to keep your customers
+                happy and your business thriving.
+                However, managing comprehensive technical support in-house can be costly and time-consuming. That’s
+                where outsourcing in-app support
+                can be a game-changer. By outsourcing apps, software, and mobile support, you gain access to seasoned
+                technicians who are expertly
+                trained, diligent, and ready to provide top-tier service.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="outsourcing-benefits-section">
+        <div class="outsourcing-benefits-content">
+            <h2>Why Outsource Your App and Software Support?</h2>
+            <p>
+                Outsourcing your mobile and software support needs is a smart, cost-effective solution for businesses
+                looking to scale
+                technical customer service and maintain a competitive edge. Here’s why companies are opting to outsource
+                software support:
+            </p>
+            <ul>
+                <li><strong>Focus on Core Competencies:</strong> Free up your in-house team to concentrate on
+                    development, sales, or other critical areas of your business.</li>
+                <li><strong>Access to Expertise:</strong> Instantly tap into specialized technical knowledge your team
+                    may not possess.</li>
+                <li><strong>Cost Savings:</strong> Enjoy predictable, fixed-price contracts that help manage your budget
+                    more effectively.</li>
+                <li><strong>Seamless Coverage:</strong> Ensure continuous 24/7 support even when your internal staff is
+                    unavailable or on vacation.</li>
+                <li><strong>Scalable Solutions:</strong> Easily adjust the level of support as your business needs
+                    change.</li>
+                <li><strong>Operational Efficiency:</strong> Avoid the headaches of hiring, training, and managing
+                    additional employees.</li>
+                <li><strong>Enhanced Customer Feedback:</strong> Improve social media reviews as customers appreciate
+                    your round-the-clock accessibility.</li>
+                <li><strong>Improved Support Metrics:</strong> You benefit from better response times, shorter wait
+                    times, higher first-call resolution rates, and reduced call abandonment with advanced customer
+                    service call center software.</li>
+            </ul>
+        </div>
+    </section>
+
+
+    <section class="outsourcing-benefits-section">
+        <div class="outsourcing-benefits-content">
+            <h2>Why Outsource In-App Support to the India?</h2>
+            <p>The India has become a global leader in outsourced customer and technical support. It is the ideal
+                location for businesses looking to enhance their in-app support services. Here’s why:</p>
+
+            <ul>
+                <li><strong>Highly Skilled Workforce:</strong> The India boasts a large pool of IT professionals
+                    with strong technical expertise and English proficiency.</li>
+                <li><strong>Cost-Effective Solutions:</strong> Outsourcing in-app support to the India allows
+                    businesses to reduce operational costs without sacrificing quality.</li>
+                <li><strong>Customer Service Culture:</strong> Filipino professionals are known for their hospitality
+                    and dedication to providing exceptional in-app customer support BPO.</li>
+                <li><strong>Advanced Infrastructure:</strong> The country has a well-established BPO industry with
+                    modern technology allowing seamless integration.</li>
+            </ul>
+
+            <p>By outsourcing in-app support to the India, businesses can enhance customer satisfaction, reduce
+                costs, and streamline operations while ensuring high-quality technical assistance.</p>
+        </div>
+
+
+        <div class="gallery-wrapper">
+            <div class="image-gallery">
+                <div class="image-item main-image">
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                        alt="Indian IT professionals working as a team"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="image-item side-image-1">
+                    <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80"
+                        alt="Customer support representative in call center"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="image-item side-image-2">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Professional office meeting in India"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="image-item side-image-3" style="display: none;">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                        alt="Modern office workspace with diverse team"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="outsource-support-section">
+        <div class="outsource-support-block">
+
+            <h1 style="margin: 23px 0px;">Compressive App Support Service with Value ConnectSolutions</h1>
+            <p>
+                At Value ConnectSolutions, we offer various app support services tailored to your business needs.
+                Outsourcing your
+                technical support ensures your customers receive prompt, reliable assistance any time of day or night.
+                This saves
+                you time and resources while enhancing customer satisfaction. Our outsourced software technical support
+                services
+                include:
+            </p>
+
+            <h1 style="margin: 23px 0px;">App Tech Support Services</h1>
+            <p>
+                Forget the days when customers were content to scroll through FAQs. Today, customers expect immediate,
+                personalized
+                support via their preferred contact methods—phone, email, social media, ticketing systems, or live chat.
+                Our app
+                tech support services prioritize unresolved issues to ensure a swift resolution. All agents receive
+                dedicated
+                training to act as a seamless extension of your in-house team.
+            </p>
+
+            <h1 style="margin: 23px 0px;">In-App Support Services</h1>
+            <p>
+                Proactive in-app support is a game-changer for customer satisfaction. A Radius Global Market Research
+                survey
+                revealed that 89% of users would recommend an app if a customer service agent proactively reached out
+                during an
+                issue. Our in-app customer support BPO solutions ensure users receive real-time assistance without
+                leaving the
+                app. Value ConnectSolutions’s agents can monitor app usage in real-time, offering help exactly when your
+                customers need
+                it—without them having to leave the app.
+            </p>
+        </div>
+    </section>
+
+
+
+    <section class="outsourcing-benefits-section">
+        <div class="outsourcing-benefits-content">
+            <h2>Why Choose Value ConnectSolutions for Software and App Support?</h2>
+            <p>Value ConnectSolutions was established by seasoned business professionals with deep customer service,
+                technology, and problem-solving expertise. We know what it takes to deliver exceptional software and app
+                support and are here to provide it. Our services include:</p>
+
+            <ul>
+                <li><strong>24/7 Help Desk Support:</strong> Immediate assistance, any time of day.</li>
+                <li><strong>Proactive Monitoring:</strong> Continuous database and performance monitoring to prevent
+                    issues before they impact your customers.</li>
+                <li><strong>Friendly, Skilled Agents:</strong> Our team is passionate about customer service, with
+                    excellent English proficiency and a commitment to your brand’s success.</li>
+
+            </ul>
+
+
+        </div>
+
+
+        <div class="gallery-wrapper">
+            <div class="image-gallery">
+                <div class="image-item main-image">
+                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Value ConnectSolutions professional team collaboration"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="image-item side-image-1">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Customer service agent providing 24/7 support"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="image-item side-image-2">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                        alt="Professional office meeting discussing app support strategies"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="image-item side-image-3" style="display: none;">
+                    <img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Skilled agents monitoring app performance and databases"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
+
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,670 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --primary-blue: #2176d7;
+            --primary-dark: #1a60b9;
+            --secondary-blue: #4a90e2;
+            --accent-orange: #ff6b35;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --text-white: #ffffff;
+            --bg-light: #f7fafc;
+            --bg-white: #ffffff;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --border-radius: 16px;
+            --border-radius-large: 24px;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-xxl: 64px;
+            --container-max-width: 1200px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background and Hero Section */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(33, 118, 215, 0.9) 0%, rgba(74, 144, 226, 0.8) 100%),
+                        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: var(--spacing-md);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 300;
+            margin-bottom: var(--spacing-md);
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--spacing-md);
+        }
+
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .btn-primary {
+            background: var(--accent-orange);
+            color: var(--text-white);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-heavy);
+            background: #e55a2b;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--text-white);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-white);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: var(--spacing-xxl) var(--spacing-md);
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-orange));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .content-grid {
+            display: grid;
+            gap: var(--spacing-xxl);
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        .content-card {
+            background: var(--bg-white);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(33, 118, 215, 0.1);
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .card-content {
+            padding: var(--spacing-xl);
+        }
+
+        .card-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            font-size: 1.5rem;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: var(--spacing-md);
+        }
+
+        .feature-list li {
+            padding: var(--spacing-xs) 0;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .feature-list li::before {
+            content: '✨';
+            font-size: 1.2rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--bg-gradient);
+            color: var(--text-white);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            margin: var(--spacing-xxl) 0;
+            border-radius: var(--border-radius-large);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            color: var(--accent-orange);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: var(--bg-light);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            border-radius: var(--border-radius-large);
+            margin: var(--spacing-xxl) 0;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: var(--spacing-xl) auto 0;
+            border-radius: var(--border-radius-large);
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+            aspect-ratio: 16/9;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+            color: var(--text-white);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            border-radius: var(--border-radius-large);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -1px;
+        }
+
+        .cta-text {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-buttons {
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .card-content {
+                padding: var(--spacing-md);
+            }
+
+            .card-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 660px) {
+            .hero-section{
+                align-items: flex-end;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                padding: var(--spacing-md);
+            }
+
+            .main-content {
+                padding: var(--spacing-xl) var(--spacing-sm);
+            }
+            .hero-buttons {
+             flex-direction: column;
+            }
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero-background"></div>
+    
+    <!-- Header Section -->
+    {% include 'myapp/header.html' %}
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>About Us</h1>
+            <p class="hero-subtitle">
+                Your trusted partner in connecting businesses worldwide with exceptional telecalling services. 
+                We deliver innovative outsourcing solutions that drive growth and success.
+            </p>
+            <div class="hero-buttons">
+                <a href="#our-story" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Our Journey
+                </a>
+                <a href="#our-values" class="btn btn-secondary">
+                    <i class="fas fa-heart"></i>
+                    Our Values
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Story Section -->
+        <section id="our-story" class="content-grid">
+            <div class="content-card">
+                <div class="card-content">
+                    <h2 class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        Our Story: Connecting the World
+                    </h2>
+                    <p class="card-text">
+                        Founded in 2010, ValueConnectSolution began with a simple yet powerful vision: to bridge 
+                        communication gaps and empower businesses through seamless telecalling services. What started 
+                        as a small team with big dreams has evolved into a global provider serving clients across 
+                        diverse industries.
+                    </p>
+                    <p class="card-text">
+                        Our journey has been marked by continuous innovation, relentless pursuit of excellence, and 
+                        unwavering commitment to client success. We've adapted to the evolving landscape of business 
+                        process outsourcing, integrating cutting-edge technology and refining our processes to deliver 
+                        unparalleled service quality.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section id="our-values" class="content-grid">
+            <div class="content-card">
+                <div class="card-content">
+                    <h2 class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        Our Core Values
+                    </h2>
+                    <p class="card-text">
+                        Our values are the foundation of everything we do. They guide our decisions, shape our culture, 
+                        and define our commitment to excellence.
+                    </p>
+                    <ul class="feature-list">
+                        <li><strong>Client-Centricity:</strong> We prioritize our clients' needs, delivering tailored solutions that exceed expectations</li>
+                        <li><strong>Excellence:</strong> We are committed to delivering the highest quality services through continuous improvement</li>
+                        <li><strong>Integrity:</strong> We operate with honesty, transparency, and ethical practices in all our dealings</li>
+                        <li><strong>Innovation:</strong> We embrace new technologies and creative solutions to stay ahead of the curve</li>
+                        <li><strong>Teamwork:</strong> We foster a collaborative environment where every team member contributes to shared success</li>
+                        <li><strong>Accountability:</strong> We take responsibility for our actions and deliver on our promises</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="section-header">
+                <h2 class="section-title" style="color: white;">Our Impact in Numbers</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">
+                    Trusted by businesses worldwide, delivering exceptional results
+                </p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1M+</span>
+                    <span class="stat-label">Successful Calls</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="content-grid">
+            <div class="content-card">
+                <div class="card-content">
+                    <h2 class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        Our Expert Team
+                    </h2>
+                    <p class="card-text">
+                        Our team is our greatest asset. Comprising highly skilled professionals from diverse backgrounds, 
+                        they bring a wealth of experience and expertise to every project. From customer service 
+                        representatives to technical specialists and management, each member is dedicated to delivering 
+                        exceptional results.
+                    </p>
+                    <p class="card-text">
+                        We invest in continuous training and development to ensure our team stays updated with the latest 
+                        industry trends and technologies. This commitment to professional growth translates into superior 
+                        service delivery and positive experiences for our clients.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facilities Section -->
+        <section class="content-grid">
+            <div class="content-card">
+                <div class="card-content">
+                    <h2 class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        State-of-the-Art Facilities
+                    </h2>
+                    <p class="card-text">
+                        ValueConnectSolution operates from modern, technologically advanced facilities designed to ensure 
+                        seamless operations and a comfortable working environment. Our infrastructure is built to support 
+                        high-volume operations with robust security measures in place.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Redundant power and internet connectivity ensuring 99.99% uptime</li>
+                        <li>Advanced CRM and call management systems for efficient service delivery</li>
+                        <li>Secure data centers with strict access controls and 24/7 monitoring</li>
+                        <li>Ergonomic workstations and positive work environment for our team</li>
+                        <li>Scalable infrastructure to accommodate growing client needs</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="section-header">
+                <h2 class="section-title">See Us in Action</h2>
+                <p class="section-subtitle">
+                    Watch our explainer video to learn more about how we can transform your business
+                </p>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/your_video_id_here" 
+                        title="ValueConnectSolution Explainer Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Transform Your Business?</h2>
+            <p class="cta-text">
+                Partner with ValueConnectSolution and experience the difference of exceptional telecalling services. 
+                Contact us today for a free consultation and discover how we can help you achieve your business goals.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact-us" class="btn btn-secondary">
+                    <i class="fas fa-calculator"></i>
+                    Get Free Quote
+                </a>
+                <a href="#book-call" class="btn btn-primary">
+                    <i class="fas fa-phone"></i>
+                    Book Discovery Call
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countries Section -->
+    {% include 'myapp/index_countriesweserve.html' %}
+
+    <!-- Footer -->
+    {% include 'myapp/footer.html' %}
+</body>
+</html>

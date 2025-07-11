@@ -1,0 +1,1045 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <style>
+        
+        :root {
+            --primary: #b13914;
+            --secondary: #f59e0b;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: white;
+        }
+        
+        .why_vsc_container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .why_vsc_logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+         /* Our Location Section */
+       .section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.text-center {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 20px auto;
+}
+
+.location-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.location-card:nth-child(odd) {
+    flex-direction: row;
+}
+
+.location-card:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.location-img {
+    flex: 1;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.location-img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+}
+
+.location-content {
+    flex: 1;
+    padding: 40px;
+}
+
+.location-content h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.location-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.location-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .location-card {
+        flex-direction: column !important;
+    }
+    
+    .location-img {
+        height: 250px;
+    }
+    
+    .location-content {
+        padding: 30px 20px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+.our-people-section {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .our-people-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .what-sets-us-apart {
+            text-align: center;
+            margin: 50px 0 40px;
+        }
+
+        .what-sets-us-apart h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .team-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(135deg, #ff5252 0%, #e53e3e 100%);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 80%;
+            left: 80%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .what-sets-us-apart h3 {
+                font-size: 1.5rem;
+            }
+            
+            .team-features {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+            
+            .feature-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+        }
+
+        .why_vsc_hero {
+            background: linear-gradient(135deg, var(--primary), #576007);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .why_vsc_hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+            opacity: 0.3;
+        }
+        
+        .why_vsc_hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .why_vsc_hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .why_vsc_hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .why_vsc_btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .why_vsc_btn:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .why_vsc_why-choose-us {
+            padding: 80px 0;
+        }
+        
+        .why_vsc_section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .why_vsc_section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .why_vsc_section-title p {
+            color: #4b5563;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .why_vsc_features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .why_vsc_feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .why_vsc_feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            border-color: var(--primary);
+        }
+        
+        .why_vsc_feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #eff6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: var(--primary);
+            font-size: 24px;
+        }
+        
+        .why_vsc_feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .why_vsc_feature-card p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        
+        .why_vsc_learn-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .why_vsc_learn-more svg {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .why_vsc_learn-more:hover svg {
+            transform: translateX(3px);
+        }
+        
+        .why_vsc_stats-section {
+            background-color: var(--light);
+            padding: 80px 0;
+        }
+        
+        .why_vsc_stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .why_vsc_stat-item h3 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .why_vsc_stat-item p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .why_vsc_testimonials {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .why_vsc_testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .why_vsc_testimonial-text {
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .why_vsc_testimonial-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: #e5e7eb;
+            position: absolute;
+            left: -20px;
+            top: -20px;
+            z-index: -1;
+        }
+        
+        .why_vsc_testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .why_vsc_author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .why_vsc_author-info h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .why_vsc_author-info p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .why_vsc_cta-section {
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .why_vsc_cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .why_vsc_cta-section p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .why_vsc_btn-light {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .why_vsc_btn-light:hover {
+            background-color: #f3f4f6;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .why_vsc_footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .why_vsc_footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .why_vsc_footer-column ul {
+            list-style: none;
+        }
+        
+        .why_vsc_footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .why_vsc_footer-column ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .why_vsc_footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .why_vsc_social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .why_vsc_social-links a {
+            color: white;
+            background-color: #374151;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .why_vsc_social-links a:hover {
+            background-color: var(--primary);
+        }
+        
+        .why_vsc_copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .why_vsc_hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .why_vsc_hero p {
+                font-size: 1.1rem;
+            }
+            
+            .why_vsc_section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .why_vsc_feature-card {
+                padding: 30px 20px;
+            }
+            
+            .why_vsc_cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        {% include 'myapp/header.html' %}
+    </header>
+    
+    <section class="why_vsc_hero">
+        <div class="why_vsc_hero-content why_vsc_container">
+            <h1>Why Choose value Connect Solution?</h1>
+            <p>We're more than just a technology provider - we're your strategic partner in digital transformation, delivering tailored solutions that drive real business results.</p>
+            <a href="#" onclick="scrollToSection()" class="why_vsc_btn">Explore Our Solutions</a>
+        </div>
+    </section>
+
+     <section class="our-people-section">
+        <div class="floating-elements">
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+        </div>
+        
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our People: The Heart of Our Success</h2>
+                <p class="section-subtitle">
+                    In the contact center industry, our people are our most valuable asset. At Value Connect Solution, we prioritize attracting and retaining top talent through competitive compensation, excellent benefits, advancement opportunities, continuous training, and professional development. We offer career growth paths and strong incentives, resulting in a remarkably low annual turnover rate.
+                </p>
+            </div>
+            
+            <div class="what-sets-us-apart">
+                <h3>What Sets Our Team Apart?</h3>
+            </div>
+            
+            <div class="team-features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        👨‍💼
+                    </div>
+                    <h4>Agent Excellence</h4>
+                    <p>Our agents are highly skilled, experienced professionals with diverse skills. They are dedicated to delivering outstanding customer experiences and are known for their friendliness, empathy, and professionalism.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        👥
+                    </div>
+                    <h4>Experienced Management</h4>
+                    <p>Our management team is promoted from within and brings an average of over 10 years of experience, ensuring deep industry knowledge and a commitment to excellence.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        🎯
+                    </div>
+                    <h4>Leadership Oversight</h4>
+                    <p>As a privately owned company, our C-suite and VP team brings over 100 years of combined experience, overseeing all operations to ensure top-notch service delivery.</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <button class="cta-button" onclick="alert('Learn more about our agents!')">
+                    Listen To Our Agents
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    
+    <section class="why_vsc_why-choose-us">
+        <div class="why_vsc_container">
+            <div class="why_vsc_section-title">
+                <h2>Your Trusted Technology Partner</h2>
+                <p>With decades of combined experience and a proven track record, we help businesses navigate the complex technology landscape with confidence.</p>
+            </div>
+            
+            <div class="why_vsc_features-grid">
+                <div class="why_vsc_feature-card">
+                    <div class="why_vsc_feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Enterprise-Grade Security</h3>
+                    <p>Our solutions are built with multiple layers of protection to safeguard your data and systems against evolving cyber threats.</p>
+                    <a href="#" class="why_vsc_learn-more">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="why_vsc_feature-card">
+                    <div class="why_vsc_feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h3>24/7 Expert Support</h3>
+                    <p>Our dedicated support team is available around the clock to ensure your systems run smoothly with minimal downtime.</p>
+                    <a href="#" class="why_vsc_learn-more">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="why_vsc_feature-card">
+                    <div class="why_vsc_feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3>Industry-Specific Expertise</h3>
+                    <p>We understand the unique challenges of your industry and deliver customized solutions that address your specific needs.</p>
+                    <a href="#" class="why_vsc_learn-more">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="why_vsc_feature-card">
+                    <div class="why_vsc_feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Future-Proof Technology</h3>
+                    <p>We design scalable solutions that grow with your business and adapt to emerging technologies and market demands.</p>
+                    <a href="#" class="why_vsc_learn-more">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="why_vsc_feature-card">
+                    <div class="why_vsc_feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Comprehensive Documentation</h3>
+                    <p>Every solution comes with detailed documentation and training to ensure your team can maximize the technology.</p>
+                    <a href="#" class="why_vsc_learn-more">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="why_vsc_feature-card">
+                    <div class="why_vsc_feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <h3>Seamless Integration</h3>
+                    <p>Our solutions work harmoniously with your existing systems, minimizing disruption and maximizing efficiency.</p>
+                    <a href="#" class="why_vsc_learn-more">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<section class="section">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-title">Our Strategic Locations Across India</h2>
+            <p>Value Connect Solutions operates from multiple state-of-the-art facilities in India's leading business hubs. Our locations offer several advantages that help us deliver cost-effective, high-quality outsourcing services to global clients.</p>
+            <h3 style="font-weight: 600; margin: 30px 0;">Why Our Indian Locations Benefit You:</h3>
+        </div>
+        
+        <div class="location-card">
+            <div class="location-img" style="background-image: url('{% static 'myapp/images/cost_mangement.avif' %}');"></div>
+            <div class="location-content">
+                <h3>Cost Efficiency</h3>
+                <p>Our Indian operations deliver services at 40-60% lower costs compared to Western markets, without compromising on quality. This significant cost advantage helps our clients improve their bottom line while maintaining service excellence.</p>
+            </div>
+        </div>
+        
+        <div class="location-card">
+            <div class="location-content">
+                <h3>Business Continuity</h3>
+                <p>With our multi-location delivery model and robust disaster recovery infrastructure, we ensure 99.99% uptime for our clients. Our facilities are equipped with redundant power, network connectivity, and security systems.</p>
+            </div>
+           <div class="location-img" style="background-image: url('{% static 'myapp/images/business_continuty.jpg' %}');"></div>
+        </div>
+        
+        <div class="location-card">
+            <div class="location-img" style="background-image: url('{% static 'myapp/images/global_talent_pool.avif' %}');"></div>
+            <div class="location-content">
+                <h3>Global Talent Pool</h3>
+                <p>India produces over 1.5 million English-speaking graduates annually. Our locations in major educational hubs give us access to this vast talent pool, allowing us to quickly scale operations with skilled professionals.</p>
+            </div>
+        </div>
+        
+        <div class="location-card">
+            <div class="location-content">
+                <h3>Time Zone Advantage</h3>
+                <p>India's time zone (GMT+5:30) allows us to provide 24/7 coverage for global clients. We offer follow-the-sun support models that ensure seamless service delivery across all time zones.</p>
+            </div>
+            <div class="location-img" style="background-image: url('{% static 'myapp/images/timezone.jpg' %}');"></div>
+        </div>
+    </div>
+</section>
+
+
+
+    <section class="why_vsc_stats-section">
+        <div class="why_vsc_container">
+            <div class="why_vsc_stats-grid">
+                <div class="why_vsc_stat-item">
+                    <h3>15+</h3>
+                    <p>Years in Business</p>
+                </div>
+                <div class="why_vsc_stat-item">
+                    <h3>500+</h3>
+                    <p>Enterprise Clients</p>
+                </div>
+                <div class="why_vsc_stat-item">
+                    <h3>99.9%</h3>
+                    <p>Uptime Guarantee</p>
+                </div>
+                <div class="why_vsc_stat-item">
+                    <h3>24/7</h3>
+                    <p>Support Availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials section is commented out as per previous request -->
+    <!-- <section class="why_vsc_testimonials">
+        <div class="why_vsc_container">
+            <div class="why_vsc_testimonial-card">
+                <div class="why_vsc_testimonial-text">
+                    Value Connect Solutions transformed our IT infrastructure with their innovative approach. Their team demonstrated deep expertise and delivered a solution that exceeded our expectations while staying within budget. The ongoing support has been exceptional.
+                </div>
+                <div class="why_vsc_testimonial-author">
+                    <div class="why_vsc_author-avatar">JD</div>
+                    <div class="why_vsc_author-info">
+                        <h4>Jamie Dawson</h4>
+                        <p>CIO, TechForward Inc.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    
+    <section class="why_vsc_cta-section">
+        <div class="why_vsc_container">
+            <h2>Ready to Transform Your Technology Infrastructure?</h2>
+            <p>Discover how value connect solution can help your business achieve its digital transformation goals with our expert guidance and cutting-edge solutions.</p>
+            <a href="#" onclick="scrollToSection()" class="why_vsc_btn why_vsc_btn-light">Get Started Today</a>
+        </div>
+    </section>
+    <div id="target-section">
+         {% include 'myapp/index_countriesweserve.html' %}
+     </div>
+    {% include 'myapp/footer.html' %}
+</body>
+<script>
+ function scrollToSection() {
+    document.getElementById('target-section').scrollIntoView({
+      behavior: 'smooth'  // smooth scrolling animation
+    });
+  }
+
+
+</script>
+
+
+</html>

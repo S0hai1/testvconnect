@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>India Call Center Services - Value Connect Solutions</title>
+    {% include 'myapp/meta_tags.html' %}
     <style>
-        .svc-bpo-section * {
+        .vcs-bpo-section * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        .svc-bpo-section {
+        .vcs-bpo-section {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .svc-bpo-section .svc-hero-section {
+        .vcs-bpo-section .vcs-hero-section {
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
             min-height: 100vh;
             display: flex;
@@ -26,7 +24,7 @@
             position: relative;
         }
 
-        .svc-bpo-section .svc-hero-section::before {
+        .vcs-bpo-section .vcs-hero-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -37,7 +35,7 @@
             opacity: 0.3;
         }
 
-        .svc-bpo-section .svc-container {
+        .vcs-bpo-section .vcs-container {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
@@ -48,12 +46,12 @@
             z-index: 1;
         }
 
-        .svc-bpo-section .svc-content {
+        .vcs-bpo-section .vcs-content {
             color: white;
-            animation: svc-slideInLeft 1s ease-out;
+            animation: vcs-slideInLeft 1s ease-out;
         }
 
-        .svc-bpo-section .svc-content h1 {
+        .vcs-bpo-section .vcs-content h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
             margin-bottom: 2rem;
@@ -61,21 +59,21 @@
             text-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        .svc-bpo-section .svc-content p {
+        .vcs-bpo-section .vcs-content p {
             font-size: clamp(1rem, 2vw, 1.2rem);
             margin-bottom: 1.5rem;
             opacity: 0.95;
             line-height: 1.7;
         }
 
-        .svc-bpo-section .svc-cta-buttons {
+        .vcs-bpo-section .vcs-cta-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             margin-top: 2.5rem;
         }
 
-        .svc-btn {
+        .vcs-btn {
             padding: 1rem 2rem;
             border: none;
             border-radius: 12px;
@@ -90,7 +88,7 @@
             overflow: hidden;
         }
 
-        .svc-btn::before {
+        .vcs-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -101,42 +99,42 @@
             transition: left 0.5s;
         }
 
-        .svc-btn:hover::before {
+        .vcs-btn:hover::before {
             left: 100%;
         }
 
-        .svc-btn-primary {
+        .vcs-btn-primary {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
         }
 
-        .svc-btn-primary:hover {
+        .vcs-btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
         }
 
-        .svc-btn-secondary {
+        .vcs-btn-secondary {
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border: 2px solid rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(10px);
         }
 
-        .svc-btn-secondary:hover {
+        .vcs-btn-secondary:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
         }
 
-        .svc-team-grid {
+        .vcs-team-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            animation: svc-slideInRight 1s ease-out;
+            animation: vcs-slideInRight 1s ease-out;
         }
 
-        .svc-team-member {
+        .vcs-team-member {
             aspect-ratio: 1;
             border-radius: 20px;
             overflow: hidden;
@@ -145,23 +143,23 @@
             cursor: pointer;
         }
 
-        .svc-team-member:hover {
+        .vcs-team-member:hover {
             transform: translateY(-10px) scale(1.05);
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .svc-team-member img {
+        .vcs-team-member img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
         }
 
-        .svc-team-member:hover img {
+        .vcs-team-member:hover img {
             transform: scale(1.1);
         }
 
-        .svc-team-member::after {
+        .vcs-team-member::after {
             content: '';
             position: absolute;
             top: 0;
@@ -173,19 +171,130 @@
             transition: opacity 0.3s ease;
         }
 
-        .svc-team-member:hover::after {
+        .vcs-team-member:hover::after {
             opacity: 1;
         }
 
         /* Color variants for team members */
-        .svc-team-member:nth-child(1) { background: linear-gradient(135deg, #dc2626, #b91c1c); }
-        .svc-team-member:nth-child(2) { background: linear-gradient(135deg, #c026d3, #a21caf); }
-        .svc-team-member:nth-child(3) { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-        .svc-team-member:nth-child(4) { background: linear-gradient(135deg, #059669, #047857); }
-        .svc-team-member:nth-child(5) { background: linear-gradient(135deg, #ea580c, #c2410c); }
-        .svc-team-member:nth-child(6) { background: linear-gradient(135deg, #ca8a04, #a16207); }
+        .vcs-team-member:nth-child(1) { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+        .vcs-team-member:nth-child(2) { background: linear-gradient(135deg, #c026d3, #a21caf); }
+        .vcs-team-member:nth-child(3) { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+        .vcs-team-member:nth-child(4) { background: linear-gradient(135deg, #059669, #047857); }
+        .vcs-team-member:nth-child(5) { background: linear-gradient(135deg, #ea580c, #c2410c); }
+        .vcs-team-member:nth-child(6) { background: linear-gradient(135deg, #ca8a04, #a16207); }
 
-        @keyframes svc-slideInLeft {
+        /* Service showcase section */
+        .vcs-services-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            position: relative;
+        }
+
+        .vcs-services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .vcs-service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .vcs-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .vcs-service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+
+        .vcs-service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .vcs-service-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .vcs-section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .vcs-section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Industry showcase */
+        .vcs-industry-section {
+            padding: 4rem 2rem;
+            background: #1e293b;
+            color: white;
+        }
+
+        .vcs-industry-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .vcs-industry-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .vcs-industry-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .vcs-industry-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #a90bf5, #d97706);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        @keyframes vcs-slideInLeft {
             from {
                 opacity: 0;
                 transform: translateX(-50px);
@@ -196,7 +305,7 @@
             }
         }
 
-        @keyframes svc-slideInRight {
+        @keyframes vcs-slideInRight {
             from {
                 opacity: 0;
                 transform: translateX(50px);
@@ -209,13 +318,13 @@
 
         /* Mobile Responsive */
         @media (max-width: 1024px) {
-            .svc-container {
+            .vcs-container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
                 text-align: center;
             }
 
-            .svc-team-grid {
+            .vcs-team-grid {
                 grid-template-columns: repeat(2, 1fr);
                 max-width: 400px;
                 margin: 0 auto;
@@ -223,96 +332,104 @@
         }
 
         @media (max-width: 768px) {
-            .svc-hero-section {
+            .vcs-hero-section {
                 padding: 1rem;
                 min-height: auto;
                 padding-top: 2rem;
                 padding-bottom: 2rem;
             }
 
-            .svc-container {
+            .vcs-container {
                 gap: 2rem;
             }
 
-            .svc-content h1 {
+            .vcs-content h1 {
                 font-size: 2.5rem;
                 margin-bottom: 1.5rem;
             }
 
-            .svc-content p {
+            .vcs-content p {
                 font-size: 1rem;
                 margin-bottom: 1rem;
             }
 
-            .svc-cta-buttons {
+            .vcs-cta-buttons {
                 flex-direction: column;
                 align-items: center;
                 margin-top: 2rem;
             }
 
-            .svc-btn {
+            .vcs-btn {
                 width: 100%;
                 max-width: 300px;
                 padding: 1rem;
             }
 
-            .svc-team-grid {
+            .vcs-team-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
+            }
+
+            .vcs-services-section, .vcs-industry-section {
+                padding: 2rem 1rem;
+            }
+
+            .vcs-section-title {
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 480px) {
-            .svc-hero-section {
+            .vcs-hero-section {
                 padding: 0.5rem;
             }
 
-            .svc-content h1 {
+            .vcs-content h1 {
                 font-size: 2rem;
             }
 
-            .svc-team-grid {
+            .vcs-team-grid {
                 grid-template-columns: 1fr;
                 max-width: 250px;
             }
 
-            .svc-team-member {
+            .vcs-team-member {
                 aspect-ratio: 4/3;
             }
         }
 
         /* Floating animation for team members */
-        .svc-team-member:nth-child(odd) {
-            animation: svc-float 6s ease-in-out infinite;
+        .vcs-team-member:nth-child(odd) {
+            animation: vcs-float 6s ease-in-out infinite;
         }
 
-        .svc-team-member:nth-child(even) {
-            animation: svc-float 6s ease-in-out infinite reverse;
+        .vcs-team-member:nth-child(even) {
+            animation: vcs-float 6s ease-in-out infinite reverse;
         }
 
-        @keyframes svc-float {
+        @keyframes vcs-float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
 
         /* Parallax effect */
-        .svc-team-grid {
+        .vcs-team-grid {
             perspective: 1000px;
         }
 
-        .svc-team-member {
+        .vcs-team-member {
             transform-style: preserve-3d;
         }
 
         /* Glassmorphism effect for buttons */
-        .svc-btn-secondary {
+        .vcs-btn-secondary {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Gradient text effect */
-        .svc-content h1 {
+        .vcs-content h1 {
             background: linear-gradient(135deg, #ffffff, #e0e7ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -321,47 +438,63 @@
     </style>
 </head>
 <body>
-    <section class="svc-bpo-section">
-        <div class="svc-hero-section">
-            <div class="svc-container">
-                <div class="svc-content">
+    <section class="vcs-bpo-section">
+        <div class="vcs-hero-section">
+            <div class="vcs-container">
+                <div class="vcs-content">
                     <h1>Why Choose Our India Call Center Services</h1>
                     <p>As a leading call center company in India, Value Connect Solutions delivers exceptional business process outsourcing (BPO) solutions to drive your global success.</p>
                     <p>Value Connect Solutions helps fast-growing companies overcome operational challenges without breaking the bank. With our seasoned talents, you can focus on achieving remarkable growth and innovation. Let us manage the complexities while you soar to new heights!</p>
                     
-                    <div class="svc-cta-buttons">
-                        <a href="#svc-competitive-edge" class="svc-btn svc-btn-primary">See Our Competitive Edge</a>
-                        <a href="#svc-discovery-call" class="svc-btn svc-btn-secondary">Book a Discovery Call</a>
+                    <div class="vcs-cta-buttons">
+                        <a href="{% url 'Why-Value-Connect-Solution' %}" class="vcs-btn vcs-btn-primary">See Our Competitive Edge</a>
+                        <a href="#" onclick="scrollToSection()" class="vcs-btn vcs-btn-secondary">Book a Discovery Call</a>
                     </div>
                 </div>
                 
-                <div class="svc-team-grid">
-                    <div class="svc-team-member">
-                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b5bb?w=400&h=400&fit=crop&crop=face" alt="Professional call center agent">
+                <div class="vcs-reasons-grid">
+                    <div class="vcs-reason-card">
+                        <div class="vcs-reason-icon">💰</div>
+                        <h3>Cost Efficiency</h3>
+                        <p>Save up to 60% on operational costs while maintaining premium quality service standards</p>
                     </div>
-                    <div class="svc-team-member">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" alt="Experienced customer service representative">
+                    <div class="vcs-reason-card">
+                        <div class="vcs-reason-icon">🌍</div>
+                        <h3>English Proficiency</h3>
+                        <p>Native-level English speakers with neutral accents and cultural understanding</p>
                     </div>
-                    <div class="svc-team-member">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face" alt="Skilled BPO professional">
+                    <div class="vcs-reason-card">
+                        <div class="vcs-reason-icon">⏰</div>
+                        <h3>24/7 Operations</h3>
+                        <p>Round-the-clock support across multiple time zones for global coverage</p>
                     </div>
-                    <div class="svc-team-member">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" alt="Dedicated support specialist">
+                    <div class="vcs-reason-card">
+                        <div class="vcs-reason-icon">🎓</div>
+                        <h3>Skilled Workforce</h3>
+                        <p>Highly educated professionals with specialized training in customer service</p>
                     </div>
-                    <div class="svc-team-member">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face" alt="Expert call center manager">
+                    <div class="vcs-reason-card">
+                        <div class="vcs-reason-icon">🔧</div>
+                        <h3>Advanced Technology</h3>
+                        <p>State-of-the-art infrastructure with latest CRM and communication tools</p>
                     </div>
-                    <div class="svc-team-member">
-                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face" alt="Professional team leader">
+                    <div class="vcs-reason-card">
+                        <div class="vcs-reason-icon">📈</div>
+                        <h3>Scalability</h3>
+                        <p>Rapid scaling capabilities to match your business growth and seasonal demands</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
+        <!-- Services Section -->
+        
+
+        <!-- Industry Expertise Section -->
+       
     <script>
         // Add smooth scrolling for anchor links
-        document.querySelectorAll('.svc-bpo-section a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('.vcs-bpo-section a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
@@ -388,12 +521,12 @@
             });
         }, svcObserverOptions);
 
-        document.querySelectorAll('.svc-content, .svc-team-grid').forEach(el => {
+        document.querySelectorAll('.vcs-content, .vcs-team-grid').forEach(el => {
             svcObserver.observe(el);
         });
 
         // Add hover effects for team members
-        document.querySelectorAll('.svc-team-member').forEach(member => {
+        document.querySelectorAll('.vcs-team-member').forEach(member => {
             member.addEventListener('mouseenter', function() {
                 this.style.zIndex = '10';
             });
@@ -403,33 +536,57 @@
             });
         });
 
-        // Add parallax effect on scroll
-        // window.addEventListener('scroll', () => {
-        //     const scrolled = window.pageYOffset;
-        //     const rate = scrolled * -0.5;
+        // Add animated counters for service cards
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.vcs-service-card');
+            counters.forEach((counter, index) => {
+                setTimeout(() => {
+                    counter.style.opacity = '0';
+                    counter.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        counter.style.transition = 'all 0.6s ease';
+                        counter.style.opacity = '1';
+                        counter.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        };
+
+        // Trigger animations on scroll
+        const servicesSection = document.querySelector('.vcs-services-section');
+        const servicesObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    servicesObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (servicesSection) {
+            servicesObserver.observe(servicesSection);
+        }
+
+        function scrollToSection() {
+            const servicesSection = document.querySelector('#target-section');
+            if (servicesSection) {
+                servicesSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Add interactive hover effects for service cards
+        document.querySelectorAll('.vcs-service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
             
-        //     const svcHeroSection = document.querySelector('.svc-hero-section');
-        //     if (svcHeroSection) {
-        //         svcHeroSection.style.transform = `translateY(${rate}px)`;
-        //     }
-        // });
-
-        // Add click handlers for CTA buttons
-        const svcBtnPrimary = document.querySelector('.svc-btn-primary');
-        if (svcBtnPrimary) {
-            svcBtnPrimary.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Exploring our competitive edge! Contact us to learn more about our unique BPO solutions.');
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
-        }
-
-        const svcBtnSecondary = document.querySelector('.svc-btn-secondary');
-        if (svcBtnSecondary) {
-            svcBtnSecondary.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Ready to book your discovery call! We\'ll connect you with our BPO experts to discuss your needs.');
-            });
-        }
+        });
     </script>
 </body>
 </html>

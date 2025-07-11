@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+        }
+
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            height: auto;
+        }
+
+        /* Background Image Styles for Hero */
+        .image-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* Services Hero Section Styles */
+        .services-hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding-top: var(--header-height);
+            box-sizing: border-box;
+            z-index: 0;
+        }
+
+        .services-hero-content {
+            max-width: 1440px;
+            padding: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .services-hero-content h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .services-hero-content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .services-hero-content h1 {
+                font-size: 2.5em;
+            }
+
+            .services-hero-content p {
+                font-size: 1em;
+            }
+        }
+
+
+
+        /* Custom class names to avoid common ones */
+        .page-wrap {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .main-content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content-area {
+                flex-direction: row;
+                gap: 4rem;
+            }
+        }
+
+        .text-section {
+            flex: 2;
+            padding-right: 1rem;
+            /* Adjust for spacing */
+        }
+
+        .image-side {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            /* Align image to top */
+            padding-left: 1rem;
+            /* Adjust for spacing */
+        }
+
+        .hero-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #1a202c;
+            /* Darker text for headings */
+            margin-bottom: 1rem;
+        }
+
+        .sub-heading {
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .body-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+            /* Slightly lighter text for body */
+            margin-bottom: 1rem;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1rem;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        .bullet-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #4299e1;
+            /* Blue bullet point */
+            font-weight: bold;
+        }
+
+        .side-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            /* Rounded corners for the image */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 2rem;
+            }
+
+            .sub-heading {
+                font-size: 1.5rem;
+            }
+
+            .page-wrap {
+                padding: 1rem;
+            }
+
+            .image-side {
+                order: -1;
+                /* Move image to top on small screens */
+                margin-bottom: 2rem;
+            }
+        }
+
+
+        /* Styles for the new "Benefits" section */
+        .benefits-section-wrap {
+            background-color: rgba(28, 106, 202, 1);
+            /* Dark blue background */
+            color: #fff;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            /* Rounded corners */
+            margin-top: 2rem;
+        }
+
+        .benefits-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .benefits-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            line-height: 1.2;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .benefits-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .benefit-card {
+            background-color: #2d3748;
+            /* Slightly lighter dark background for cards */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 280px;
+            /* Max width for cards */
+        }
+
+        .benefit-icon {
+            width: 100px;
+            /* Adjust size as needed */
+            height: 100px;
+            margin-bottom: 1rem;
+            /* Placeholder for SVG/Image, you'd embed SVG here or use an image */
+            background-color: #4299e1;
+            /* Example background for icon area */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            /* For emoji/text icons */
+            color: #fff;
+        }
+
+        .benefit-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .benefit-description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #a0aec0;
+            /* Lighter text for descriptions */
+        }
+
+
+
+        .start-section-wrap {
+            background-color: #fff;
+            /* White background */
+            color: #333;
+            padding: 4rem 2rem;
+            text-align: left;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .start-section-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 1024px) {
+            .start-section-wrap {
+                flex-direction: row;
+                gap: 4rem;
+                align-items: center;
+            }
+        }
+
+        .start-text-content {
+            flex: 2;
+        }
+
+        .start-image-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .start-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+        }
+
+        .start-body-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+
+        .start-main-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        @media (max-width: 1048px) {
+            .start-section-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-background" style="background-image: url('{% static 'myapp/images/pexels-pixabay-267507.jpg' %}');">
+        <div class="image-overlay"></div>
+    </div>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="services-hero-section">
+        <div class="services-hero-content">
+            <h1>Lead Generation Outsourcing in the India</h1>
+
+        </div>
+    </div>
+
+
+    <div class="page-wrap">
+        <div class="main-content-area">
+            <div class="text-section">
+                <h1 class="hero-heading">Lead Generation Outsourcing: Unlock Your Business' Full Growth Potential</h1>
+                <p class="body-text">At Value ConnectSolutions, we specialize in managing every aspect of lead
+                    generation for
+                    your business. From identifying the right contact person to qualifying leads, we connect your sales
+                    team with prospects who are ready to engage.</p>
+                <p class="body-text">Our goal is to empower your sales team to focus on what they do best—closing
+                    deals—while we handle the task of generating qualified leads. With best-in-class services and
+                    dedicated agents, Value ConnectSolutions helps businesses grow, no matter the size.</p>
+
+                <h2 class="sub-heading">What Is Lead Generation?</h2>
+                <p class="body-text">Lead generation is the process of identifying individuals or businesses interested
+                    in your company's products or services. Leads can be generated through various channels, like:</p>
+                <ul class="bullet-list">
+                    <li>search engines</li>
+                    <li>social media</li>
+                    <li>your company website</li>
+                    <li>inbound calls</li>
+                    <li>Cold calling campaigns</li>
+                </ul>
+                <p class="body-text">Effective lead generation bridges the gap between your marketing efforts and sales
+                    goals, ensuring that your team connects with prospects ready to convert.</p>
+
+                <h2 class="sub-heading">The Benefits of Lead Generation Services</h2>
+                <p class="body-text">Sales professionals excel at closing deals and matching customers with the right
+                    products to meet their needs. The ideal scenario for them is to engage with prospects who are
+                    already interested in your offerings, familiar with your brand, and aware of the value you provide.
+                </p>
+                <p class="body-text">Lead generation services free up your sales team to focus on converting these
+                    pre-qualified prospects into paying customers, rather than spending valuable time cold calling.</p>
+
+                <h2 class="sub-heading">Why Outsource to Lead Generation to the India?</h2>
+                <p class="body-text">Using lead generation call center services in the India offers a
+                    cost-efficient, high-quality solution for growing your business.</p>
+
+                <h3>Cost Savings Without Compromising Quality</h3>
+                <p class="body-text">Labor costs in the India are significantly lower than in the USA or UK,
+                    allowing you to save money while accessing skilled professionals.</p>
+
+                <h3>Highly Skilled, English-Speaking Workforce</h3>
+                <p class="body-text">Our agents are fluent in English and have extensive experience in lead generation,
+                    ensuring smooth communication with your prospects.</p>
+
+                <h3>Increased Efficiency and Productivity</h3>
+                <p class="body-text">Free up your in-house sales team to focus on closing deals, while we handle cold
+                    calling, lead qualification, and pre-sales activities.</p>
+            </div>
+
+            <div class="image-side">
+                <!-- Placeholder image, replace with actual image if available -->
+                <img src="https://placehold.co/300x600/e0f2fe/000000?text=Placeholder+Image"
+                    alt="People working in a call center" class="side-image">
+            </div>
+        </div>
+
+        <div class="main-content-area" style="display: block;">
+
+            <h2 class="sub-heading">What a Lead Generation Call Center Does?</h2>
+            <p class="body-text">Value ConnectSolution's lead generation call center in the India specializes in:
+            </p>
+            <ul class="bullet-list">
+                <li>Identifying key decision-makers within companies or households, determines the optimal time to
+                    contact them, and</li>
+                <li>Conducts qualification calls to assess their level of interest and purchasing power related to your
+                    products or services.</li>
+                <li>Educate prospects about the benefits of doing business with your company, pre-qualify their needs
+                    and buying timeline</li>
+                <li>Connect interested prospects directly with your sales team.</li>
+            </ul>
+            <p class="body-text">Research shows that 67% of sales are lost because sales reps fail to properly qualify
+                potential customers. Let us help lighten the load and increase your success rate with our lead
+                generations services in the India.</p>
+        </div>
+    </div>
+
+    <div class="benefits-section-wrap">
+        <div class="benefits-content">
+            <h2 class="benefits-heading">Benefits of Partnering with an Outsourced Call Center</h2>
+            <p class="body-text" style="color: #cbd5e0; max-width: 1440px; margin: 0 auto 2.5rem auto;">Outsourcing call
+                center lead generation provides businesses with a reliable way to scale their sales efforts and maximize
+                ROI. From lead verification services to pre-qualification, our team ensures every prospect is primed for
+                conversion, so your sales team can focus on closing deals.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div> <!-- Placeholder icon -->
+                    <h3 class="benefit-title">Achieve Growth Targets Quickly</h3>
+                    <p class="benefit-description">Start hitting missed growth goals right away with a steady stream of
+                        qualified leads</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌟</div> <!-- Placeholder icon -->
+                    <h3 class="benefit-title">Gain Expertise Instantly</h3>
+                    <p class="benefit-description">Leverage years of industry experience by partnering with seasoned
+                        professionals</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💲</div> <!-- Placeholder icon -->
+                    <h3 class="benefit-title">Improve Lead Conversion Rates</h3>
+                    <p class="benefit-description">Increase the percentage of leads that turn into paying customers with
+                        expert prequalification.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏰</div> <!-- Placeholder icon -->
+                    <h3 class="benefit-title">24/7 Availability</h3>
+                    <p class="benefit-description">Provide around-the-clock availability to your prospective customers,
+                        ensuring no opportunity is missed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="start-section-wrap">
+        <div class="start-section-content">
+            <div class="start-text-content">
+                <h2 class="start-heading">How to Get Started with Value ConnectSolutions: Lead Generation Outsourcing in
+                    the India</h2>
+                <p class="start-body-text">Getting started with Value ConnectSolutions is easy. We have 1,000
+                    pre-screened, trained, and qualified agents ready to join your team at our state-of-the-art call
+                    center</p>
+                <p class="start-body-text">Our center operates 24/7, and we offer clients an exclusive team of agents
+                    dedicated solely to their business. All our agents have at least two years of college education,
+                    previous call center experience, and have passed rigorous communication, EQ, and IQ tests.</p>
+                <p class="start-body-text">Our agents undergo comprehensive training on your products, services,
+                    business vision, and goals. Our training process includes role-playing simulations, test calls, call
+                    scripts, and video resources to ensure our agents are fully prepared to represent your brand.</p>
+                <p class="start-body-text">Training ensures they are fully prepared to represent your brand and meet
+                    your lead generation goals.</p>
+            </div>
+            <div class="start-image-content">
+
+                <!-- Placeholder image for the "How to Get Started" section -->
+                <img src='{% static "myapp/images/pexels-yankrukov-8867474.jpg" %}'
+                    alt="People working in a call center" class="start-main-image">
+            </div>
+        </div>
+    </div>
+    {% include 'myapp/index_countriesweserve.html' %}
+    {% include 'myapp/footer.html' %}
+
+    <script>
+
+    </script>
+</body>
+
+</html>

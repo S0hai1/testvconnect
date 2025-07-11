@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outsourcing Solutions</title>
+    {% include 'myapp/meta_tags.html' %}
     <style>
         * {
             margin: 0;
@@ -12,362 +10,195 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .solutions-section {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 80px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .solutions-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 1200px;
+        .main-wrapper {
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            padding: 2rem;
         }
 
-        .section-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #1976d2;
+        .title-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .title-section h1 {
+            font-size: 2.5rem;
+            color: white;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: #424242;
-            margin-bottom: 4rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 400;
-            line-height: 1.7;
+        .title-section p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .solutions-grid {
+        .solution-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
 
-        .solution-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        .solution-box {
+            background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            border-radius: 20px;
+            padding: 2.5rem;
             text-align: center;
-            min-height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            animation: slideUp 0.8s ease-out;
         }
 
-        .solution-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.5s ease;
+        .solution-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
-        .solution-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .solution-card:hover::before {
-            left: 100%;
-        }
-
-       
-
-        .solution-card.outbound {
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .solution-card.back-office {
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .solution-card.ai-solutions {
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .solution-icon {
+        .solution-symbol {
             width: 80px;
             height: 80px;
             margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(25, 118, 210, 0.3);
-            position: relative;
-            overflow: hidden;
+            font-size: 2rem;
+            color: white;
+            animation: breathe 2s infinite;
         }
 
-        .solution-icon::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: rotate 3s linear infinite;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .solution-icon svg {
-            width: 40px;
-            height: 40px;
-            fill: white;
-            z-index: 1;
-            position: relative;
-        }
-
-        .solution-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #1976d2;
+        .solution-box h3 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .solution-description {
-            color: #424242;
-            font-size: 1rem;
+        .solution-box p {
+            color: #666;
+            margin-bottom: 1.5rem;
             line-height: 1.6;
-            margin-bottom: 2rem;
-            flex-grow: 1;
         }
 
-        .learn-more-btn {
-            background: transparent;
-            color: #1976d2;
-            border: 2px solid #1976d2;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
+        .action-link {
             display: inline-block;
-            position: relative;
-            overflow: hidden;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .learn-more-btn::before {
-            content: '';
-            position: absolute;
+        .action-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact-area {
+            text-align: center;
+            margin-top: 3rem;
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        .contact-area h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .contact-area p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .primary-button {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .primary-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .background-elements {
+            position: fixed;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: #1976d2;
-            transition: left 0.3s ease;
+            pointer-events: none;
             z-index: -1;
         }
 
-        .learn-more-btn:hover {
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(25, 118, 210, 0.3);
-        }
-
-        .learn-more-btn:hover::before {
-            left: 0;
-        }
-
-        .bottom-section {
-            margin-top: 3rem;
-            text-align: center;
-        }
-
-        .bottom-text {
-            font-size: 1.1rem;
-            color: #424242;
-            margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
-            color: white;
-            padding: 1.2rem 3rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(25, 118, 210, 0.3);
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
+        .floating-element {
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: drift 20s infinite linear;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 32px rgba(25, 118, 210, 0.4);
-            background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
         }
 
-        .cta-button:hover::before {
-            left: 100%;
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
         }
 
-        .cta-button:active {
-            transform: translateY(-1px);
+        .floating-element:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .solutions-section {
-                padding: 60px 15px;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-                margin-bottom: 1rem;
-            }
-
-            .section-subtitle {
-                font-size: 1rem;
-                margin-bottom: 3rem;
-            }
-
-            .solutions-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                margin-bottom: 2.5rem;
-            }
-
-            .solution-card {
-                padding: 2rem 1.5rem;
-                min-height: 320px;
-            }
-
-            .solution-icon {
-                width: 70px;
-                height: 70px;
-                margin-bottom: 1.2rem;
-            }
-
-            .solution-icon svg {
-                width: 35px;
-                height: 35px;
-            }
-
-            .solution-title {
-                font-size: 1.3rem;
-            }
-
-            .solution-description {
-                font-size: 0.95rem;
-            }
-
-            .learn-more-btn {
-                padding: 0.7rem 1.8rem;
-                font-size: 0.95rem;
-            }
-
-            .cta-button {
-                padding: 1rem 2.5rem;
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .section-subtitle {
-                font-size: 0.95rem;
-            }
-
-            .solution-card {
-                padding: 1.5rem 1rem;
-                min-height: 300px;
-            }
-
-            .solution-icon {
-                width: 60px;
-                height: 60px;
-            }
-
-            .solution-icon svg {
-                width: 30px;
-                height: 30px;
-            }
-
-            .solution-title {
-                font-size: 1.2rem;
-            }
-
-            .bottom-text {
-                font-size: 1rem;
-            }
-        }
-
-        /* Animation for section entrance */
-        @keyframes fadeInUp {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -375,96 +206,216 @@
             }
         }
 
-        .solutions-section {
-            animation: fadeInUp 0.8s ease-out;
+        @keyframes breathe {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
         }
 
-        .solution-card {
-            animation: fadeInUp 0.6s ease-out;
-            animation-fill-mode: both;
+        @keyframes drift {
+            from {
+                transform: translateY(0px) rotate(0deg);
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+            }
         }
 
-        .solution-card:nth-child(1) { animation-delay: 0.1s; }
-        .solution-card:nth-child(2) { animation-delay: 0.2s; }
-        .solution-card:nth-child(3) { animation-delay: 0.3s; }
-        .solution-card:nth-child(4) { animation-delay: 0.4s; }
+        @media (max-width: 768px) {
+            .main-wrapper {
+                padding: 1rem;
+            }
+            
+            .title-section h1 {
+                font-size: 2rem;
+            }
+            
+            .solution-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .solution-box {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .title-section p {
+                font-size: 1rem;
+            }
+            
+            .solution-box {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <section class="solutions-section">
-        <div class="container">
-            <h2 class="section-title">Outsourcing Solutions in the India for Your Business Operations</h2>
-            <p class="section-subtitle">
-                Providing world-class business process outsourcing solutions in the India to empower your global success.
-            </p>
-            
-            <div class="solutions-grid">
-                <div class="solution-card inbound">
-                    <div class="solution-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.1-.03-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/>
-                        </svg>
-                    </div>
-                    <h3 class="solution-title">Telemarketing</h3>
-                    <p class="solution-description">
-Value Connect Solutions: Expert Telecallers for US Insurance Live Transfers
+    <div class="background-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
 
-Value Connect Solutions specializes in providing high-quality telecallers who can generate live transfers for various types of insurance in the US. Our team of experienced and skilled telecallers to connect potential customers with insurance providers in real-time.
-
-Welcome to Value Connect Solutions, your trusted partner in insurance sales growth. We specialize in providing highly trained and experienced telecaller agents to Allstate licensed insurance agents across the United States.                    </p>
-                    <a href="#inbound" class="learn-more-btn">Learn more</a>
-                </div>
-
-                <div class="solution-card outbound">
-                    <div class="solution-icon">
-                       <img style="width: 35px; height: 35px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB/0lEQVR4nO3YTYhNcRjH8b/3vCVvJUQUyWKKbKQkpWZFYWGBsrG1nOwsLGZriR2ZJDuUWEgpSlJS3sJGyEsh78N8dOq5dbpNY5q5Z+69/8637j2L8z/PyznneZ7f/6RUU1NTU9MOZEKSUSJ/ZJJILz7qXoZwvFEnK3BX9/EFuxtJbI7jLAzoHh5gTcS+sPgbRF+pix3Gb53NAGZHvBvwoty1zmBmnNyKtzqPwaabfgDfhmu/97AyFi3HHZ3DO2yP2GbgxP/myPumC05rP7ewNGJahtujHYjD1c0v7eEkppde+Tdjmeznim4WRrbgtYnjBw6F70k4MlITGo1EuY9VYXAxbqieZ+gJn3NwoVVa6wN2hOGp6FcdlzE/fK3Fw1aLxkKT9RWPOZzsx3etlRr9mBz2d+JTler3fNMwemn8FFqvN2xOwbFIrHIZ/wjrwvEiXDd2ihpcXbJ1baL3I5+xq3QXx1I3Z0tdceN4nm5q8Xu9D19Hcd3Pop2W5tTB8dZb0houYV4E1YPnI6x9VVLchXI41Wlb3SdYHwEuwNVh1tzEkiq0XFLRRiemcdGu/5akxrQ4t63V6jppPUPRPht1swd7S8kdreI7QVIdVxoTOpKYi4vd+jnoKTbF73GVjpJMSDIhyYQkE5JMSDIhyYQkE5JMSDIhyYRUU1NTU5PawD95ZgOCo89UiQAAAABJRU5ErkJggg==" alt="new-post">
-                    </div>
-                    <h3 class="solution-title">Email Marketing</h3>
-                    <p class="solution-description">
-Value Connect Solutions: Expert Email Marketing for US Insurance Leads
-
-Value Connect Solutions specializes in delivering high-quality email marketing services to generate leads for various types of insurance in the US. Our team of experienced professionals crafts compelling email campaigns to connect potential customers with insurance providers in real time.
-
-Welcome to Value Connect Solutions, your trusted partner in insurance sales growth. We specialize in designing and executing targeted email marketing campaigns for Allstate licensed insurance agents across the United States.                    </p>
-                    <a href="#outbound" class="learn-more-btn">Learn more</a>
-                </div>
-
-                <div class="solution-card back-office">
-                    <div class="solution-icon">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACwklEQVR4nO2aO2jVUBiA01asoFQRi4OCr0XFIihCsVWq4OKoqLjooM4OTq6im4Ju4uDg6io6FIdSqSDo6NBqR+HWBz6qqKif/OZPSWNyc05OHifQbwnc/Dn5v5xnTm4QLLHEfwATwJPAV4A1hnG/CentEtMT1A2wF5jW5GaA/S4iwCYtb7KypFNu2gO8YjHzwFgREUKJWT0/XrlA7MZrExK5MlkiLJZ4CgzUXSMzNjJpIjQpEUtiF9AxlZERC5jySqKoTKJGpxuXAE6LRFEZQhGZV8ablOjT/jEHDOlv24E3GTJfgcOBbwAnY0m2VwZ4lkiy49jMJjLiq1vOAIcyblpYhnA0S2OqSpFHZNOOZgYMAX+6iLRDBriXI+G/DLAR+GEo4q8McMNCwk8ZYAD4WEDELxngckEJf2SA/i43bo8McIzysJk0R6pYIN5tQOZ1aRsRwJbYkvtWAzLrypAYBb4AN6MnA1ypUWbWuUZiEhHStPr03CWDZYopD6P3d5WJXnvlOFy2RMR9YLnGXAB+FUxerpOyRjP643onAS1oBPjcJYnHwCqNPQX8tBD4pP1ss3OijhIRk8BqveYo8C0nXl6JLwIrKxWwlIh4DgzqtQf1aSeRl6UTUd+qHGBPRp/I4yWwQcvYB7zTWfk2sLOW5COAFSn7tzbI6LJNy9oq26hBEwBnceMtsLuR5OM4Lj0WJHRuSaOejzqE43kRPsi3ES3jTM4E2VuHyHXHmjiemBgXtnpMvk6VhiwDHCSOAN9TYv7J1CpiuTMSlxjOGbLnY82tNpF+4IGFhOxtvTeUr09EAJYBd/IkYjO5PHFTMr8pVr3L/iLWLGSzekdK3JiFjMQdqC7r/O2fwZwYG5lOtND0EuxkzgU+g7nM1cB3MJM5H7QBusvMmf5fxQtkdNKkk8N3M6NW4ICMTtKxgWt6LLUm/gIsYf+RdRdtLgAAAABJRU5ErkJggg==" alt="speaker_1">
-                    </div>
-                    <h3 class="solution-title">Digital Marketing</h3>
-                    <p class="solution-description">
-Value Connect Solutions: Expert Telecallers for US Insurance Live Transfers
-
-Value Connect Solutions specializes in providing high-quality telecallers who can generate live transfers for various types of insurance in the US. Our team of experienced and skilled telecallers to connect potential customers with insurance providers in real-time.                    </p>
-                    <a href="#back-office" class="learn-more-btn">Learn more</a>
-                </div>
-
-                <!-- <div class="solution-card ai-solutions">
-                    <div class="solution-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                            <circle cx="12" cy="9" r="2"/>
-                            <circle cx="12" cy="15" r="2"/>
-                            <path d="M12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/>
-                        </svg>
-                    </div>
-                    <h3 class="solution-title">AI Solutions</h3>
-                    <p class="solution-description">
-                        Drive innovation to your business with the power of artificial intelligence.
-                    </p>
-                    <a href="#ai-solutions" class="learn-more-btn">Learn more</a>
-                </div> -->
-            </div>
-
-            <div class="bottom-section">
-                <p class="bottom-text">
-                    Value Connect Solutions leads the way in call center India outsourcing, delivering customized and innovative services.
-                </p>
-                <a href="#contact" class="cta-button">Book a Discovery Call</a>
-            </div>
+    <div class="main-wrapper">
+        <div class="title-section">
+            <h1>Value Connect Solutions</h1>
+            <p>Empowering businesses across India with innovative solutions and exceptional service delivery to drive your digital transformation journey.</p>
         </div>
-    </section>
+
+        <div class="solution-grid">
+            <div class="solution-box">
+                <div class="solution-symbol">📞</div>
+                <h3>Inbound Services</h3>
+                <p>Efficient assistance with pre and post-sales support needs. Including technical troubleshooting, product knowledge, and customer experience (CX) management.</p>
+                <a href="{% url 'inbound_call_center_services' %}" 
+   style="display: inline-block;
+          padding: 12px 30px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          text-decoration: none;
+          border-radius: 25px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          border: none;
+          cursor: pointer;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          text-align: center;">
+   Learn More
+</a>
+            </div>
+
+            <div class="solution-box">
+                <div class="solution-symbol">📊</div>
+                <h3>Outbound Services</h3>
+                <p>Generate and qualify leads, set appointments, and consumer sales. Conduct studies and promote special events and product launches.</p>
+                <a href="{% url 'outbound_call_center_solutions' %}" style="display: inline-block;
+          padding: 12px 30px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          text-decoration: none;
+          border-radius: 25px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          border: none;
+          cursor: pointer;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          text-align: center;">Learn More</a>
+            </div>
+
+            <div class="solution-box">
+                <div class="solution-symbol">⚙️</div>
+                <h3>Back-Office Support</h3>
+                <p>Optimize your operations by outsourcing tasks like data entry, payroll, and document processing, enabling your team to focus on core goals.</p>
+               <a href="{%url 'back_office_support'%}"style="display: inline-block;
+          padding: 12px 30px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          text-decoration: none;
+          border-radius: 25px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          border: none;
+          cursor: pointer;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          text-align: center;">Learn More</a>
+            </div>
+
+            <!-- <div class="solution-box">
+                <div class="solution-symbol">🤖</div>
+                <h3>AI Solutions</h3>
+                <p>Drive innovation to your business with the power of artificial intelligence.</p>
+                <a href="{%url 'back_office_support'%}"style="display: inline-block;
+          padding: 12px 30px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          text-decoration: none;
+          border-radius: 25px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          border: none;
+          cursor: pointer;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          text-align: center;">Learn More</a>
+            </div> -->
+        </div>
+
+        <div class="contact-area">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Partner with Value Connect Solutions and experience the difference of working with India's premier business solutions provider.</p>
+            <a href="#" onclick="scrollToSection()" class="action-link primary-button">Schedule a Consultation</a>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling and interactive elements
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.solution-box').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add hover effects for solution boxes
+        document.querySelectorAll('.solution-box').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click analytics (placeholder)
+        document.querySelectorAll('.action-link').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Button clicked:', this.textContent);
+                // Add actual analytics or navigation logic here
+            });
+        });
+         function scrollToSection() {
+            document.getElementById('target-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>

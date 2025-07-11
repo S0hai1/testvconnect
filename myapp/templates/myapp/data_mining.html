@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    {% load static %}
+    <style>
+        /* CSS Variables */
+        :root {
+            --header-height: 70px;
+            --primary-blue: #2176d7;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --text-light: #666;
+            --bg-light: #f8f8f8;
+            --bg-white: #ffffff;
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --border-radius: 15px;
+            --border-radius-large: 20px;
+            --spacing-xs: 10px;
+            --spacing-sm: 15px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            --spacing-xxl: 50px;
+            --container-max-width: 1440px;
+        }
+
+        /* General Body Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-light);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(33, 118, 215, 0.9), rgba(28, 106, 202, 0.9)),
+                        url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Page Container */
+        .page-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: var(--spacing-xl) 1rem;
+        }
+
+        .heading-section {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .main-page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Content Layout */
+        .content-layout-area {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        .text-description-area p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .visual-display-area {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: var(--border-radius-large);
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .visual-display-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-accent-overlay {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            width: 80px;
+            height: 20px;
+            background: linear-gradient(90deg, #ffcc00, #ffa500);
+            border-radius: 5px;
+            transform: skewX(-20deg);
+        }
+
+        /* Blue Background Sections */
+        .blue-background {
+            background: linear-gradient(135deg, rgba(33, 118, 215, 1), rgba(28, 106, 202, 1));
+            color: white;
+            padding: var(--spacing-xxl) 1rem;
+        }
+
+        .section-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .main-heading {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .sub-description {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            transition: transform 0.3s ease;
+            /* Added explicit background for contrast on blue sections */
+            background: rgba(255, 255, 255, 0.1); 
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        /* Explicitly set text color for features within blue sections */
+        .blue-background .feature-item .feature-title,
+        .blue-background .feature-item .feature-text {
+            color: white; 
+        }
+
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Data Mining Services Section */
+        .services-section {
+            padding: var(--spacing-xxl) 1rem;
+            background: var(--bg-white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Benefits Section */
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        .benefits-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .benefits-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .benefits-icon {
+            width: 3rem;
+            height: 3rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Explicitly set text color for benefits within blue sections */
+        .blue-background .benefits-item h3,
+        .blue-background .benefits-item p {
+            color: white;
+        }
+
+        .benefits-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefits-content p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* White Section */
+        .white-section {
+            background: var(--bg-white);
+            padding: var(--spacing-xxl) 1rem;
+        }
+
+        .white-section .feature-item {
+            background: var(--bg-light);
+            color: var(--text-primary);
+        }
+
+        .white-section .feature-text {
+            color: var(--text-secondary);
+        }
+
+        .white-section .feature-icon {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .content-layout-area {
+                grid-template-columns: 1fr 400px;
+            }
+
+            .hero-section {
+                background-attachment: fixed;
+            }
+
+            .nav-menu {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .header {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-light);
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-section {
+                background-attachment: scroll;
+                padding: 0 1rem;
+            }
+
+            .benefits-list {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-container {
+                padding: var(--spacing-md) 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-background" style="background-image: url('{% static 'myapp/images/services_hero_bg.jpg' %}');">
+        <div class="image-overlay"></div>
+    </div>
+
+    {% include 'myapp/header.html' %}
+    
+
+
+    <section class="hero-section" id="home">
+        <div class="hero-content fade-in-up">
+            <h1>Data Mining Services</h1>
+            <p>Unlock valuable business insights with our comprehensive data mining solutions</p>
+        </div>
+    </section>
+
+    <div class="page-container">
+        <div class="heading-section scroll-animate">
+            <h1 class="main-page-title">Unlock Business Insights with Value ConnectSolution's Data Mining Services</h1>
+        </div>
+
+        <div class="content-layout-area scroll-animate">
+            <div class="text-description-area">
+                <p>At "Value ConnectSolutions", we provide comprehensive data mining services to help businesses uncover valuable insights, spot industry-specific trends, promote products effectively, and boost sales and customer satisfaction.</p>
+                
+                <p>As a full-service data mining call center, we employ best practices like "clustering", "sequence and path analysis", "classification", and "pattern recognition" to deliver deep insights into economic indicators, customer profiles, and competitor demographics.</p>
+
+                <p>Data mining is more than just extracting information; it's about identifying patterns and relationships that drive intelligent decision-making. By focusing on continual analysis and interpretation, our data mining services help companies transform raw data into actionable business intelligence.</p>
+            </div>
+            <div class="visual-display-area">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80" alt="Data analytics dashboard with charts and graphs">
+                <div class="image-accent-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    ---
+
+    <section class="blue-background" id="services">
+        <div class="section-container">
+            <h1 class="main-heading scroll-animate">Why Outsource Your Data Mining Services to Value ConnectSolutions?</h1>
+            <p class="sub-description scroll-animate">Outsourcing data mining to Value ConnectSolutions offers a strategic advantage by providing your business with the expertise, tools, and flexibility needed to thrive in today's competitive market.</p>
+
+            <div class="feature-grid">
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Cost Savings of Up to 60%</h3>
+                    <p class="feature-text">Save significantly compared to in-house operations without sacrificing quality.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Expert Team with Global Experience</h3>
+                    <p class="feature-text">Leverage our years of experience serving international clients across various sectors.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Data Security and Compliance</h3>
+                    <p class="feature-text">Complete data security with rigorous quality checks and industry compliance.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Scalable and Flexible Solutions</h3>
+                    <p class="feature-text">Adaptable services for projects of all sizes with multiple delivery formats.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">No Long-Term Contracts</h3>
+                    <p class="feature-text">Flexible pricing without long-term commitment pressures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <section class="services-section">
+        <div class="section-container">
+            <h1 class="main-heading scroll-animate" style="color: var(--text-primary);">Comprehensive Data Mining Services</h1>
+            <p class="sub-description scroll-animate" style="color: var(--text-secondary);">We understand that each business has unique data requirements. Our skilled professionals provide the intelligence you need to drive sales and profitability.</p>
+
+            <div class="services-grid">
+                <div class="service-card scroll-animate">
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2039&q=80" alt="Social Media Analytics" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Social Media Data Mining</h3>
+                        <p class="service-text">Extract valuable customer sentiment and trends from social media platforms.</p>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Web Data Mining" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Web Data Mining</h3>
+                        <p class="service-text">Gather insights from websites, forums, and online communities.</p>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" alt="E-commerce Analytics" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">E-Commerce Data Mining</h3>
+                        <p class="service-text">Analyze online shopping behaviors to optimize product placement and sales strategies.</p>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2121&q=80" alt="Database Analysis" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">SQL Database Mining</h3>
+                        <p class="service-text">Uncover patterns and trends from structured data within SQL databases.</p>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <img src="https://images.unsplash.com/photo-1590479773265-7464e5d48118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Market Trends" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Market Trend Analysis</h3>
+                        <p class="service-text">Stay ahead of industry trends and adapt your business strategy accordingly.</p>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Metadata Analysis" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">Metadata Extraction</h3>
+                        <p class="service-text">Identify and interpret critical metadata for enhanced decision-making.</p>
+                    C                   </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <section class="blue-background">
+        <div class="section-container">
+            <h1 class="main-heading scroll-animate">Benefits of Outsourcing Data Mining Services</h1>
+            <p class="sub-description scroll-animate">Data mining helps businesses gain a competitive edge by converting raw data into strategic insights.</p>
+
+            <ul class="benefits-list">
+                <li class="benefits-item scroll-animate">
+                    <div class="benefits-icon">💡</div>
+                    <div class="benefits-content">
+                        <h3>Drive Intelligent Marketing Campaigns</h3>
+                        <p>Use data-driven insights to target the right audience with more effective campaigns.</p>
+                    </div>
+                </li>
+
+                <li class="benefits-item scroll-animate">
+                    <div class="benefits-icon">📈</div>
+                    <div class="benefits-content">
+                        <h3>Predict Customer Behavior</h3>
+                        <p>Understand customer preferences and anticipate future buying behaviors.</p>
+                    </div>
+                </li>
+
+                <li class="benefits-item scroll-animate">
+                    <div class="benefits-icon">💰</div>
+                    <div class="benefits-content">
+                        <h3>Unlock Hidden Profitability</h3>
+                        <p>Identify untapped opportunities and optimize operations for increased revenue.</p>
+                    </div>
+                </li>
+
+                <li class="benefits-item scroll-animate">
+                    <div class="benefits-icon">📊</div>
+                    <div class="benefits-content">
+                        <h3>Enhance Decision-Making</h3>
+                        <p>Make informed decisions with clearer understanding of market dynamics.</p>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="scroll-animate" style="margin-top: 3rem; max-width: 1440px; margin-left: auto; margin-right: auto;">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Data Mining for Business Growth</h2>
+                <p style="margin-bottom: 1.5rem;">Value ConnectSolutions helps businesses build accurate prediction models for new products and services by mining data on customer behaviors and historical sales patterns.</p>
+                <p>Our team has the latest software and infrastructure, ensuring cost-effective and high-quality data mining solutions. Partnering with us means gaining the expertise and technology to enhance customer experiences and reduce churn.</p>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <section class="white-section">
+        <div class="section-container">
+            <h1 class="main-heading scroll-animate" style="color: var(--text-primary);">Why Choose Value ConnectSolutions?</h1>
+            <p class="sub-description scroll-animate" style="color: var(--text-secondary);">We provide the expertise, tools, and flexibility needed to thrive in today's competitive market.</p>
+
+            <div class="feature-grid">
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Industry-Leading Expertise</h3>
+                    <p class="feature-text">Benefit from best practices and advanced techniques applied by skilled professionals.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Flexible Operations</h3>
+                    <p class="feature-text">Adapt to your business's changing needs with our scalable services.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">💎</div>
+                    <h3 class="feature-title">Cost Savings</h3>
+                    <p class="feature-text">Save significantly compared to in-house operations without sacrificing quality.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Cutting-Edge Technology</h3>
+                    <p class="feature-text">Leverage state-of-the-art software and infrastructure for competitive advantage.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Quick Turnaround</h3>
+                    <p class="feature-text">Receive fast and reliable results to support timely business decisions.</p>
+                </div>
+
+                <div class="feature-item scroll-animate">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">Customer-Focused Approach</h3>
+                    <p class="feature-text">Tailored solutions that meet your unique needs without long-term contracts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'myapp/index_countriesweserve.html' %}
+     {% include 'myapp/footer.html' %} 
+
+
+    <script>
+        // JavaScript for mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // JavaScript for scroll animations
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+
+            const elementInView = (el, dividend = 1) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return (
+                    elementTop <=
+                    (window.innerHeight || document.documentElement.clientHeight) / dividend
+                );
+            };
+
+            const displayScrollElement = (element) => {
+                element.classList.add('visible');
+            };
+
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 1.25)) {
+                        displayScrollElement(el);
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', handleScrollAnimation);
+            // Initial check in case elements are already in view on load
+            handleScrollAnimation();
+        });
+    </script>
+</body>
+
+</html>

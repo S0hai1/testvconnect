@@ -2,9 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ValueConnectSolution - Your Success Is Our Mission</title>
+    {% include 'myapp/meta_tags.html' %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     {% load static %}
@@ -77,6 +75,7 @@
             padding: 0 30px;
             padding-top: 140px;
             background-color: white;
+            width: 100%;
         }
 
         .hero-content h1 {
@@ -106,7 +105,7 @@
             }
 
             .hero-content {
-                padding: 0 20px;
+                padding-top: 85px;
             }
 
             .hero-content h1 {
@@ -374,7 +373,7 @@
 
 
 
-/* Why Choose Select VoiceCom Section */
+/* Why Choose Value ConnectSolutions Section */
 .why-choose-section {
     background-color: #ffffff;
     padding: 40px;
@@ -517,7 +516,6 @@
             position: relative; /* For the image inside */
         }
         .image-content img {
-            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -561,14 +559,7 @@
 
     <div class="hero-section">
         <div class="hero-content">
-            <h1>Outsourced Customer Retention Services in the Philippines</h1>
-        </div>
-        
-        <div class="scroll-indicator">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 13l3 3 7-7"/>
-                <path d="M7 6l3 3 7-7"/>
-            </svg>
+            <h1>Outsourced Customer Retention Services in the India</h1>
         </div>
     </div>
 
@@ -601,13 +592,13 @@
                     </ul>
                 </div>
                 <div class="image-content">
-                    <img src="{% static 'myapp/images/image_37af59.jpg' %}" alt="Customer Retention Importance">
+                    <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80" alt="Business team discussing customer retention strategies">
                 </div>
             </div>
 
             <div class="outsourcing-benefits">
-                <h2>The Benefits of Outsourcing Customer Retention to Select VoiceCom</h2>
-                <p>Building and maintaining a loyal customer base is no easy task. It requires consistent, high-quality service and a deep understanding of your customer's needs. That's why many businesses turn to customer retention outsourcing. That's where Select VoiceCom comes in.</p>
+                <h2>The Benefits of Outsourcing Customer Retention to Value ConnectSolutions</h2>
+                <p>Building and maintaining a loyal customer base is no easy task. It requires consistent, high-quality service and a deep understanding of your customer's needs. That's why many businesses turn to customer retention outsourcing. That's where Value ConnectSolutions comes in.</p>
                 <p>We design our client retention services to strengthen your existing client relationships, save you time and resources, and ultimately enhance your bottom line.</p>
                 <p>Customer service and customer retention go hand in hand. When customers feel heard, supported, and valued, they're far more likely to stay. Our dedicated agents not only resolve issues quickly but create positive, brand-aligned experiences that keep your customers coming back.</p>
                 <p><strong>Key Benefits of Our Customer Retention Services:</strong></p>
@@ -629,8 +620,8 @@
     <section class="content-section">
         <div class="container">
             <div class="why-choose-section">
-                <h2>Why Choose Select VoiceCom for Your Customer Retention Needs?</h2>
-                <p>At Select VoiceCom, we go beyond basic customer support; we help you keep your customers loyal. Our retention services are tailored to reduce churn, strengthen your brand, and build long-lasting relationships through open communication and proactive customer engagement. Happy customers are loyal customers.</p>
+                <h2>Why Choose Value ConnectSolutions for Your Customer Retention Needs?</h2>
+                <p>At Value ConnectSolutions, we go beyond basic customer support; we help you keep your customers loyal. Our retention services are tailored to reduce churn, strengthen your brand, and build long-lasting relationships through open communication and proactive customer engagement. Happy customers are loyal customers.</p>
                 <p>Whether you're facing challenges with pricing, service issues, shifting customer needs, or operational changes, we bring the tools and expertise to overcome obstacles and maintain customer retention for long-term success.</p>
                 
                 <h3>What Sets Us Apart:</h3>
@@ -648,7 +639,7 @@
                     <li><strong>Flexible & Scalable Solutions:</strong> Whether you need short-term assistance or long-term outsourcing, we adapt to your business's evolving needs.</li>
                 </ul>
                 
-                <p>Ready to boost your revenue and decrease churn? Select VoiceCom's customer retention services in the Philippines offer an affordable and effective way to achieve business growth. <a href="#contact">Contact us today</a> to learn more.</p>
+                <p>Ready to boost your revenue and decrease churn? Value ConnectSolutions's customer retention services in the India offer an affordable and effective way to achieve business growth. <a href="#contact">Contact us today</a> to learn more.</p>
             </div>
         </div>
     </section>
@@ -690,6 +681,7 @@
             </div>
         </div>
     </div>
+    {% include 'myapp/index_countriesweserve.html' %}
         {% include 'myapp/footer.html' %}
 
 

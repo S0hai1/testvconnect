@@ -1,0 +1,741 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <meta name="description" content="Experience cost savings, operational efficiency and expert talent by outsourcing with Value Connect Solution. Focus on your core business today!">
+    
+    <link rel="shortcut icon" href="https://valueconnectsolutions.com/favicon.ico">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #374151;
+            --light-gray: #f9fafb;
+            --medium-gray: #e5e7eb;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .best-practices-section {
+        background-color: #ffffff;
+        padding: 80px 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .section-header h2 {
+        font-size: 2.2rem;
+        color: #2563eb;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    
+    .section-header p {
+        font-size: 1.1rem;
+        color: #4b5563;
+        line-height: 1.7;
+    }
+    
+    .practice-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+    
+    .practice-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .practice-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+    
+    .card-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .card-content {
+        padding: 25px;
+    }
+    
+    .card-content h3 {
+        font-size: 1.4rem;
+        color: #1e40af;
+        margin-bottom: 15px;
+    }
+    
+    .card-content p {
+        color: #6b7280;
+        line-height: 1.6;
+    }
+    
+    .closing-statement {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 25px;
+        background-color: #f8fafc;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        color: #4b5563;
+        line-height: 1.7;
+    }
+    
+    @media (max-width: 768px) {
+        .section-header h2 {
+            font-size: 1.8rem;
+        }
+        
+        .practice-cards {
+            grid-template-columns: 1fr;
+        }
+        
+        .best-practices-section {
+            padding: 60px 0;
+        }
+    }
+        /* Header Styles */
+        .reason-header-main {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .reason-header-main__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .reason-header-main__logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .reason-header-main__menu-nav-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .reason-header-main__menu-nav-wrapper .hs-menu-wrapper > ul > li > a {
+            color: var(--text-color);
+            padding: 10px 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .reason-header-main__menu-nav-wrapper .hs-menu-wrapper > ul > li > a:hover {
+            color: var(--primary-color);
+        }
+        
+        .reason-header-main__cta {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .reason-header-main__cta:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Banner Section */
+        .reason-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(255,255,255,0.9)), 
+                        url('{% static 'myapp/images/reach_out.jpg' %}');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 120px;
+            text-align: center;
+        }
+        
+        .reason-banner__inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .reason-banner h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        /* Content Sections */
+        .reason-section {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .reason-section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .reason-section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .reason-card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .reason-card {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .reason-card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .reason-card-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        /* Feature Sections */
+        .reason-feature-section {
+            background-color: var(--light-gray);
+        }
+        
+        .reason-feature-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .reason-feature-img {
+            flex: 0 0 40%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        
+        .reason-feature-content {
+            flex: 0 0 60%;
+            padding: 0 40px;
+        }
+
+        /* --- Our Strategic Locations Across India Specific Styles (also using "reason-" prefix now) --- */
+        .reason-why-heading { /* New class for the "Why Our Indian Locations Benefit You" heading */
+            font-weight: 600;
+            margin: 30px 0;
+            text-align: center; /* Added for consistency with other titles */
+        }
+        
+        .reason-location-card { /* Renamed from .reason-card for clarity within location section */
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .reason-location-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .reason-location-img {
+            flex: 0 0 40%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .reason-location-content {
+            flex: 0 0 60%;
+            padding: 30px 40px;
+        }
+
+        .reason-location-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Contact Form */
+        .reason-contact-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .reason-contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .reason-contact-info {
+            flex: 0 0 50%;
+            padding: 0 30px;
+        }
+        
+        .reason-contact-form {
+            flex: 0 0 50%;
+            padding: 0 30px;
+        }
+        
+        .reason-form-group {
+            margin-bottom: 20px;
+        }
+        
+        .reason-form-group input, 
+        .reason-form-group textarea, 
+        .reason-form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .reason-contact-form button[type="submit"] {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .reason-contact-form button[type="submit"]:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* Footer */
+        .reason-footer {
+            background-color: var(--text-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .reason-footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+        
+        .reason-footer-logo img {
+            height: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .reason-footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .reason-footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .reason-footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .reason-footer-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .reason-footer-links a:hover {
+            color: white;
+        }
+        
+        .reason-social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .reason-social-links a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .reason-copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .reason-feature-card, .reason-location-card {
+                flex-direction: column;
+            }
+            
+            .reason-feature-img, .reason-feature-content, 
+            .reason-location-img, .reason-location-content {
+                flex: 0 0 100%;
+                width: 100%;
+            }
+            
+            .reason-feature-content, .reason-location-content {
+                padding: 30px 0 0;
+            }
+
+            .reason-location-card:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .reason-contact-info, .reason-contact-form {
+                flex: 0 0 100%;
+                padding: 0 20px;
+                margin-bottom: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .reason-header-main__menu-nav-container {
+                display: none;
+            }
+            
+            .reason-mobile-menu-btn { /* New class for mobile menu button */
+                display: block;
+            }
+            
+            .reason-banner {
+                padding: 150px 0 80px;
+            }
+            
+            .reason-section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .reason-banner h1 {
+                font-size: 2rem;
+            }
+            
+            .reason-section-title {
+                font-size: 1.8rem;
+            }
+            
+            .reason-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+ {% include 'myapp/header.html' %}
+
+    <section class="reason-banner">
+        <div class="reason-banner__inner">
+            <h1>Reasons to Outsource</h1>
+            <p>Discover how Value Connect Solution can transform your business operations through strategic outsourcing</p>
+        </div>
+    </section>
+
+    <section class="reason-section">
+        <div class="reason-container">
+            <h2 class="reason-section-title">Why Outsource to Value Connect Solution?</h2>
+            <p class="reason-section-subtitle">Outsourcing your business processes to our expert team in India offers numerous strategic advantages that can help your company reduce costs, improve efficiency, and focus on core competencies.</p>
+            
+            <div class="reason-card-container">
+                <div class="reason-card">
+                    <div class="reason-card-img" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+                    <h3 class="reason-card-title">Significant Cost Savings</h3>
+                    <p>Reduce operational costs by up to 60% while maintaining high-quality service standards through our cost-effective Indian operations.</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-card-img" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+                    <h3 class="reason-card-title">Access to Skilled Talent</h3>
+                    <p>Leverage our pool of highly educated, English-speaking professionals with specialized skills across multiple industries.</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-card-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80')"></div>
+                    <h3 class="reason-card-title">Flexible Scalability</h3>
+                    <p>Easily scale your operations up or down based on demand without the challenges of hiring and training in-house staff.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Best Practices Section -->
+<section class="best-practices-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Continuous Innovation in Best Practices</h2>
+            <p>With our extensive experience serving global clients across industries, Value Connect Solution has developed a comprehensive repository of proven methodologies. Our India-based centers of excellence continuously refine customer service frameworks that deliver measurable results. Partnering with us gives you access to:</p>
+        </div>
+
+        <div class="practice-cards">
+            <!-- Card 1 -->
+            <div class="practice-card">
+                <div class="card-image" style="background-image: url('{% static 'myapp/images/cross_plateform.jpg' %}')"></div>
+                <div class="card-content">
+                    <h3>Cross-Industry Expertise</h3>
+                    <p>Techniques perfected across healthcare, finance, e-commerce and technology sectors</p>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="practice-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                <div class="card-content">
+                    <h3>Tailored Solutions</h3>
+                    <p>Customized approaches adapted to your specific business challenges and goals</p>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="practice-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                <div class="card-content">
+                    <h3>Data-Optimized Processes</h3>
+                    <p>Continuous improvement powered by analytics and performance metrics</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="closing-statement">
+            <p>Leverage our 15+ years of refined methodologies - no need to build from scratch. Our Indian operations combine global best practices with local cultural insights for exceptional customer experiences.</p>
+        </div>
+    </div>
+</section>
+
+    <section class="reason-section">
+        <div class="reason-container">
+            <div class="reason-text-center">
+                <h2 class="reason-section-title">Our Strategic Locations Across India</h2>
+                <p>Value Connect Solution operates from multiple state-of-the-art facilities in India's leading business hubs. Our locations offer several advantages that help us deliver cost-effective, high-quality outsourcing services to global clients.</p>
+                <h3 class="reason-why-heading">Why Our Indian Locations Benefit You:</h3>
+            </div>
+            
+            <div class="reason-location-card">
+                <div class="reason-location-img" style="background-image: url('{% static 'myapp/images/cost_mangement.avif' %}');"></div>
+                <div class="reason-location-content">
+                    <h3>Cost Efficiency</h3>
+                    <p>Our Indian operations deliver services at 40-60% lower costs compared to Western markets, without compromising on quality. This significant cost advantage helps our clients improve their bottom line while maintaining service excellence.</p>
+                </div>
+            </div>
+            
+            <div class="reason-location-card">
+                <div class="reason-location-content">
+                    <h3>Business Continuity</h3>
+                    <p>With our multi-location delivery model and robust disaster recovery infrastructure, we ensure 99.99% uptime for our clients. Our facilities are equipped with redundant power, network connectivity, and security systems.</p>
+                </div>
+                <div class="reason-location-img"style="background-image: url('{% static 'myapp/images/business_continuty.jpg' %}');"></div>
+            </div>
+            
+            <div class="reason-location-card">
+                <div class="reason-location-img"style="background-image: url('{% static 'myapp/images/global_talent_pool.avif' %}');"></div>
+                <div class="reason-location-content">
+                    <h3>Global Talent Pool</h3>
+                    <p>India produces over 1.5 million English-speaking graduates annually. Our locations in major educational hubs give us access to this vast talent pool, allowing us to quickly scale operations with skilled professionals.</p>
+                </div>
+            </div>
+            
+            <div class="reason-location-card">
+                <div class="reason-location-content">
+                    <h3>Time Zone Advantage</h3>
+                    <p>India's time zone (GMT+5:30) allows us to provide 24/7 coverage for global clients. We offer follow-the-sun support models that ensure seamless service delivery across all time zones.</p>
+                </div>
+                <div class="reason-location-img" style="background-image: url('{% static 'myapp/images/timezone.jpg' %}');"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reason-section reason-feature-section">
+        <div class="reason-container">
+            <h2 class="reason-section-title">Enterprise Experience</h2>
+            
+            <div class="reason-feature-card">
+                <div class="reason-feature-img" style="background-image: url('{% static 'myapp/images/leadership.jpg' %}');"></div>
+                <div class="reason-feature-content">
+                    <h3>Proven Leadership</h3>
+                    <p>With over 15 years of industry experience, Value Connect Solution has established itself as a trusted BPO partner for global businesses. Our leadership team brings together decades of combined experience in delivering exceptional outsourcing solutions.</p>
+                    <p>We've successfully implemented hundreds of outsourcing programs across various industries, from healthcare and finance to e-commerce and technology.</p>
+                </div>
+            </div>
+            
+            <div class="reason-feature-card">
+                <div class="reason-feature-content">
+                    <h3>Highly Skilled Workforce</h3>
+                    <p>Our agents are carefully selected from India's top talent pool, with:</p>
+                    <ul>
+                        <li>Minimum graduate-level education</li>
+                        <li>Average 3+ years of industry experience</li>
+                        <li>Exceptional English communication skills</li>
+                        <li>Specialized training in various business processes</li>
+                    </ul>
+                    <p>Our management team averages 8+ years of experience in the BPO industry, ensuring high-quality service delivery.</p>
+                </div>
+                <div class="reason-feature-img" style="background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+            </div>
+        </div>
+    </section>
+
+
+   <section class="reason-section">
+    <div class="reason-container">
+        <h2 class="reason-section-title">Specialized Services</h2>
+        <p class="reason-section-subtitle">We offer a comprehensive range of outsourcing services tailored to your specific business needs</p>
+
+        <div class="reason-card-container">
+            <div class="reason-card">
+                <div class="reason-card-img" style="background-image: url('{% static 'myapp/images/customer_support.jpg' %}');"></div>
+                <h3 class="reason-card-title">Customer Support</h3>
+                <p>24/7 multilingual customer service, technical support, and help desk solutions to enhance your customer experience.</p>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-card-img" style="background-image: url('{% static 'myapp/images/back_office.jpg' %}');"></div>
+                <h3 class="reason-card-title">Back Office Operations</h3>
+                <p>Data entry, processing, accounting, and other administrative functions handled with precision.</p>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-card-img" style="background-image: url('{% static 'myapp/images/digital_services.jpg' %}');"></div>
+                <h3 class="reason-card-title">Digital Services</h3>
+                <p>Comprehensive digital solutions including content moderation, social media management, and digital marketing support.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reason-section reason-feature-section">
+    <div class="reason-container">
+        <h2 class="reason-section-title">Advanced Technology Infrastructure</h2>
+
+        <div class="reason-feature-card">
+            <div class="reason-feature-img" style="background-image: url('https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"></div>
+            <div class="reason-feature-content">
+                <h3>State-of-the-Art Facilities</h3>
+                <ul>
+                    <li>Enterprise-grade security and compliance</li>
+                    <li>Redundant power and internet connectivity</li>
+                    <li>Advanced call center technology</li>
+                    <li>Omnichannel communication platforms</li>
+                    <li>Robust disaster recovery systems</li>
+                </ul>
+                <p>We maintain ISO 27001 certification and comply with global data protection standards to ensure your information is always secure.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'myapp/index_countriesweserve.html' %}
+
+    {% include 'myapp/footer.html' %}
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Updated class name for menu button
+            const menuBtn = document.querySelector('.reason-mobile-menu-btn'); 
+            const navContainer = document.querySelector('.reason-header-main__menu-nav-container');
+            
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    navContainer.style.display = navContainer.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

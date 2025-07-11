@@ -1,0 +1,811 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'myapp/meta_tags.html' %}
+    <meta name="description" content="Find the perfect talent for your business with Value Connect Solutions' staffing services. We provide skilled professionals to meet your unique needs. Contact us today!">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://valueconnectsolutions.com/favicon.ico">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="BPO Recruiting and Staffing | Value Connect Solutions">
+    <meta property="og:description" content="Find the perfect talent for your business with Value Connect Solutions' staffing services. We provide skilled professionals to meet your unique needs. Contact us today!">
+    <meta property="og:url" content="https://valueconnectsolutions.com/recruiting-staffing">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="BPO Recruiting and Staffing | Value Connect Solutions">
+    <meta name="twitter:description" content="Find the perfect talent for your business with Value Connect Solutions' staffing services. We provide skilled professionals to meet your unique needs. Contact us today!">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Recruiting and Staffing Services",
+      "description": "Value Connect Solutions offers rigorous recruitment and staffing processes, ensuring high-quality personnel for BPO services through screening, testing, and client-involved selection to meet specific needs.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Value Connect Solutions",
+        "url": "https://valueconnectsolutions.com",
+        "sameAs": [
+          "https://www.linkedin.com/company/value-connect-solutions",
+          "https://twitter.com/ValueConnectSol"
+        ]
+      },
+      "serviceType": [
+        "Agent Screening",
+        "Staff Selection",
+        "Client-Specific Staffing",
+        "Quality Control"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Global"
+      },
+      "url": "https://valueconnectsolutions.com/recruiting-staffing"
+    }
+    </script>
+    
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #374151;
+            --light-gray: #f8fafc;
+            --medium-gray: #e5e7eb;
+            --dark-gray: #6b7280;
+            --white: #ffffff;
+            --black: #111827;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-menu a {
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        /* Hero Banner */
+        .hero-banner {
+             background: linear-gradient(135deg, rgb(0, 0, 0), rgba(0, 0, 0, 0)), 
+                       url('{% static "myapp/images/staffing.jpg" %}');
+            color: var(--white);
+            padding: 180px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+           
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero-banner p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb-section {
+            background-color: var(--light-gray);
+            padding: 20px 0;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .breadcrumb li::after {
+            content: '/';
+            margin-left: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .breadcrumb li:last-child::after {
+            display: none;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .content-section.reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .content-text {
+            flex: 1;
+        }
+        
+        .content-text h2 {
+            margin-bottom: 20px;
+        }
+        
+        .content-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .content-image {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        /* Process Section */
+        .process-section {
+            background-color: var(--light-gray);
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .process-step {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .process-step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--white);
+        }
+        
+        .process-step h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+        
+        .process-step p {
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 80px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .stat-card {
+            padding: 30px;
+        }
+        
+        .stat-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .stat-card h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Features Section */
+        .features-section {
+            background-color: var(--white);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            padding: 30px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+        
+        .feature-card p {
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta-section .section-title {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        
+        .cta-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+        }
+        
+        .cta-section .btn {
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .cta-section .btn:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background-color: var(--white);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--black);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+       
+        
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .content-section,
+            .content-section.reverse {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .hero-stats {
+                gap: 40px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-banner {
+                padding: 150px 0 80px;
+            }
+            
+            .hero-banner h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero-banner p {
+                font-size: 1rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .hero-banner {
+                padding: 140px 0 60px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+ {% include 'myapp/header.html' %}        
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="hero-content">
+                <h1><i class="fas fa-users"></i> Recruiting & Staffing</h1>
+                <p>Exceptional talent acquisition for your BPO needs with our rigorous selection process</p>
+                
+                  <a href="#" class="btn" onclick="scrollToSection()">Get Started Today</a>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">90%</span>
+                        <span class="stat-label">Acceptance Rate</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25%</span>
+                        <span class="stat-label">Pass Rate</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Agents Placed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    
+
+    <!-- Main Content -->
+    <main>
+        <!-- Introduction Section -->
+        <section class="section">
+            <div class="container">
+                <div class="content-section">
+                    <div class="content-text">
+                        <h2 class="section-title">Exceptional Agent BPO Recruitment and Staffing</h2>
+                        <p>In the highly competitive Call Center BPO (business process outsourcing) world, the quality of your customer interactions directly influences client satisfaction and business success. At Value Connect Solutions, we understand that excellent service begins with exceptional people.</p>
+                        <p>Our understanding of the critical nature of offering high-quality personnel is why we have developed a rigorous recruitment and staffing process to attract and retain top talent, ensuring our clients receive the best possible support from highly qualified and dedicated agents.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Professional recruitment team">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="section process-section">
+            <div class="container">
+                <h2 class="section-title text-center">Our Comprehensive Recruitment Process</h2>
+                <p class="section-subtitle text-center">We follow a rigorous 6-step process to ensure we select only the best talent for your business needs</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="process-step-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Resume Screening</h3>
+                        <p>Thorough review of all applications with verification of work and educational references to ensure qualifications meet our standards.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>Comprehensive Testing</h3>
+                        <p>Language proficiency, cognitive ability, and emotional intelligence assessments to evaluate technical and soft skills.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Structured Interviews</h3>
+                        <p>Behavioral and situational interviews to assess communication skills, problem-solving abilities, and cultural fit.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Background Verification</h3>
+                        <p>Comprehensive background checks including criminal records, employment history, and reference verification.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Specialized Training</h3>
+                        <p>Customized training programs tailored to your specific business requirements and industry standards.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Client Approval</h3>
+                        <p>Final candidates presented for client review and approval before placement to ensure perfect fit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-filter"></i>
+                        <h3>50%</h3>
+                        <p>Resume Screening Filter Rate</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>25%</h3>
+                        <p>Overall Pass Rate</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-thumbs-up"></i>
+                        <h3>90%</h3>
+                        <p>Offer Acceptance Rate</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <h3>98%</h3>
+                        <p>Client Satisfaction Rate</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Qualifications Section -->
+        <section class="section">
+            <div class="container">
+                <div class="content-section reverse">
+                    <div class="content-text">
+                        <h2 class="section-title">Strict Qualifications and Compliance</h2>
+                        <p>At Value Connect Solutions, we have established strict qualifications to ensure that our agents are well-prepared to meet the demands of their roles. All successful candidates must have at least one year of college-level education, providing them with foundational knowledge and critical thinking skills.</p>
+                        <p>Additionally, candidates must have prior contact center experience relevant to the position they are applying for. This experience ensures they bring a practical understanding of the industry and job, and with our training, they can contribute effectively from day one.</p>
+                        <p>To further guarantee the integrity and reliability of our staff, we require all successful candidates to obtain clearance from local authorities and complete medical screening tests to confirm they are physically and mentally fit for the role.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="{% static 'myapp/images/complience.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="target-section">
+{% include 'myapp/index_countriesweserve.html' %}    
+
+        </div>
+             
+         {% include 'myapp/footer.html' %} 
+        
+
+
+    </body>
+    <script>
+        function scrollToSection() {
+            document.getElementById('target-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</html>
