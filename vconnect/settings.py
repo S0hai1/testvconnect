@@ -75,35 +75,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'vconnect.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'vconnectdb',  # or your database name
-        'USER': 'postgres',  # or your database user
-        'PASSWORD': 'password',
-        'HOST': 'localhost',  # or your database host/IP
-        'PORT': '5432',        # default PostgreSQL port
-    }
-}
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'vconnectdb',  # or your database name
-#         'USER': 'postgres',  # or your database user
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',  # or your database host/IP
-#         'PORT': '5432',        # default PostgreSQL port
-#     }
-# }
-
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
