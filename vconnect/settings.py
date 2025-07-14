@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'vconnectdb',  # or your database name
         'USER': 'postgres',  # or your database user
-        'PASSWORD': 'vconnect',
+        'PASSWORD': 'password',
         'HOST': 'localhost',  # or your database host/IP
         'PORT': '5432',        # default PostgreSQL port
     }
